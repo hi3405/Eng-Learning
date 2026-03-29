@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>English Overload v2.3</title>
+  <title>English Overload v2.4</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Roboto+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -33,14 +33,11 @@
         </div>
       </div>
       
-      <div class="mt-4 flex justify-between items-end">
-        <div class="relative">
-          <select id="vocabLevelSelect" onchange="changeVocabLevel()" class="bg-brand-dark text-brand-blue font-extrabold text-xl outline-none border border-gray-700 rounded-xl px-3 py-1.5 focus:ring-1 focus:ring-brand-blue appearance-none pr-8 cursor-pointer shadow-sm">
-            <option value="b1">L1: B1 基礎</option>
-            <option value="b2">L2: B2 進階</option>
-            <option value="c1" selected>L3: C1 極限</option>
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-brand-blue"><i class="fas fa-chevron-down text-sm"></i></div>
+      <div class="mt-5 flex justify-between items-center">
+        <div class="flex bg-brand-dark rounded-xl p-1 border border-gray-800 shadow-inner">
+          <button id="btn-lvl-b1" onclick="changeVocabLevel('b1')" class="vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold text-gray-500 transition-colors active-scale">B1 Base</button>
+          <button id="btn-lvl-b2" onclick="changeVocabLevel('b2')" class="vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold text-gray-500 transition-colors active-scale">B2 Pro</button>
+          <button id="btn-lvl-c1" onclick="changeVocabLevel('c1')" class="vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-blue text-white shadow-md transition-colors active-scale">C1 Elite</button>
         </div>
         <div class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1.5 rounded-md border border-gray-800">Quest <span id="vocabProgress">1</span> / <span id="vocabTotal">...</span></div>
       </div>
@@ -77,7 +74,9 @@
       <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10 flex-shrink-0">
         <div class="flex justify-between items-center">
           <h1 class="text-xs font-semibold uppercase tracking-widest text-gray-400">Campaign Mode</h1>
-          <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full shadow-inner streak-display"><i class="fas fa-fire-alt"></i> <span class="streakValue">0</span></div>
+          <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full shadow-inner streak-display">
+            <i class="fas fa-fire-alt"></i> <span class="streakValue">0</span>
+          </div>
         </div>
         <div class="mt-4 flex justify-between items-end">
           <p class="text-xl font-extrabold text-white tracking-tight">Speaking Stages</p>
@@ -184,7 +183,6 @@
   <script>
     const getTodayDate = () => new Date().toLocaleDateString('en-CA');
 
-    // 💥 V9 Data: lastVocabDate 變成 Object，獨立紀錄每個 Level 係咪做完
     function loadUserData() {
       const defaultData = { currentStreak: 0, lastCompletedDate: null, totalScore: 0, history: [], savedVocab: [], doneVocabIds: [], unlockedSpeakLevel: 0, speakHighScores: {}, speakHistory: {}, lastVocabDate: { b1: null, b2: null, c1: null } };
       const savedData = localStorage.getItem('english_coach_data_v9'); 
@@ -222,15 +220,24 @@
     }
 
     // ==========================================
-    // Vocab System (v2.3 多難度支援)
+    // Vocab System (v2.4 按鈕切換)
     // ==========================================
     let vocabData = []; let currentVocabIndex = 0; let vocabScore = 0; let vocabAnswered = false;
     const DAILY_VOCAB_LIMIT = 5;
     let currentVocabLevel = 'c1'; // 預設 C1
 
-    // 💥 切換難度
-    function changeVocabLevel() {
-      currentVocabLevel = document.getElementById('vocabLevelSelect').value;
+    // 💥 UI 按鈕切換邏輯
+    function changeVocabLevel(level) {
+      if (currentVocabLevel === level) return;
+      currentVocabLevel = level;
+      
+      // 更新按鈕樣式
+      document.querySelectorAll('.vocab-lvl-btn').forEach(btn => {
+        btn.className = "vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold text-gray-500 transition-colors active-scale";
+      });
+      const activeBtn = document.getElementById(`btn-lvl-${level}`);
+      activeBtn.className = "vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-blue text-white shadow-md transition-colors active-scale";
+      
       currentVocabIndex = 0;
       vocabScore = 0;
       fetchVocabData();
@@ -256,7 +263,6 @@
       if (checkDailyVocabStatus()) return;
 
       try {
-        // 💥 根據選擇嘅難度讀取對應嘅 JSON 檔案
         document.getElementById('vocabSentence').innerHTML = '<i class="fas fa-spinner fa-spin text-brand-blue text-2xl mb-2"></i><br><span class="text-sm text-gray-400">載入題庫中...</span>';
         document.getElementById('vocabOptions').innerHTML = '';
         
@@ -329,7 +335,7 @@
       } else { 
         let data = loadUserData();
         if (!data.lastVocabDate) data.lastVocabDate = { b1: null, b2: null, c1: null };
-        data.lastVocabDate[currentVocabLevel] = getTodayDate(); // 鎖定目前難度
+        data.lastVocabDate[currentVocabLevel] = getTodayDate();
         saveData(data);
         
         completeWorkout(`Vocab (Level ${currentVocabLevel.toUpperCase()})`, Math.round((vocabScore / vocabData.length) * 100)); 
@@ -616,8 +622,12 @@
     function testVoice() { speakWord("Push your limit, Jack."); }
 
     window.onload = () => { 
-      document.getElementById('vocabLevelSelect').value = 'c1'; // Default C1
-      fetchVocabData(); fetchSpeakData(); document.querySelectorAll('.streakValue').forEach(el => el.innerText = loadUserData().currentStreak); switchView('vocab'); popVoices(); 
+      // 預設將 UI 設為 C1 Elite
+      changeVocabLevel('c1');
+      fetchSpeakData(); 
+      document.querySelectorAll('.streakValue').forEach(el => el.innerText = loadUserData().currentStreak); 
+      switchView('vocab'); 
+      popVoices(); 
     };
   </script>
 </body>
