@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>English Overload v1.2</title>
+  <title>English Overload v1.4</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -42,21 +42,15 @@
     <main class="flex-grow p-6 flex flex-col">
       <div class="bg-brand-dark p-6 rounded-3xl shadow-xl mb-6 border border-gray-800">
         <p id="vocabSentence" class="text-lg font-semibold leading-relaxed text-white font-sans text-center mt-4">
-          <i class="fas fa-spinner fa-spin text-brand-blue text-2xl mb-2"></i><br>
-          <span class="text-sm text-gray-400">載入題庫中...</span>
+          <i class="fas fa-spinner fa-spin text-brand-blue text-2xl mb-2"></i><br><span class="text-sm text-gray-400">載入題庫中...</span>
         </p>
       </div>
       <div id="vocabOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
       <div id="vocabFeedback" class="hidden mb-6 p-5 rounded-2xl bg-brand-dark border shadow-inner">
-        <div class="flex items-center gap-2 mb-2">
-          <i id="vocabFeedbackIcon" class="fas text-xl"></i>
-          <h3 id="vocabFeedbackTitle" class="font-bold text-lg"></h3>
-        </div>
+        <div class="flex items-center gap-2 mb-2"><i id="vocabFeedbackIcon" class="fas text-xl"></i><h3 id="vocabFeedbackTitle" class="font-bold text-lg"></h3></div>
         <p id="vocabExplanation" class="text-sm text-gray-300 leading-relaxed"></p>
       </div>
-      <button id="nextVocabBtn" onclick="nextVocabQuest()" class="hidden w-full mt-auto bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale flex justify-center items-center gap-2">
-        Next Question <i class="fas fa-arrow-right text-sm"></i>
-      </button>
+      <button id="nextVocabBtn" onclick="nextVocabQuest()" class="hidden w-full mt-auto bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale flex justify-center items-center gap-2">Next Question <i class="fas fa-arrow-right text-sm"></i></button>
     </main>
   </div>
 
@@ -90,23 +84,16 @@
 
   <div id="view-progress" class="view-section pt-12 px-6">
     <h2 class="text-2xl font-extrabold text-white mb-2">Your Discipline</h2>
-    <p class="text-gray-400 mb-6 text-sm">Review your stats and saved vocab.</p>
-    
     <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800 mb-6 flex justify-between items-center shadow-inner">
       <div><p class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Total Score</p><p class="text-3xl font-extrabold text-brand-blue" id="progressTotalScore">0</p></div>
       <div class="text-right"><p class="text-xs text-brand-orange font-bold uppercase tracking-wider mb-1">Current Streak</p><p class="text-3xl font-extrabold text-white"><span id="progressStreak">0</span> 🔥</p></div>
     </div>
-
     <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800 shadow-inner mb-8">
       <h3 class="text-sm font-bold text-gray-300 mb-4 uppercase tracking-wider text-center" id="calendarMonthLabel">Month</h3>
       <div id="calendarGrid" class="w-full"></div>
     </div>
-
     <div class="mb-6">
-      <div class="flex justify-between items-end mb-4">
-        <h3 class="text-sm font-bold text-brand-blue uppercase tracking-wider"><i class="fas fa-vault mr-2"></i>Vocab Vault</h3>
-        <span class="text-xs text-gray-500" id="vaultCount">0 words</span>
-      </div>
+      <div class="flex justify-between items-end mb-4"><h3 class="text-sm font-bold text-brand-blue uppercase tracking-wider"><i class="fas fa-vault mr-2"></i>Vocab Vault</h3><span class="text-xs text-gray-500" id="vaultCount">0 words</span></div>
       <div id="vocabVaultList" class="flex flex-col gap-3"></div>
     </div>
   </div>
@@ -114,24 +101,25 @@
   <div id="view-settings" class="view-section pt-12 px-6">
     <h2 class="text-2xl font-extrabold text-white mb-2">Settings</h2>
     <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800">
-      <label class="block text-xs font-bold text-brand-blue uppercase tracking-widest mb-3">Coach Voice (朗讀聲)</label>
+      <label class="block text-xs font-bold text-brand-blue uppercase tracking-widest mb-3">Coach Voice</label>
       <div class="relative mb-4">
         <select id="voiceSelect" class="w-full bg-brand-slate text-white border border-gray-700 rounded-xl p-4 appearance-none focus:outline-none focus:border-brand-blue"><option>Loading voices...</option></select>
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400"><i class="fas fa-chevron-down"></i></div>
       </div>
       <button onclick="testVoice()" class="w-full bg-gray-700 text-white py-3 rounded-xl font-bold text-sm active-scale hover:bg-gray-600 flex justify-center items-center gap-2"><i class="fas fa-play"></i> 試聽聲音 Test Voice</button>
+      <button onclick="resetData()" class="w-full mt-8 bg-red-900/30 text-red-400 py-3 rounded-xl font-bold text-xs active-scale border border-red-900/50">RESET ALL DATA</button>
     </div>
   </div>
 
-  <div id="summaryModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-brand-dark/95 backdrop-blur-lg transition-opacity duration-300">
-    <div class="bg-brand-slate p-8 rounded-3xl shadow-2xl w-full max-w-sm border border-gray-700 text-center">
+  <div id="summaryModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-brand-dark/95 backdrop-blur-lg transition-opacity duration-300 text-center">
+    <div class="bg-brand-slate p-8 rounded-3xl shadow-2xl w-full max-w-sm border border-gray-700">
       <div class="w-20 h-20 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center text-5xl mx-auto mb-6"><i class="fas fa-check-circle"></i></div>
-      <h2 id="summaryTitle" class="text-2xl font-extrabold text-white tracking-tight mb-2">Workout Complete!</h2>
-      <div class="bg-brand-dark p-5 rounded-2xl mb-6 grid grid-cols-2 gap-4 border border-gray-800 mt-6 shadow-inner">
+      <h2 id="summaryTitle" class="text-2xl font-extrabold text-white tracking-tight mb-2">Complete!</h2>
+      <div class="bg-brand-dark p-5 rounded-2xl mb-6 grid grid-cols-2 gap-4 border border-gray-800 mt-4 shadow-inner">
         <div class="border-r border-gray-800 pr-4"><p class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Score</p><p class="text-3xl font-extrabold text-brand-blue"><span id="summaryScore">0</span>%</p></div>
         <div class="pl-4"><p class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Total</p><p class="text-3xl font-extrabold text-white" id="summaryTotal">0</p></div>
       </div>
-      <button onclick="closeSummary()" class="w-full bg-brand-green text-white py-4 rounded-xl font-bold text-lg active-scale">Keep Pushing!</button>
+      <button onclick="closeSummary()" class="w-full bg-brand-green text-white py-4 rounded-xl font-bold text-lg active-scale">See You Tomorrow!</button>
     </div>
   </div>
 
@@ -145,9 +133,10 @@
   <script>
     const getTodayDate = () => new Date().toLocaleDateString('en-CA');
 
+    // 💥 升級 Data 結構 (v5): 分開 doneVocabIds 同 doneSpeakIds
     function loadUserData() {
-      const defaultData = { currentStreak: 0, lastCompletedDate: null, totalScore: 0, history: [], savedVocab: [] };
-      const savedData = localStorage.getItem('english_coach_data_v4'); 
+      const defaultData = { currentStreak: 0, lastCompletedDate: null, totalScore: 0, history: [], savedVocab: [], doneVocabIds: [], doneSpeakIds: [] };
+      const savedData = localStorage.getItem('english_coach_data_v5'); 
       return savedData ? JSON.parse(savedData) : defaultData;
     }
 
@@ -156,104 +145,87 @@
       document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
       document.getElementById(`view-${viewName}`).classList.add('active');
       document.getElementById(`nav-${viewName}`).classList.add('active');
-      
-      if(viewName === 'progress') {
-        renderCalendar(); 
-        renderVocabVault(); 
-      }
+      if(viewName === 'progress') { renderCalendar(); renderVocabVault(); }
     }
 
-    // 💥 隨機洗牌演算法 (Fisher-Yates Shuffle)
     function shuffleArray(array) {
-      let currentIndex = array.length, randomIndex;
-      while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
       }
       return array;
     }
 
+    // 💥 完美修復：防重複機制 (根據類型分別過濾)
+    function getNextBatch(allData, limit, type) {
+      const data = loadUserData();
+      const doneList = type === 'vocab' ? (data.doneVocabIds || []) : (data.doneSpeakIds || []);
+      
+      let filtered = allData.filter(item => !doneList.includes(item.id));
+      
+      if (filtered.length < limit) {
+        if (type === 'vocab') data.doneVocabIds = [];
+        else data.doneSpeakIds = [];
+        localStorage.setItem('english_coach_data_v5', JSON.stringify(data));
+        filtered = allData;
+      }
+      return shuffleArray(filtered).slice(0, limit);
+    }
+
+    function markIdAsDone(id, type) {
+      let data = loadUserData();
+      if (type === 'vocab' && !data.doneVocabIds.includes(id)) data.doneVocabIds.push(id);
+      if (type === 'speak' && !data.doneSpeakIds.includes(id)) data.doneSpeakIds.push(id);
+      localStorage.setItem('english_coach_data_v5', JSON.stringify(data));
+    }
+
     // -----------------------------------------
-    // 💥 動態讀取 + Shuffle: Vocab 系統
+    // Vocab 系統
     // -----------------------------------------
-    let vocabData = []; 
-    let currentVocabIndex = 0; 
-    let vocabScore = 0; 
-    let vocabAnswered = false;
-    const DAILY_VOCAB_LIMIT = 5; // 每日限制做 5 題，保持高強度精簡
+    let vocabData = []; let currentVocabIndex = 0; let vocabScore = 0; let vocabAnswered = false;
+    const DAILY_VOCAB_LIMIT = 5;
 
     async function fetchVocabData() {
       try {
         const response = await fetch('vocab-data.json');
-        if (!response.ok) throw new Error('Network error');
-        
-        let allVocab = await response.json();
-        // 洗牌並抽出每日指定題數
-        vocabData = shuffleArray(allVocab).slice(0, DAILY_VOCAB_LIMIT);
-        
+        const allVocab = await response.json();
+        vocabData = getNextBatch(allVocab, DAILY_VOCAB_LIMIT, 'vocab');
         document.getElementById('vocabTotal').innerText = vocabData.length;
         loadVocabQuest();
-      } catch (error) {
-        document.getElementById('vocabSentence').innerHTML = '<span class="text-brand-red font-bold flex items-center justify-center gap-2"><i class="fas fa-exclamation-triangle"></i> 無法載入題庫 (vocab-data.json)</span>';
-      }
+      } catch (e) { document.getElementById('vocabSentence').innerText = "Load failed. Please check JSON."; }
     }
 
     function loadVocabQuest() {
-      if (vocabData.length === 0) return; 
+      if (vocabData.length === 0) return;
       vocabAnswered = false;
       const quest = vocabData[currentVocabIndex];
       document.getElementById('vocabProgress').innerText = currentVocabIndex + 1;
       document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', '<span class="blank-space"></span>');
-
-      const optionsContainer = document.getElementById('vocabOptions');
-      optionsContainer.innerHTML = '';
-      
-      quest.options.forEach((opt, index) => {
+      const container = document.getElementById('vocabOptions');
+      container.innerHTML = '';
+      quest.options.forEach((opt, idx) => {
         const btn = document.createElement('div');
-        btn.className = "w-full flex justify-between items-center p-4 rounded-xl border border-gray-700 bg-brand-dark text-gray-200 cursor-pointer transition-all hover:border-brand-blue vocab-option-btn";
-        btn.innerHTML = `
-          <div class="flex-grow font-semibold text-lg flex items-center flex-wrap">
-            <span class="mr-2">${opt.word}</span>
-            <span class="vocab-trans hidden text-lg font-bold text-brand-yellow tracking-wide mt-1 sm:mt-0">- ${opt.trans}</span>
-          </div>
-          <button class="w-12 h-12 flex-shrink-0 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 active-scale ml-2" onclick="speakWord('${opt.word}', event)">
-            <i class="fas fa-volume-up text-brand-blue text-lg"></i>
-          </button>
-        `;
-        btn.onclick = (e) => { if (e.target.closest('button')) return; checkVocabAnswer(index, btn, opt); };
-        optionsContainer.appendChild(btn);
+        btn.className = "w-full flex justify-between items-center p-4 rounded-xl border border-gray-700 bg-brand-dark text-gray-200 cursor-pointer active-scale vocab-option-btn";
+        btn.innerHTML = `<div class="flex-grow font-semibold text-lg flex items-center flex-wrap"><span class="mr-2">${opt.word}</span><span class="vocab-trans hidden text-lg font-bold text-brand-yellow tracking-wide mt-1">- ${opt.trans}</span></div><button class="w-12 h-12 flex-shrink-0 rounded-full bg-gray-800 flex items-center justify-center ml-2" onclick="speakWord('${opt.word}', event)"><i class="fas fa-volume-up text-brand-blue text-lg"></i></button>`;
+        btn.onclick = (e) => { if (!e.target.closest('button')) checkVocabAnswer(idx, btn); };
+        container.appendChild(btn);
       });
-
       document.getElementById('vocabFeedback').classList.add('hidden');
       document.getElementById('nextVocabBtn').classList.add('hidden');
     }
 
-    function checkVocabAnswer(selectedIndex, btnElement, selectedOptionData) {
-      if (vocabAnswered) return;
-      vocabAnswered = true;
+    function checkVocabAnswer(idx, btn) {
+      if (vocabAnswered) return; vocabAnswered = true;
       const quest = vocabData[currentVocabIndex];
-      
       document.querySelectorAll('.vocab-trans').forEach(el => el.classList.remove('hidden'));
-      const optionsButtons = document.querySelectorAll('.vocab-option-btn');
+      const correctBtn = document.querySelectorAll('.vocab-option-btn')[quest.correctIndex];
+      correctBtn.classList.add('border-brand-green', 'bg-brand-green/20', 'text-brand-green');
+      if (idx === quest.correctIndex) { vocabScore++; setVocabFeedback(true, "Spot On!", quest.explanation); }
+      else { btn.classList.add('border-brand-red', 'bg-brand-red/20', 'text-brand-red'); setVocabFeedback(false, "Not Quite", quest.explanation); }
       
-      const correctBtn = optionsButtons[quest.correctIndex];
-      correctBtn.classList.replace('border-gray-700', 'border-brand-green');
-      correctBtn.classList.replace('bg-brand-dark', 'bg-brand-green/20');
-      correctBtn.classList.add('text-brand-green');
-
-      if (selectedIndex === quest.correctIndex) {
-        vocabScore++;
-        setVocabFeedback(true, "Spot On!", quest.explanation);
-      } else {
-        btnElement.classList.replace('border-gray-700', 'border-brand-red');
-        btnElement.classList.replace('bg-brand-dark', 'bg-brand-red/20');
-        btnElement.classList.add('text-brand-red');
-        setVocabFeedback(false, "Not Quite", quest.explanation);
-      }
-
+      markIdAsDone(quest.id, 'vocab');
       saveToVocabVault(quest.options[quest.correctIndex].word, quest.options[quest.correctIndex].trans, quest.explanation);
-      document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', `<span class="text-brand-green font-bold border-b-2 border-brand-green mx-1 px-1">${quest.options[quest.correctIndex].word}</span>`);
+      document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', `<span class="text-brand-green font-bold border-b-2 border-brand-green px-1">${quest.options[quest.correctIndex].word}</span>`);
       document.getElementById('nextVocabBtn').classList.remove('hidden');
     }
 
@@ -261,94 +233,38 @@
       let data = loadUserData();
       if (!data.savedVocab.find(v => v.word === word)) {
         data.savedVocab.push({ word, trans, explanation, dateAdded: getTodayDate() });
-        localStorage.setItem('english_coach_data_v4', JSON.stringify(data));
+        localStorage.setItem('english_coach_data_v5', JSON.stringify(data));
       }
     }
 
     function setVocabFeedback(isCorrect, title, exp) {
       const box = document.getElementById('vocabFeedback');
-      box.className = `mb-6 p-5 rounded-2xl border shadow-inner ${isCorrect ? 'bg-brand-green/10 border-brand-green/30' : 'bg-brand-red/10 border-brand-red/30'}`;
-      document.getElementById('vocabFeedbackTitle').className = `font-bold text-lg ${isCorrect ? 'text-brand-green' : 'text-brand-red'}`;
+      box.className = `mb-6 p-5 rounded-2xl border ${isCorrect ? 'bg-brand-green/10 border-brand-green/30' : 'bg-brand-red/10 border-brand-red/30'}`;
       document.getElementById('vocabFeedbackTitle').innerText = title;
-      document.getElementById('vocabFeedbackIcon').className = `fas ${isCorrect ? 'fa-check-circle text-brand-green' : 'fa-times-circle text-brand-red'} text-xl`;
+      document.getElementById('vocabFeedbackTitle').className = `font-bold text-lg ${isCorrect ? 'text-brand-green' : 'text-brand-red'}`;
       document.getElementById('vocabExplanation').innerText = exp;
       box.classList.remove('hidden');
     }
 
     function nextVocabQuest() {
-      if (currentVocabIndex < vocabData.length - 1) {
-        currentVocabIndex++; loadVocabQuest();
-      } else {
-        const scorePct = Math.round((vocabScore / vocabData.length) * 100);
-        completeWorkout('Vocab', scorePct);
-        // 完成後重新洗牌抽題，方便學員想 Double Workout
-        fetchVocabData(); 
-        currentVocabIndex = 0; vocabScore = 0;
-      }
-    }
-
-    function renderVocabVault() {
-      const data = loadUserData();
-      const vaultList = document.getElementById('vocabVaultList');
-      document.getElementById('vaultCount').innerText = `${data.savedVocab.length} words`;
-      vaultList.innerHTML = '';
-
-      if (data.savedVocab.length === 0) {
-        vaultList.innerHTML = '<p class="text-sm text-gray-500 italic text-center py-4">完成 Vocab 訓練後，生字會自動儲存喺度！</p>';
-        return;
-      }
-
-      const reversedVocab = [...data.savedVocab].reverse();
-      reversedVocab.forEach(item => {
-        const card = document.createElement('div');
-        card.className = "bg-brand-dark p-4 rounded-2xl border border-gray-700 flex flex-col gap-2";
-        card.innerHTML = `
-          <div class="flex justify-between items-start">
-            <div>
-              <p class="text-xl font-extrabold text-white tracking-tight">${item.word}</p>
-              <p class="text-brand-yellow font-bold text-sm mt-1">${item.trans}</p>
-            </div>
-            <button class="w-10 h-10 flex-shrink-0 rounded-full bg-brand-slate flex items-center justify-center hover:bg-gray-700 active-scale shadow-md" onclick="speakWord('${item.word}', event)">
-              <i class="fas fa-volume-up text-gray-300"></i>
-            </button>
-          </div>
-          <div class="w-full h-px bg-gray-800 my-1"></div>
-          <p class="text-xs text-gray-400 leading-relaxed">${item.explanation}</p>
-        `;
-        vaultList.appendChild(card);
-      });
+      if (currentVocabIndex < vocabData.length - 1) { currentVocabIndex++; loadVocabQuest(); }
+      else { completeWorkout('Vocab', Math.round((vocabScore / vocabData.length) * 100)); fetchVocabData(); currentVocabIndex = 0; vocabScore = 0; }
     }
 
     // -----------------------------------------
-    // 💥 動態讀取 + Shuffle: Speaking 系統
+    // 💥 Speaking 系統 (含錄音防卡死修復)
     // -----------------------------------------
-    let speakTasks = [];
-    let currentSpeakIndex = 0; 
-    let speakDailyScore = 0;
-    const DAILY_SPEAK_LIMIT = 3; // 每日限制講 3 題
+    let speakTasks = []; let currentSpeakIndex = 0; let speakDailyScore = 0;
+    const DAILY_SPEAK_LIMIT = 3;
 
     async function fetchSpeakData() {
       try {
         const response = await fetch('speak-data.json');
-        if (!response.ok) throw new Error('Network error');
-        
-        let allSpeak = await response.json();
-        // 洗牌並抽出每日指定題數
-        speakTasks = shuffleArray(allSpeak).slice(0, DAILY_SPEAK_LIMIT);
-        
+        const allSpeak = await response.json();
+        speakTasks = getNextBatch(allSpeak, DAILY_SPEAK_LIMIT, 'speak');
         document.getElementById('speakTotal').innerText = speakTasks.length;
         loadSpeakTask();
-      } catch (error) {
-        document.getElementById('targetSentence').innerHTML = '<span class="text-brand-red font-bold">無法載入題庫 (speak-data.json)</span>';
-      }
-    }
-
-    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-    let recognition; let isRecording = false;
-    if (SpeechRec) {
-      recognition = new SpeechRec(); recognition.lang = 'en-US';
-      recognition.onresult = (e) => calculateSpeakScore(e.results[0][0].transcript);
-      recognition.onspeechend = stopRecording; recognition.onerror = stopRecording;
+      } catch (e) { document.getElementById('targetSentence').innerText = "Load failed"; }
     }
 
     function loadSpeakTask() {
@@ -360,107 +276,141 @@
       document.getElementById('nextSpeakBtn').classList.add('hidden');
     }
 
-    function speakWord(word, event) {
-      if(event) event.stopPropagation();
-      const utterance = new SpeechSynthesisUtterance(word);
-      const savedVoiceURI = localStorage.getItem('preferred_voice_uri');
-      if (savedVoiceURI) {
-        const preferredVoice = speechSynthesis.getVoices().find(v => v.voiceURI === savedVoiceURI);
-        if (preferredVoice) utterance.voice = preferredVoice;
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition; let isRecording = false;
+    
+    if (SpeechRec) {
+      recognition = new SpeechRec(); 
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      
+      recognition.onresult = (e) => {
+        try { calculateSpeakScore(e.results[0][0].transcript); } 
+        catch (err) { console.error(err); forceStopUI("Analysis failed."); }
+      };
+      
+      // 完美修復：處理所有中斷情況
+      recognition.onspeechend = () => recognition.stop(); // 唔好直接改 UI，等 onend 或 onresult
+      
+      recognition.onerror = (e) => {
+        console.warn("Speech recognition error:", e.error);
+        forceStopUI();
+        if(e.error === 'no-speech') alert("聽唔到聲音，請靠近咪高峰或者大聲啲再試一次！");
+      };
+      
+      recognition.onend = () => { forceStopUI(); }; // 確保任何情況下 UI 都會 Reset
+    }
+
+    function toggleRecording() {
+      if (isRecording) { recognition.stop(); forceStopUI(); } 
+      else {
+        try { recognition.start(); } catch(e) { console.warn(e); }
+        isRecording = true;
+        document.getElementById('recordBtn').classList.replace('bg-brand-red', 'bg-red-800');
+        document.getElementById('recordRipple').classList.add('animate-ping', 'opacity-50');
+        document.getElementById('recordingStatus').innerText = "Listening...";
+        document.getElementById('speakFeedbackArea').classList.add('hidden');
       }
-      window.speechSynthesis.speak(utterance);
     }
-    
-    function playSpeakAudio() { speakWord(speakTasks[currentSpeakIndex].sentence, null); }
-    function toggleRecording() { isRecording ? stopRecording() : startRecording(); }
-    
-    function startRecording() {
-      if(!recognition) return alert("Browser not supported");
-      recognition.start(); isRecording = true;
-      document.getElementById('recordBtn').classList.replace('bg-brand-red', 'bg-red-800');
-      document.getElementById('recordRipple').classList.add('animate-ping', 'opacity-50');
-      document.getElementById('recordingStatus').innerText = "Listening...";
-      document.getElementById('speakFeedbackArea').classList.add('hidden');
-      document.getElementById('nextSpeakBtn').classList.add('hidden');
-    }
-    function stopRecording() {
-      if(isRecording) recognition.stop(); isRecording = false;
+
+    function forceStopUI() {
+      isRecording = false;
       document.getElementById('recordBtn').classList.replace('bg-red-800', 'bg-brand-red');
       document.getElementById('recordRipple').classList.remove('animate-ping', 'opacity-50');
       document.getElementById('recordingStatus').innerText = "";
     }
-    
+
     function calculateSpeakScore(spokenText) {
-      const targetWords = speakTasks[currentSpeakIndex].sentence.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
-      const spokenWords = spokenText.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
-      let matchCount = 0; targetWords.forEach(w => { if (spokenWords.includes(w)) { matchCount++; spokenWords.splice(spokenWords.indexOf(w), 1); } });
-      const score = Math.round((matchCount / targetWords.length) * 100);
+      if(!spokenText || spokenText.trim() === "") return;
+      forceStopUI(); // 確保 UI 變回正常狀態
+      
+      const target = speakTasks[currentSpeakIndex].sentence.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
+      const spoken = spokenText.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
+      let match = 0; target.forEach(w => { if (spoken.includes(w)) { match++; spoken.splice(spoken.indexOf(w), 1); } });
+      const score = Math.round((match / target.length) * 100);
       document.getElementById('speakScoreValue').innerText = score;
       document.getElementById('speakUserText').innerText = `Heard: "${spokenText}"`;
       document.getElementById('speakFeedbackArea').classList.remove('hidden');
       const box = document.getElementById('speakFeedbackBox');
-      if (score >= 85) {
-        box.className = "p-5 rounded-2xl w-full text-center flex flex-col items-center bg-brand-green/10 text-brand-green border border-brand-green/30";
-        document.getElementById('speakScoreLabel').innerText = "Mission Accomplished!";
-        speakDailyScore += score; document.getElementById('nextSpeakBtn').classList.remove('hidden');
+      
+      if (score >= 80) { // C1 級句子長，放寬至 80 分合格
+        box.className = "p-5 rounded-2xl w-full flex flex-col items-center bg-brand-green/10 text-brand-green border border-brand-green/30";
+        document.getElementById('speakScoreLabel').innerText = "Excellent!";
+        speakDailyScore += score; 
+        document.getElementById('nextSpeakBtn').classList.remove('hidden');
+        markIdAsDone(speakTasks[currentSpeakIndex].id, 'speak');
       } else {
-        box.className = "p-5 rounded-2xl w-full text-center flex flex-col items-center bg-orange-500/10 text-orange-400 border border-orange-500/20";
-        document.getElementById('speakScoreLabel').innerText = "Retry Required (Need 85%)";
+        box.className = "p-5 rounded-2xl w-full flex flex-col items-center bg-orange-500/10 text-orange-400 border border-orange-500/20";
+        document.getElementById('speakScoreLabel').innerText = "Retry Required (80%)";
       }
     }
-    
+
     function nextSpeakTask() {
-      if (currentSpeakIndex < speakTasks.length - 1) { 
-        currentSpeakIndex++; loadSpeakTask();
-      } else {
-        const avg = Math.round(speakDailyScore / speakTasks.length);
-        completeWorkout('Speaking', avg); 
-        // 完成後重新洗牌抽題
-        fetchSpeakData();
-        currentSpeakIndex = 0; speakDailyScore = 0;
-      }
+      if (currentSpeakIndex < speakTasks.length - 1) { currentSpeakIndex++; loadSpeakTask(); }
+      else { completeWorkout('Speaking', Math.round(speakDailyScore / speakTasks.length)); fetchSpeakData(); currentSpeakIndex = 0; speakDailyScore = 0; }
     }
-    
-    // 日曆與結算
-    function renderCalendar() {
-      const data = loadUserData();
-      document.getElementById('progressTotalScore').innerText = data.totalScore;
-      document.getElementById('progressStreak').innerText = data.currentStreak;
-      const now = new Date(); const year = now.getFullYear(); const month = now.getMonth();
-      const daysInMonth = new Date(year, month + 1, 0).getDate(); const firstDay = new Date(year, month, 1).getDay();
-      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      document.getElementById('calendarMonthLabel').innerText = `${monthNames[month]} ${year}`;
-      let html = '<div class="grid grid-cols-7 gap-y-4 gap-x-2 text-center text-xs font-mono">';
-      ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(d => html += `<div class="text-gray-500 font-bold mb-2">${d}</div>`);
-      for(let i=0; i<firstDay; i++) html += `<div></div>`;
-      for(let d=1; d<=daysInMonth; d++) {
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-        if (data.history && data.history.includes(dateStr)) html += `<div class="w-8 h-8 mx-auto bg-brand-orange text-white rounded-full flex items-center justify-center shadow-lg shadow-brand-orange/40"><i class="fas fa-fire-alt text-sm"></i></div>`;
-        else if (dateStr === getTodayDate()) html += `<div class="w-8 h-8 mx-auto border-2 border-brand-blue text-brand-blue rounded-full flex items-center justify-center font-bold">${d}</div>`;
-        else html += `<div class="w-8 h-8 mx-auto text-gray-600 flex items-center justify-center">${d}</div>`;
-      }
-      document.getElementById('calendarGrid').innerHTML = html + '</div>';
+
+    function playSpeakAudio() { speakWord(speakTasks[currentSpeakIndex].sentence, null); }
+    function speakWord(word, e) {
+      if(e) e.stopPropagation();
+      const u = new SpeechSynthesisUtterance(word);
+      const saved = localStorage.getItem('preferred_voice_uri');
+      if (saved) { u.voice = speechSynthesis.getVoices().find(v => v.voiceURI === saved); }
+      window.speechSynthesis.speak(u);
     }
 
     function completeWorkout(type, score) {
       let data = loadUserData(); const today = getTodayDate();
-      if (!data.history) data.history = [];
       if (!data.history.includes(today)) {
         data.history.push(today);
         const yesterday = new Date(Date.now() - 86400000).toLocaleDateString('en-CA');
         data.history.includes(yesterday) ? data.currentStreak++ : data.currentStreak = 1;
       }
       data.totalScore += score;
-      localStorage.setItem('english_coach_data_v4', JSON.stringify(data));
-      document.querySelectorAll('.streakValue').forEach(el => el.innerText = `${data.currentStreak}`);
+      localStorage.setItem('english_coach_data_v5', JSON.stringify(data));
+      document.querySelectorAll('.streakValue').forEach(el => el.innerText = data.currentStreak);
       document.getElementById('summaryTitle').innerText = `${type} Complete!`;
       document.getElementById('summaryScore').innerText = score;
       document.getElementById('summaryTotal').innerText = data.totalScore;
-      document.getElementById('summaryModal').classList.remove('hidden', 'opacity-0');
+      document.getElementById('summaryModal').classList.remove('hidden');
     }
     function closeSummary() { document.getElementById('summaryModal').classList.add('hidden'); }
 
-    // 語音設定
+    function renderCalendar() {
+      const data = loadUserData();
+      document.getElementById('progressTotalScore').innerText = data.totalScore;
+      document.getElementById('progressStreak').innerText = data.currentStreak;
+      const now = new Date(); const year = now.getFullYear(); const month = now.getMonth();
+      const daysInMonth = new Date(year, month + 1, 0).getDate(); const firstDay = new Date(year, month, 1).getDay();
+      document.getElementById('calendarMonthLabel').innerText = `${now.toLocaleString('en-US', { month: 'short' })} ${year}`;
+      let html = '<div class="grid grid-cols-7 gap-y-4 text-center text-[10px] font-mono">';
+      ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(d => html += `<div class="text-gray-500 font-bold">${d}</div>`);
+      for(let i=0; i<firstDay; i++) html += `<div></div>`;
+      for(let d=1; d<=daysInMonth; d++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        if (data.history.includes(dateStr)) html += `<div class="w-7 h-7 mx-auto bg-brand-orange text-white rounded-full flex items-center justify-center shadow-lg"><i class="fas fa-fire-alt text-[10px]"></i></div>`;
+        else if (dateStr === getTodayDate()) html += `<div class="w-7 h-7 mx-auto border-2 border-brand-blue text-brand-blue rounded-full flex items-center justify-center font-bold">${d}</div>`;
+        else html += `<div class="w-7 h-7 mx-auto text-gray-600 flex items-center justify-center">${d}</div>`;
+      }
+      document.getElementById('calendarGrid').innerHTML = html + '</div>';
+    }
+
+    function renderVocabVault() {
+      const data = loadUserData();
+      const list = document.getElementById('vocabVaultList');
+      document.getElementById('vaultCount').innerText = `${data.savedVocab.length} words`;
+      list.innerHTML = data.savedVocab.length ? [...data.savedVocab].reverse().map(v => `
+        <div class="bg-brand-dark p-4 rounded-2xl border border-gray-700">
+          <div class="flex justify-between items-start">
+            <div><p class="text-xl font-extrabold text-white">${v.word}</p><p class="text-brand-yellow font-bold text-sm">${v.trans}</p></div>
+            <button class="w-10 h-10 rounded-full bg-brand-slate flex items-center justify-center" onclick="speakWord('${v.word}')"><i class="fas fa-volume-up text-gray-300"></i></button>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">${v.explanation}</p>
+        </div>`).join('') : '<p class="text-center py-4 text-gray-500 italic">No words saved yet.</p>';
+    }
+
+    function resetData() { if(confirm("確定重置所有訓練數據？")) { localStorage.removeItem('english_coach_data_v5'); location.reload(); } }
+
     let voices = [];
     function popVoices() {
       voices = speechSynthesis.getVoices().filter(v => v.lang.includes('en'));
@@ -472,17 +422,11 @@
       });
     }
     speechSynthesis.onvoiceschanged = popVoices;
-    document.getElementById('voiceSelect').addEventListener('change', (e) => localStorage.setItem('preferred_voice_uri', voices[e.target.value].voiceURI));
-    function testVoice() { speakWord("Hello, I am your coach.", null); }
+    document.getElementById('voiceSelect').onchange = (e) => localStorage.setItem('preferred_voice_uri', voices[e.target.value].voiceURI);
+    function testVoice() { speakWord("Hello, ready to push your limit?"); }
 
-    // 啟動載入
-    window.onload = () => {
-      fetchVocabData(); 
-      fetchSpeakData(); // 新增載入 Speaking JSON
-      document.querySelectorAll('.streakValue').forEach(el => el.innerText = `${loadUserData().currentStreak}`);
-      switchView('vocab'); 
-      popVoices();
-    };
+    window.onload = () => { fetchVocabData(); fetchSpeakData(); updateGlobalStreak(); switchView('vocab'); popVoices(); };
+    function updateGlobalStreak() { document.querySelectorAll('.streakValue').forEach(el => el.innerText = loadUserData().currentStreak); }
   </script>
 </body>
 </html>
