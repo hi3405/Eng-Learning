@@ -1,0 +1,62 @@
+[
+  {
+    "id": "b1-1",
+    "sentence": "Please {blank} your email password if you cannot log in to the company system.",
+    "options": [
+      { "word": "reset", "trans": "重設" },
+      { "word": "remove", "trans": "移除" },
+      { "word": "return", "trans": "返回" },
+      { "word": "record", "trans": "記錄" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Reset password 係最基本嘅 IT 詞彙，意思係重設密碼。"
+  },
+  {
+    "id": "b1-2",
+    "sentence": "The new employee is very {blank} and always comes to the office early.",
+    "options": [
+      { "word": "lazy", "trans": "懶惰的" },
+      { "word": "punctual", "trans": "準時的" },
+      { "word": "angry", "trans": "生氣的" },
+      { "word": "confused", "trans": "困惑的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Punctual 形容人非常守時，係職場基本要求。"
+  },
+  {
+    "id": "b1-3",
+    "sentence": "We need to {blank} this issue before the customer gets upset.",
+    "options": [
+      { "word": "resolve", "trans": "解決" },
+      { "word": "create", "trans": "創造" },
+      { "word": "repeat", "trans": "重複" },
+      { "word": "ignore", "trans": "忽略" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Resolve an issue 係客服同 QA 日常最常講嘅句子。"
+  },
+  {
+    "id": "b1-4",
+    "sentence": "Can you please {blank} the meeting room for tomorrow afternoon?",
+    "options": [
+      { "word": "buy", "trans": "買" },
+      { "word": "book", "trans": "預訂" },
+      { "word": "build", "trans": "建立" },
+      { "word": "break", "trans": "打破" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Book a room/ticket 指預訂房間或機票。"
+  },
+  {
+    "id": "b1-5",
+    "sentence": "The manager will {blank} the final report to check for any spelling mistakes.",
+    "options": [
+      { "word": "review", "trans": "審閱 / 檢查" },
+      { "word": "throw", "trans": "丟棄" },
+      { "word": "draw", "trans": "畫" },
+      { "word": "hide", "trans": "隱藏" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Review a document 意思係提交前再仔細睇一次。"
+  }
+]
