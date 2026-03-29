@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>English Overload v6.0</title>
+  <title>English Overload v1.1</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -35,13 +35,16 @@
       </div>
       <div class="mt-4 flex justify-between items-end">
         <p class="text-xl font-extrabold text-white tracking-tight">C1 Precision</p>
-        <div class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md">Quest <span id="vocabProgress" class="text-brand-blue font-bold">1</span> / <span id="vocabTotal">5</span></div>
+        <div class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md">Quest <span id="vocabProgress" class="text-brand-blue font-bold">1</span> / <span id="vocabTotal">...</span></div>
       </div>
     </header>
 
     <main class="flex-grow p-6 flex flex-col">
       <div class="bg-brand-dark p-6 rounded-3xl shadow-xl mb-6 border border-gray-800">
-        <p id="vocabSentence" class="text-lg font-semibold leading-relaxed text-white font-sans"></p>
+        <p id="vocabSentence" class="text-lg font-semibold leading-relaxed text-white font-sans text-center mt-4">
+          <i class="fas fa-spinner fa-spin text-brand-blue text-2xl mb-2"></i><br>
+          <span class="text-sm text-gray-400">載入題庫中...</span>
+        </p>
       </div>
 
       <div id="vocabOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
@@ -64,7 +67,9 @@
     <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10">
       <div class="flex justify-between items-center">
         <h1 class="text-xs font-semibold uppercase tracking-widest text-gray-400">Speaking Quest</h1>
-        <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full shadow-inner streak-display"><i class="fas fa-fire-alt"></i> <span class="streakValue">0</span></div>
+        <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full shadow-inner streak-display">
+          <i class="fas fa-fire-alt"></i> <span class="streakValue">0</span>
+        </div>
       </div>
       <div class="mt-4 flex justify-between items-end">
         <p id="taskType" class="text-xl font-extrabold text-white tracking-tight">Task 1: The Heavy Lift</p>
@@ -105,8 +110,7 @@
         <h3 class="text-sm font-bold text-brand-blue uppercase tracking-wider"><i class="fas fa-vault mr-2"></i>Vocab Vault</h3>
         <span class="text-xs text-gray-500" id="vaultCount">0 words</span>
       </div>
-      <div id="vocabVaultList" class="flex flex-col gap-3">
-        </div>
+      <div id="vocabVaultList" class="flex flex-col gap-3"></div>
     </div>
   </div>
 
@@ -145,9 +149,8 @@
     const getTodayDate = () => new Date().toLocaleDateString('en-CA');
 
     function loadUserData() {
-      // 升級資料庫：加入 savedVocab Array 用嚟儲存做過嘅生字
       const defaultData = { currentStreak: 0, lastCompletedDate: null, totalScore: 0, history: [], savedVocab: [] };
-      const savedData = localStorage.getItem('english_coach_data_v4'); // 升級版本號防撞
+      const savedData = localStorage.getItem('english_coach_data_v4'); 
       return savedData ? JSON.parse(savedData) : defaultData;
     }
 
@@ -159,49 +162,111 @@
       
       if(viewName === 'progress') {
         renderCalendar(); 
-        renderVocabVault(); // 切換時同時渲染單字庫
+        renderVocabVault(); 
       }
     }
 
     // -----------------------------------------
     // 💥 v1.1 動態讀取題庫系統
     // -----------------------------------------
-    let vocabData = []; // 改為空 Array，等待載入
+    let vocabData = []; 
     let currentVocabIndex = 0; 
     let vocabScore = 0; 
     let vocabAnswered = false;
 
-    // 非同步載入 JSON 檔案
     async function fetchVocabData() {
       try {
-        // Fetch API 會去搵同一個資料夾下面嘅 vocab-data.json
         const response = await fetch('vocab-data.json');
         if (!response.ok) throw new Error('Network response was not ok');
         
         vocabData = await response.json();
         
-        // 確保成功載入後，先更新 UI 同總題數
         document.getElementById('vocabTotal').innerText = vocabData.length;
         loadVocabQuest();
       } catch (error) {
         console.error("題庫載入失敗:", error);
-        document.getElementById('vocabSentence').innerHTML = '<span class="text-brand-red">⚠️ 無法載入題庫 (vocab-data.json)，請確認檔案已上傳至 Vercel。</span>';
+        document.getElementById('vocabSentence').innerHTML = '<span class="text-brand-red font-bold flex items-center justify-center gap-2"><i class="fas fa-exclamation-triangle"></i> 無法載入題庫 (vocab-data.json)，請確認檔案已上傳。</span>';
       }
     }
 
-    // 將原本 window.onload 裡面嘅 loadVocabQuest() 換成 fetchVocabData()
-    window.onload = () => {
-      fetchVocabData(); // 啟動時先去 Fetch 題庫
-      loadSpeakTask();
-      document.querySelectorAll('.streakValue').forEach(el => el.innerText = `${loadUserData().currentStreak}`);
-      switchView('vocab'); 
-      popVoices();
-    };
+    function loadVocabQuest() {
+      if (vocabData.length === 0) return; // 避免未載入完成時報錯
+      
+      vocabAnswered = false;
+      const quest = vocabData[currentVocabIndex];
+      document.getElementById('vocabProgress').innerText = currentVocabIndex + 1;
+      document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', '<span class="blank-space"></span>');
 
-    // 儲存單字邏輯
+      const optionsContainer = document.getElementById('vocabOptions');
+      optionsContainer.innerHTML = '';
+      
+      quest.options.forEach((opt, index) => {
+        const btn = document.createElement('div');
+        btn.className = "w-full flex justify-between items-center p-4 rounded-xl border border-gray-700 bg-brand-dark text-gray-200 cursor-pointer transition-all hover:border-brand-blue vocab-option-btn";
+        
+        btn.innerHTML = `
+          <div class="flex-grow font-semibold text-lg flex items-center flex-wrap">
+            <span class="mr-2">${opt.word}</span>
+            <span class="vocab-trans hidden text-lg font-bold text-brand-yellow tracking-wide mt-1 sm:mt-0">- ${opt.trans}</span>
+          </div>
+          <button class="w-12 h-12 flex-shrink-0 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 active-scale ml-2" onclick="speakWord('${opt.word}', event)">
+            <i class="fas fa-volume-up text-brand-blue text-lg"></i>
+          </button>
+        `;
+        
+        btn.onclick = (e) => {
+          if (e.target.closest('button')) return; 
+          checkVocabAnswer(index, btn, opt); 
+        };
+        optionsContainer.appendChild(btn);
+      });
+
+      document.getElementById('vocabFeedback').classList.add('hidden');
+      document.getElementById('nextVocabBtn').classList.add('hidden');
+    }
+
+    function speakWord(word, event) {
+      if(event) event.stopPropagation();
+      const utterance = new SpeechSynthesisUtterance(word);
+      const savedVoiceURI = localStorage.getItem('preferred_voice_uri');
+      if (savedVoiceURI) {
+        const preferredVoice = speechSynthesis.getVoices().find(v => v.voiceURI === savedVoiceURI);
+        if (preferredVoice) utterance.voice = preferredVoice;
+      }
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function checkVocabAnswer(selectedIndex, btnElement, selectedOptionData) {
+      if (vocabAnswered) return;
+      vocabAnswered = true;
+      const quest = vocabData[currentVocabIndex];
+      
+      document.querySelectorAll('.vocab-trans').forEach(el => el.classList.remove('hidden'));
+      const optionsButtons = document.querySelectorAll('.vocab-option-btn');
+      
+      const correctBtn = optionsButtons[quest.correctIndex];
+      correctBtn.classList.replace('border-gray-700', 'border-brand-green');
+      correctBtn.classList.replace('bg-brand-dark', 'bg-brand-green/20');
+      correctBtn.classList.add('text-brand-green');
+
+      if (selectedIndex === quest.correctIndex) {
+        vocabScore++;
+        setVocabFeedback(true, "Spot On!", quest.explanation);
+      } else {
+        btnElement.classList.replace('border-gray-700', 'border-brand-red');
+        btnElement.classList.replace('bg-brand-dark', 'bg-brand-red/20');
+        btnElement.classList.add('text-brand-red');
+        setVocabFeedback(false, "Not Quite", quest.explanation);
+      }
+
+      saveToVocabVault(quest.options[quest.correctIndex].word, quest.options[quest.correctIndex].trans, quest.explanation);
+
+      document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', `<span class="text-brand-green font-bold border-b-2 border-brand-green mx-1 px-1">${quest.options[quest.correctIndex].word}</span>`);
+      document.getElementById('nextVocabBtn').classList.remove('hidden');
+    }
+
     function saveToVocabVault(word, trans, explanation) {
       let data = loadUserData();
-      // 檢查是否已經存在，避免重複儲存
       const exists = data.savedVocab.find(v => v.word === word);
       if (!exists) {
         data.savedVocab.push({ word, trans, explanation, dateAdded: getTodayDate() });
@@ -229,9 +294,6 @@
       }
     }
 
-    // -----------------------------------------
-    // 💥 渲染 Vocab Vault (單字庫)
-    // -----------------------------------------
     function renderVocabVault() {
       const data = loadUserData();
       const vaultList = document.getElementById('vocabVaultList');
@@ -243,9 +305,7 @@
         return;
       }
 
-      // 將最新加入嘅字排喺最上面 (Reverse array)
       const reversedVocab = [...data.savedVocab].reverse();
-
       reversedVocab.forEach(item => {
         const card = document.createElement('div');
         card.className = "bg-brand-dark p-4 rounded-2xl border border-gray-700 flex flex-col gap-2";
@@ -267,7 +327,7 @@
     }
 
     // -----------------------------------------
-    // Speaking & 其他邏輯 (保持穩定運作)
+    // Speaking & 其他邏輯
     // -----------------------------------------
     const speakTasks = [
       { type: "Task 1: The Heavy Lift", sentence: "We must rectify the discrepancy immediately to prevent further yield loss." },
@@ -330,7 +390,6 @@
       }
     }
     
-    // 日曆與結算
     function renderCalendar() {
       const data = loadUserData();
       document.getElementById('progressTotalScore').innerText = data.totalScore;
@@ -369,7 +428,6 @@
     }
     function closeSummary() { document.getElementById('summaryModal').classList.add('hidden'); }
 
-    // 語音設定
     let voices = [];
     function popVoices() {
       voices = speechSynthesis.getVoices().filter(v => v.lang.includes('en'));
@@ -385,9 +443,11 @@
     function testVoice() { speakWord("Hello, I am your coach.", null); }
 
     window.onload = () => {
-      loadVocabQuest(); loadSpeakTask();
+      fetchVocabData(); 
+      loadSpeakTask();
       document.querySelectorAll('.streakValue').forEach(el => el.innerText = `${loadUserData().currentStreak}`);
-      switchView('vocab'); popVoices();
+      switchView('vocab'); 
+      popVoices();
     };
   </script>
 </body>
