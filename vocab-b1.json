@@ -657,5 +657,304 @@
     ],
     "correctIndex": 1,
     "explanation": "Understand the terms 指明白條款內容。"
+  },{
+    "id": "b1-56",
+    "sentence": "Can you help me {blank} a meeting for tomorrow morning?",
+    "options": [
+      { "word": "forget", "trans": "忘記" },
+      { "word": "arrange", "trans": "安排" },
+      { "word": "hide", "trans": "隱藏" },
+      { "word": "destroy", "trans": "破壞" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Arrange a meeting 指安排會議，基礎必備。"
+  },
+  {
+    "id": "b1-57",
+    "sentence": "I cannot {blank} the training session because I am sick today.",
+    "options": [
+      { "word": "attend", "trans": "出席" },
+      { "word": "pretend", "trans": "假裝" },
+      { "word": "expect", "trans": "預期" },
+      { "word": "enjoy", "trans": "享受" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Attend 意思係出席或參加。"
+  },
+  {
+    "id": "b1-58",
+    "sentence": "We need more time to {blank} the presentation slides.",
+    "options": [
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "delete", "trans": "刪除" },
+      { "word": "prepare", "trans": "準備" },
+      { "word": "sell", "trans": "賣出" }
+    ],
+    "correctIndex": 2,
+    "explanation": "Prepare slides 指準備簡報投影片。"
+  },
+  {
+    "id": "b1-59",
+    "sentence": "I {blank} that we take a short break before starting the next topic.",
+    "options": [
+      { "word": "refuse", "trans": "拒絕" },
+      { "word": "suggest", "trans": "建議" },
+      { "word": "complain", "trans": "投訴" },
+      { "word": "guess", "trans": "猜測" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Suggest 意思係提出建議。"
+  },
+  {
+    "id": "b1-60",
+    "sentence": "Please {blank} your laptop to the Wi-Fi before opening the app.",
+    "options": [
+      { "word": "connect", "trans": "連接" },
+      { "word": "break", "trans": "打破" },
+      { "word": "drop", "trans": "掉落" },
+      { "word": "hide", "trans": "隱藏" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Connect to Wi-Fi 係連線上網嘅標準講法。"
+  },
+  {
+    "id": "b1-61",
+    "sentence": "Did you {blank} the email I sent you yesterday?",
+    "options": [
+      { "word": "steal", "trans": "偷" },
+      { "word": "receive", "trans": "收到" },
+      { "word": "give", "trans": "給予" },
+      { "word": "send", "trans": "發送" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Receive an email 指收到電郵。"
+  },
+  {
+    "id": "b1-62",
+    "sentence": "We would like to {blank} you to our company dinner next Friday.",
+    "options": [
+      { "word": "invite", "trans": "邀請" },
+      { "word": "kick", "trans": "踢" },
+      { "word": "blame", "trans": "責怪" },
+      { "word": "scold", "trans": "責罵" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Invite someone 意思係邀請某人。"
+  },
+  {
+    "id": "b1-63",
+    "sentence": "The team went out to {blank} the successful product launch.",
+    "options": [
+      { "word": "cry", "trans": "哭泣" },
+      { "word": "fight", "trans": "打架" },
+      { "word": "celebrate", "trans": "慶祝" },
+      { "word": "sleep", "trans": "睡覺" }
+    ],
+    "correctIndex": 2,
+    "explanation": "Celebrate 指慶祝好事情。"
+  },
+  {
+    "id": "b1-64",
+    "sentence": "We {blank} the delivery to arrive by next Monday.",
+    "options": [
+      { "word": "fear", "trans": "害怕" },
+      { "word": "expect", "trans": "預期 / 期待" },
+      { "word": "forget", "trans": "忘記" },
+      { "word": "deny", "trans": "否認" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Expect 喺商業上指預計某事會發生。"
+  },
+  {
+    "id": "b1-65",
+    "sentence": "It is hard to {blank} a large team without good communication skills.",
+    "options": [
+      { "word": "manage", "trans": "管理" },
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "destroy", "trans": "破壞" },
+      { "word": "lose", "trans": "遺失" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Manage a team 意思係管理團隊。"
+  },
+  {
+    "id": "b1-66",
+    "sentence": "I need you to {blank} me when I present this idea to the boss.",
+    "options": [
+      { "word": "support", "trans": "支持" },
+      { "word": "attack", "trans": "攻擊" },
+      { "word": "laugh", "trans": "嘲笑" },
+      { "word": "leave", "trans": "離開" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Support 指喺背後撐住或支援某人。"
+  },
+  {
+    "id": "b1-67",
+    "sentence": "You must build {blank} with your clients so they will buy from you again.",
+    "options": [
+      { "word": "anger", "trans": "憤怒" },
+      { "word": "trust", "trans": "信任" },
+      { "word": "fear", "trans": "恐懼" },
+      { "word": "doubt", "trans": "懷疑" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Build trust 即係建立互信。"
+  },
+  {
+    "id": "b1-68",
+    "sentence": "Let's {blank} the prices of these two laptops before we buy one.",
+    "options": [
+      { "word": "compare", "trans": "比較" },
+      { "word": "guess", "trans": "猜測" },
+      { "word": "hide", "trans": "隱藏" },
+      { "word": "break", "trans": "打破" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Compare 指將兩樣嘢放埋一齊比較。"
+  },
+  {
+    "id": "b1-69",
+    "sentence": "We have to {blank} where to hold the wedding party soon.",
+    "options": [
+      { "word": "forget", "trans": "忘記" },
+      { "word": "decide", "trans": "決定" },
+      { "word": "paint", "trans": "畫" },
+      { "word": "ignore", "trans": "忽略" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Decide 意思係做決定。"
+  },
+  {
+    "id": "b1-70",
+    "sentence": "Can you {blank} the problem you saw on the computer screen?",
+    "options": [
+      { "word": "describe", "trans": "描述" },
+      { "word": "eat", "trans": "吃" },
+      { "word": "touch", "trans": "觸摸" },
+      { "word": "steal", "trans": "偷" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Describe 指用說話形容出嚟。"
+  },
+  {
+    "id": "b1-71",
+    "sentence": "They {blank} a free drink if you order a meal today.",
+    "options": [
+      { "word": "refuse", "trans": "拒絕" },
+      { "word": "offer", "trans": "提供" },
+      { "word": "take", "trans": "拿取" },
+      { "word": "hide", "trans": "隱藏" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Offer 指主動提供優惠或物品。"
+  },
+  {
+    "id": "b1-72",
+    "sentence": "I {blank} to send the report to you by 5 PM.",
+    "options": [
+      { "word": "promise", "trans": "承諾" },
+      { "word": "forget", "trans": "忘記" },
+      { "word": "deny", "trans": "否認" },
+      { "word": "fail", "trans": "失敗" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Promise 指答應人哋會做某件事。"
+  },
+  {
+    "id": "b1-73",
+    "sentence": "We want to warmly {blank} our new colleague to the team.",
+    "options": [
+      { "word": "reject", "trans": "拒絕" },
+      { "word": "welcome", "trans": "歡迎" },
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "scare", "trans": "嚇唬" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Welcome someone 係迎新常用詞。"
+  },
+  {
+    "id": "b1-74",
+    "sentence": "Let's {blank} everyone in the meeting room for a quick announcement.",
+    "options": [
+      { "word": "scatter", "trans": "分散" },
+      { "word": "gather", "trans": "聚集" },
+      { "word": "lose", "trans": "遺失" },
+      { "word": "hide", "trans": "躲藏" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Gather 意思係將人或物品集合埋一齊。"
+  },
+  {
+    "id": "b1-75",
+    "sentence": "Don't forget to {blank} your phone before you go to sleep.",
+    "options": [
+      { "word": "break", "trans": "打破" },
+      { "word": "charge", "trans": "充電" },
+      { "word": "drop", "trans": "掉落" },
+      { "word": "sell", "trans": "賣" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Charge 喺電子產品語境指充電。"
+  },
+  {
+    "id": "b1-76",
+    "sentence": "You need to bend your knees when you {blank} heavy boxes.",
+    "options": [
+      { "word": "push", "trans": "推" },
+      { "word": "lift", "trans": "舉起 / 搬起" },
+      { "word": "read", "trans": "閱讀" },
+      { "word": "burn", "trans": "燒" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Lift 指將重物搬起，健身或搬運常用。"
+  },
+  {
+    "id": "b1-77",
+    "sentence": "It is good to {blank} your legs after running.",
+    "options": [
+      { "word": "stretch", "trans": "伸展 / 拉筋" },
+      { "word": "cut", "trans": "切斷" },
+      { "word": "freeze", "trans": "冷凍" },
+      { "word": "hide", "trans": "隱藏" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Stretch 指拉筋，放鬆肌肉。"
+  },
+  {
+    "id": "b1-78",
+    "sentence": "Would you like to {blank} us for dinner tonight?",
+    "options": [
+      { "word": "leave", "trans": "離開" },
+      { "word": "join", "trans": "加入 / 參與" },
+      { "word": "avoid", "trans": "避開" },
+      { "word": "forget", "trans": "忘記" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Join us 係極常見嘅邀請語。"
+  },
+  {
+    "id": "b1-79",
+    "sentence": "What will {blank} if we miss the flight?",
+    "options": [
+      { "word": "happen", "trans": "發生" },
+      { "word": "stop", "trans": "停止" },
+      { "word": "sleep", "trans": "睡覺" },
+      { "word": "eat", "trans": "吃" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Happen 意思係有咩事情會發生。"
+  },
+  {
+    "id": "b1-80",
+    "sentence": "We plan to {blank} the factory in Taiwan next month.",
+    "options": [
+      { "word": "visit", "trans": "拜訪 / 參觀" },
+      { "word": "forget", "trans": "忘記" },
+      { "word": "destroy", "trans": "破壞" },
+      { "word": "ignore", "trans": "忽略" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Visit 指去探訪或參觀某個地方。"
   }
 ]
