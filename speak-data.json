@@ -20,3 +20,19 @@
     "sentence": "I would have scheduled the financial review for Thursday if I had known about the preliminary figures earlier."
   }
 ]
+{
+    "type": "C1 Tech: The Heavy Lift",
+    "sentence": "The preliminary Field Return FA indicates a recurring defect in the SMT line that requires immediate rectification."
+  },
+  {
+    "type": "C1 Flow: The Endurance Run",
+    "sentence": "By launching the OBA 2.0 web tool, we can systematically track automated inspections and eliminate manual discrepancies."
+  },
+  {
+    "type": "C1 Assertive: The Sprint",
+    "sentence": "We need to schedule a comprehensive review with the ODM partners to address the escalating CQA concerns."
+  },
+  {
+    "type": "C1 Precision: Focus",
+    "sentence": "Implementing rigorous quality gates during the assembly phase is a prerequisite for achieving our target yield rate."
+  }
