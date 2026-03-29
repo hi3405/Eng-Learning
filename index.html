@@ -164,144 +164,39 @@
     }
 
     // -----------------------------------------
-    // 💥 全新高階題庫 (進階專業場景)
+    // 💥 v1.1 動態讀取題庫系統
     // -----------------------------------------
-    const vocabData = [
-      {
-        sentence: "During the audit, the engineer detected a glaring {blank} between the reported serial numbers and the physical units.",
-        options: [
-          { word: "discrepancy", trans: "差異 / 不一致" },
-          { word: "synergy", trans: "協同效應" },
-          { word: "paradigm", trans: "典範 / 範例" },
-          { word: "complacency", trans: "自滿 / 驕傲" }
-        ],
-        correctIndex: 0,
-        explanation: "Discrepancy 指數據或情況之間的不一致。喺對比報告同實物時最常用。"
-      },
-      {
-        sentence: "To ensure the manufacturing process maintains a high yield rate, the temperature profiles must be kept {blank} without severe deviations.",
-        options: [
-          { word: "erratic", trans: "飄忽不定的" },
-          { word: "redundant", trans: "多餘的" },
-          { word: "optimal", trans: "最佳的 / 最理想的" },
-          { word: "obsolete", trans: "過時的" }
-        ],
-        correctIndex: 2,
-        explanation: "Optimal 代表處於最佳狀態。Erratic 是反義詞 (不穩定)，Obsolete 指被淘汰的。"
-      },
-      {
-        sentence: "The management was given 48 hours to implement a report and {blank} the critical quality issues found in the recent returns.",
-        options: [
-          { word: "exacerbate", trans: "惡化 / 加劇" },
-          { word: "rectify", universal: true, trans: "糾正 / 修正" },
-          { word: "disregard", trans: "忽視 / 漠視" },
-          { word: "obscure", trans: "掩蓋 / 使模糊" }
-        ],
-        correctIndex: 1,
-        explanation: "Rectify 是一個 C1 級別的正式用字，意指糾正錯誤或修復問題。Exacerbate 是令情況變差。"
-      },
-      {
-        sentence: "The new web-based tracking tool was developed to {blank} the inspection process and reduce manual data entry errors.",
-        options: [
-          { word: "streamline", trans: "精簡 / 優化流程" },
-          { word: "hinder", trans: "阻礙" },
-          { word: "prolong", trans: "延長" },
-          { word: "obfuscate", trans: "使困惑 / 複雜化" }
-        ],
-        correctIndex: 0,
-        explanation: "Streamline 經常在優化系統或提高效率的語境中使用。Obfuscate 是故意令事情變得難以理解。"
-      },
-      {
-        sentence: "All newly assembled components must undergo a {blank} testing phase to guarantee they meet the international safety standards.",
-        options: [
-          { word: "lenient", trans: "寬鬆的" },
-          { word: "stringent", trans: "嚴格的 / 嚴苛的" },
-          { word: "superficial", trans: "表面的 / 膚淺的" },
-          { word: "sporadic", trans: "零星的 / 偶發的" }
-        ],
-        correctIndex: 1,
-        explanation: "Stringent testing 意思是非常嚴格的測試。Lenient 是其反義詞 (寬鬆)。"
-      }
-    ];
+    let vocabData = []; // 改為空 Array，等待載入
+    let currentVocabIndex = 0; 
+    let vocabScore = 0; 
+    let vocabAnswered = false;
 
-    let currentVocabIndex = 0; let vocabScore = 0; let vocabAnswered = false;
-
-    function loadVocabQuest() {
-      vocabAnswered = false;
-      const quest = vocabData[currentVocabIndex];
-      document.getElementById('vocabProgress').innerText = currentVocabIndex + 1;
-      document.getElementById('vocabTotal').innerText = vocabData.length;
-      document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', '<span class="blank-space"></span>');
-
-      const optionsContainer = document.getElementById('vocabOptions');
-      optionsContainer.innerHTML = '';
-      
-      quest.options.forEach((opt, index) => {
-        const btn = document.createElement('div');
-        btn.className = "w-full flex justify-between items-center p-4 rounded-xl border border-gray-700 bg-brand-dark text-gray-200 cursor-pointer transition-all hover:border-brand-blue vocab-option-btn";
+    // 非同步載入 JSON 檔案
+    async function fetchVocabData() {
+      try {
+        // Fetch API 會去搵同一個資料夾下面嘅 vocab-data.json
+        const response = await fetch('vocab-data.json');
+        if (!response.ok) throw new Error('Network response was not ok');
         
-        // 💥 UI 強化：中文解釋變大 (text-lg)、變粗 (font-bold)、變黃色 (text-brand-yellow)
-        btn.innerHTML = `
-          <div class="flex-grow font-semibold text-lg flex items-center flex-wrap">
-            <span class="mr-2">${opt.word}</span>
-            <span class="vocab-trans hidden text-lg font-bold text-brand-yellow tracking-wide mt-1 sm:mt-0">- ${opt.trans}</span>
-          </div>
-          <button class="w-12 h-12 flex-shrink-0 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 active-scale ml-2" onclick="speakWord('${opt.word}', event)">
-            <i class="fas fa-volume-up text-brand-blue text-lg"></i>
-          </button>
-        `;
+        vocabData = await response.json();
         
-        btn.onclick = (e) => {
-          if (e.target.closest('button')) return; 
-          checkVocabAnswer(index, btn, opt); // 將 opt 傳入去準備 Save
-        };
-        optionsContainer.appendChild(btn);
-      });
-
-      document.getElementById('vocabFeedback').classList.add('hidden');
-      document.getElementById('nextVocabBtn').classList.add('hidden');
-    }
-
-    function speakWord(word, event) {
-      if(event) event.stopPropagation();
-      const utterance = new SpeechSynthesisUtterance(word);
-      const savedVoiceURI = localStorage.getItem('preferred_voice_uri');
-      if (savedVoiceURI) {
-        const preferredVoice = speechSynthesis.getVoices().find(v => v.voiceURI === savedVoiceURI);
-        if (preferredVoice) utterance.voice = preferredVoice;
+        // 確保成功載入後，先更新 UI 同總題數
+        document.getElementById('vocabTotal').innerText = vocabData.length;
+        loadVocabQuest();
+      } catch (error) {
+        console.error("題庫載入失敗:", error);
+        document.getElementById('vocabSentence').innerHTML = '<span class="text-brand-red">⚠️ 無法載入題庫 (vocab-data.json)，請確認檔案已上傳至 Vercel。</span>';
       }
-      window.speechSynthesis.speak(utterance);
     }
 
-    function checkVocabAnswer(selectedIndex, btnElement, selectedOptionData) {
-      if (vocabAnswered) return;
-      vocabAnswered = true;
-      const quest = vocabData[currentVocabIndex];
-      
-      document.querySelectorAll('.vocab-trans').forEach(el => el.classList.remove('hidden'));
-      const optionsButtons = document.querySelectorAll('.vocab-option-btn');
-      
-      const correctBtn = optionsButtons[quest.correctIndex];
-      correctBtn.classList.replace('border-gray-700', 'border-brand-green');
-      correctBtn.classList.replace('bg-brand-dark', 'bg-brand-green/20');
-      correctBtn.classList.add('text-brand-green');
-
-      if (selectedIndex === quest.correctIndex) {
-        vocabScore++;
-        setVocabFeedback(true, "Spot On!", quest.explanation);
-      } else {
-        btnElement.classList.replace('border-gray-700', 'border-brand-red');
-        btnElement.classList.replace('bg-brand-dark', 'bg-brand-red/20');
-        btnElement.classList.add('text-brand-red');
-        setVocabFeedback(false, "Not Quite", quest.explanation);
-      }
-
-      // 💥 儲存單字到 LocalStorage Vault
-      saveToVocabVault(quest.options[quest.correctIndex].word, quest.options[quest.correctIndex].trans, quest.explanation);
-
-      document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', `<span class="text-brand-green font-bold border-b-2 border-brand-green mx-1 px-1">${quest.options[quest.correctIndex].word}</span>`);
-      document.getElementById('nextVocabBtn').classList.remove('hidden');
-    }
+    // 將原本 window.onload 裡面嘅 loadVocabQuest() 換成 fetchVocabData()
+    window.onload = () => {
+      fetchVocabData(); // 啟動時先去 Fetch 題庫
+      loadSpeakTask();
+      document.querySelectorAll('.streakValue').forEach(el => el.innerText = `${loadUserData().currentStreak}`);
+      switchView('vocab'); 
+      popVoices();
+    };
 
     // 儲存單字邏輯
     function saveToVocabVault(word, trans, explanation) {
