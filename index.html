@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>English Overload v1.4</title>
+  <title>English Overload v1.5</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -38,7 +38,6 @@
         <div class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md">Quest <span id="vocabProgress">1</span> / <span id="vocabTotal">...</span></div>
       </div>
     </header>
-
     <main class="flex-grow p-6 flex flex-col">
       <div class="bg-brand-dark p-6 rounded-3xl shadow-xl mb-6 border border-gray-800">
         <p id="vocabSentence" class="text-lg font-semibold leading-relaxed text-white font-sans text-center mt-4">
@@ -71,10 +70,27 @@
       <div class="bg-brand-dark p-7 rounded-3xl shadow-xl mb-8 border border-gray-800">
         <p class="text-[11px] text-brand-blue font-bold mb-3 uppercase tracking-widest opacity-80">Target Sentence</p>
         <p id="targetSentence" class="text-xl font-semibold leading-relaxed text-white font-sans text-center text-gray-400 text-sm mt-2">載入題庫中...</p>
+        <p id="targetTranslation" class="text-sm text-brand-yellow font-bold text-center mt-4 hidden tracking-wide"></p>
       </div>
-      <div id="speakFeedbackArea" class="hidden mb-6"><div class="p-5 rounded-2xl w-full text-center flex flex-col items-center" id="speakFeedbackBox"><p class="text-xs font-bold mb-1 uppercase tracking-wider" id="speakScoreLabel">Analysis Result</p><div class="flex items-end gap-1"><p class="text-5xl font-extrabold" id="speakScoreValue">0</p><p class="text-lg font-bold pb-1">%</p></div><p class="text-sm mt-3 text-gray-300 font-mono italic" id="speakUserText"></p></div></div>
+      
+      <div id="speakFeedbackArea" class="hidden mb-6">
+        <div class="p-5 rounded-2xl w-full text-center flex flex-col items-center bg-brand-dark border border-gray-700 shadow-inner" id="speakFeedbackBox">
+          <p class="text-xs font-bold mb-1 uppercase tracking-wider" id="speakScoreLabel">Analysis Result</p>
+          <div class="flex items-end gap-1"><p class="text-5xl font-extrabold" id="speakScoreValue">0</p><p class="text-lg font-bold pb-1">%</p></div>
+          
+          <div class="w-full h-px bg-gray-700 my-4"></div>
+          <p class="text-xs text-gray-400 font-bold uppercase mb-2">Pronunciation Analysis:</p>
+          <p class="text-base mt-1 text-white font-sans leading-relaxed" id="speakUserText"></p>
+          
+          <div id="speakMissedWordsArea" class="mt-5 w-full text-left hidden">
+            <p class="text-[11px] text-brand-red font-bold uppercase tracking-widest mb-2"><i class="fas fa-exclamation-circle"></i> Needs Improvement (點擊聽發音):</p>
+            <div id="speakMissedWordsList" class="flex flex-wrap gap-2"></div>
+          </div>
+        </div>
+      </div>
+
       <div class="mt-auto flex justify-center gap-6">
-        <button onclick="playSpeakAudio()" class="w-16 h-16 bg-gray-700 text-gray-200 rounded-full shadow-lg flex items-center justify-center text-2xl active-scale"><i class="fas fa-volume-up"></i></button>
+        <button onclick="playSpeakAudio()" class="w-16 h-16 bg-gray-700 text-gray-200 rounded-full shadow-lg flex items-center justify-center text-2xl active-scale hover:bg-gray-600"><i class="fas fa-volume-up"></i></button>
         <button id="recordBtn" onclick="toggleRecording()" class="w-20 h-20 bg-brand-red text-white rounded-full shadow-2xl flex items-center justify-center text-3xl active-scale ring-8 ring-red-600/20 relative"><i class="fas fa-microphone"></i><span id="recordRipple" class="absolute inset-0 rounded-full bg-brand-red opacity-0"></span></button>
       </div>
       <p id="recordingStatus" class="text-center text-sm text-red-400 font-semibold h-5 animate-pulse mt-4 mb-2"></p>
@@ -133,7 +149,6 @@
   <script>
     const getTodayDate = () => new Date().toLocaleDateString('en-CA');
 
-    // 💥 升級 Data 結構 (v5): 分開 doneVocabIds 同 doneSpeakIds
     function loadUserData() {
       const defaultData = { currentStreak: 0, lastCompletedDate: null, totalScore: 0, history: [], savedVocab: [], doneVocabIds: [], doneSpeakIds: [] };
       const savedData = localStorage.getItem('english_coach_data_v5'); 
@@ -156,16 +171,12 @@
       return array;
     }
 
-    // 💥 完美修復：防重複機制 (根據類型分別過濾)
     function getNextBatch(allData, limit, type) {
       const data = loadUserData();
       const doneList = type === 'vocab' ? (data.doneVocabIds || []) : (data.doneSpeakIds || []);
-      
       let filtered = allData.filter(item => !doneList.includes(item.id));
-      
       if (filtered.length < limit) {
-        if (type === 'vocab') data.doneVocabIds = [];
-        else data.doneSpeakIds = [];
+        if (type === 'vocab') data.doneVocabIds = []; else data.doneSpeakIds = [];
         localStorage.setItem('english_coach_data_v5', JSON.stringify(data));
         filtered = allData;
       }
@@ -179,9 +190,9 @@
       localStorage.setItem('english_coach_data_v5', JSON.stringify(data));
     }
 
-    // -----------------------------------------
-    // Vocab 系統
-    // -----------------------------------------
+    // ==========================================
+    // Vocab System
+    // ==========================================
     let vocabData = []; let currentVocabIndex = 0; let vocabScore = 0; let vocabAnswered = false;
     const DAILY_VOCAB_LIMIT = 5;
 
@@ -192,7 +203,7 @@
         vocabData = getNextBatch(allVocab, DAILY_VOCAB_LIMIT, 'vocab');
         document.getElementById('vocabTotal').innerText = vocabData.length;
         loadVocabQuest();
-      } catch (e) { document.getElementById('vocabSentence').innerText = "Load failed. Please check JSON."; }
+      } catch (e) { document.getElementById('vocabSentence').innerText = "Load failed. Check JSON."; }
     }
 
     function loadVocabQuest() {
@@ -222,7 +233,6 @@
       correctBtn.classList.add('border-brand-green', 'bg-brand-green/20', 'text-brand-green');
       if (idx === quest.correctIndex) { vocabScore++; setVocabFeedback(true, "Spot On!", quest.explanation); }
       else { btn.classList.add('border-brand-red', 'bg-brand-red/20', 'text-brand-red'); setVocabFeedback(false, "Not Quite", quest.explanation); }
-      
       markIdAsDone(quest.id, 'vocab');
       saveToVocabVault(quest.options[quest.correctIndex].word, quest.options[quest.correctIndex].trans, quest.explanation);
       document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', `<span class="text-brand-green font-bold border-b-2 border-brand-green px-1">${quest.options[quest.correctIndex].word}</span>`);
@@ -251,9 +261,9 @@
       else { completeWorkout('Vocab', Math.round((vocabScore / vocabData.length) * 100)); fetchVocabData(); currentVocabIndex = 0; vocabScore = 0; }
     }
 
-    // -----------------------------------------
-    // 💥 Speaking 系統 (含錄音防卡死修復)
-    // -----------------------------------------
+    // ==========================================
+    // Speaking System (v1.5 修復 Bug + 紅字 + 錯字重讀)
+    // ==========================================
     let speakTasks = []; let currentSpeakIndex = 0; let speakDailyScore = 0;
     const DAILY_SPEAK_LIMIT = 3;
 
@@ -269,9 +279,23 @@
 
     function loadSpeakTask() {
       if (speakTasks.length === 0) return;
+      const task = speakTasks[currentSpeakIndex];
       document.getElementById('taskProgress').innerText = currentSpeakIndex + 1;
-      document.getElementById('taskType').innerText = speakTasks[currentSpeakIndex].type;
-      document.getElementById('targetSentence').innerText = speakTasks[currentSpeakIndex].sentence;
+      document.getElementById('taskType').innerText = task.type;
+      
+      // 更新目標句子 (純文字，無樣式，避免影響判讀)
+      document.getElementById('targetSentence').className = "text-xl font-semibold leading-relaxed text-white font-sans mt-2";
+      document.getElementById('targetSentence').innerText = task.sentence;
+      
+      // 更新並顯示黃色中文翻譯
+      const transEl = document.getElementById('targetTranslation');
+      if(task.trans) {
+        transEl.innerText = "- " + task.trans;
+        transEl.classList.remove('hidden');
+      } else {
+        transEl.classList.add('hidden');
+      }
+
       document.getElementById('speakFeedbackArea').classList.add('hidden');
       document.getElementById('nextSpeakBtn').classList.add('hidden');
     }
@@ -286,30 +310,25 @@
       
       recognition.onresult = (e) => {
         try { calculateSpeakScore(e.results[0][0].transcript); } 
-        catch (err) { console.error(err); forceStopUI("Analysis failed."); }
+        catch (err) { console.error(err); forceStopUI(); }
       };
-      
-      // 完美修復：處理所有中斷情況
-      recognition.onspeechend = () => recognition.stop(); // 唔好直接改 UI，等 onend 或 onresult
-      
-      recognition.onerror = (e) => {
-        console.warn("Speech recognition error:", e.error);
-        forceStopUI();
-        if(e.error === 'no-speech') alert("聽唔到聲音，請靠近咪高峰或者大聲啲再試一次！");
-      };
-      
-      recognition.onend = () => { forceStopUI(); }; // 確保任何情況下 UI 都會 Reset
+      recognition.onspeechend = () => recognition.stop();
+      recognition.onerror = (e) => { forceStopUI(); };
+      recognition.onend = () => { forceStopUI(); }; 
     }
 
     function toggleRecording() {
       if (isRecording) { recognition.stop(); forceStopUI(); } 
       else {
-        try { recognition.start(); } catch(e) { console.warn(e); }
+        try { recognition.start(); } catch(e) {}
         isRecording = true;
         document.getElementById('recordBtn').classList.replace('bg-brand-red', 'bg-red-800');
         document.getElementById('recordRipple').classList.add('animate-ping', 'opacity-50');
         document.getElementById('recordingStatus').innerText = "Listening...";
         document.getElementById('speakFeedbackArea').classList.add('hidden');
+        
+        // 將原本句子變灰，準備出結果
+        document.getElementById('targetSentence').className = "text-xl font-semibold leading-relaxed text-gray-500 font-sans mt-2 transition-all";
       }
     }
 
@@ -320,45 +339,98 @@
       document.getElementById('recordingStatus').innerText = "";
     }
 
+    // 💥 V1.5 核心演算法：字詞精準對比與紅字標記
     function calculateSpeakScore(spokenText) {
       if(!spokenText || spokenText.trim() === "") return;
-      forceStopUI(); // 確保 UI 變回正常狀態
+      forceStopUI(); 
       
-      const target = speakTasks[currentSpeakIndex].sentence.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
-      const spoken = spokenText.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
-      let match = 0; target.forEach(w => { if (spoken.includes(w)) { match++; spoken.splice(spoken.indexOf(w), 1); } });
-      const score = Math.round((match / target.length) * 100);
+      const rawTargetWords = speakTasks[currentSpeakIndex].sentence.split(/\s+/);
+      const targetClean = rawTargetWords.map(w => w.toLowerCase().replace(/[^\w\s\']/g, ""));
+      const spokenClean = spokenText.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
+      
+      let matchCount = 0;
+      let highlightedHTML = "";
+      let missedWords = [];
+      
+      let spokenTemp = [...spokenClean];
+      
+      for (let i = 0; i < targetClean.length; i++) {
+         let cleanW = targetClean[i];
+         let rawW = rawTargetWords[i];
+         
+         let foundIdx = spokenTemp.indexOf(cleanW);
+         if (foundIdx !== -1) {
+             matchCount++;
+             spokenTemp.splice(foundIdx, 1);
+             highlightedHTML += `<span class="text-brand-green drop-shadow-[0_0_2px_rgba(16,185,129,0.5)]">${rawW}</span> `;
+         } else {
+             highlightedHTML += `<span class="text-brand-red font-bold underline decoration-brand-red/50">${rawW}</span> `;
+             if (cleanW.length > 0) missedWords.push(cleanW); // 儲存純英文單字準備發音
+         }
+      }
+      
+      const score = Math.round((matchCount / targetClean.length) * 100);
+      
+      // 更新分數
       document.getElementById('speakScoreValue').innerText = score;
-      document.getElementById('speakUserText').innerText = `Heard: "${spokenText}"`;
+      
+      // 顯示紅綠字分析結果
+      document.getElementById('speakUserText').innerHTML = highlightedHTML;
+      
+      // 生成錯字小喇叭
+      const missedArea = document.getElementById('speakMissedWordsArea');
+      const missedList = document.getElementById('speakMissedWordsList');
+      if (missedWords.length > 0) {
+          missedList.innerHTML = missedWords.map(w => 
+              `<button onclick="speakWord('${w}', event)" class="px-3 py-1.5 bg-brand-slate border border-brand-red/50 text-brand-red rounded-lg text-sm font-semibold active-scale flex items-center gap-2 shadow-sm hover:bg-brand-red/10 transition-colors">
+                <i class="fas fa-volume-up text-xs opacity-70"></i> ${w}
+              </button>`
+          ).join('');
+          missedArea.classList.remove('hidden');
+      } else {
+          missedArea.classList.add('hidden');
+      }
+
       document.getElementById('speakFeedbackArea').classList.remove('hidden');
       const box = document.getElementById('speakFeedbackBox');
       
-      if (score >= 80) { // C1 級句子長，放寬至 80 分合格
-        box.className = "p-5 rounded-2xl w-full flex flex-col items-center bg-brand-green/10 text-brand-green border border-brand-green/30";
+      if (score >= 80) { 
+        box.classList.replace("border-gray-700", "border-brand-green/30");
         document.getElementById('speakScoreLabel').innerText = "Excellent!";
+        document.getElementById('speakScoreLabel').className = "text-xs font-bold mb-1 uppercase tracking-wider text-brand-green";
         speakDailyScore += score; 
         document.getElementById('nextSpeakBtn').classList.remove('hidden');
         markIdAsDone(speakTasks[currentSpeakIndex].id, 'speak');
       } else {
-        box.className = "p-5 rounded-2xl w-full flex flex-col items-center bg-orange-500/10 text-orange-400 border border-orange-500/20";
+        box.classList.replace("border-gray-700", "border-orange-500/30");
         document.getElementById('speakScoreLabel').innerText = "Retry Required (80%)";
+        document.getElementById('speakScoreLabel').className = "text-xs font-bold mb-1 uppercase tracking-wider text-orange-400";
       }
     }
 
     function nextSpeakTask() {
+      // 重置邊框顏色
+      document.getElementById('speakFeedbackBox').className = "p-5 rounded-2xl w-full text-center flex flex-col items-center bg-brand-dark border border-gray-700 shadow-inner";
+      document.getElementById('speakScoreLabel').className = "text-xs font-bold mb-1 uppercase tracking-wider text-gray-400";
+      
       if (currentSpeakIndex < speakTasks.length - 1) { currentSpeakIndex++; loadSpeakTask(); }
       else { completeWorkout('Speaking', Math.round(speakDailyScore / speakTasks.length)); fetchSpeakData(); currentSpeakIndex = 0; speakDailyScore = 0; }
     }
 
+    // 💥 修復 TTS 無限 Loop Bug：加入 cancel() 強制清除 Queue
     function playSpeakAudio() { speakWord(speakTasks[currentSpeakIndex].sentence, null); }
     function speakWord(word, e) {
       if(e) e.stopPropagation();
+      window.speechSynthesis.cancel(); // 核心修復：防止瀏覽器語音卡死
       const u = new SpeechSynthesisUtterance(word);
       const saved = localStorage.getItem('preferred_voice_uri');
       if (saved) { u.voice = speechSynthesis.getVoices().find(v => v.voiceURI === saved); }
       window.speechSynthesis.speak(u);
     }
 
+    // ==========================================
+    // Tracker & Settings
+    // ==========================================
     function completeWorkout(type, score) {
       let data = loadUserData(); const today = getTodayDate();
       if (!data.history.includes(today)) {
