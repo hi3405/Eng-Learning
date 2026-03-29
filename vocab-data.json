@@ -1,0 +1,112 @@
+[
+  {
+    "sentence": "The management team must find a way to {blank} the shipping process to meet the tight deadline.",
+    "options": [
+      { "word": "expedite", "trans": "加速 / 促進" },
+      { "word": "stagnate", "trans": "停滯" },
+      { "word": "hinder", "trans": "阻礙" },
+      { "word": "mitigate", "trans": "減輕" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Expedite 係商業上極常用嘅字，代表加快進度。Hinder 同 Stagnate 意思完全相反。"
+  },
+  {
+    "sentence": "Due to the recent financial losses, the proposed budget is currently under intense {blank} by the board of directors.",
+    "options": [
+      { "word": "praise", "trans": "讚賞" },
+      { "word": "scrutiny", "trans": "仔細審查" },
+      { "word": "oblivion", "trans": "遺忘" },
+      { "word": "consensus", "trans": "共識" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Under intense scrutiny 係一個 C1 固定搭配，指受到嚴格、仔細嘅審查或監視。"
+  },
+  {
+    "sentence": "A comprehensive risk assessment is a mandatory {blank} before we can officially launch the new product line.",
+    "options": [
+      { "word": "aftermath", "trans": "後果" },
+      { "word": "impediment", "trans": "障礙" },
+      { "word": "prerequisite", "trans": "先決條件" },
+      { "word": "byproduct", "trans": "副產品" }
+    ],
+    "correctIndex": 2,
+    "explanation": "Prerequisite 指事前必須具備嘅條件。Impediment 係阻礙，放喺呢度唔合邏輯。"
+  },
+  {
+    "sentence": "The legal team needs more concrete evidence to {blank} the claims made in the lawsuit.",
+    "options": [
+      { "word": "nullify", "trans": "使無效" },
+      { "word": "substantiate", "trans": "證實 / 證明" },
+      { "word": "fabricate", "trans": "捏造" },
+      { "word": "contradict", "trans": "反駁" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Substantiate 係正式用字，意指提供證據去支持一個主張。Fabricate 係捏造假證據。"
+  },
+  {
+    "sentence": "Ignoring the minor defects during the early stages proved to be highly {blank} to the final project's success.",
+    "options": [
+      { "word": "lucrative", "trans": "有利可圖的" },
+      { "word": "beneficial", "trans": "有益的" },
+      { "word": "detrimental", "trans": "有害的 / 不利的" },
+      { "word": "irrelevant", "trans": "無關的" }
+    ],
+    "correctIndex": 2,
+    "explanation": "Detrimental to... 係指對某事物造成損害。Lucrative 通常用嚟形容生意或合約好賺錢。"
+  },
+  {
+    "sentence": "The rumors of a potential merger are becoming {blank} throughout the entire industry.",
+    "options": [
+      { "word": "scarce", "trans": "缺乏的" },
+      { "word": "pervasive", "trans": "無處不在的 / 遍布的" },
+      { "word": "isolated", "trans": "孤立的" },
+      { "word": "trivial", "trans": "微不足道的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Pervasive 用嚟形容某種事物（如謠言、影響力）彌漫、滲透到每一個角落。"
+  },
+  {
+    "sentence": "We need to implement a new strategy to {blank} the negative impact of the recent supply chain disruptions.",
+    "options": [
+      { "word": "exacerbate", "trans": "惡化" },
+      { "word": "ameliorate", "trans": "改善 / 減緩" },
+      { "word": "instigate", "trans": "煽動 / 促使" },
+      { "word": "disregard", "trans": "忽視" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Ameliorate 係 C1 級別用字，意思同 improve / mitigate 接近。Exacerbate 係令情況更壞。"
+  },
+  {
+    "sentence": "Before signing the contract, we must carefully consider the long-term {blank} of this partnership.",
+    "options": [
+      { "word": "ramifications", "trans": "衍生後果 / 影響" },
+      { "word": "incentives", "trans": "動機 / 誘因" },
+      { "word": "anecdotes", "trans": "軼事" },
+      { "word": "prefixes", "trans": "前綴" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Ramifications 指一個決定或行動所帶嚟嘅複雜、深遠嘅後果（通常係負面或需要深思嘅）。"
+  },
+  {
+    "sentence": "The lack of clear communication was a major {blank} to the team's overall productivity.",
+    "options": [
+      { "word": "catalyst", "trans": "催化劑" },
+      { "word": "impediment", "trans": "阻礙 / 障礙" },
+      { "word": "milestone", "trans": "里程碑" },
+      { "word": "boon", "trans": "恩賜 / 益處" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Impediment 係障礙物嘅意思。Catalyst 係促使事情發生嘅催化劑，意思相反。"
+  },
+  {
+    "sentence": "The sales figures for the last quarter were completely {blank}, ranging from record highs to sudden drops.",
+    "options": [
+      { "word": "consistent", "trans": "一致的" },
+      { "word": "erratic", "trans": "飄忽不定的 / 不穩定的" },
+      { "word": "predictable", "trans": "可預測的" },
+      { "word": "marginal", "trans": "邊緣的 / 微小的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Erratic 形容無規律、不穩定嘅情況，完美對應後面提到嘅高低起伏。"
+  }
+]
