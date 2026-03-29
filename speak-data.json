@@ -118,5 +118,124 @@
     "type": "Stage 20: Final Boss (C1+)",
     "sentence": "Rectifying the discrepancy between reported serial numbers and physical units is paramount to prevent further yield loss.",
     "trans": "糾正報告序號與實際實物之間的差異，對於防止進一步的良率損失至關重要。"
+  },{
+    "id": "s21",
+    "type": "Stage 21: QA Fundamentals (B2+)",
+    "sentence": "Consolidating data from QC2 and QMB factories will significantly reduce our reporting time.",
+    "trans": "整合來自 QC2 和 QMB 工廠的數據，將大幅減少我們編寫報告的時間。"
+  },
+  {
+    "id": "s22",
+    "type": "Stage 22: Mechanical Flow (B2+)",
+    "sentence": "If the temperature gauge fluctuates, we must inspect the thermostat immediately.",
+    "trans": "如果溫度計出現波動，我們必須立即檢查恆溫器。"
+  },
+  {
+    "id": "s23",
+    "type": "Stage 23: Discipline (B2+)",
+    "sentence": "Breaking through a fitness plateau requires progressive overload and strict dietary discipline.",
+    "trans": "突破健身停滯期需要漸進式超負荷和嚴格的飲食紀律。"
+  },
+  {
+    "id": "s24",
+    "type": "Stage 24: Event Planning (C1)",
+    "sentence": "Planning the venue layout for the banquet demands meticulous attention to every single detail.",
+    "trans": "規劃宴會的場地佈置需要對每一個細節都一絲不苟。"
+  },
+  {
+    "id": "s25",
+    "type": "Stage 25: Psychology (C1)",
+    "sentence": "Congruent communication fosters trust and resolves conflicts more effectively within the team.",
+    "trans": "內外一致的溝通能培養信任，並更有效地解決團隊內的衝突。"
+  },
+  {
+    "id": "s26",
+    "type": "Stage 26: Physical Recovery (C1)",
+    "sentence": "Ensuring adequate protein intake is vital for muscle recuperation after a grueling workout.",
+    "trans": "在令人筋疲力盡的鍛鍊後，確保攝取足夠的蛋白質對肌肉恢復至關重要。"
+  },
+  {
+    "id": "s27",
+    "type": "Stage 27: Strict Compliance (C1)",
+    "sentence": "It is absolutely paramount that we adhere strictly to the new stringent safety guidelines.",
+    "trans": "嚴格遵守新的嚴苛安全指南是絕對首要的任務。"
+  },
+  {
+    "id": "s28",
+    "type": "Stage 28: Risk Assessment (C1)",
+    "sentence": "The proposed marketing strategy seems viable, but we must first quantify the potential risks.",
+    "trans": "擬議的行銷策略看似可行，但我們必須先量化潛在的風險。"
+  },
+  {
+    "id": "s29",
+    "type": "Stage 29: Production Alert (C1)",
+    "sentence": "Any deviation from the standard manufacturing process could jeopardize the entire batch.",
+    "trans": "任何偏離標準製造流程的行為，都可能危及整批產品。"
+  },
+  {
+    "id": "s30",
+    "type": "Stage 30: Audit Scrutiny (C1)",
+    "sentence": "The auditor will scrutinize every document to ensure legitimate compliance with international standards.",
+    "trans": "審核員將仔細審查每份文件，以確保合法符合國際標準。"
+  },
+  {
+    "id": "s31",
+    "type": "Stage 31: SMT Bottleneck (C1+)",
+    "sentence": "We need a cohesive engineering plan to alleviate the current bottlenecks in the SMT line.",
+    "trans": "我們需要一個有凝聚力的工程計劃，以緩解目前 SMT 生產線上的樽頸。"
+  },
+  {
+    "id": "s32",
+    "type": "Stage 32: Contractual Tone (C1+)",
+    "sentence": "The contract clearly stipulates that all subsequent changes require unanimous approval from the board.",
+    "trans": "合約明確規定，所有後續更改均需獲得董事會的全體一致批准。"
+  },
+  {
+    "id": "s33",
+    "type": "Stage 33: Operational Yield (C1+)",
+    "sentence": "Eliminating redundant steps in the OBA process will undoubtedly yield a much higher operational efficiency.",
+    "trans": "消除 OBA 流程中多餘的步驟，無疑將帶來更高的營運效率。"
+  },
+  {
+    "id": "s34",
+    "type": "Stage 34: Software Integration (C1+)",
+    "sentence": "We must allocate sufficient resources to facilitate the smooth integration of the new software.",
+    "trans": "我們必須分配足夠的資源，以促進新軟件的順利整合。"
+  },
+  {
+    "id": "s35",
+    "type": "Stage 35: Crisis Management (C1+)",
+    "sentence": "The unprecedented field return rate warrants an immediate and thorough investigation into the supply chain.",
+    "trans": "史無前例的客退率，使得對供應鏈進行立即且徹底的調查成為必要。"
+  },
+  {
+    "id": "s36",
+    "type": "Stage 36: Corporate Conflict (C1+)",
+    "sentence": "Her ambiguous remarks during the presentation elicited confusion and frustration among the stakeholders.",
+    "trans": "她在簡報中模稜兩可的言論，引起了利益相關者的困惑和沮喪。"
+  },
+  {
+    "id": "s37",
+    "type": "Stage 37: Evidence Gathering (C2)",
+    "sentence": "It is essential to compile all tangible evidence before officially confronting the supplier regarding the defect.",
+    "trans": "在就缺陷問題正式與供應商對質之前，彙編所有實質證據是必不可少的。"
+  },
+  {
+    "id": "s38",
+    "type": "Stage 38: Performance Metrics (C2)",
+    "sentence": "Establishing a reliable benchmark is the very first step to accurately evaluating our actual performance.",
+    "trans": "建立一個可靠的基準，是準確評估我們實際績效的第一步。"
+  },
+  {
+    "id": "s39",
+    "type": "Stage 39: Leadership Decisions (C2)",
+    "sentence": "We cannot perpetuate these arbitrary decisions if we want to maintain our market leadership.",
+    "trans": "如果我們想保持市場領先地位，我們就不能讓這些武斷的決定持續下去。"
+  },
+  {
+    "id": "s40",
+    "type": "Stage 40: Ultimate Grandmaster (C2)",
+    "sentence": "Delineating the specific responsibilities for each resident engineer will mitigate the risk of overlapping work and miscommunication.",
+    "trans": "清晰界定每位駐廠工程師的具體職責，將減輕工作重疊和溝通不良的風險。"
   }
 ]
