@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>English Overload v2.4</title>
+  <title>English Overload v3.0</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Roboto+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
-    tailwind.config = { theme: { extend: { colors: { brand: { dark: '#0A0E17', slate: '#1E293B', orange: '#F97316', blue: '#3B82F6', green: '#10B981', red: '#EF4444', yellow: '#FDE047' } } } } }
+    tailwind.config = { theme: { extend: { colors: { brand: { dark: '#0A0E17', slate: '#1E293B', orange: '#F97316', blue: '#3B82F6', green: '#10B981', red: '#EF4444', yellow: '#FDE047', purple: '#8B5CF6' } } } } }
   </script>
   <style>
     body, html { height: 100%; overflow: hidden; background-color: #0A0E17; }
@@ -17,618 +17,1585 @@
     .view-section { display: none; height: 100%; overflow-y: auto; padding-bottom: 90px; }
     .view-section.active { display: flex; flex-direction: column; }
     .nav-item.active { color: #3B82F6; }
-    .nav-item.active i { transform: translateY(-2px); transition: all 0.2s; }
+    .nav-item.active .nav-ico { transform: translateY(-3px); transition: all 0.2s; }
+    .nav-item.active .nav-bar { opacity: 1; }
+    .nav-bar { opacity: 0; height: 3px; background: #3B82F6; border-radius: 2px; width: 24px; transition: opacity 0.2s; }
     .blank-space { display: inline-block; width: 80px; border-bottom: 2px solid #3B82F6; margin: 0 4px; vertical-align: bottom; }
     ::-webkit-scrollbar { display: none; }
+
+    /* SHAKE ANIMATION */
+    @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-6px)} 80%{transform:translateX(6px)} }
+    .shake { animation: shake 0.4s ease; }
+
+    /* PULSE ANIMATION */
+    @keyframes correctPulse { 0%{transform:scale(1)} 50%{transform:scale(1.03)} 100%{transform:scale(1)} }
+    .correct-pulse { animation: correctPulse 0.3s ease; }
+
+    /* FLASHCARD FLIP */
+    .flip-card { perspective: 1000px; }
+    .flip-card-inner { transition: transform 0.5s; transform-style: preserve-3d; position: relative; }
+    .flip-card-inner.flipped { transform: rotateY(180deg); }
+    .flip-card-front, .flip-card-back { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .flip-card-back { transform: rotateY(180deg); position: absolute; top: 0; left: 0; width: 100%; }
+
+    /* DAILY BANNER */
+    #dailyBanner { transition: all 0.4s ease; }
+
+    /* SCORE RING */
+    .score-ring { transform: rotate(-90deg); }
+
+    /* VOCAB OPTION */
+    .vocab-opt { transition: all 0.2s; }
+
+    /* CUSTOM SCROLLBAR for modals */
+    .custom-scroll { scrollbar-width: thin; scrollbar-color: #3B82F6 #1E293B; }
+    .custom-scroll::-webkit-scrollbar { display: block; width: 4px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #1E293B; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 2px; }
+
+    /* SPACED REP BADGE */
+    .due-badge { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
   </style>
 </head>
 <body class="text-gray-100 antialiased selection:bg-brand-blue/30 flex flex-col h-full relative max-w-md mx-auto bg-brand-slate shadow-2xl">
 
+  <!-- DAILY REMINDER BANNER -->
+  <div id="dailyBanner" class="hidden fixed top-0 left-0 right-0 max-w-md mx-auto z-50 px-4 pt-safe">
+    <div class="bg-gradient-to-r from-brand-orange to-yellow-500 text-black p-4 rounded-2xl shadow-2xl flex items-center gap-3 mt-2">
+      <span class="text-2xl">🔥</span>
+      <div class="flex-1">
+        <p class="font-extrabold text-sm">今日仲未練習！</p>
+        <p class="text-xs opacity-80">保持 streak，每日5分鐘</p>
+      </div>
+      <button onclick="closeBanner()" class="text-black/60 font-bold text-lg px-2">✕</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- VOCAB VIEW                         -->
+  <!-- ═══════════════════════════════════ -->
   <div id="view-vocab" class="view-section active">
     <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10 flex-shrink-0">
       <div class="flex justify-between items-center">
-        <h1 class="text-xs font-semibold uppercase tracking-widest text-gray-400">Daily Quest</h1>
-        <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full shadow-inner streak-display">
-          <i class="fas fa-fire-alt"></i> <span class="streakValue">0</span>
+        <div>
+          <h1 class="text-xs font-semibold uppercase tracking-widest text-gray-400">Daily Quest</h1>
+          <p id="vocabDateLbl" class="text-[10px] text-gray-500 mt-0.5"></p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="switchView('retry')" id="retryNavBtn" class="hidden items-center gap-1.5 text-brand-red font-bold text-xs px-3 py-1.5 bg-brand-red/10 rounded-full border border-brand-red/30 due-badge">
+            <i class="fas fa-redo text-xs"></i> 錯題 <span id="retryCount" class="bg-brand-red text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px]">0</span>
+          </button>
+          <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full streak-display">
+            <i class="fas fa-fire-alt"></i> <span class="streakValue">0</span>
+          </div>
         </div>
       </div>
-      
-      <div class="mt-5 flex justify-between items-center">
-        <div class="flex bg-brand-dark rounded-xl p-1 border border-gray-800 shadow-inner">
-          <button id="btn-lvl-b1" onclick="changeVocabLevel('b1')" class="vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold text-gray-500 transition-colors active-scale">B1 Base</button>
-          <button id="btn-lvl-b2" onclick="changeVocabLevel('b2')" class="vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold text-gray-500 transition-colors active-scale">B2 Pro</button>
-          <button id="btn-lvl-c1" onclick="changeVocabLevel('c1')" class="vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-blue text-white shadow-md transition-colors active-scale">C1 Elite</button>
+
+      <div class="mt-4 flex justify-between items-center">
+        <div class="flex bg-brand-dark rounded-xl p-1 border border-gray-800">
+          <button id="btn-lvl-b1" onclick="changeVocabLevel('b1')" class="vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold text-gray-500 transition-colors active-scale">B1</button>
+          <button id="btn-lvl-b2" onclick="changeVocabLevel('b2')" class="vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold text-gray-500 transition-colors active-scale">B2</button>
+          <button id="btn-lvl-c1" onclick="changeVocabLevel('c1')" class="vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-blue text-white shadow-md transition-colors active-scale">C1</button>
         </div>
-        <div class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1.5 rounded-md border border-gray-800">Quest <span id="vocabProgress">1</span> / <span id="vocabTotal">...</span></div>
+        <div class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1.5 rounded-md border border-gray-800">
+          <span id="vocabProgress">1</span> / <span id="vocabTotal">5</span>
+        </div>
+      </div>
+
+      <!-- PROGRESS BAR -->
+      <div class="mt-3 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+        <div id="vocabProgressBar" class="h-full bg-gradient-to-r from-brand-blue to-brand-purple rounded-full transition-all duration-500" style="width:0%"></div>
       </div>
     </header>
 
-    <main class="flex-grow p-6 flex flex-col overflow-y-auto" id="vocabMainArea">
+    <main class="flex-grow p-5 flex flex-col overflow-y-auto">
       <div id="vocabQuestArea" class="flex flex-col flex-grow">
-        <div class="bg-brand-dark p-6 rounded-3xl shadow-xl mb-6 border border-gray-800">
-          <p id="vocabSentence" class="text-lg font-semibold leading-relaxed text-white font-sans text-center mt-4">
-            <i class="fas fa-spinner fa-spin text-brand-blue text-2xl mb-2"></i><br><span class="text-sm text-gray-400">載入題庫中...</span>
+        <div class="bg-brand-dark p-6 rounded-3xl shadow-xl mb-5 border border-gray-800 min-h-[120px] flex items-center justify-center">
+          <p id="vocabSentence" class="text-lg font-semibold leading-relaxed text-white font-sans text-center">
+            <i class="fas fa-spinner fa-spin text-brand-blue text-2xl"></i>
           </p>
         </div>
-        <div id="vocabOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
-        <div id="vocabFeedback" class="hidden mb-6 p-5 rounded-2xl bg-brand-dark border shadow-inner">
-          <div class="flex items-center gap-2 mb-2"><i id="vocabFeedbackIcon" class="fas text-xl"></i><h3 id="vocabFeedbackTitle" class="font-bold text-lg"></h3></div>
+
+        <div id="vocabOptions" class="flex flex-col gap-3 mb-5"></div>
+
+        <div id="vocabFeedback" class="hidden mb-5 p-5 rounded-2xl bg-brand-dark border shadow-inner">
+          <div class="flex items-center gap-2 mb-2">
+            <i id="vocabFeedbackIcon" class="fas text-xl"></i>
+            <h3 id="vocabFeedbackTitle" class="font-bold text-lg"></h3>
+          </div>
           <p id="vocabExplanation" class="text-sm text-gray-300 leading-relaxed"></p>
+          <!-- SRS info -->
+          <div id="srsInfo" class="hidden mt-3 pt-3 border-t border-gray-700 flex items-center gap-2">
+            <i class="fas fa-brain text-brand-purple text-xs"></i>
+            <p class="text-xs text-gray-500" id="srsInfoText"></p>
+          </div>
         </div>
-        <button id="nextVocabBtn" onclick="nextVocabQuest()" class="hidden w-full mt-auto bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale flex justify-center items-center gap-2 flex-shrink-0">Next Question <i class="fas fa-arrow-right text-sm"></i></button>
+
+        <button id="nextVocabBtn" onclick="nextVocabQuest()" class="hidden w-full mt-auto bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale flex justify-center items-center gap-2 flex-shrink-0">
+          Next <i class="fas fa-arrow-right text-sm"></i>
+        </button>
       </div>
 
-      <div id="vocabDoneArea" class="hidden flex-col items-center justify-center flex-grow h-full text-center">
-        <div class="w-24 h-24 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center text-6xl mb-6 shadow-inner border border-brand-green/30">
+      <div id="vocabDoneArea" class="hidden flex-col items-center justify-center flex-grow text-center">
+        <div class="w-20 h-20 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center text-5xl mb-5 border border-brand-green/30">
           <i class="fas fa-check"></i>
         </div>
-        <h2 class="text-2xl font-extrabold text-white mb-2">Level Completed!</h2>
-        <p class="text-gray-400 text-sm mb-8 leading-relaxed">你今日嘅呢個難度已經完成。<br>你可以喺頂部切換難度挑戰更多，<br>或者直接進入 Campaign Mode！</p>
-        <button onclick="switchView('speaking')" class="w-full bg-brand-blue text-white py-4 rounded-xl font-bold text-lg active-scale shadow-lg">前往 Speaking Campaign</button>
+        <h2 class="text-2xl font-extrabold text-white mb-2">Level Complete!</h2>
+        <p class="text-gray-400 text-sm mb-6 leading-relaxed">切換難度繼續挑戰，<br>或者去 Speaking Campaign！</p>
+        <button onclick="switchView('retry')" id="doneRetryBtn" class="hidden w-full mb-3 bg-brand-red/20 border border-brand-red/40 text-brand-red py-3 rounded-xl font-bold active-scale">
+          <i class="fas fa-redo mr-2"></i>練習錯題 (<span class="retryCountInline">0</span> 題)
+        </button>
+        <button onclick="switchView('flashcard')" class="w-full mb-3 bg-brand-purple/20 border border-brand-purple/40 text-brand-purple py-3 rounded-xl font-bold active-scale">
+          <i class="fas fa-layer-group mr-2"></i>閃卡複習
+        </button>
+        <button onclick="switchView('speaking')" class="w-full bg-brand-blue text-white py-3 rounded-xl font-bold active-scale">
+          前往 Speaking Campaign
+        </button>
       </div>
     </main>
   </div>
 
+  <!-- ═══════════════════════════════════ -->
+  <!-- RETRY VIEW (錯題重練)              -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="view-retry" class="view-section">
+    <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10 flex-shrink-0">
+      <div class="flex items-center gap-3">
+        <button onclick="switchView('vocab')" class="text-gray-400 active-scale"><i class="fas fa-chevron-left"></i></button>
+        <div>
+          <h1 class="text-sm font-extrabold text-brand-red uppercase tracking-widest">錯題重練</h1>
+          <p class="text-xs text-gray-500">Spaced Repetition 智能複習</p>
+        </div>
+        <div class="ml-auto text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1.5 rounded-md border border-gray-800">
+          <span id="retryProgress">1</span> / <span id="retryTotal">0</span>
+        </div>
+      </div>
+      <div class="mt-3 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+        <div id="retryProgressBar" class="h-full bg-gradient-to-r from-brand-red to-brand-orange rounded-full transition-all duration-500" style="width:0%"></div>
+      </div>
+    </header>
+    <main class="flex-grow p-5 flex flex-col overflow-y-auto">
+      <div id="retryQuestArea" class="flex flex-col flex-grow">
+        <div class="bg-brand-dark p-6 rounded-3xl shadow-xl mb-5 border border-gray-800 min-h-[120px] flex items-center justify-center">
+          <p id="retrySentence" class="text-lg font-semibold leading-relaxed text-white font-sans text-center"></p>
+        </div>
+        <div id="retryOptions" class="flex flex-col gap-3 mb-5"></div>
+        <div id="retryFeedback" class="hidden mb-5 p-5 rounded-2xl bg-brand-dark border shadow-inner">
+          <div class="flex items-center gap-2 mb-2">
+            <i id="retryFeedbackIcon" class="fas text-xl"></i>
+            <h3 id="retryFeedbackTitle" class="font-bold text-lg"></h3>
+          </div>
+          <p id="retryExplanation" class="text-sm text-gray-300 leading-relaxed"></p>
+        </div>
+        <button id="nextRetryBtn" onclick="nextRetryQuest()" class="hidden w-full mt-auto bg-brand-red text-white py-4 rounded-xl font-bold text-lg active-scale flex justify-center items-center gap-2">
+          Next <i class="fas fa-arrow-right text-sm"></i>
+        </button>
+      </div>
+      <div id="retryDoneArea" class="hidden flex-col items-center justify-center flex-grow text-center">
+        <div class="w-20 h-20 bg-brand-orange/10 text-brand-orange rounded-full flex items-center justify-center text-5xl mb-5 border border-brand-orange/30">🧠</div>
+        <h2 class="text-2xl font-extrabold text-white mb-2">錯題練完！</h2>
+        <p class="text-gray-400 text-sm mb-6">答啱嘅題目會減少出現頻率，<br>繼續答啱就會從錯題庫移除 ✅</p>
+        <button onclick="switchView('vocab')" class="w-full bg-brand-blue text-white py-3 rounded-xl font-bold active-scale">
+          返回主頁
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- FLASHCARD VIEW                     -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="view-flashcard" class="view-section">
+    <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10 flex-shrink-0">
+      <div class="flex items-center gap-3">
+        <button onclick="switchView('vocab')" class="text-gray-400 active-scale"><i class="fas fa-chevron-left"></i></button>
+        <div>
+          <h1 class="text-sm font-extrabold text-brand-purple uppercase tracking-widest">閃卡複習</h1>
+          <p class="text-xs text-gray-500">撳卡片翻面睇中文</p>
+        </div>
+        <div class="ml-auto">
+          <button onclick="switchView('myVocab')" class="text-xs text-brand-purple border border-brand-purple/40 px-3 py-1.5 rounded-lg active-scale">
+            <i class="fas fa-bookmark mr-1"></i>生字本
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="flex-grow p-5 flex flex-col items-center justify-start overflow-y-auto">
+      <p class="text-xs text-gray-500 mb-6 text-center"><span id="flashIdx">1</span> / <span id="flashTotal">0</span> 張</p>
+
+      <!-- FLASHCARD -->
+      <div class="flip-card w-full mb-6" style="height:200px" onclick="flipCard()">
+        <div class="flip-card-inner w-full h-full" id="flashCardInner">
+          <div class="flip-card-front bg-brand-dark border-2 border-brand-purple/40 rounded-3xl w-full h-full flex flex-col items-center justify-center p-6 shadow-xl">
+            <p class="text-xs text-brand-purple font-bold uppercase tracking-widest mb-3">English</p>
+            <p id="flashWord" class="text-3xl font-extrabold text-white text-center"></p>
+            <p id="flashSentence" class="text-sm text-gray-500 text-center mt-3 leading-relaxed"></p>
+            <p class="text-xs text-gray-600 mt-4">👆 撳翻面</p>
+          </div>
+          <div class="flip-card-back bg-brand-dark border-2 border-brand-yellow/40 rounded-3xl w-full h-full flex flex-col items-center justify-center p-6 shadow-xl">
+            <p class="text-xs text-brand-yellow font-bold uppercase tracking-widest mb-3">中文</p>
+            <p id="flashTrans" class="text-3xl font-extrabold text-brand-yellow text-center"></p>
+            <p id="flashExplanation" class="text-sm text-gray-400 text-center mt-3 leading-relaxed"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTROLS -->
+      <div class="flex gap-3 w-full mb-6">
+        <button onclick="flashNav(-1)" class="flex-1 bg-brand-dark border border-gray-700 text-gray-300 py-3 rounded-xl font-bold active-scale">
+          <i class="fas fa-chevron-left mr-1"></i> 上一張
+        </button>
+        <button onclick="speakFlash()" class="w-12 bg-brand-dark border border-gray-700 text-brand-blue rounded-xl active-scale flex items-center justify-center">
+          <i class="fas fa-volume-up"></i>
+        </button>
+        <button onclick="flashNav(1)" class="flex-1 bg-brand-blue text-white py-3 rounded-xl font-bold active-scale">
+          下一張 <i class="fas fa-chevron-right ml-1"></i>
+        </button>
+      </div>
+
+      <!-- SOURCE TABS -->
+      <div class="flex bg-brand-dark rounded-xl p-1 border border-gray-800 w-full mb-4">
+        <button onclick="setFlashSource('vault')" id="flashTabVault" class="flex-1 py-2 rounded-lg text-xs font-bold text-white bg-brand-blue transition-colors active-scale">學過的詞 (<span id="flashVaultCount">0</span>)</button>
+        <button onclick="setFlashSource('myVocab')" id="flashTabMy" class="flex-1 py-2 rounded-lg text-xs font-bold text-gray-500 transition-colors active-scale">我的生字本 (<span id="flashMyCount">0</span>)</button>
+      </div>
+
+      <div id="flashEmpty" class="hidden text-center text-gray-500 text-sm py-8">
+        <i class="fas fa-layer-group text-3xl mb-3 block opacity-30"></i>
+        呢個來源暫無生字，先完成 Vocab Quest！
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- MY VOCAB VIEW (自訂生字本)         -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="view-myVocab" class="view-section">
+    <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10 flex-shrink-0">
+      <div class="flex items-center gap-3 mb-3">
+        <button onclick="switchView('flashcard')" class="text-gray-400 active-scale"><i class="fas fa-chevron-left"></i></button>
+        <div class="flex-1">
+          <h1 class="text-sm font-extrabold text-brand-purple uppercase tracking-widest">我的生字本</h1>
+          <p class="text-xs text-gray-500"><span id="myVocabCount">0</span> 個生字</p>
+        </div>
+      </div>
+      <!-- ADD WORD FORM -->
+      <div class="bg-brand-dark rounded-xl p-3 border border-gray-800">
+        <div class="flex gap-2 mb-2">
+          <input id="addWordInput" class="flex-1 bg-brand-slate border border-gray-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-purple" placeholder="English word / phrase">
+          <input id="addTransInput" class="flex-1 bg-brand-slate border border-gray-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-purple" placeholder="中文意思">
+        </div>
+        <input id="addNoteInput" class="w-full bg-brand-slate border border-gray-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-purple mb-2" placeholder="例句 / 備注（選填）">
+        <button onclick="addMyVocabWord()" class="w-full bg-brand-purple text-white py-2 rounded-lg font-bold text-sm active-scale">
+          <i class="fas fa-plus mr-1"></i> 加入生字本
+        </button>
+      </div>
+    </header>
+    <main class="flex-grow p-5 overflow-y-auto custom-scroll">
+      <div id="myVocabList" class="flex flex-col gap-3 pb-4"></div>
+      <div id="myVocabEmpty" class="hidden text-center text-gray-500 text-sm py-12">
+        <i class="fas fa-bookmark text-3xl mb-3 block opacity-30"></i>
+        生字本係空嘅<br>喺上面加入第一個生字！
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- SPEAKING VIEW                      -->
+  <!-- ═══════════════════════════════════ -->
   <div id="view-speaking" class="view-section">
     <div id="speakLevelScreen" class="flex flex-col h-full">
       <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10 flex-shrink-0">
         <div class="flex justify-between items-center">
           <h1 class="text-xs font-semibold uppercase tracking-widest text-gray-400">Campaign Mode</h1>
-          <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full shadow-inner streak-display">
+          <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full streak-display">
             <i class="fas fa-fire-alt"></i> <span class="streakValue">0</span>
           </div>
         </div>
         <div class="mt-4 flex justify-between items-end">
-          <p class="text-xl font-extrabold text-white tracking-tight">Speaking Stages</p>
+          <p class="text-xl font-extrabold text-white">Speaking Stages</p>
           <span class="text-xs font-mono text-brand-green bg-brand-green/10 border border-brand-green/20 px-2.5 py-1 rounded-md">80% to Unlock</span>
         </div>
       </header>
-      <main class="flex-grow p-6 overflow-y-auto">
-        <p class="text-sm text-gray-400 mb-6 text-center">挑戰極限發音，過關解鎖新句子！</p>
+      <main class="flex-grow p-5 overflow-y-auto">
+        <p class="text-sm text-gray-400 mb-5 text-center">挑戰極限發音，過關解鎖新句子！</p>
         <div id="levelGrid" class="grid grid-cols-3 gap-4 pb-10"></div>
       </main>
     </div>
 
     <div id="speakActionScreen" class="hidden flex-col h-full">
       <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10 flex-shrink-0">
-        <div class="flex justify-between items-center mb-4">
-          <button onclick="backToLevels()" class="text-gray-400 hover:text-white px-2 py-1 -ml-2 active-scale flex items-center gap-2 text-sm font-bold"><i class="fas fa-chevron-left"></i> Back</button>
+        <div class="flex justify-between items-center mb-3">
+          <button onclick="backToLevels()" class="text-gray-400 active-scale flex items-center gap-2 text-sm font-bold"><i class="fas fa-chevron-left"></i> Back</button>
           <span class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md">Stage <span id="currentStageNum" class="text-brand-blue font-bold">1</span></span>
         </div>
-        <p id="taskType" class="text-lg font-extrabold text-brand-blue tracking-tight leading-tight">Loading...</p>
+        <p id="taskType" class="text-lg font-extrabold text-brand-blue tracking-tight">Loading...</p>
       </header>
-      <main class="flex-grow p-6 flex flex-col overflow-y-auto" id="speakMainContent">
-        <div class="bg-brand-dark p-7 rounded-3xl shadow-xl mb-4 border border-gray-800 flex-shrink-0">
-          <p class="text-[11px] text-brand-blue font-bold mb-3 uppercase tracking-widest opacity-80">Target Sentence</p>
-          <p id="targetSentence" class="text-xl font-semibold leading-relaxed text-white font-sans text-center text-gray-400 text-sm mt-2">載入題庫中...</p>
-          <p id="targetTranslation" class="text-xl text-brand-yellow font-extrabold text-center mt-5 hidden tracking-wide leading-snug drop-shadow-sm"></p>
+      <main class="flex-grow p-5 flex flex-col overflow-y-auto" id="speakMainContent">
+
+        <div class="bg-brand-dark p-6 rounded-3xl shadow-xl mb-4 border border-gray-800 flex-shrink-0">
+          <p class="text-[11px] text-brand-blue font-bold mb-2 uppercase tracking-widest opacity-80">Target Sentence</p>
+          <p id="targetSentence" class="text-xl font-semibold leading-relaxed text-white font-sans text-center mt-2">載入中...</p>
+          <p id="targetTranslation" class="text-brand-yellow font-extrabold text-center mt-4 hidden text-lg"></p>
         </div>
-        
-        <div id="speakFeedbackArea" class="hidden mb-6 flex-shrink-0 transition-all duration-300">
-          <div class="p-5 rounded-2xl w-full text-center flex flex-col items-center bg-brand-dark border border-gray-700 shadow-inner" id="speakFeedbackBox">
-            <p class="text-xs font-bold mb-1 uppercase tracking-wider" id="speakScoreLabel">Analysis Result</p>
-            <div class="flex items-end gap-1"><p class="text-5xl font-extrabold" id="speakScoreValue">0</p><p class="text-lg font-bold pb-1">%</p></div>
-            <div class="w-full h-px bg-gray-700 my-4"></div>
-            <div class="flex justify-between w-full items-center mb-2"><p class="text-xs text-gray-400 font-bold uppercase" id="speakResultTypeTitle">Pronunciation Analysis:</p></div>
-            <p class="text-base mt-1 text-white font-sans leading-relaxed" id="speakUserText"></p>
-            <div id="speakMissedWordsArea" class="mt-5 w-full text-left hidden">
-              <p class="text-[11px] text-brand-red font-bold uppercase tracking-widest mb-2"><i class="fas fa-exclamation-circle"></i> Needs Improvement (點擊聽):</p>
+
+        <!-- ENHANCED PRONUNCIATION FEEDBACK -->
+        <div id="speakFeedbackArea" class="hidden mb-5 flex-shrink-0">
+          <div class="p-5 rounded-2xl w-full bg-brand-dark border border-gray-700 shadow-inner" id="speakFeedbackBox">
+            <p class="text-xs font-bold mb-1 uppercase tracking-wider text-center" id="speakScoreLabel">Analysis Result</p>
+
+            <!-- SCORE DISPLAY -->
+            <div class="flex items-center justify-center gap-4 my-3">
+              <svg width="80" height="80" class="score-ring">
+                <circle cx="40" cy="40" r="32" fill="none" stroke="#1E293B" stroke-width="8"/>
+                <circle id="scoreCircle" cx="40" cy="40" r="32" fill="none" stroke="#10B981" stroke-width="8"
+                  stroke-dasharray="201" stroke-dashoffset="201" stroke-linecap="round" class="transition-all duration-700"/>
+              </svg>
+              <div class="text-center">
+                <div class="flex items-end gap-1"><p class="text-5xl font-extrabold" id="speakScoreValue">0</p><p class="text-lg font-bold pb-1">%</p></div>
+                <p class="text-xs text-gray-500" id="speakScoreSubtitle">Accuracy</p>
+              </div>
+            </div>
+
+            <!-- WAVEFORM COMPARISON -->
+            <div id="waveformArea" class="hidden mb-3">
+              <p class="text-[11px] text-gray-400 font-bold uppercase tracking-widest mb-2">🎙 發音波形對比：</p>
+              <div class="relative rounded-xl overflow-hidden bg-black/30 border border-gray-700" style="height:80px">
+                <!-- Reference waveform (native) -->
+                <canvas id="refWaveCanvas" class="absolute inset-0 w-full h-full opacity-40"></canvas>
+                <!-- User waveform -->
+                <canvas id="userWaveCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                <div class="absolute bottom-1 left-2 text-[9px] text-gray-500 font-bold">你的發音</div>
+                <div class="absolute bottom-1 right-2 text-[9px] text-gray-500 font-bold opacity-40">參考</div>
+              </div>
+            </div>
+
+            <div class="w-full h-px bg-gray-700 my-3"></div>
+
+            <!-- WORD BY WORD HIGHLIGHT -->
+            <div class="mb-3">
+              <p class="text-[11px] text-gray-400 font-bold uppercase tracking-widest mb-2">逐字分析：</p>
+              <p class="text-base text-white font-sans leading-relaxed" id="speakUserText"></p>
+            </div>
+
+            <!-- MISSED WORDS -->
+            <div id="speakMissedWordsArea" class="hidden mt-3 pt-3 border-t border-gray-700">
+              <p class="text-[11px] text-brand-red font-bold uppercase tracking-widest mb-2"><i class="fas fa-exclamation-circle"></i> 需要改善 (點擊聽發音):</p>
               <div id="speakMissedWordsList" class="flex flex-wrap gap-2"></div>
+            </div>
+
+            <!-- PREVIOUS ATTEMPT COMPARISON -->
+            <div id="prevAttemptArea" class="hidden mt-3 pt-3 border-t border-gray-700">
+              <p class="text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-1">vs 上次:</p>
+              <div class="flex items-center gap-2">
+                <span class="text-sm text-gray-400" id="prevScore">—%</span>
+                <i class="fas fa-arrow-right text-xs text-gray-600"></i>
+                <span class="text-sm font-bold" id="curScoreCompare">—%</span>
+                <span id="improveBadge" class="hidden text-xs text-brand-green bg-brand-green/10 px-2 py-0.5 rounded-full font-bold">↑ 進步!</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="mt-auto flex justify-center gap-4 items-center flex-shrink-0 pt-4">
+        <div class="mt-auto flex justify-center gap-4 items-center flex-shrink-0 pt-3">
           <button onclick="playSpeakAudio()" class="w-14 h-14 bg-gray-700 text-gray-200 rounded-full shadow-lg flex items-center justify-center text-xl active-scale hover:bg-gray-600"><i class="fas fa-volume-up"></i></button>
-          <button id="recordBtn" onclick="toggleRecording()" class="w-20 h-20 bg-brand-red text-white rounded-full shadow-2xl flex items-center justify-center text-3xl active-scale ring-8 ring-red-600/20 relative"><i class="fas fa-microphone"></i><span id="recordRipple" class="absolute inset-0 rounded-full bg-brand-red opacity-0"></span></button>
-          <button id="nextLevelBtn" onclick="goToNextLevel()" class="w-14 h-14 bg-gray-800 text-gray-400 rounded-full shadow-lg flex items-center justify-center text-xl active-scale hover:bg-gray-700 border border-gray-700"><i class="fas fa-forward"></i></button>
+          <button id="recordBtn" onclick="toggleRecording()" class="w-20 h-20 bg-brand-red text-white rounded-full shadow-2xl flex items-center justify-center text-3xl active-scale ring-8 ring-red-600/20 relative">
+            <i class="fas fa-microphone"></i>
+            <span id="recordRipple" class="absolute inset-0 rounded-full bg-brand-red opacity-0"></span>
+          </button>
+          <button id="nextLevelBtn" onclick="goToNextLevel()" class="w-14 h-14 bg-gray-800 text-gray-400 rounded-full shadow-lg flex items-center justify-center text-xl active-scale border border-gray-700"><i class="fas fa-forward"></i></button>
         </div>
-        <div class="h-10 mt-3 mb-2 flex items-center justify-center flex-shrink-0">
-           <p id="recordingStatus" class="text-center text-sm font-bold text-gray-400"></p>
+        <div class="h-10 mt-3 flex items-center justify-center flex-shrink-0">
+          <p id="recordingStatus" class="text-center text-sm font-bold text-gray-400"></p>
         </div>
       </main>
     </div>
   </div>
 
-  <div id="view-progress" class="view-section pt-12 px-6">
-    <h2 class="text-2xl font-extrabold text-white mb-2">Your Discipline</h2>
-    <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800 mb-6 flex justify-between items-center shadow-inner flex-shrink-0">
-      <div><p class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Total Score</p><p class="text-3xl font-extrabold text-brand-blue" id="progressTotalScore">0</p></div>
-      <div class="text-right"><p class="text-xs text-brand-orange font-bold uppercase tracking-wider mb-1">Current Streak</p><p class="text-3xl font-extrabold text-white"><span id="progressStreak">0</span> 🔥</p></div>
+  <!-- ═══════════════════════════════════ -->
+  <!-- PROGRESS VIEW                      -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="view-progress" class="view-section pt-7 px-5">
+    <div class="flex justify-between items-start mb-5">
+      <h2 class="text-2xl font-extrabold text-white">Your Discipline</h2>
+      <div class="text-right">
+        <p class="text-[10px] text-gray-500 uppercase tracking-wider">Streak</p>
+        <p class="text-2xl font-extrabold text-brand-orange"><span id="progressStreak">0</span> 🔥</p>
+      </div>
     </div>
-    <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800 shadow-inner mb-8 flex-shrink-0">
+
+    <!-- STATS ROW -->
+    <div class="grid grid-cols-3 gap-3 mb-5 flex-shrink-0">
+      <div class="bg-brand-dark p-4 rounded-2xl border border-gray-800 text-center">
+        <p class="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Score</p>
+        <p class="text-xl font-extrabold text-brand-blue" id="progressTotalScore">0</p>
+      </div>
+      <div class="bg-brand-dark p-4 rounded-2xl border border-gray-800 text-center">
+        <p class="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Learned</p>
+        <p class="text-xl font-extrabold text-brand-green" id="progressVaultCount">0</p>
+      </div>
+      <div class="bg-brand-dark p-4 rounded-2xl border border-gray-800 text-center">
+        <p class="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Errors</p>
+        <p class="text-xl font-extrabold text-brand-red" id="progressErrorCount">0</p>
+      </div>
+    </div>
+
+    <!-- CALENDAR -->
+    <div class="bg-brand-dark p-5 rounded-3xl border border-gray-800 mb-5 flex-shrink-0">
       <h3 class="text-sm font-bold text-gray-300 mb-4 uppercase tracking-wider text-center" id="calendarMonthLabel">Month</h3>
       <div id="calendarGrid" class="w-full"></div>
     </div>
-    <div class="mb-6 flex-shrink-0">
-      <div class="flex justify-between items-end mb-4"><h3 class="text-sm font-bold text-brand-blue uppercase tracking-wider"><i class="fas fa-book-open mr-2"></i>Learned Words (Vault)</h3><span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded"><span id="vaultCount">0</span> words</span></div>
-      <p class="text-xs text-gray-400 mb-4 italic">這裡記錄了所有你在 Daily Quest 中學過的生字。</p>
+
+    <!-- VOCAB VAULT -->
+    <div class="mb-5 flex-shrink-0">
+      <div class="flex justify-between items-end mb-3">
+        <h3 class="text-sm font-bold text-brand-blue uppercase tracking-wider"><i class="fas fa-book-open mr-2"></i>Learned Vault</h3>
+        <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded"><span id="vaultCount">0</span> words</span>
+      </div>
       <div id="vocabVaultList" class="flex flex-col gap-3 pb-6"></div>
     </div>
   </div>
 
-  <div id="view-settings" class="view-section pt-12 px-6">
-    <h2 class="text-2xl font-extrabold text-white mb-2">Settings</h2>
-    <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800">
-      <label class="block text-xs font-bold text-brand-blue uppercase tracking-widest mb-3">Coach Voice (精選美/英口音)</label>
+  <!-- ═══════════════════════════════════ -->
+  <!-- SETTINGS VIEW                      -->
+  <!-- ═══════════════════════════════════ -->
+  <div id="view-settings" class="view-section pt-12 px-5">
+    <h2 class="text-2xl font-extrabold text-white mb-5">Settings</h2>
+
+    <div class="bg-brand-dark p-5 rounded-3xl border border-gray-800 mb-4">
+      <label class="block text-xs font-bold text-brand-blue uppercase tracking-widest mb-3">Coach Voice</label>
       <div class="relative mb-2">
-        <select id="voiceSelect" class="w-full bg-brand-slate text-white border border-gray-700 rounded-xl p-4 appearance-none focus:outline-none focus:border-brand-blue"><option>Loading voices...</option></select>
+        <select id="voiceSelect" class="w-full bg-brand-slate text-white border border-gray-700 rounded-xl p-4 appearance-none focus:outline-none focus:border-brand-blue">
+          <option>Loading voices...</option>
+        </select>
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400"><i class="fas fa-chevron-down"></i></div>
       </div>
       <p class="text-[10px] text-gray-500 mb-4 px-2">如果聽到機械人聲，請試轉另外一把。</p>
-      <button onclick="testVoice()" class="w-full bg-gray-700 text-white py-3 rounded-xl font-bold text-sm active-scale hover:bg-gray-600 flex justify-center items-center gap-2"><i class="fas fa-play"></i> 試聽聲音 Test Voice</button>
-      <button onclick="resetData()" class="w-full mt-8 bg-red-900/30 text-red-400 py-3 rounded-xl font-bold text-xs active-scale border border-red-900/50">RESET ALL DATA</button>
+      <button onclick="testVoice()" class="w-full bg-gray-700 text-white py-3 rounded-xl font-bold text-sm active-scale flex justify-center items-center gap-2">
+        <i class="fas fa-play"></i> Test Voice
+      </button>
     </div>
-  </div>
 
-  <div id="summaryModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-brand-dark/95 backdrop-blur-lg transition-opacity duration-300 text-center">
-    <div class="bg-brand-slate p-8 rounded-3xl shadow-2xl w-full max-w-sm border border-gray-700">
-      <div class="w-20 h-20 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center text-5xl mx-auto mb-6"><i class="fas fa-check-circle"></i></div>
-      <h2 id="summaryTitle" class="text-2xl font-extrabold text-white tracking-tight mb-2">Complete!</h2>
-      <div class="bg-brand-dark p-5 rounded-2xl mb-6 grid grid-cols-2 gap-4 border border-gray-800 mt-4 shadow-inner">
-        <div class="border-r border-gray-800 pr-4"><p class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Score</p><p class="text-3xl font-extrabold text-brand-blue"><span id="summaryScore">0</span>%</p></div>
-        <div class="pl-4"><p class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Total</p><p class="text-3xl font-extrabold text-white" id="summaryTotal">0</p></div>
+    <!-- DAILY REMINDER TOGGLE -->
+    <div class="bg-brand-dark p-5 rounded-3xl border border-gray-800 mb-4">
+      <label class="block text-xs font-bold text-brand-orange uppercase tracking-widest mb-3"><i class="fas fa-bell mr-1"></i> 每日提醒</label>
+      <div class="flex items-center justify-between">
+        <p class="text-sm text-gray-300">開啟 App 時顯示提醒 Banner</p>
+        <button onclick="toggleReminder()" id="reminderToggle" class="w-12 h-6 rounded-full border-2 border-gray-600 bg-gray-700 relative transition-all active-scale">
+          <div id="reminderDot" class="w-4 h-4 bg-gray-400 rounded-full absolute top-0.5 left-0.5 transition-all"></div>
+        </button>
       </div>
-      <button onclick="closeSummary()" class="w-full bg-brand-green text-white py-4 rounded-xl font-bold text-lg active-scale">Keep It Up!</button>
+      <p class="text-[10px] text-gray-500 mt-2">開 App 時，如果當日未練習會顯示橙色提醒 Banner</p>
     </div>
+
+    <div class="bg-brand-dark p-5 rounded-3xl border border-gray-800 mb-4">
+      <label class="block text-xs font-bold text-brand-purple uppercase tracking-widest mb-3"><i class="fas fa-brain mr-1"></i> Spaced Repetition</label>
+      <div class="flex items-center justify-between mb-2">
+        <p class="text-sm text-gray-300">錯題庫</p>
+        <span class="text-brand-red font-bold text-sm"><span id="srsErrorCount">0</span> 題</span>
+      </div>
+      <button onclick="clearErrors()" class="w-full bg-brand-red/10 border border-brand-red/30 text-brand-red py-2 rounded-xl font-bold text-sm active-scale">
+        清除錯題庫
+      </button>
+    </div>
+
+    <button onclick="resetData()" class="w-full bg-red-900/30 text-red-400 py-3 rounded-xl font-bold text-xs active-scale border border-red-900/50 mb-8">
+      RESET ALL DATA
+    </button>
   </div>
 
+  <!-- BOTTOM NAV -->
   <nav class="absolute bottom-0 w-full bg-brand-slate/95 backdrop-blur-lg border-t border-gray-800 flex justify-around items-center pb-safe pt-2 px-1 z-40">
-    <button onclick="switchView('vocab')" id="nav-vocab" class="nav-item active flex flex-col items-center p-3 text-gray-500 w-16"><i class="fas fa-layer-group text-xl mb-1"></i><span class="text-[9px] font-bold uppercase tracking-wider">Vocab</span></button>
-    <button onclick="switchView('speaking')" id="nav-speaking" class="nav-item flex flex-col items-center p-3 text-gray-500 w-16"><i class="fas fa-microphone-alt text-xl mb-1"></i><span class="text-[9px] font-bold uppercase tracking-wider">Speak</span></button>
-    <button onclick="switchView('progress')" id="nav-progress" class="nav-item flex flex-col items-center p-3 text-gray-500 w-16"><i class="fas fa-calendar-check text-xl mb-1"></i><span class="text-[9px] font-bold uppercase tracking-wider">Tracker</span></button>
-    <button onclick="switchView('settings')" id="nav-settings" class="nav-item flex flex-col items-center p-3 text-gray-500 w-16"><i class="fas fa-cog text-xl mb-1"></i><span class="text-[9px] font-bold uppercase tracking-wider">Config</span></button>
+    <button onclick="switchView('vocab')" id="nav-vocab" class="nav-item active flex flex-col items-center p-2 text-gray-500 w-16 gap-1">
+      <div class="nav-bar"></div>
+      <i class="nav-ico fas fa-layer-group text-xl"></i>
+      <span class="text-[9px] font-bold uppercase tracking-wider">Vocab</span>
+    </button>
+    <button onclick="switchView('speaking')" id="nav-speaking" class="nav-item flex flex-col items-center p-2 text-gray-500 w-16 gap-1">
+      <div class="nav-bar"></div>
+      <i class="nav-ico fas fa-microphone-alt text-xl"></i>
+      <span class="text-[9px] font-bold uppercase tracking-wider">Speak</span>
+    </button>
+    <button onclick="switchView('flashcard')" id="nav-flashcard" class="nav-item flex flex-col items-center p-2 text-gray-500 w-16 gap-1">
+      <div class="nav-bar"></div>
+      <i class="nav-ico fas fa-layer-group text-xl"></i>
+      <span class="text-[9px] font-bold uppercase tracking-wider">Cards</span>
+    </button>
+    <button onclick="switchView('progress')" id="nav-progress" class="nav-item flex flex-col items-center p-2 text-gray-500 w-16 gap-1">
+      <div class="nav-bar"></div>
+      <i class="nav-ico fas fa-calendar-check text-xl"></i>
+      <span class="text-[9px] font-bold uppercase tracking-wider">Tracker</span>
+    </button>
+    <button onclick="switchView('settings')" id="nav-settings" class="nav-item flex flex-col items-center p-2 text-gray-500 w-16 gap-1">
+      <div class="nav-bar"></div>
+      <i class="nav-ico fas fa-cog text-xl"></i>
+      <span class="text-[9px] font-bold uppercase tracking-wider">Config</span>
+    </button>
   </nav>
 
-  <script>
-    const getTodayDate = () => new Date().toLocaleDateString('en-CA');
+  <!-- AUTO RETRY MODAL (開App自動彈) -->
+  <div id="autoRetryModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-brand-dark/95 backdrop-blur-lg text-center">
+    <div class="bg-brand-slate p-8 rounded-3xl shadow-2xl w-full max-w-sm border border-brand-red/30">
+      <div class="w-20 h-20 bg-brand-red/10 text-brand-red rounded-full flex items-center justify-center text-5xl mx-auto mb-5">🧠</div>
+      <h2 class="text-2xl font-extrabold text-white mb-2">錯題待練！</h2>
+      <p class="text-gray-400 text-sm mb-1">你有 <span id="autoRetryCount" class="text-brand-red font-extrabold text-lg">0</span> 題錯題需要複習</p>
+      <p class="text-gray-500 text-xs mb-6">Spaced Repetition：定期複習有助記憶 💡</p>
+      <button onclick="goToRetryFromModal()" class="w-full bg-brand-red text-white py-4 rounded-xl font-bold text-lg active-scale mb-3">
+        <i class="fas fa-redo mr-2"></i>立即練習錯題
+      </button>
+      <button onclick="dismissAutoRetry()" class="w-full bg-transparent border border-gray-700 text-gray-400 py-3 rounded-xl font-bold active-scale">
+        稍後再練
+      </button>
+    </div>
+  </div>
 
-    function loadUserData() {
-      const defaultData = { currentStreak: 0, lastCompletedDate: null, totalScore: 0, history: [], savedVocab: [], doneVocabIds: [], unlockedSpeakLevel: 0, speakHighScores: {}, speakHistory: {}, lastVocabDate: { b1: null, b2: null, c1: null } };
-      const savedData = localStorage.getItem('english_coach_data_v9'); 
-      return savedData ? JSON.parse(savedData) : defaultData;
+  <!-- SUMMARY MODAL -->
+  <div id="summaryModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-brand-dark/95 backdrop-blur-lg text-center">
+    <div class="bg-brand-slate p-8 rounded-3xl shadow-2xl w-full max-w-sm border border-gray-700">
+      <div class="w-20 h-20 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center text-5xl mx-auto mb-5"><i class="fas fa-check-circle"></i></div>
+      <h2 id="summaryTitle" class="text-2xl font-extrabold text-white mb-3">Complete!</h2>
+      <div class="bg-brand-dark p-5 rounded-2xl mb-5 grid grid-cols-2 gap-4 border border-gray-800">
+        <div class="border-r border-gray-800 pr-4"><p class="text-xs text-gray-500 font-bold uppercase mb-1">Score</p><p class="text-3xl font-extrabold text-brand-blue"><span id="summaryScore">0</span>%</p></div>
+        <div class="pl-4"><p class="text-xs text-gray-500 font-bold uppercase mb-1">Total</p><p class="text-3xl font-extrabold text-white" id="summaryTotal">0</p></div>
+      </div>
+      <button onclick="closeSummary()" class="w-full bg-brand-green text-white py-4 rounded-xl font-bold text-lg active-scale">Keep It Up! 💪</button>
+    </div>
+  </div>
+
+<script>
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
+const getTodayDate = () => new Date().toLocaleDateString('en-CA');
+
+const DEFAULT_DATA = {
+  currentStreak: 0, lastCompletedDate: null, totalScore: 0,
+  history: [], savedVocab: [], doneVocabIds: [],
+  unlockedSpeakLevel: 0, speakHighScores: {}, speakHistory: {},
+  lastVocabDate: { b1: null, b2: null, c1: null },
+  // NEW
+  errorVocab: {},      // { vocabId: { wrongCount, lastSeen, nextReview } }
+  myVocab: [],         // user custom words
+  reminderOn: true,
+  speakScoreHistory: {} // { taskId: [score1, score2] }
+};
+
+function loadData() {
+  const s = localStorage.getItem('eng_v30');
+  if(!s) return JSON.parse(JSON.stringify(DEFAULT_DATA));
+  try { return { ...JSON.parse(JSON.stringify(DEFAULT_DATA)), ...JSON.parse(s) }; }
+  catch(e) { return JSON.parse(JSON.stringify(DEFAULT_DATA)); }
+}
+function saveData(d) { localStorage.setItem('eng_v30', JSON.stringify(d)); }
+
+// Migrate from old key
+(function migrate(){
+  const old = localStorage.getItem('english_coach_data_v9');
+  if(old && !localStorage.getItem('eng_v30')) {
+    try {
+      const o = JSON.parse(old);
+      const d = loadData();
+      d.currentStreak = o.currentStreak||0;
+      d.totalScore = o.totalScore||0;
+      d.history = o.history||[];
+      d.savedVocab = o.savedVocab||[];
+      d.doneVocabIds = o.doneVocabIds||[];
+      d.unlockedSpeakLevel = o.unlockedSpeakLevel||0;
+      d.speakHighScores = o.speakHighScores||{};
+      d.speakHistory = o.speakHistory||{};
+      d.lastVocabDate = o.lastVocabDate||{b1:null,b2:null,c1:null};
+      saveData(d);
+    } catch(e){}
+  }
+})();
+
+// ══════════════════════════════════════════
+// DAILY REMINDER BANNER
+// ══════════════════════════════════════════
+function checkBanner() {
+  const d = loadData();
+  if(!d.reminderOn) return;
+  const today = getTodayDate();
+  const hasDoneToday = d.history.includes(today);
+  if(!hasDoneToday) {
+    document.getElementById('dailyBanner').classList.remove('hidden');
+  }
+}
+function closeBanner() {
+  document.getElementById('dailyBanner').classList.add('hidden');
+}
+function toggleReminder() {
+  const d = loadData();
+  d.reminderOn = !d.reminderOn;
+  saveData(d);
+  updateReminderUI(d.reminderOn);
+}
+function updateReminderUI(on) {
+  const btn = document.getElementById('reminderToggle');
+  const dot = document.getElementById('reminderDot');
+  if(on) {
+    btn.classList.replace('border-gray-600','border-brand-orange');
+    btn.classList.replace('bg-gray-700','bg-brand-orange/30');
+    dot.classList.replace('bg-gray-400','bg-brand-orange');
+    dot.style.left = '26px';
+  } else {
+    btn.classList.replace('border-brand-orange','border-gray-600');
+    btn.classList.replace('bg-brand-orange/30','bg-gray-700');
+    dot.classList.replace('bg-brand-orange','bg-gray-400');
+    dot.style.left = '2px';
+  }
+}
+
+// ══════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════
+const NAV_VIEWS = ['vocab','speaking','flashcard','progress','settings'];
+
+function switchView(viewName) {
+  document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const pg = document.getElementById(`view-${viewName}`);
+  if(pg) pg.classList.add('active');
+  const nb = document.getElementById(`nav-${viewName}`);
+  if(nb) nb.classList.add('active');
+
+  if(viewName==='vocab') { checkDailyVocabStatus(); updateRetryBadge(); }
+  if(viewName==='speaking') { backToLevels(); }
+  if(viewName==='progress') { renderCalendar(); renderVocabVault(); updateProgressStats(); }
+  if(viewName==='flashcard') { initFlashcards(); }
+  if(viewName==='myVocab') { renderMyVocab(); }
+  if(viewName==='retry') { initRetry(); }
+  if(viewName==='settings') { updateSettingsPage(); }
+}
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+function playSuccessSound() {
+  try {
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    const osc = ctx.createOscillator(); const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination); osc.type='sine';
+    osc.frequency.setValueAtTime(659.25,ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(1046.5,ctx.currentTime+0.1);
+    gain.gain.setValueAtTime(0.3,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.4);
+    osc.start(ctx.currentTime); osc.stop(ctx.currentTime+0.4);
+  } catch(e){}
+}
+
+// ══════════════════════════════════════════
+// VOCAB SYSTEM
+// ══════════════════════════════════════════
+let vocabData = []; let currentVocabIndex = 0; let vocabScore = 0; let vocabAnswered = false;
+let currentVocabLevel = 'c1';
+
+function changeVocabLevel(level) {
+  if(currentVocabLevel === level) return;
+  currentVocabLevel = level;
+  document.querySelectorAll('.vocab-lvl-btn').forEach(btn => {
+    btn.className = "vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold text-gray-500 transition-colors active-scale";
+  });
+  const ab = document.getElementById(`btn-lvl-${level}`);
+  if(ab) ab.className = "vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-blue text-white shadow-md transition-colors active-scale";
+  currentVocabIndex = 0; vocabScore = 0;
+  fetchVocabData();
+}
+
+function checkDailyVocabStatus() {
+  const d = loadData();
+  const done = d.lastVocabDate && d.lastVocabDate[currentVocabLevel] === getTodayDate();
+  document.getElementById('vocabQuestArea').classList.toggle('hidden', done);
+  document.getElementById('vocabDoneArea').classList.toggle('hidden', !done);
+  if(done) {
+    const rc = getRetryDueCount();
+    const doneRetryBtn = document.getElementById('doneRetryBtn');
+    const inlines = document.querySelectorAll('.retryCountInline');
+    if(rc > 0) {
+      doneRetryBtn.classList.remove('hidden');
+      inlines.forEach(el => el.textContent = rc);
+    } else {
+      doneRetryBtn.classList.add('hidden');
     }
+  }
+  if(!done) fetchVocabData();
+  return done;
+}
 
-    function saveData(data) { localStorage.setItem('english_coach_data_v9', JSON.stringify(data)); }
+async function fetchVocabData() {
+  try {
+    document.getElementById('vocabSentence').innerHTML = '<i class="fas fa-spinner fa-spin text-brand-blue text-2xl"></i>';
+    document.getElementById('vocabOptions').innerHTML = '';
+    const response = await fetch(`vocab-${currentVocabLevel}.json`);
+    const all = await response.json();
+    const d = loadData();
+    let filtered = all.filter(item => !d.doneVocabIds.includes(item.id));
+    if(filtered.length < 5) { d.doneVocabIds = []; saveData(d); filtered = all; }
+    vocabData = shuffleArray(filtered).slice(0, 5);
+    document.getElementById('vocabTotal').textContent = vocabData.length;
+    loadVocabQuest();
+  } catch(e) {
+    document.getElementById('vocabSentence').innerHTML = '<span class="text-brand-red text-sm"><i class="fas fa-exclamation-triangle"></i> 找不到題庫 JSON</span>';
+  }
+}
 
-    function switchView(viewName) {
-      document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-      document.getElementById(`view-${viewName}`).classList.add('active');
-      document.getElementById(`nav-${viewName}`).classList.add('active');
-      if(viewName === 'progress') { renderCalendar(); renderVocabVault(); }
-      if(viewName === 'speaking') { backToLevels(); }
-      if(viewName === 'vocab') { checkDailyVocabStatus(); } 
+function loadVocabQuest() {
+  if(!vocabData.length) return;
+  vocabAnswered = false;
+  const q = vocabData[currentVocabIndex];
+  const pct = Math.round(currentVocabIndex / vocabData.length * 100);
+  document.getElementById('vocabProgress').textContent = currentVocabIndex + 1;
+  document.getElementById('vocabProgressBar').style.width = pct + '%';
+  document.getElementById('vocabSentence').innerHTML = q.sentence.replace('{blank}', '<span class="blank-space"></span>');
+  document.getElementById('vocabOptions').innerHTML = '';
+  const labels = ['A','B','C','D'];
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('div');
+    btn.className = "vocab-opt w-full flex items-center gap-3 p-4 rounded-xl border border-gray-700 bg-brand-dark cursor-pointer active-scale";
+    btn.innerHTML = `
+      <span class="w-7 h-7 rounded-lg border border-gray-600 flex items-center justify-center font-bold text-xs text-gray-400 flex-shrink-0">${labels[idx]}</span>
+      <div class="flex-grow">
+        <span class="font-semibold text-base text-white">${opt.word}</span>
+        <span class="vocab-trans hidden text-brand-yellow text-sm ml-2">- ${opt.trans}</span>
+      </div>
+      <button class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0" onclick="speakWord('${opt.word}',event)">
+        <i class="fas fa-volume-up text-brand-blue text-sm"></i>
+      </button>`;
+    btn.onclick = (e) => { if(!e.target.closest('button[onclick]')) checkVocabAnswer(idx, btn, q); };
+    document.getElementById('vocabOptions').appendChild(btn);
+  });
+  document.getElementById('vocabFeedback').classList.add('hidden');
+  document.getElementById('nextVocabBtn').classList.add('hidden');
+}
+
+function checkVocabAnswer(idx, btn, q) {
+  if(vocabAnswered) return;
+  vocabAnswered = true;
+  document.querySelectorAll('.vocab-trans').forEach(el => el.classList.remove('hidden'));
+  const opts = document.querySelectorAll('.vocab-opt');
+  const correctBtn = opts[q.correctIndex];
+
+  if(idx === q.correctIndex) {
+    vocabScore++;
+    btn.classList.add('border-brand-green','bg-brand-green/20');
+    btn.classList.add('correct-pulse');
+    setVocabFeedback(true, "✅ Spot On!", q.explanation);
+    // SRS: reduce error count if was wrong before
+    updateSRS(q.id, true);
+  } else {
+    btn.classList.add('border-brand-red','bg-brand-red/20');
+    btn.classList.add('shake');
+    correctBtn.classList.add('border-brand-green','bg-brand-green/20');
+    setVocabFeedback(false, "❌ Not Quite", q.explanation);
+    updateSRS(q.id, false);
+    // Add to error vocab
+    addToErrorVocab(q);
+  }
+
+  // Save to vault
+  const d = loadData();
+  if(!d.doneVocabIds.includes(q.id)) d.doneVocabIds.push(q.id);
+  const correctWord = q.options[q.correctIndex];
+  if(!d.savedVocab.find(v=>v.word===correctWord.word)) {
+    d.savedVocab.push({ word: correctWord.word, trans: correctWord.trans, explanation: q.explanation, dateAdded: getTodayDate(), id: q.id });
+  }
+  saveData(d);
+  document.getElementById('vocabSentence').innerHTML = q.sentence.replace('{blank}',`<span class="text-brand-green font-bold border-b-2 border-brand-green px-1">${correctWord.word}</span>`);
+  document.getElementById('nextVocabBtn').classList.remove('hidden');
+}
+
+function setVocabFeedback(ok, title, exp, containerId='vocabFeedback', titleId='vocabFeedbackTitle', expId='vocabExplanation') {
+  const box = document.getElementById(containerId);
+  box.className = `mb-5 p-5 rounded-2xl border flex-shrink-0 ${ok?'bg-brand-green/10 border-brand-green/30':'bg-brand-red/10 border-brand-red/30'}`;
+  document.getElementById(titleId).textContent = title;
+  document.getElementById(titleId).className = `font-bold text-lg ${ok?'text-brand-green':'text-brand-red'}`;
+  document.getElementById(expId).textContent = exp;
+  box.classList.remove('hidden');
+}
+
+function nextVocabQuest() {
+  if(currentVocabIndex < vocabData.length - 1) {
+    currentVocabIndex++;
+    loadVocabQuest();
+  } else {
+    const d = loadData();
+    if(!d.lastVocabDate) d.lastVocabDate = {b1:null,b2:null,c1:null};
+    d.lastVocabDate[currentVocabLevel] = getTodayDate();
+    saveData(d);
+    completeWorkout(`Vocab (${currentVocabLevel.toUpperCase()})`, Math.round(vocabScore/vocabData.length*100));
+    currentVocabIndex = 0; vocabScore = 0;
+    checkDailyVocabStatus();
+    updateRetryBadge();
+  }
+}
+
+// ══════════════════════════════════════════
+// SPACED REPETITION (SRS)
+// ══════════════════════════════════════════
+function addToErrorVocab(q) {
+  const d = loadData();
+  if(!d.errorVocab) d.errorVocab = {};
+  const entry = d.errorVocab[q.id] || { q, wrongCount: 0, rightCount: 0, nextReview: getTodayDate() };
+  entry.q = q;
+  entry.wrongCount++;
+  entry.nextReview = getTodayDate(); // due immediately
+  d.errorVocab[q.id] = entry;
+  saveData(d);
+}
+
+function updateSRS(id, correct) {
+  const d = loadData();
+  if(!d.errorVocab || !d.errorVocab[id]) return;
+  if(correct) {
+    d.errorVocab[id].rightCount = (d.errorVocab[id].rightCount||0) + 1;
+    // After 3 correct answers, remove from error list
+    if(d.errorVocab[id].rightCount >= 3) {
+      delete d.errorVocab[id];
+    } else {
+      // Push next review by 1 day
+      const next = new Date(); next.setDate(next.getDate() + d.errorVocab[id].rightCount);
+      d.errorVocab[id].nextReview = next.toLocaleDateString('en-CA');
     }
+  }
+  saveData(d);
+}
 
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; }
-      return array;
+function getRetryDueCount() {
+  const d = loadData();
+  if(!d.errorVocab) return 0;
+  const today = getTodayDate();
+  return Object.values(d.errorVocab).filter(e => e.nextReview <= today).length;
+}
+
+function updateRetryBadge() {
+  const count = getRetryDueCount();
+  const btn = document.getElementById('retryNavBtn');
+  document.getElementById('retryCount').textContent = count;
+  if(count > 0) { btn.classList.remove('hidden'); btn.classList.add('flex'); }
+  else { btn.classList.add('hidden'); btn.classList.remove('flex'); }
+}
+
+// RETRY SYSTEM
+let retryData = []; let retryIndex = 0; let retryAnswered = false;
+
+function initRetry() {
+  const d = loadData();
+  const today = getTodayDate();
+  retryData = Object.values(d.errorVocab||{}).filter(e => e.nextReview <= today && e.q);
+  retryData = shuffleArray(retryData);
+  retryIndex = 0;
+  document.getElementById('retryTotal').textContent = retryData.length;
+  document.getElementById('retryQuestArea').classList.remove('hidden');
+  document.getElementById('retryDoneArea').classList.add('hidden');
+  if(retryData.length > 0) loadRetryQuest();
+  else {
+    document.getElementById('retryQuestArea').classList.add('hidden');
+    document.getElementById('retryDoneArea').classList.remove('hidden');
+  }
+}
+
+function loadRetryQuest() {
+  if(!retryData.length) return;
+  retryAnswered = false;
+  const entry = retryData[retryIndex];
+  const q = entry.q;
+  const pct = Math.round(retryIndex / retryData.length * 100);
+  document.getElementById('retryProgress').textContent = retryIndex + 1;
+  document.getElementById('retryProgressBar').style.width = pct + '%';
+  document.getElementById('retrySentence').innerHTML = q.sentence.replace('{blank}','<span class="blank-space"></span>');
+  document.getElementById('retryOptions').innerHTML = '';
+  document.getElementById('retryFeedback').classList.add('hidden');
+  document.getElementById('nextRetryBtn').classList.add('hidden');
+  const labels = ['A','B','C','D'];
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('div');
+    btn.className = "vocab-opt w-full flex items-center gap-3 p-4 rounded-xl border border-gray-700 bg-brand-dark cursor-pointer active-scale";
+    btn.innerHTML = `
+      <span class="w-7 h-7 rounded-lg border border-gray-600 flex items-center justify-center font-bold text-xs text-gray-400 flex-shrink-0">${labels[idx]}</span>
+      <div class="flex-grow"><span class="font-semibold text-base text-white">${opt.word}</span></div>
+      <button class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0" onclick="speakWord('${opt.word}',event)">
+        <i class="fas fa-volume-up text-brand-blue text-sm"></i>
+      </button>`;
+    btn.onclick = (e) => { if(!e.target.closest('button[onclick]')) checkRetryAnswer(idx, btn, q); };
+    document.getElementById('retryOptions').appendChild(btn);
+  });
+}
+
+function checkRetryAnswer(idx, btn, q) {
+  if(retryAnswered) return;
+  retryAnswered = true;
+  document.querySelectorAll('#retryOptions .vocab-opt').forEach((b,i) => {
+    if(i === q.correctIndex) b.classList.add('border-brand-green','bg-brand-green/20');
+  });
+  if(idx === q.correctIndex) {
+    btn.classList.add('correct-pulse');
+    setVocabFeedback(true,'✅ Correct!', q.explanation,'retryFeedback','retryFeedbackTitle','retryExplanation');
+    updateSRS(q.id, true);
+  } else {
+    btn.classList.add('border-brand-red','bg-brand-red/20','shake');
+    setVocabFeedback(false,'❌ Wrong again', q.explanation,'retryFeedback','retryFeedbackTitle','retryExplanation');
+    updateSRS(q.id, false);
+  }
+  document.getElementById('nextRetryBtn').classList.remove('hidden');
+}
+
+function nextRetryQuest() {
+  if(retryIndex < retryData.length - 1) {
+    retryIndex++; loadRetryQuest();
+  } else {
+    document.getElementById('retryQuestArea').classList.add('hidden');
+    document.getElementById('retryDoneArea').classList.remove('hidden');
+    updateRetryBadge();
+  }
+}
+
+// ══════════════════════════════════════════
+// FLASHCARD SYSTEM
+// ══════════════════════════════════════════
+let flashCards = []; let flashIndex = 0; let flashSource = 'vault';
+
+function setFlashSource(src) {
+  flashSource = src;
+  document.getElementById('flashTabVault').className = `flex-1 py-2 rounded-lg text-xs font-bold transition-colors active-scale ${src==='vault'?'text-white bg-brand-blue':'text-gray-500'}`;
+  document.getElementById('flashTabMy').className = `flex-1 py-2 rounded-lg text-xs font-bold transition-colors active-scale ${src==='myVocab'?'text-white bg-brand-purple':'text-gray-500'}`;
+  loadFlashCards();
+}
+
+function initFlashcards() {
+  const d = loadData();
+  document.getElementById('flashVaultCount').textContent = d.savedVocab.length;
+  document.getElementById('flashMyCount').textContent = (d.myVocab||[]).length;
+  loadFlashCards();
+}
+
+function loadFlashCards() {
+  const d = loadData();
+  if(flashSource === 'vault') {
+    flashCards = [...d.savedVocab].reverse();
+  } else {
+    flashCards = [...(d.myVocab||[])];
+  }
+  flashIndex = 0;
+  // Reset flip state
+  document.getElementById('flashCardInner').classList.remove('flipped');
+  if(flashCards.length === 0) {
+    document.getElementById('flashEmpty').classList.remove('hidden');
+    document.getElementById('flashIdx').textContent = '0';
+    document.getElementById('flashTotal').textContent = '0';
+    document.getElementById('flashWord').textContent = '';
+    document.getElementById('flashSentence').textContent = '';
+    document.getElementById('flashTrans').textContent = '';
+    document.getElementById('flashExplanation').textContent = '';
+  } else {
+    document.getElementById('flashEmpty').classList.add('hidden');
+    renderFlashCard();
+  }
+}
+
+function renderFlashCard() {
+  if(!flashCards.length) return;
+  const card = flashCards[flashIndex];
+  document.getElementById('flashIdx').textContent = flashIndex + 1;
+  document.getElementById('flashTotal').textContent = flashCards.length;
+  document.getElementById('flashWord').textContent = card.word;
+  document.getElementById('flashSentence').textContent = card.explanation || card.note || '';
+  document.getElementById('flashTrans').textContent = card.trans;
+  document.getElementById('flashExplanation').textContent = card.explanation || '';
+  document.getElementById('flashCardInner').classList.remove('flipped');
+}
+
+function flipCard() {
+  document.getElementById('flashCardInner').classList.toggle('flipped');
+}
+
+function flashNav(dir) {
+  flashIndex = (flashIndex + dir + flashCards.length) % flashCards.length;
+  renderFlashCard();
+}
+
+function speakFlash() {
+  if(flashCards[flashIndex]) speakWord(flashCards[flashIndex].word, null);
+}
+
+// ══════════════════════════════════════════
+// MY VOCAB (自訂生字本)
+// ══════════════════════════════════════════
+function addMyVocabWord() {
+  const word = document.getElementById('addWordInput').value.trim();
+  const trans = document.getElementById('addTransInput').value.trim();
+  const note = document.getElementById('addNoteInput').value.trim();
+  if(!word || !trans) { shakeEl('addWordInput'); return; }
+  const d = loadData();
+  if(!d.myVocab) d.myVocab = [];
+  d.myVocab.unshift({ word, trans, note, dateAdded: getTodayDate() });
+  saveData(d);
+  document.getElementById('addWordInput').value = '';
+  document.getElementById('addTransInput').value = '';
+  document.getElementById('addNoteInput').value = '';
+  renderMyVocab();
+  // Update flashcard counts
+  document.getElementById('flashMyCount').textContent = d.myVocab.length;
+}
+
+function renderMyVocab() {
+  const d = loadData();
+  const list = d.myVocab || [];
+  document.getElementById('myVocabCount').textContent = list.length;
+  const container = document.getElementById('myVocabList');
+  const empty = document.getElementById('myVocabEmpty');
+  if(!list.length) { container.innerHTML=''; empty.classList.remove('hidden'); return; }
+  empty.classList.add('hidden');
+  container.innerHTML = list.map((v,i) => `
+    <div class="bg-brand-dark p-4 rounded-2xl border border-gray-700">
+      <div class="flex justify-between items-start">
+        <div>
+          <p class="text-lg font-extrabold text-white">${v.word}</p>
+          <p class="text-brand-yellow font-bold text-sm">${v.trans}</p>
+          ${v.note?`<p class="text-xs text-gray-500 mt-1 leading-relaxed">${v.note}</p>`:''}
+        </div>
+        <div class="flex gap-2 ml-3">
+          <button class="w-9 h-9 rounded-full bg-brand-slate flex items-center justify-center active-scale" onclick="speakWord('${v.word}',event)">
+            <i class="fas fa-volume-up text-gray-300 text-sm"></i>
+          </button>
+          <button class="w-9 h-9 rounded-full bg-brand-red/10 border border-brand-red/30 flex items-center justify-center active-scale" onclick="delMyVocab(${i})">
+            <i class="fas fa-trash text-brand-red text-xs"></i>
+          </button>
+        </div>
+      </div>
+      <p class="text-[10px] text-gray-600 mt-2">${v.dateAdded}</p>
+    </div>`).join('');
+}
+
+function delMyVocab(idx) {
+  const d = loadData();
+  d.myVocab.splice(idx, 1);
+  saveData(d);
+  renderMyVocab();
+  document.getElementById('flashMyCount').textContent = d.myVocab.length;
+}
+
+function shakeEl(id) {
+  const el = document.getElementById(id);
+  el.classList.add('border-brand-red');
+  el.classList.add('shake');
+  setTimeout(() => { el.classList.remove('shake','border-brand-red'); }, 500);
+}
+
+// ══════════════════════════════════════════
+// SPEAKING SYSTEM
+// ══════════════════════════════════════════
+let allSpeakTasks = []; let currentStageIndex = 0;
+
+async function fetchSpeakData() {
+  try {
+    const r = await fetch('speak-data.json');
+    allSpeakTasks = await r.json();
+    renderLevelGrid();
+  } catch(e) { document.getElementById('levelGrid').textContent = "Load failed"; }
+}
+
+function renderLevelGrid() {
+  const d = loadData(); const grid = document.getElementById('levelGrid'); grid.innerHTML = '';
+  allSpeakTasks.forEach((task, index) => {
+    const isUnlocked = index <= d.unlockedSpeakLevel;
+    const highScore = d.speakHighScores[task.id] || 0;
+    const isCleared = highScore >= 80;
+    const btn = document.createElement('button');
+    if(isUnlocked) {
+      btn.className = `w-full aspect-square rounded-2xl flex flex-col items-center justify-center border-2 active-scale transition-all ${isCleared?(highScore===100?'bg-brand-dark border-brand-yellow/50 text-brand-yellow':'bg-brand-dark border-brand-green/50 text-brand-green'):'bg-brand-blue border-brand-blue text-white shadow-lg shadow-brand-blue/30'}`;
+      btn.innerHTML = `<span class="text-2xl font-black">${index+1}</span>${isCleared?`<span class="text-xs font-bold mt-1">${highScore}%</span><i class="fas fa-check-circle text-xs mt-1"></i>`:`<span class="text-[10px] font-bold mt-1 uppercase tracking-widest opacity-80">Stage</span>`}`;
+      btn.onclick = () => openStage(index);
+    } else {
+      btn.className = "w-full aspect-square rounded-2xl flex flex-col items-center justify-center border-2 bg-gray-800 border-gray-700 text-gray-500 cursor-not-allowed opacity-50";
+      btn.innerHTML = `<i class="fas fa-lock text-xl mb-1"></i><span class="text-xl font-black">${index+1}</span>`;
     }
+    grid.appendChild(btn);
+  });
+}
 
-    function playSuccessSound() {
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContext) return;
-        const ctx = new AudioContext(); const osc = ctx.createOscillator(); const gain = ctx.createGain();
-        osc.connect(gain); gain.connect(ctx.destination); osc.type = 'sine';
-        osc.frequency.setValueAtTime(659.25, ctx.currentTime); 
-        osc.frequency.exponentialRampToValueAtTime(1046.5, ctx.currentTime + 0.1); 
-        gain.gain.setValueAtTime(0.3, ctx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
-        osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.4);
-      } catch(e){}
-    }
+function openStage(index) {
+  currentStageIndex = index;
+  const task = allSpeakTasks[index];
+  document.getElementById('speakLevelScreen').classList.add('hidden');
+  document.getElementById('speakActionScreen').classList.remove('hidden');
+  document.getElementById('speakActionScreen').classList.add('flex');
+  document.getElementById('currentStageNum').textContent = index + 1;
+  document.getElementById('taskType').textContent = task.type;
+  document.getElementById('targetSentence').className = "text-xl font-semibold leading-relaxed text-white font-sans mt-2";
+  document.getElementById('targetSentence').textContent = task.sentence;
+  const transEl = document.getElementById('targetTranslation');
+  if(task.trans){transEl.textContent="- "+task.trans;transEl.classList.remove('hidden');}else{transEl.classList.add('hidden');}
+  document.getElementById('speakFeedbackArea').classList.add('hidden');
+  document.getElementById('recordingStatus').textContent = "";
+  // Check previous attempt
+  const d = loadData();
+  if(d.speakHistory && d.speakHistory[task.id]) {
+    renderPreviousAttempt(task, d.speakHistory[task.id]);
+  }
+}
 
-    // ==========================================
-    // Vocab System (v2.4 按鈕切換)
-    // ==========================================
-    let vocabData = []; let currentVocabIndex = 0; let vocabScore = 0; let vocabAnswered = false;
-    const DAILY_VOCAB_LIMIT = 5;
-    let currentVocabLevel = 'c1'; // 預設 C1
+function renderPreviousAttempt(task, historyText) {
+  calculateSpeakScore(historyText, true);
+}
 
-    // 💥 UI 按鈕切換邏輯
-    function changeVocabLevel(level) {
-      if (currentVocabLevel === level) return;
-      currentVocabLevel = level;
-      
-      // 更新按鈕樣式
-      document.querySelectorAll('.vocab-lvl-btn').forEach(btn => {
-        btn.className = "vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold text-gray-500 transition-colors active-scale";
-      });
-      const activeBtn = document.getElementById(`btn-lvl-${level}`);
-      activeBtn.className = "vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-blue text-white shadow-md transition-colors active-scale";
-      
-      currentVocabIndex = 0;
-      vocabScore = 0;
-      fetchVocabData();
-    }
+function backToLevels() {
+  if(isRecording) forceStopUI();
+  document.getElementById('speakActionScreen').classList.add('hidden');
+  document.getElementById('speakActionScreen').classList.remove('flex');
+  document.getElementById('speakLevelScreen').classList.remove('hidden');
+  renderLevelGrid();
+}
 
-    function checkDailyVocabStatus() {
-      const data = loadUserData();
-      if (data.lastVocabDate && data.lastVocabDate[currentVocabLevel] === getTodayDate()) {
-        document.getElementById('vocabQuestArea').classList.add('hidden');
-        document.getElementById('vocabDoneArea').classList.remove('hidden');
-        document.getElementById('vocabDoneArea').classList.add('flex');
-        return true;
-      } else {
-        document.getElementById('vocabQuestArea').classList.remove('hidden');
-        document.getElementById('vocabQuestArea').classList.add('flex');
-        document.getElementById('vocabDoneArea').classList.add('hidden');
-        document.getElementById('vocabDoneArea').classList.remove('flex');
-        return false;
-      }
-    }
+const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recognition = null; let isRecording = false; let finalSpeechText = "";
 
-    async function fetchVocabData() {
-      if (checkDailyVocabStatus()) return;
-
-      try {
-        document.getElementById('vocabSentence').innerHTML = '<i class="fas fa-spinner fa-spin text-brand-blue text-2xl mb-2"></i><br><span class="text-sm text-gray-400">載入題庫中...</span>';
-        document.getElementById('vocabOptions').innerHTML = '';
-        
-        const response = await fetch(`vocab-${currentVocabLevel}.json`);
-        const allVocab = await response.json();
-        const data = loadUserData();
-        
-        let filtered = allVocab.filter(item => !data.doneVocabIds.includes(item.id));
-        if (filtered.length < DAILY_VOCAB_LIMIT) { data.doneVocabIds = []; saveData(data); filtered = allVocab; }
-        
-        vocabData = shuffleArray(filtered).slice(0, DAILY_VOCAB_LIMIT);
-        document.getElementById('vocabTotal').innerText = vocabData.length;
-        loadVocabQuest();
-      } catch (e) { 
-        document.getElementById('vocabSentence').innerHTML = '<span class="text-brand-red font-bold"><i class="fas fa-exclamation-triangle"></i> 找不到該難度題庫。<br>請確保已建立對應的 JSON。</span>'; 
-      }
-    }
-
-    function loadVocabQuest() {
-      if (vocabData.length === 0) return;
-      vocabAnswered = false;
-      const quest = vocabData[currentVocabIndex];
-      document.getElementById('vocabProgress').innerText = currentVocabIndex + 1;
-      document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', '<span class="blank-space"></span>');
-      const container = document.getElementById('vocabOptions');
-      container.innerHTML = '';
-      quest.options.forEach((opt, idx) => {
-        const btn = document.createElement('div');
-        btn.className = "w-full flex justify-between items-center p-4 rounded-xl border border-gray-700 bg-brand-dark text-gray-200 cursor-pointer active-scale vocab-option-btn";
-        btn.innerHTML = `<div class="flex-grow font-semibold text-lg flex items-center flex-wrap"><span class="mr-2">${opt.word}</span><span class="vocab-trans hidden text-xl font-extrabold text-brand-yellow tracking-wide mt-1">- ${opt.trans}</span></div><button class="w-12 h-12 flex-shrink-0 rounded-full bg-gray-800 flex items-center justify-center ml-2" onclick="speakWord('${opt.word}', event)"><i class="fas fa-volume-up text-brand-blue text-lg"></i></button>`;
-        btn.onclick = (e) => { if (!e.target.closest('button')) checkVocabAnswer(idx, btn); };
-        container.appendChild(btn);
-      });
-      document.getElementById('vocabFeedback').classList.add('hidden');
-      document.getElementById('nextVocabBtn').classList.add('hidden');
-    }
-
-    function checkVocabAnswer(idx, btn) {
-      if (vocabAnswered) return; vocabAnswered = true;
-      const quest = vocabData[currentVocabIndex];
-      document.querySelectorAll('.vocab-trans').forEach(el => el.classList.remove('hidden'));
-      const correctBtn = document.querySelectorAll('.vocab-option-btn')[quest.correctIndex];
-      correctBtn.classList.add('border-brand-green', 'bg-brand-green/20', 'text-brand-green');
-      if (idx === quest.correctIndex) { vocabScore++; setVocabFeedback(true, "Spot On!", quest.explanation); }
-      else { btn.classList.add('border-brand-red', 'bg-brand-red/20', 'text-brand-red'); setVocabFeedback(false, "Not Quite", quest.explanation); }
-      
-      let data = loadUserData();
-      if (!data.doneVocabIds.includes(quest.id)) { data.doneVocabIds.push(quest.id); }
-      if (!data.savedVocab.find(v => v.word === quest.options[quest.correctIndex].word)) {
-        data.savedVocab.push({ word: quest.options[quest.correctIndex].word, trans: quest.options[quest.correctIndex].trans, explanation: quest.explanation, dateAdded: getTodayDate() });
-      }
-      saveData(data);
-      
-      document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', `<span class="text-brand-green font-bold border-b-2 border-brand-green px-1">${quest.options[quest.correctIndex].word}</span>`);
-      document.getElementById('nextVocabBtn').classList.remove('hidden');
-    }
-
-    function setVocabFeedback(isCorrect, title, exp) {
-      const box = document.getElementById('vocabFeedback');
-      box.className = `mb-6 p-5 rounded-2xl border flex-shrink-0 ${isCorrect ? 'bg-brand-green/10 border-brand-green/30' : 'bg-brand-red/10 border-brand-red/30'}`;
-      document.getElementById('vocabFeedbackTitle').innerText = title;
-      document.getElementById('vocabFeedbackTitle').className = `font-bold text-lg ${isCorrect ? 'text-brand-green' : 'text-brand-red'}`;
-      document.getElementById('vocabExplanation').innerText = exp;
-      box.classList.remove('hidden');
-    }
-
-    function nextVocabQuest() {
-      if (currentVocabIndex < vocabData.length - 1) { 
-        currentVocabIndex++; loadVocabQuest(); 
-      } else { 
-        let data = loadUserData();
-        if (!data.lastVocabDate) data.lastVocabDate = { b1: null, b2: null, c1: null };
-        data.lastVocabDate[currentVocabLevel] = getTodayDate();
-        saveData(data);
-        
-        completeWorkout(`Vocab (Level ${currentVocabLevel.toUpperCase()})`, Math.round((vocabScore / vocabData.length) * 100)); 
-        currentVocabIndex = 0; vocabScore = 0; 
-        checkDailyVocabStatus(); 
-      }
-    }
-
-    // ==========================================
-    // Speaking System (Campaign Mode)
-    // ==========================================
-    let allSpeakTasks = []; let currentStageIndex = 0;
-
-    async function fetchSpeakData() {
-      try {
-        const response = await fetch('speak-data.json');
-        allSpeakTasks = await response.json(); renderLevelGrid();
-      } catch (e) { document.getElementById('levelGrid').innerText = "Load failed"; }
-    }
-
-    function renderLevelGrid() {
-      const data = loadUserData(); const grid = document.getElementById('levelGrid'); grid.innerHTML = '';
-      allSpeakTasks.forEach((task, index) => {
-        const isUnlocked = index <= data.unlockedSpeakLevel;
-        const highScore = data.speakHighScores[task.id] || 0;
-        const isCleared = highScore >= 80;
-        
-        const btn = document.createElement('button');
-        if (isUnlocked) {
-          btn.className = `w-full aspect-square rounded-2xl flex flex-col items-center justify-center border-2 active-scale transition-all ${isCleared ? (highScore===100 ? 'bg-brand-dark border-brand-yellow/50 text-brand-yellow' : 'bg-brand-dark border-brand-green/50 text-brand-green') : 'bg-brand-blue border-brand-blue text-white shadow-lg shadow-brand-blue/30'}`;
-          btn.innerHTML = `<span class="text-2xl font-black">${index + 1}</span>
-            ${isCleared ? `<span class="text-xs font-bold mt-1">${highScore}%</span>` : `<span class="text-[10px] font-bold mt-1 uppercase tracking-widest opacity-80">Stage</span>`}
-            ${isCleared ? `<i class="fas fa-check-circle text-xs mt-1"></i>` : ''}`;
-          btn.onclick = () => openStage(index);
-        } else {
-          btn.className = "w-full aspect-square rounded-2xl flex flex-col items-center justify-center border-2 bg-gray-800 border-gray-700 text-gray-500 cursor-not-allowed opacity-50";
-          btn.innerHTML = `<i class="fas fa-lock text-xl mb-1"></i><span class="text-xl font-black">${index + 1}</span>`;
-        }
-        grid.appendChild(btn);
-      });
-    }
-
-    function openStage(index) {
-      currentStageIndex = index; const task = allSpeakTasks[index];
-      document.getElementById('speakLevelScreen').classList.add('hidden');
-      document.getElementById('speakActionScreen').classList.remove('hidden'); document.getElementById('speakActionScreen').classList.add('flex');
-      document.getElementById('currentStageNum').innerText = index + 1; document.getElementById('taskType').innerText = task.type;
-      document.getElementById('targetSentence').className = "text-xl font-semibold leading-relaxed text-white font-sans mt-2";
-      document.getElementById('targetSentence').innerText = task.sentence;
-      
-      const transEl = document.getElementById('targetTranslation');
-      if(task.trans) { transEl.innerText = "- " + task.trans; transEl.classList.remove('hidden'); } else { transEl.classList.add('hidden'); }
-
-      const data = loadUserData();
-      if (data.speakHistory && data.speakHistory[task.id]) { renderPreviousAttempt(task, data.speakHistory[task.id]); } 
-      else { document.getElementById('speakFeedbackArea').classList.add('hidden'); }
-      
-      document.getElementById('recordingStatus').innerText = "";
-    }
-
-    function renderPreviousAttempt(task, historyText) {
-      document.getElementById('speakResultTypeTitle').innerText = "Last Attempt (上次紀錄):";
-      calculateSpeakScore(historyText, true); 
-    }
-
-    function backToLevels() {
-      if(isRecording) forceStopUI();
-      document.getElementById('speakActionScreen').classList.add('hidden'); document.getElementById('speakActionScreen').classList.remove('flex');
-      document.getElementById('speakLevelScreen').classList.remove('hidden');
-      renderLevelGrid(); 
-    }
-
-    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-    let recognition = null; let isRecording = false; let finalSpeechText = "";
-
-    function toggleRecording() {
-      if (isRecording) {
-        recognition.stop();
-        if(finalSpeechText.trim() !== "") { calculateSpeakScore(finalSpeechText, false); } 
-        else { forceStopUI(); document.getElementById('recordingStatus').innerHTML = "<span class='text-orange-400'>⚠️ 無聲，請再試一次。</span>"; document.getElementById('targetSentence').className = "text-xl font-semibold leading-relaxed text-white font-sans mt-2 transition-all"; }
-      } else {
-        if (!SpeechRec) return alert("Browser not supported");
-        recognition = new SpeechRec(); recognition.lang = 'en-US'; recognition.continuous = true; recognition.interimResults = true; finalSpeechText = "";
-        
-        recognition.onresult = (e) => {
-          finalSpeechText = Array.from(e.results).map(r => r[0].transcript).join('');
-          document.getElementById('recordingStatus').innerHTML = `<span class='text-brand-blue font-bold'>聽緊:</span> <span class='text-white font-normal italic'>${finalSpeechText}</span>`;
-        };
-        recognition.onerror = (e) => { forceStopUI(); };
-        try {
-          recognition.start(); isRecording = true;
-          document.getElementById('recordBtn').classList.replace('bg-brand-red', 'bg-red-800');
-          document.getElementById('recordRipple').classList.add('animate-ping', 'opacity-50');
-          document.getElementById('recordingStatus').innerHTML = "<span class='text-red-400 animate-pulse'>🔴 Listening... (講完撳掣停止)</span>";
-          document.getElementById('speakFeedbackArea').classList.add('hidden');
-          document.getElementById('targetSentence').className = "text-xl font-semibold leading-relaxed text-gray-500 font-sans mt-2 transition-all";
-          document.getElementById('speakResultTypeTitle').innerText = "Pronunciation Analysis:";
-        } catch(e) { forceStopUI(); }
-      }
-    }
-
-    function forceStopUI() {
-      isRecording = false;
-      if (recognition) { try { recognition.stop(); } catch(e){} }
-      document.getElementById('recordBtn').classList.replace('bg-red-800', 'bg-brand-red');
-      document.getElementById('recordRipple').classList.remove('animate-ping', 'opacity-50');
-      document.getElementById('recordingStatus').innerText = "";
-    }
-
-    function calculateSpeakScore(spokenText, isReviewMode = false) {
-      if(!spokenText || spokenText.trim() === "") return;
-      if(!isReviewMode) { forceStopUI(); document.getElementById('recordingStatus').innerText = ""; }
-      
-      const task = allSpeakTasks[currentStageIndex];
-      const rawTargetWords = task.sentence.split(/\s+/);
-      const targetClean = rawTargetWords.map(w => w.toLowerCase().replace(/[^\w\s\']/g, ""));
-      const spokenClean = spokenText.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
-      
-      let matchCount = 0; let highlightedHTML = ""; let missedWords = []; let spokenTemp = [...spokenClean];
-      
-      for (let i = 0; i < targetClean.length; i++) {
-         let cleanW = targetClean[i]; let rawW = rawTargetWords[i];
-         let foundIdx = spokenTemp.indexOf(cleanW);
-         if (foundIdx !== -1) { matchCount++; spokenTemp.splice(foundIdx, 1); highlightedHTML += `<span class="text-brand-green drop-shadow-[0_0_2px_rgba(16,185,129,0.5)]">${rawW}</span> `; } 
-         else { highlightedHTML += `<span class="text-brand-red font-bold underline decoration-brand-red/50">${rawW}</span> `; if (cleanW.length > 0 && !cleanW.includes('-')) missedWords.push(cleanW); }
-      }
-      
-      const score = Math.round((matchCount / targetClean.length) * 100);
-      document.getElementById('speakScoreValue').innerText = score;
-      document.getElementById('speakUserText').innerHTML = highlightedHTML;
-      
-      const missedArea = document.getElementById('speakMissedWordsArea');
-      const missedList = document.getElementById('speakMissedWordsList');
-      missedWords = [...new Set(missedWords)];
-      if (missedWords.length > 0) {
-          missedList.innerHTML = missedWords.map(w => `<button onclick="speakWord('${w}', event)" class="px-3 py-1.5 bg-brand-slate border border-brand-red/50 text-brand-red rounded-lg text-sm font-semibold active-scale flex items-center gap-2 shadow-sm hover:bg-brand-red/10 transition-colors"><i class="fas fa-volume-up text-xs opacity-70"></i> ${w}</button>`).join('');
-          missedArea.classList.remove('hidden');
-      } else { missedArea.classList.add('hidden'); }
-
-      document.getElementById('speakFeedbackArea').classList.remove('hidden');
-      const box = document.getElementById('speakFeedbackBox');
-      
-      if (score >= 80) { 
-        box.className = "p-5 rounded-2xl w-full text-center flex flex-col items-center bg-brand-dark border shadow-inner border-brand-green/30";
-        document.getElementById('speakScoreLabel').innerText = score === 100 ? "Perfect Mastery!" : "Stage Cleared!";
-        document.getElementById('speakScoreLabel').className = `text-xs font-bold mb-1 uppercase tracking-widest ${score === 100 ? 'text-brand-yellow' : 'text-brand-green'}`;
-        
-        if (!isReviewMode) {
-          playSuccessSound(); confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#10B981', '#3B82F6', '#FDE047'] });
-          let data = loadUserData();
-          const previousHigh = data.speakHighScores[task.id] || 0;
-          if (score > previousHigh) { data.speakHighScores[task.id] = score; }
-          if (currentStageIndex === data.unlockedSpeakLevel && currentStageIndex < allSpeakTasks.length - 1) {
-             data.unlockedSpeakLevel++; setTimeout(() => alert("🎉 恭喜通關！下一句挑戰已解鎖！"), 500);
-          }
-          data.speakHistory[task.id] = spokenText; saveData(data);
-          completeWorkout('Speaking Stage', score, false);
-        }
-      } else {
-        box.className = "p-5 rounded-2xl w-full text-center flex flex-col items-center bg-brand-dark border shadow-inner border-orange-500/30";
-        document.getElementById('speakScoreLabel').innerText = "Retry Required (80% to clear)";
-        document.getElementById('speakScoreLabel').className = "text-xs font-bold mb-1 uppercase tracking-widest text-orange-400";
-        
-        if (!isReviewMode) { let data = loadUserData(); data.speakHistory[task.id] = spokenText; saveData(data); }
-      }
-      
-      setTimeout(() => { const mainContent = document.getElementById('speakMainContent'); mainContent.scrollTo({ top: mainContent.scrollHeight, behavior: 'smooth' }); }, 100);
-    }
-
-    function goToNextLevel() {
-        let data = loadUserData();
-        if (currentStageIndex < allSpeakTasks.length - 1 && currentStageIndex < data.unlockedSpeakLevel) { openStage(currentStageIndex + 1); } 
-        else { backToLevels(); }
-    }
-
-    function playSpeakAudio() { speakWord(allSpeakTasks[currentStageIndex].sentence, null); }
-    function speakWord(word, e) {
-      if(e) e.stopPropagation();
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(word);
-      const saved = localStorage.getItem('preferred_voice_uri');
-      if (saved) { u.voice = speechSynthesis.getVoices().find(v => v.voiceURI === saved); }
-      window.speechSynthesis.speak(u);
-    }
-
-    // ==========================================
-    // Tracker & Settings
-    // ==========================================
-    function completeWorkout(type, score, showModal = true) {
-      let data = loadUserData(); const today = getTodayDate();
-      if (!data.history.includes(today)) {
-        data.history.push(today);
-        const yesterday = new Date(Date.now() - 86400000).toLocaleDateString('en-CA');
-        data.history.includes(yesterday) ? data.currentStreak++ : data.currentStreak = 1;
-      }
-      data.totalScore += score; saveData(data);
-      document.querySelectorAll('.streakValue').forEach(el => el.innerText = data.currentStreak);
-      
-      if (showModal) {
-        document.getElementById('summaryTitle').innerText = `${type} Complete!`;
-        document.getElementById('summaryScore').innerText = score;
-        document.getElementById('summaryTotal').innerText = data.totalScore;
-        document.getElementById('summaryModal').classList.remove('hidden');
-      }
-    }
-    function closeSummary() { document.getElementById('summaryModal').classList.add('hidden'); }
-
-    function renderCalendar() {
-      const data = loadUserData();
-      document.getElementById('progressTotalScore').innerText = data.totalScore;
-      document.getElementById('progressStreak').innerText = data.currentStreak;
-      const now = new Date(); const year = now.getFullYear(); const month = now.getMonth();
-      const daysInMonth = new Date(year, month + 1, 0).getDate(); const firstDay = new Date(year, month, 1).getDay();
-      document.getElementById('calendarMonthLabel').innerText = `${now.toLocaleString('en-US', { month: 'short' })} ${year}`;
-      let html = '<div class="grid grid-cols-7 gap-y-4 text-center text-[10px] font-mono">';
-      ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(d => html += `<div class="text-gray-500 font-bold">${d}</div>`);
-      for(let i=0; i<firstDay; i++) html += `<div></div>`;
-      for(let d=1; d<=daysInMonth; d++) {
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-        if (data.history.includes(dateStr)) html += `<div class="w-7 h-7 mx-auto bg-brand-orange text-white rounded-full flex items-center justify-center shadow-lg"><i class="fas fa-fire-alt text-[10px]"></i></div>`;
-        else if (dateStr === getTodayDate()) html += `<div class="w-7 h-7 mx-auto border-2 border-brand-blue text-brand-blue rounded-full flex items-center justify-center font-bold">${d}</div>`;
-        else html += `<div class="w-7 h-7 mx-auto text-gray-600 flex items-center justify-center">${d}</div>`;
-      }
-      document.getElementById('calendarGrid').innerHTML = html + '</div>';
-    }
-
-    function renderVocabVault() {
-      const data = loadUserData();
-      const list = document.getElementById('vocabVaultList');
-      document.getElementById('vaultCount').innerText = data.savedVocab.length;
-      list.innerHTML = data.savedVocab.length ? [...data.savedVocab].reverse().map(v => `
-        <div class="bg-brand-dark p-4 rounded-2xl border border-gray-700">
-          <div class="flex justify-between items-start">
-            <div><p class="text-xl font-extrabold text-white">${v.word}</p><p class="text-brand-yellow font-bold text-sm">${v.trans}</p></div>
-            <button class="w-10 h-10 rounded-full bg-brand-slate flex items-center justify-center active-scale" onclick="speakWord('${v.word}')"><i class="fas fa-volume-up text-gray-300"></i></button>
-          </div>
-          <p class="text-xs text-gray-400 mt-2 leading-relaxed">${v.explanation}</p>
-        </div>`).join('') : '<p class="text-center py-4 text-gray-500 italic">完成 Vocab 訓練後，生字會記錄喺度！</p>';
-    }
-
-    function resetData() { if(confirm("確定重置所有訓練數據同解鎖進度？")) { localStorage.removeItem('english_coach_data_v9'); location.reload(); } }
-
-    let voices = [];
-    function popVoices() {
-      const allVoices = speechSynthesis.getVoices();
-      if(allVoices.length === 0) return;
-
-      const goodVoices = allVoices.filter(v => !v.name.includes('Eloquence') && !v.name.includes('Zarvox') && !v.name.includes('Bubbles') && !v.name.includes('Trinoids'));
-      const usVoices = goodVoices.filter(v => v.lang.includes('en-US') || v.lang.includes('en_US'));
-      const ukVoices = goodVoices.filter(v => v.lang.includes('en-GB') || v.lang.includes('en_GB'));
-
-      const findVoice = (arr, keywords) => arr.find(v => keywords.some(k => v.name.toLowerCase().includes(k)));
-
-      let usFemale = findVoice(usVoices, ['female', 'samantha', 'victoria', 'siri voice 1', 'zira']) || usVoices[0];
-      let usMale = findVoice(usVoices, ['male', 'alex', 'fred', 'siri voice 2', 'david', 'guy']) || usVoices.find(v => v !== usFemale);
-      
-      let ukFemale = findVoice(ukVoices, ['female', 'serena', 'martha', 'siri voice 1', 'hazel']) || ukVoices[0];
-      let ukMale = findVoice(ukVoices, ['daniel', 'george', 'arthur', 'male', 'mac']) || ukVoices.find(v => !v.name.toLowerCase().includes('female') && v !== ukFemale) || ukVoices[1];
-
-      let selectedVoices = [];
-      if (usFemale) selectedVoices.push({ label: '🇺🇸 美式 (女聲)', voice: usFemale });
-      if (usMale) selectedVoices.push({ label: '🇺🇸 美式 (男聲)', voice: usMale });
-      if (ukFemale) selectedVoices.push({ label: '🇬🇧 英式 (女聲)', voice: ukFemale });
-      if (ukMale) selectedVoices.push({ label: '🇬🇧 英式 (男聲)', voice: ukMale });
-
-      selectedVoices = selectedVoices.filter((v, i, a) => v && a.findIndex(t => t.voice.name === v.voice.name) === i);
-      voices = selectedVoices.map(item => item.voice);
-
-      const sel = document.getElementById('voiceSelect'); 
-      sel.innerHTML = '';
-      const saved = localStorage.getItem('preferred_voice_uri');
-      
-      selectedVoices.forEach((item, i) => {
-        const opt = document.createElement('option'); 
-        opt.text = `${item.label} [${item.voice.name.split(' ')[0]}]`;
-        opt.value = i;
-        if(saved === item.voice.voiceURI) opt.selected = true; 
-        sel.appendChild(opt);
-      });
-    }
-    
-    speechSynthesis.onvoiceschanged = popVoices;
-    document.getElementById('voiceSelect').onchange = (e) => localStorage.setItem('preferred_voice_uri', voices[e.target.value].voiceURI);
-    function testVoice() { speakWord("Push your limit, Jack."); }
-
-    window.onload = () => { 
-      // 預設將 UI 設為 C1 Elite
-      changeVocabLevel('c1');
-      fetchSpeakData(); 
-      document.querySelectorAll('.streakValue').forEach(el => el.innerText = loadUserData().currentStreak); 
-      switchView('vocab'); 
-      popVoices(); 
+function toggleRecording() {
+  if(isRecording) {
+    recognition.stop();
+    stopWaveCapture();
+    if(finalSpeechText.trim()) calculateSpeakScore(finalSpeechText, false);
+    else { forceStopUI(); document.getElementById('recordingStatus').innerHTML = "<span class='text-orange-400'>⚠️ 無聲，請再試一次。</span>"; }
+  } else {
+    if(!SpeechRec) return alert("Browser not supported");
+    recognition = new SpeechRec();
+    recognition.lang='en-US'; recognition.continuous=true; recognition.interimResults=true; finalSpeechText="";
+    recognition.onresult = (e) => {
+      finalSpeechText = Array.from(e.results).map(r=>r[0].transcript).join('');
+      document.getElementById('recordingStatus').innerHTML = `<span class='text-brand-blue font-bold'>聽緊:</span> <span class='text-white font-normal italic'>${finalSpeechText}</span>`;
     };
-  </script>
+    recognition.onerror = () => { stopWaveCapture(); forceStopUI(); };
+    try {
+      recognition.start(); isRecording = true;
+      startWaveCapture(); // capture mic waveform
+      document.getElementById('recordBtn').classList.replace('bg-brand-red','bg-red-800');
+      document.getElementById('recordRipple').classList.add('animate-ping','opacity-50');
+      document.getElementById('recordingStatus').innerHTML = "<span class='text-red-400 animate-pulse'>🔴 Listening...</span>";
+      document.getElementById('speakFeedbackArea').classList.add('hidden');
+    } catch(e) { stopWaveCapture(); forceStopUI(); }
+  }
+}
+
+function forceStopUI() {
+  isRecording = false;
+  if(recognition){try{recognition.stop();}catch(e){}}
+  document.getElementById('recordBtn').classList.replace('bg-red-800','bg-brand-red');
+  document.getElementById('recordRipple').classList.remove('animate-ping','opacity-50');
+}
+
+function calculateSpeakScore(spokenText, isReviewMode=false) {
+  if(!spokenText||spokenText.trim()==='') return;
+  if(!isReviewMode) { forceStopUI(); document.getElementById('recordingStatus').textContent=''; }
+  const task = allSpeakTasks[currentStageIndex];
+  const rawTarget = task.sentence.split(/\s+/);
+  const targetClean = rawTarget.map(w=>w.toLowerCase().replace(/[^\w']/g,''));
+  const spokenClean = spokenText.toLowerCase().replace(/[^\w'\s]/g,'').split(/\s+/);
+  let matchCount=0; let highlightedHTML=''; let missedWords=[]; let spokenTemp=[...spokenClean];
+
+  for(let i=0;i<targetClean.length;i++){
+    const cw=targetClean[i]; const rw=rawTarget[i];
+    const fi=spokenTemp.indexOf(cw);
+    if(fi!==-1){matchCount++;spokenTemp.splice(fi,1);highlightedHTML+=`<span class="text-brand-green font-bold">${rw}</span> `;}
+    else{highlightedHTML+=`<span class="text-brand-red underline decoration-brand-red/50">${rw}</span> `;if(cw.length>0)missedWords.push(cw);}
+  }
+
+  const score = Math.round(matchCount/targetClean.length*100);
+  document.getElementById('speakScoreValue').textContent = score;
+
+  // Animate score ring
+  const circle = document.getElementById('scoreCircle');
+  const circumference = 201;
+  const offset = circumference - (score/100) * circumference;
+  circle.style.strokeDashoffset = offset;
+  circle.style.stroke = score>=80?'#10B981':score>=60?'#F97316':'#EF4444';
+
+  document.getElementById('speakScoreLabel').textContent = score===100?'Perfect! 🏆':score>=80?'Stage Cleared! ✅':score>=60?'Getting There 💪':'Keep Practicing 🔄';
+  document.getElementById('speakUserText').innerHTML = highlightedHTML;
+
+  // Show waveform
+  const waveArea = document.getElementById('waveformArea');
+  if(!isReviewMode && capturedWaveData.length > 10) {
+    waveArea.classList.remove('hidden');
+    setTimeout(() => {
+      drawUserWave(capturedWaveData);
+      drawSimulatedRefWave(targetClean.length);
+    }, 100);
+  } else {
+    waveArea.classList.add('hidden');
+  }
+
+  // Missed words
+  const missedArea = document.getElementById('speakMissedWordsArea');
+  const missedList = document.getElementById('speakMissedWordsList');
+  const unique = [...new Set(missedWords)];
+  if(unique.length>0) {
+    missedList.innerHTML = unique.map(w=>`<button onclick="speakWord('${w}',event)" class="px-3 py-1.5 bg-brand-slate border border-brand-red/50 text-brand-red rounded-lg text-sm font-semibold active-scale flex items-center gap-1.5"><i class="fas fa-volume-up text-xs"></i> ${w}</button>`).join('');
+    missedArea.classList.remove('hidden');
+  } else missedArea.classList.add('hidden');
+
+  // Previous score comparison
+  const d = loadData();
+  const history = d.speakScoreHistory || {};
+  const prevScores = history[task.id] || [];
+  const prevArea = document.getElementById('prevAttemptArea');
+  if(prevScores.length > 0 && !isReviewMode) {
+    const lastScore = prevScores[prevScores.length-1];
+    document.getElementById('prevScore').textContent = lastScore + '%';
+    document.getElementById('curScoreCompare').textContent = score + '%';
+    document.getElementById('curScoreCompare').style.color = score>=lastScore?'#10B981':'#EF4444';
+    const badge = document.getElementById('improveBadge');
+    if(score > lastScore) badge.classList.remove('hidden'); else badge.classList.add('hidden');
+    prevArea.classList.remove('hidden');
+  } else prevArea.classList.add('hidden');
+
+  document.getElementById('speakFeedbackArea').classList.remove('hidden');
+
+  if(score>=80 && !isReviewMode) {
+    playSuccessSound();
+    confetti({particleCount:100,spread:70,origin:{y:0.6},colors:['#10B981','#3B82F6','#FDE047']});
+    const prevHigh = d.speakHighScores[task.id] || 0;
+    if(score > prevHigh) d.speakHighScores[task.id] = score;
+    if(currentStageIndex === d.unlockedSpeakLevel && currentStageIndex < allSpeakTasks.length-1) {
+      d.unlockedSpeakLevel++;
+      setTimeout(()=>alert("🎉 恭喜通關！下一句挑戰已解鎖！"),500);
+    }
+    completeWorkout('Speaking Stage', score, false);
+  }
+
+  if(!isReviewMode) {
+    d.speakHistory[task.id] = spokenText;
+    if(!d.speakScoreHistory) d.speakScoreHistory = {};
+    if(!d.speakScoreHistory[task.id]) d.speakScoreHistory[task.id] = [];
+    d.speakScoreHistory[task.id].push(score);
+    if(d.speakScoreHistory[task.id].length > 10) d.speakScoreHistory[task.id].shift();
+    saveData(d);
+  }
+
+  setTimeout(()=>{
+    const mc = document.getElementById('speakMainContent');
+    mc.scrollTo({top:mc.scrollHeight,behavior:'smooth'});
+  },100);
+}
+
+function goToNextLevel() {
+  const d = loadData();
+  if(currentStageIndex < allSpeakTasks.length-1 && currentStageIndex < d.unlockedSpeakLevel) openStage(currentStageIndex+1);
+  else backToLevels();
+}
+function playSpeakAudio() { speakWord(allSpeakTasks[currentStageIndex].sentence, null); }
+
+// ══════════════════════════════════════════
+// TRACKER
+// ══════════════════════════════════════════
+function completeWorkout(type, score, showModal=true) {
+  const d = loadData(); const today = getTodayDate();
+  if(!d.history.includes(today)) {
+    d.history.push(today);
+    const yesterday = new Date(Date.now()-86400000).toLocaleDateString('en-CA');
+    d.currentStreak = d.history.includes(yesterday) ? d.currentStreak+1 : 1;
+  }
+  d.totalScore += score; saveData(d);
+  document.querySelectorAll('.streakValue').forEach(el=>el.textContent=d.currentStreak);
+  if(showModal) {
+    document.getElementById('summaryTitle').textContent = `${type} Complete!`;
+    document.getElementById('summaryScore').textContent = score;
+    document.getElementById('summaryTotal').textContent = d.totalScore;
+    document.getElementById('summaryModal').classList.remove('hidden');
+  }
+  // Close banner since user practiced today
+  closeBanner();
+}
+function closeSummary() { document.getElementById('summaryModal').classList.add('hidden'); }
+
+function updateProgressStats() {
+  const d = loadData();
+  document.getElementById('progressTotalScore').textContent = d.totalScore;
+  document.getElementById('progressStreak').textContent = d.currentStreak;
+  document.getElementById('progressVaultCount').textContent = (d.savedVocab||[]).length;
+  document.getElementById('progressErrorCount').textContent = Object.keys(d.errorVocab||{}).length;
+}
+
+function renderCalendar() {
+  const d = loadData();
+  const now = new Date(); const y = now.getFullYear(); const m = now.getMonth();
+  const daysInMonth = new Date(y,m+1,0).getDate(); const firstDay = new Date(y,m,1).getDay();
+  document.getElementById('calendarMonthLabel').textContent = `${now.toLocaleString('en-US',{month:'long'})} ${y}`;
+  let html='<div class="grid grid-cols-7 gap-y-3 text-center text-[10px] font-mono">';
+  ['S','M','T','W','T','F','S'].forEach(day=>html+=`<div class="text-gray-500 font-bold">${day}</div>`);
+  for(let i=0;i<firstDay;i++) html+='<div></div>';
+  const today = getTodayDate();
+  for(let day=1;day<=daysInMonth;day++){
+    const dStr=`${y}-${String(m+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    if(d.history.includes(dStr)) html+=`<div class="w-7 h-7 mx-auto bg-brand-orange text-white rounded-full flex items-center justify-center shadow-lg"><i class="fas fa-fire-alt text-[9px]"></i></div>`;
+    else if(dStr===today) html+=`<div class="w-7 h-7 mx-auto border-2 border-brand-blue text-brand-blue rounded-full flex items-center justify-center font-bold">${day}</div>`;
+    else html+=`<div class="w-7 h-7 mx-auto text-gray-600 flex items-center justify-center">${day}</div>`;
+  }
+  document.getElementById('calendarGrid').innerHTML = html+'</div>';
+}
+
+function renderVocabVault() {
+  const d = loadData();
+  document.getElementById('vaultCount').textContent = d.savedVocab.length;
+  const list = document.getElementById('vocabVaultList');
+  list.innerHTML = d.savedVocab.length
+    ? [...d.savedVocab].reverse().map(v=>`
+      <div class="bg-brand-dark p-4 rounded-2xl border border-gray-700">
+        <div class="flex justify-between items-start">
+          <div><p class="text-lg font-extrabold text-white">${v.word}</p><p class="text-brand-yellow font-bold text-sm">${v.trans}</p></div>
+          <button class="w-9 h-9 rounded-full bg-brand-slate flex items-center justify-center active-scale" onclick="speakWord('${v.word}')"><i class="fas fa-volume-up text-gray-300 text-sm"></i></button>
+        </div>
+        <p class="text-xs text-gray-400 mt-2 leading-relaxed">${v.explanation}</p>
+      </div>`).join('')
+    : '<p class="text-center py-4 text-gray-500 text-sm italic">完成 Vocab Quest 後生字會記錄喺度！</p>';
+}
+
+// ══════════════════════════════════════════
+// SETTINGS
+// ══════════════════════════════════════════
+function updateSettingsPage() {
+  const d = loadData();
+  updateReminderUI(d.reminderOn !== false);
+  document.getElementById('srsErrorCount').textContent = Object.keys(d.errorVocab||{}).length;
+}
+function clearErrors() {
+  const d = loadData(); d.errorVocab = {}; saveData(d);
+  document.getElementById('srsErrorCount').textContent = 0;
+  updateRetryBadge();
+}
+function resetData() {
+  if(confirm("確定重置所有資料？")) { localStorage.removeItem('eng_v30'); location.reload(); }
+}
+
+// VOICE
+let voices=[];
+function popVoices(){
+  const all = speechSynthesis.getVoices(); if(!all.length) return;
+  const good = all.filter(v=>!v.name.includes('Eloquence')&&!v.name.includes('Zarvox'));
+  const us = good.filter(v=>v.lang.includes('en-US'));
+  const uk = good.filter(v=>v.lang.includes('en-GB'));
+  const find=(arr,kw)=>arr.find(v=>kw.some(k=>v.name.toLowerCase().includes(k)));
+  let usFem=find(us,['samantha','female','victoria'])||us[0];
+  let usMal=find(us,['alex','fred','david','guy'])||us.find(v=>v!==usFem);
+  let ukFem=find(uk,['serena','martha','hazel'])||uk[0];
+  let ukMal=find(uk,['daniel','george','arthur'])||uk[1];
+  let sel=[];
+  if(usFem)sel.push({l:'🇺🇸 美式女聲',v:usFem});
+  if(usMal)sel.push({l:'🇺🇸 美式男聲',v:usMal});
+  if(ukFem)sel.push({l:'🇬🇧 英式女聲',v:ukFem});
+  if(ukMal)sel.push({l:'🇬🇧 英式男聲',v:ukMal});
+  sel=sel.filter((v,i,a)=>v&&a.findIndex(t=>t.v.name===v.v.name)===i);
+  voices=sel.map(s=>s.v);
+  const el=document.getElementById('voiceSelect'); el.innerHTML='';
+  const saved=localStorage.getItem('preferred_voice_uri');
+  sel.forEach((s,i)=>{const o=document.createElement('option');o.text=s.l;o.value=i;if(saved===s.v.voiceURI)o.selected=true;el.appendChild(o);});
+}
+speechSynthesis.onvoiceschanged=popVoices;
+document.getElementById('voiceSelect').onchange=(e)=>localStorage.setItem('preferred_voice_uri',voices[e.target.value].voiceURI);
+function testVoice(){speakWord("Push your limit every single day.");}
+function speakWord(word,e){
+  if(e)e.stopPropagation();
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(word);
+  const saved=localStorage.getItem('preferred_voice_uri');
+  if(saved)u.voice=speechSynthesis.getVoices().find(v=>v.voiceURI===saved);
+  window.speechSynthesis.speak(u);
+}
+
+// ══════════════════════════════════════════
+// WEB PUSH NOTIFICATION
+// ══════════════════════════════════════════
+async function requestPushPermission() {
+  if(!('Notification' in window)) return;
+  if(Notification.permission === 'granted') {
+    schedulePushReminder();
+    return;
+  }
+  if(Notification.permission !== 'denied') {
+    const perm = await Notification.requestPermission();
+    if(perm === 'granted') schedulePushReminder();
+  }
+}
+
+function schedulePushReminder() {
+  // Store that we have permission
+  const d = loadData();
+  d.pushEnabled = true;
+  saveData(d);
+  // Check if should fire now (user hasn't practiced today)
+  const today = getTodayDate();
+  if(!d.history.includes(today)) {
+    // Fire a notification if page is visible
+    if(document.visibilityState === 'visible') return; // banner handles it
+    try {
+      new Notification('English Overload 💪', {
+        body: '今日仲未練習！保持你嘅 streak！',
+        icon: 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/svgs/solid/fire.svg',
+        badge: 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/svgs/solid/fire.svg',
+        tag: 'daily-reminder'
+      });
+    } catch(e) {}
+  }
+}
+
+// Fire notification when tab becomes hidden (user switches away)
+document.addEventListener('visibilitychange', () => {
+  if(document.visibilityState === 'hidden') {
+    const d = loadData();
+    if(!d.pushEnabled) return;
+    const today = getTodayDate();
+    if(!d.history.includes(today) && Notification.permission === 'granted') {
+      try {
+        new Notification('English Overload 💪', {
+          body: '記得返嚟練習！今日仲有題目未做。',
+          tag: 'daily-reminder-bg'
+        });
+      } catch(e) {}
+    }
+  }
+});
+
+// ══════════════════════════════════════════
+// AUTO RETRY MODAL (開 App 時彈)
+// ══════════════════════════════════════════
+function checkAutoRetry() {
+  const count = getRetryDueCount();
+  if(count === 0) return;
+  // Show a full-screen prompt
+  const modal = document.getElementById('autoRetryModal');
+  document.getElementById('autoRetryCount').textContent = count;
+  modal.classList.remove('hidden');
+}
+function dismissAutoRetry() {
+  document.getElementById('autoRetryModal').classList.add('hidden');
+}
+function goToRetryFromModal() {
+  document.getElementById('autoRetryModal').classList.add('hidden');
+  switchView('retry');
+}
+
+// ══════════════════════════════════════════
+// WAVEFORM VISUALIZER
+// ══════════════════════════════════════════
+let audioCtx = null;
+let userWaveData = []; // store amplitude data from mic
+
+function drawWaveform(canvasId, data, color, filled=false) {
+  const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth; const H = canvas.offsetHeight;
+  canvas.width = W; canvas.height = H;
+  ctx.clearRect(0,0,W,H);
+  if(!data.length) return;
+
+  ctx.beginPath();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  if(filled) {
+    ctx.fillStyle = color.replace(')',', 0.15)').replace('rgb','rgba');
+  }
+  const sliceW = W / data.length;
+  let x = 0;
+  ctx.moveTo(0, H/2);
+  data.forEach((v, i) => {
+    const y = H/2 - (v * H/2 * 0.9);
+    if(i===0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+    x += sliceW;
+  });
+  ctx.stroke();
+  if(filled) {
+    ctx.lineTo(W, H/2);
+    ctx.lineTo(0, H/2);
+    ctx.closePath();
+    ctx.fill();
+  }
+}
+
+function drawSimulatedRefWave(wordCount) {
+  // Draw a smooth "ideal" reference waveform based on word count
+  const points = 200;
+  const data = [];
+  for(let i=0;i<points;i++) {
+    // Simulate speech envelope: rises and falls per word
+    const t = i/points;
+    const envelope = Math.sin(t * Math.PI * wordCount) * 0.5 + 0.5;
+    const noise = Math.sin(t * Math.PI * 40) * 0.3;
+    data.push((envelope * noise));
+  }
+  drawWaveform('refWaveCanvas', data, 'rgb(59,130,246)', true);
+}
+
+function drawUserWave(data) {
+  drawWaveform('userWaveCanvas', data, 'rgb(16,185,129)', false);
+}
+
+// Capture mic audio as waveform data during recording
+let analyserNode = null;
+let waveAnimFrame = null;
+let capturedWaveData = [];
+
+async function startWaveCapture() {
+  try {
+    if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+    const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+    const source = audioCtx.createMediaStreamSource(stream);
+    analyserNode = audioCtx.createAnalyser();
+    analyserNode.fftSize = 256;
+    source.connect(analyserNode);
+    capturedWaveData = [];
+
+    const bufLen = analyserNode.frequencyBinCount;
+    const dataArr = new Uint8Array(bufLen);
+
+    function capture() {
+      if(!analyserNode) return;
+      analyserNode.getByteTimeDomainData(dataArr);
+      const avg = Array.from(dataArr).map(v=>(v-128)/128);
+      // Downsample to 1 point per frame
+      const peak = Math.max(...avg.map(Math.abs));
+      capturedWaveData.push(peak);
+      if(capturedWaveData.length > 200) capturedWaveData.shift();
+      waveAnimFrame = requestAnimationFrame(capture);
+    }
+    capture();
+  } catch(e) {}
+}
+
+function stopWaveCapture() {
+  if(waveAnimFrame) cancelAnimationFrame(waveAnimFrame);
+  analyserNode = null;
+}
+
+// ══════════════════════════════════════════
+// BOOT
+// ══════════════════════════════════════════
+window.onload=()=>{
+  const d = loadData();
+  document.getElementById('vocabDateLbl').textContent = new Date().toLocaleDateString('zh-HK',{year:'numeric',month:'long',day:'numeric'});
+  document.querySelectorAll('.streakValue').forEach(el=>el.textContent=d.currentStreak);
+  changeVocabLevel('c1');
+  fetchSpeakData();
+  switchView('vocab');
+  popVoices();
+  updateRetryBadge();
+  updateReminderUI(d.reminderOn !== false);
+
+  // 1. Show banner
+  setTimeout(checkBanner, 600);
+
+  // 2. Auto show retry modal if there are due questions
+  setTimeout(checkAutoRetry, 1200);
+
+  // 3. Request push notification permission (after user interaction)
+  document.body.addEventListener('click', () => {
+    if(Notification.permission === 'default') requestPushPermission();
+  }, { once: true });
+
+  // 4. If push already granted, schedule
+  if(Notification.permission === 'granted') schedulePushReminder();
+};
+</script>
 </body>
 </html>
