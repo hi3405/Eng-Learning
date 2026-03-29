@@ -1,38 +1,37 @@
 [
   {
+    "id": "s1",
     "type": "C1 Accuracy: The Heavy Lift",
-    "sentence": "To mitigate the ubiquitous supply chain disruptions, the management team orchestrated a comprehensive contingency plan."
-  },
-  {
-    "type": "C1 Fluency: The Endurance Run",
-    "sentence": "We must rectify the discrepancy immediately to prevent further yield loss and ensure optimal product quality."
-  },
-  {
-    "type": "C1 Pressure: The Sprint",
-    "sentence": "The streamlined inspection process has significantly improved our audit efficiency across all ODM partners."
-  },
-  {
-    "type": "C1 Articulation: Focus",
-    "sentence": "Given the volatile market conditions, it is imperative to diversify our investment portfolio to minimize potential setbacks."
-  },
-  {
-    "type": "C1 Rhythm: Native Flow",
-    "sentence": "I would have scheduled the financial review for Thursday if I had known about the preliminary figures earlier."
-  }
-]
-{
-    "type": "C1 Tech: The Heavy Lift",
     "sentence": "The preliminary Field Return FA indicates a recurring defect in the SMT line that requires immediate rectification."
   },
   {
+    "id": "s2",
     "type": "C1 Flow: The Endurance Run",
     "sentence": "By launching the OBA 2.0 web tool, we can systematically track automated inspections and eliminate manual discrepancies."
   },
   {
+    "id": "s3",
     "type": "C1 Assertive: The Sprint",
     "sentence": "We need to schedule a comprehensive review with the ODM partners to address the escalating CQA concerns."
   },
   {
+    "id": "s4",
     "type": "C1 Precision: Focus",
     "sentence": "Implementing rigorous quality gates during the assembly phase is a prerequisite for achieving our target yield rate."
+  },
+  {
+    "id": "s5",
+    "type": "C1 Tech: Advanced",
+    "sentence": "The sudden spike in defective units was an anomaly that prompted an immediate halt to the production line."
+  },
+  {
+    "id": "s6",
+    "type": "C1 Business: Formal",
+    "sentence": "To mitigate ubiquitous supply chain disruptions, the team orchestrated a comprehensive contingency plan."
+  },
+  {
+    "id": "s7",
+    "type": "C1 Fluency: Natural",
+    "sentence": "I would have scheduled the financial review for Thursday if I had known about the preliminary figures earlier."
   }
+]
