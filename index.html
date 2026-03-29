@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>English Overload v4.0</title>
+  <title>English Overload v5.0</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -19,8 +19,9 @@
     .view-section.active { display: flex; flex-direction: column; }
     .nav-item.active { color: #3B82F6; }
     .nav-item.active i { transform: translateY(-2px); transition: all 0.2s; }
-    /* 填空題橫線特效 */
     .blank-space { display: inline-block; width: 80px; border-bottom: 2px solid #3B82F6; margin: 0 4px; vertical-align: bottom; }
+    /* 隱藏原生滾動條但保持可滾動 */
+    ::-webkit-scrollbar { display: none; }
   </style>
 </head>
 <body class="text-gray-100 antialiased selection:bg-brand-blue/30 flex flex-col h-full relative max-w-md mx-auto bg-brand-slate shadow-2xl">
@@ -29,23 +30,22 @@
     <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10">
       <div class="flex justify-between items-center">
         <h1 class="text-xs font-semibold uppercase tracking-widest text-gray-400">Vocab Builder</h1>
-        <div class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md">
-          Quest <span id="vocabProgress" class="text-brand-blue font-bold">1</span> / 3
+        <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full shadow-inner streak-display">
+          <i class="fas fa-fire-alt"></i> <span class="streakValue">0</span>
         </div>
       </div>
       <div class="mt-4 flex justify-between items-end">
         <p class="text-xl font-extrabold text-white tracking-tight">C1 Precision</p>
+        <div class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md">Quest <span id="vocabProgress" class="text-brand-blue font-bold">1</span> / 3</div>
       </div>
     </header>
 
     <main class="flex-grow p-6 flex flex-col">
       <div class="bg-brand-dark p-6 rounded-3xl shadow-xl mb-6 border border-gray-800">
-        <p id="vocabSentence" class="text-lg font-semibold leading-relaxed text-white font-sans">
-          </p>
+        <p id="vocabSentence" class="text-lg font-semibold leading-relaxed text-white font-sans"></p>
       </div>
 
-      <div id="vocabOptions" class="grid grid-cols-1 gap-3 mb-6">
-        </div>
+      <div id="vocabOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
 
       <div id="vocabFeedback" class="hidden mb-6 p-5 rounded-2xl bg-brand-dark border shadow-inner">
         <div class="flex items-center gap-2 mb-2">
@@ -55,8 +55,8 @@
         <p id="vocabExplanation" class="text-sm text-gray-300 leading-relaxed"></p>
       </div>
 
-      <button id="nextVocabBtn" onclick="nextVocabQuest()" class="hidden w-full mt-auto bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale">
-        Next Question <i class="fas fa-arrow-right ml-2 text-sm"></i>
+      <button id="nextVocabBtn" onclick="nextVocabQuest()" class="hidden w-full mt-auto bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale flex justify-center items-center gap-2">
+        Next Question <i class="fas fa-arrow-right text-sm"></i>
       </button>
     </main>
   </div>
@@ -65,8 +65,8 @@
     <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10">
       <div class="flex justify-between items-center">
         <h1 class="text-xs font-semibold uppercase tracking-widest text-gray-400">Speaking Quest</h1>
-        <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full shadow-inner">
-          <i class="fas fa-fire-alt"></i> <span id="streakValue">0 Day Streak</span>
+        <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full shadow-inner streak-display">
+          <i class="fas fa-fire-alt"></i> <span class="streakValue">0</span>
         </div>
       </div>
       <div class="mt-4 flex justify-between items-end">
@@ -74,19 +74,52 @@
         <span class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md"><span id="taskProgress" class="text-brand-blue font-bold">1</span> / 3</span>
       </div>
     </header>
+    
     <main class="flex-grow p-6 flex flex-col">
       <div class="bg-brand-dark p-7 rounded-3xl shadow-xl mb-8 border border-gray-800">
         <p class="text-[11px] text-brand-blue font-bold mb-3 uppercase tracking-widest opacity-80">Target Sentence</p>
-        <p id="targetSentence" class="text-xl font-semibold leading-relaxed text-white font-sans">To mitigate the ubiquitous supply chain disruptions...</p>
+        <p id="targetSentence" class="text-xl font-semibold leading-relaxed text-white font-sans"></p>
       </div>
-      <div id="feedbackArea" class="hidden mb-6"><div class="p-5 rounded-2xl w-full text-center flex flex-col items-center" id="feedbackBox"><p class="text-xs font-bold mb-1 uppercase tracking-wider" id="scoreLabel">Analysis Result</p><div class="flex items-end gap-1"><p class="text-5xl font-extrabold" id="scoreValue">0</p><p class="text-lg font-bold pb-1">%</p></div><p class="text-sm mt-3 text-gray-300 font-mono italic" id="userSpeechText"></p></div></div>
+      
+      <div id="speakFeedbackArea" class="hidden mb-6">
+        <div class="p-5 rounded-2xl w-full text-center flex flex-col items-center" id="speakFeedbackBox">
+          <p class="text-xs font-bold mb-1 uppercase tracking-wider" id="speakScoreLabel">Analysis Result</p>
+          <div class="flex items-end gap-1"><p class="text-5xl font-extrabold" id="speakScoreValue">0</p><p class="text-lg font-bold pb-1">%</p></div>
+          <p class="text-sm mt-3 text-gray-300 font-mono italic" id="speakUserText"></p>
+        </div>
+      </div>
+
       <div class="mt-auto flex justify-center gap-6">
-        <button onclick="playAudio()" class="w-16 h-16 bg-gray-700 text-gray-200 rounded-full shadow-lg flex items-center justify-center text-2xl active-scale"><i class="fas fa-volume-up"></i></button>
-        <button id="recordBtn" onclick="toggleRecording()" class="w-20 h-20 bg-brand-red text-white rounded-full shadow-2xl flex items-center justify-center text-3xl active-scale ring-8 ring-red-600/20 relative"><i class="fas fa-microphone"></i><span id="recordRipple" class="absolute inset-0 rounded-full bg-brand-red opacity-0"></span></button>
+        <button onclick="playSpeakAudio()" class="w-16 h-16 bg-gray-700 text-gray-200 rounded-full shadow-lg flex items-center justify-center text-2xl active-scale"><i class="fas fa-volume-up"></i></button>
+        <button id="recordBtn" onclick="toggleRecording()" class="w-20 h-20 bg-brand-red text-white rounded-full shadow-2xl flex items-center justify-center text-3xl active-scale ring-8 ring-red-600/20 relative">
+          <i class="fas fa-microphone"></i>
+          <span id="recordRipple" class="absolute inset-0 rounded-full bg-brand-red opacity-0"></span>
+        </button>
       </div>
       <p id="recordingStatus" class="text-center text-sm text-red-400 font-semibold h-5 animate-pulse mt-4 mb-2"></p>
-      <button id="nextBtn" onclick="nextTask()" class="hidden w-full mt-4 bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale">Next Challenge <i class="fas fa-arrow-right ml-2 text-sm"></i></button>
+      <button id="nextSpeakBtn" onclick="nextSpeakTask()" class="hidden w-full mt-4 bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale flex justify-center items-center gap-2">Next Challenge <i class="fas fa-arrow-right text-sm"></i></button>
     </main>
+  </div>
+
+  <div id="view-progress" class="view-section pt-12 px-6">
+    <h2 class="text-2xl font-extrabold text-white mb-2">Your Discipline</h2>
+    <p class="text-gray-400 mb-6 text-sm">Consistency is the key to C1.</p>
+    
+    <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800 mb-6 flex justify-between items-center shadow-inner">
+      <div>
+        <p class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Total Score</p>
+        <p class="text-3xl font-extrabold text-brand-blue" id="progressTotalScore">0</p>
+      </div>
+      <div class="text-right">
+        <p class="text-xs text-brand-orange font-bold uppercase tracking-wider mb-1">Current Streak</p>
+        <p class="text-3xl font-extrabold text-white"><span id="progressStreak">0</span> 🔥</p>
+      </div>
+    </div>
+
+    <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800 shadow-inner">
+      <h3 class="text-sm font-bold text-gray-300 mb-4 uppercase tracking-wider text-center" id="calendarMonthLabel">March 2026</h3>
+      <div id="calendarGrid" class="w-full"></div>
+    </div>
   </div>
 
   <div id="view-settings" class="view-section pt-12 px-6">
@@ -95,7 +128,7 @@
     <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800">
       <label class="block text-xs font-bold text-brand-blue uppercase tracking-widest mb-3">Coach Voice (朗讀聲)</label>
       <div class="relative">
-        <select id="voiceSelect" class="w-full bg-brand-slate text-white border border-gray-700 rounded-xl p-4 appearance-none focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue"><option>Loading voices...</option></select>
+        <select id="voiceSelect" class="w-full bg-brand-slate text-white border border-gray-700 rounded-xl p-4 appearance-none focus:outline-none focus:border-brand-blue"><option>Loading voices...</option></select>
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400"><i class="fas fa-chevron-down"></i></div>
       </div>
       <p class="text-xs text-gray-500 mt-3 mb-4">選擇你喜歡嘅 Native Speaker 口音。</p>
@@ -103,151 +136,363 @@
     </div>
   </div>
 
-  <nav class="absolute bottom-0 w-full bg-brand-slate/95 backdrop-blur-lg border-t border-gray-800 flex justify-around items-center pb-safe pt-2 px-2 z-50">
-    <button onclick="switchView('vocab')" id="nav-vocab" class="nav-item active flex flex-col items-center p-3 text-gray-500 w-20"><i class="fas fa-layer-group text-xl mb-1"></i><span class="text-[10px] font-bold uppercase tracking-wider">Vocab</span></button>
-    <button onclick="switchView('speaking')" id="nav-speaking" class="nav-item flex flex-col items-center p-3 text-gray-500 w-20"><i class="fas fa-microphone-alt text-xl mb-1"></i><span class="text-[10px] font-bold uppercase tracking-wider">Speak</span></button>
-    <button onclick="switchView('settings')" id="nav-settings" class="nav-item flex flex-col items-center p-3 text-gray-500 w-20"><i class="fas fa-cog text-xl mb-1"></i><span class="text-[10px] font-bold uppercase tracking-wider">Settings</span></button>
+  <div id="summaryModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-brand-dark/95 backdrop-blur-lg transition-opacity duration-300">
+    <div class="bg-brand-slate p-8 rounded-3xl shadow-2xl w-full max-w-sm border border-gray-700 text-center">
+      <div class="w-20 h-20 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center text-5xl mx-auto mb-6"><i class="fas fa-check-circle"></i></div>
+      <h2 id="summaryTitle" class="text-2xl font-extrabold text-white tracking-tight mb-2">Workout Complete!</h2>
+      <p class="text-gray-400 mb-6 text-sm">Great job pushing your limits today.</p>
+      
+      <div class="bg-brand-dark p-5 rounded-2xl mb-6 grid grid-cols-2 gap-4 border border-gray-800 shadow-inner">
+        <div class="border-r border-gray-800 pr-4">
+          <p class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Score</p>
+          <p class="text-3xl font-extrabold text-brand-blue"><span id="summaryScore">0</span>%</p>
+        </div>
+        <div class="pl-4">
+          <p class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Total</p>
+          <p class="text-3xl font-extrabold text-white" id="summaryTotal">0</p>
+        </div>
+      </div>
+      <button onclick="closeSummary()" class="w-full bg-brand-green text-white py-4 rounded-xl font-bold text-lg active-scale">See You Tomorrow!</button>
+    </div>
+  </div>
+
+  <nav class="absolute bottom-0 w-full bg-brand-slate/95 backdrop-blur-lg border-t border-gray-800 flex justify-around items-center pb-safe pt-2 px-1 z-40">
+    <button onclick="switchView('vocab')" id="nav-vocab" class="nav-item active flex flex-col items-center p-3 text-gray-500 w-16"><i class="fas fa-layer-group text-xl mb-1"></i><span class="text-[9px] font-bold uppercase tracking-wider">Vocab</span></button>
+    <button onclick="switchView('speaking')" id="nav-speaking" class="nav-item flex flex-col items-center p-3 text-gray-500 w-16"><i class="fas fa-microphone-alt text-xl mb-1"></i><span class="text-[9px] font-bold uppercase tracking-wider">Speak</span></button>
+    <button onclick="switchView('progress')" id="nav-progress" class="nav-item flex flex-col items-center p-3 text-gray-500 w-16"><i class="fas fa-calendar-check text-xl mb-1"></i><span class="text-[9px] font-bold uppercase tracking-wider">Tracker</span></button>
+    <button onclick="switchView('settings')" id="nav-settings" class="nav-item flex flex-col items-center p-3 text-gray-500 w-16"><i class="fas fa-cog text-xl mb-1"></i><span class="text-[9px] font-bold uppercase tracking-wider">Config</span></button>
   </nav>
 
   <script>
     // -----------------------------------------
-    // 1. 導航邏輯
+    // 1. 核心數據與導航邏輯
     // -----------------------------------------
+    const getTodayDate = () => new Date().toLocaleDateString('en-CA');
+
+    function loadUserData() {
+      // 升級資料結構，加入 history Array 紀錄打卡日期
+      const defaultData = { currentStreak: 0, lastCompletedDate: null, totalScore: 0, history: [] };
+      const savedData = localStorage.getItem('english_coach_data_v3');
+      return savedData ? JSON.parse(savedData) : defaultData;
+    }
+
     function switchView(viewName) {
       document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
       document.getElementById(`view-${viewName}`).classList.add('active');
       document.getElementById(`nav-${viewName}`).classList.add('active');
+      
+      if(viewName === 'progress') renderCalendar(); // 切換到日曆時重新渲染
     }
 
     // -----------------------------------------
-    // 2. Vocab C1 訓練模組邏輯 (新加入!)
+    // 2. Vocab C1 訓練 (加入發音與中文解釋)
     // -----------------------------------------
     const vocabData = [
       {
         sentence: "Given the volatile market conditions, it is imperative to {blank} our investment portfolio to minimize potential losses.",
-        options: ["diversify", "consolidate", "squander", "liquidate"],
+        options: [
+          { word: "diversify", trans: "分散風險" },
+          { word: "consolidate", trans: "合併/鞏固" },
+          { word: "squander", trans: "揮霍/浪費" },
+          { word: "liquidate", trans: "清盤/變現" }
+        ],
         correctIndex: 0,
-        explanation: "Diversify (分散風險) 是不穩定市場中的關鍵。Consolidate 意思是合併，Squander 是揮霍，Liquidate 是清盤。"
+        explanation: "Diversify 是不穩定市場中的關鍵。"
       },
       {
         sentence: "The CEO's {blank} remarks during the press conference only fueled further speculation about the company's financial health.",
-        options: ["lucid", "ambiguous", "cogent", "profound"],
+        options: [
+          { word: "lucid", trans: "清晰易懂的" },
+          { word: "ambiguous", trans: "模稜兩可的" },
+          { word: "cogent", trans: "有說服力的" },
+          { word: "profound", trans: "深奧的" }
+        ],
         correctIndex: 1,
-        explanation: "Ambiguous (模稜兩可的) 會引起猜測。Lucid 和 Cogent 代表清晰、有邏輯，Profound 代表深奧的。"
-      },
-      {
-        sentence: "Despite facing numerous setbacks during the ODM integration, the QA team's {blank} eventually led to a successful launch.",
-        options: ["complacency", "lethargy", "perseverance", "trepidation"],
-        correctIndex: 2,
-        explanation: "Perseverance (毅力/堅持) 克服了挫折。Complacency (自滿) 和 Lethargy (昏睡/無氣力) 是負面詞彙，Trepidation 則是恐懼。"
+        explanation: "Ambiguous 會引起無謂猜測。"
       }
     ];
 
-    let currentVocabIndex = 0;
-    let vocabScore = 0;
-    let vocabAnswered = false;
+    let currentVocabIndex = 0; let vocabScore = 0; let vocabAnswered = false;
 
     function loadVocabQuest() {
       vocabAnswered = false;
       const quest = vocabData[currentVocabIndex];
       document.getElementById('vocabProgress').innerText = currentVocabIndex + 1;
-      
-      // 渲染題目，將 {blank} 變成底線特效
-      const sentenceHtml = quest.sentence.replace('{blank}', '<span class="blank-space"></span>');
-      document.getElementById('vocabSentence').innerHTML = sentenceHtml;
+      document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', '<span class="blank-space"></span>');
 
-      // 渲染選項按鈕
       const optionsContainer = document.getElementById('vocabOptions');
       optionsContainer.innerHTML = '';
       
       quest.options.forEach((opt, index) => {
-        const btn = document.createElement('button');
-        btn.className = "w-full text-left p-4 rounded-xl border border-gray-700 bg-brand-dark text-gray-200 font-semibold text-lg active-scale transition-all hover:border-brand-blue";
-        btn.innerText = opt;
-        btn.onclick = () => checkVocabAnswer(index, btn);
+        const btn = document.createElement('div');
+        // 按鈕結構：左邊係字(+隱藏中文)，右邊係喇叭
+        btn.className = "w-full flex justify-between items-center p-4 rounded-xl border border-gray-700 bg-brand-dark text-gray-200 cursor-pointer transition-all hover:border-brand-blue vocab-option-btn";
+        btn.innerHTML = `
+          <div class="flex-grow font-semibold text-lg flex items-center">
+            ${opt.word} 
+            <span class="vocab-trans hidden ml-3 text-sm font-normal text-brand-orange opacity-90">- ${opt.trans}</span>
+          </div>
+          <button class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 active-scale" onclick="speakWord('${opt.word}', event)">
+            <i class="fas fa-volume-up text-brand-blue"></i>
+          </button>
+        `;
+        
+        // 點擊整個框框作答，但排除點擊喇叭
+        btn.onclick = (e) => {
+          if (e.target.closest('button')) return; // 防止點喇叭時觸發作答
+          checkVocabAnswer(index, btn);
+        };
         optionsContainer.appendChild(btn);
       });
 
-      // 隱藏回饋區與下一題按鈕
       document.getElementById('vocabFeedback').classList.add('hidden');
       document.getElementById('nextVocabBtn').classList.add('hidden');
     }
 
-    function checkVocabAnswer(selectedIndex, btnElement) {
-      if (vocabAnswered) return; // 答過唔俾再撳
-      vocabAnswered = true;
-      
-      const quest = vocabData[currentVocabIndex];
-      const feedbackBox = document.getElementById('vocabFeedback');
-      const feedbackTitle = document.getElementById('vocabFeedbackTitle');
-      const feedbackIcon = document.getElementById('vocabFeedbackIcon');
-      const optionsButtons = document.getElementById('vocabOptions').children;
+    function speakWord(word, event) {
+      if(event) event.stopPropagation(); // 阻止事件冒泡
+      const utterance = new SpeechSynthesisUtterance(word);
+      const savedVoiceURI = localStorage.getItem('preferred_voice_uri');
+      if (savedVoiceURI) {
+        const preferredVoice = speechSynthesis.getVoices().find(v => v.voiceURI === savedVoiceURI);
+        if (preferredVoice) utterance.voice = preferredVoice;
+      }
+      window.speechSynthesis.speak(utterance);
+    }
 
-      // 顯示正確答案 (變綠色)
-      optionsButtons[quest.correctIndex].classList.replace('border-gray-700', 'border-brand-green');
-      optionsButtons[quest.correctIndex].classList.replace('bg-brand-dark', 'bg-brand-green/20');
-      optionsButtons[quest.correctIndex].classList.add('text-brand-green');
+    function checkVocabAnswer(selectedIndex, btnElement) {
+      if (vocabAnswered) return;
+      vocabAnswered = true;
+      const quest = vocabData[currentVocabIndex];
+      
+      // 顯示所有選項的中文解釋
+      document.querySelectorAll('.vocab-trans').forEach(el => el.classList.remove('hidden'));
+      const optionsButtons = document.querySelectorAll('.vocab-option-btn');
+      
+      // 正確答案視覺
+      const correctBtn = optionsButtons[quest.correctIndex];
+      correctBtn.classList.replace('border-gray-700', 'border-brand-green');
+      correctBtn.classList.replace('bg-brand-dark', 'bg-brand-green/20');
+      correctBtn.classList.add('text-brand-green');
 
       if (selectedIndex === quest.correctIndex) {
-        // 答對
         vocabScore++;
-        feedbackBox.className = "mb-6 p-5 rounded-2xl bg-brand-green/10 border border-brand-green/30 shadow-inner";
-        feedbackTitle.className = "font-bold text-lg text-brand-green";
-        feedbackTitle.innerText = "Spot On! (準確無誤)";
-        feedbackIcon.className = "fas fa-check-circle text-xl text-brand-green";
+        setVocabFeedback(true, "Spot On! (準確無誤)", quest.explanation);
       } else {
-        // 答錯 (變紅色)
+        // 錯誤答案視覺
         btnElement.classList.replace('border-gray-700', 'border-brand-red');
         btnElement.classList.replace('bg-brand-dark', 'bg-brand-red/20');
         btnElement.classList.add('text-brand-red');
-
-        feedbackBox.className = "mb-6 p-5 rounded-2xl bg-brand-red/10 border border-brand-red/30 shadow-inner";
-        feedbackTitle.className = "font-bold text-lg text-brand-red";
-        feedbackTitle.innerText = "Not Quite (爭少少)";
-        feedbackIcon.className = "fas fa-times-circle text-xl text-brand-red";
+        setVocabFeedback(false, "Not Quite (爭少少)", quest.explanation);
       }
 
-      // 填入解析並顯示
-      document.getElementById('vocabExplanation').innerText = quest.explanation;
-      feedbackBox.classList.remove('hidden');
+      document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', `<span class="text-brand-green font-bold border-b-2 border-brand-green mx-1 px-1">${quest.options[quest.correctIndex].word}</span>`);
       document.getElementById('nextVocabBtn').classList.remove('hidden');
+    }
 
-      // 將填空線替換成正確答案
-      const sentenceHtml = quest.sentence.replace('{blank}', `<span class="text-brand-green font-bold border-b-2 border-brand-green mx-1 px-1">${quest.options[quest.correctIndex]}</span>`);
-      document.getElementById('vocabSentence').innerHTML = sentenceHtml;
+    function setVocabFeedback(isCorrect, title, exp) {
+      const box = document.getElementById('vocabFeedback');
+      box.className = `mb-6 p-5 rounded-2xl border shadow-inner ${isCorrect ? 'bg-brand-green/10 border-brand-green/30' : 'bg-brand-red/10 border-brand-red/30'}`;
+      document.getElementById('vocabFeedbackTitle').className = `font-bold text-lg ${isCorrect ? 'text-brand-green' : 'text-brand-red'}`;
+      document.getElementById('vocabFeedbackTitle').innerText = title;
+      document.getElementById('vocabFeedbackIcon').className = `fas ${isCorrect ? 'fa-check-circle text-brand-green' : 'fa-times-circle text-brand-red'} text-xl`;
+      document.getElementById('vocabExplanation').innerText = exp;
+      box.classList.remove('hidden');
     }
 
     function nextVocabQuest() {
       if (currentVocabIndex < vocabData.length - 1) {
-        currentVocabIndex++;
-        loadVocabQuest();
+        currentVocabIndex++; loadVocabQuest();
       } else {
-        alert(`Vocab Workout Complete! 你答啱咗 ${vocabScore} / ${vocabData.length} 題！🔥\n繼續保持，稍後可以切換去 Speak 練發音！`);
-        currentVocabIndex = 0;
-        vocabScore = 0;
-        loadVocabQuest();
+        const scorePct = Math.round((vocabScore / vocabData.length) * 100);
+        completeWorkout('Vocab', scorePct);
+        currentVocabIndex = 0; vocabScore = 0; loadVocabQuest();
       }
     }
 
     // -----------------------------------------
-    // 3. 原有 Speaking & Settings 邏輯 (保持精簡)
+    // 3. Speaking 訓練 (完整版)
     // -----------------------------------------
-    // (保留之前的 Speaking Array, SpeechRecognition 等邏輯)
-    // ... 為免過長，這部分與 v3.0 完全相同，但必須保留在真實檔案中。
-    // 在這裡我簡單寫入載入觸發，確保介面正常。
-    window.onload = () => {
-      // 預設將首頁設為 Vocab
-      switchView('vocab');
-      loadVocabQuest();
-      // 其他初始化功能...
-    };
+    const speakTasks = [
+      { type: "Task 1: The Heavy Lift", sentence: "To mitigate the ubiquitous supply chain disruptions, the management team orchestrated a comprehensive contingency plan." },
+      { type: "Task 2: The Endurance Run", sentence: "I would have gone to the meeting if I had known about it." }
+    ];
+    let currentSpeakIndex = 0; let speakDailyScore = 0;
 
-    // --- 以下為保證報錯不出問題的 Dummy Functions (因為我將原有 speaking 摺疊了) ---
-    function toggleRecording() {}
-    function playAudio() {}
-    function testVoice() {}
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition; let isRecording = false;
+    if (SpeechRec) {
+      recognition = new SpeechRec(); recognition.lang = 'en-US';
+      recognition.onresult = (e) => calculateSpeakScore(e.results[0][0].transcript);
+      recognition.onspeechend = stopRecording; recognition.onerror = stopRecording;
+    }
+
+    function loadSpeakTask() {
+      document.getElementById('taskProgress').innerText = currentSpeakIndex + 1;
+      document.getElementById('taskType').innerText = speakTasks[currentSpeakIndex].type;
+      document.getElementById('targetSentence').innerText = speakTasks[currentSpeakIndex].sentence;
+      document.getElementById('speakFeedbackArea').classList.add('hidden');
+      document.getElementById('nextSpeakBtn').classList.add('hidden');
+    }
+
+    function playSpeakAudio() {
+      speakWord(speakTasks[currentSpeakIndex].sentence, null);
+    }
+
+    function toggleRecording() { isRecording ? stopRecording() : startRecording(); }
+    
+    function startRecording() {
+      if(!recognition) return alert("Browser not supported");
+      recognition.start(); isRecording = true;
+      document.getElementById('recordBtn').classList.replace('bg-brand-red', 'bg-red-800');
+      document.getElementById('recordRipple').classList.add('animate-ping', 'opacity-50');
+      document.getElementById('recordingStatus').innerText = "Listening...";
+      document.getElementById('speakFeedbackArea').classList.add('hidden');
+      document.getElementById('nextSpeakBtn').classList.add('hidden');
+    }
+
+    function stopRecording() {
+      if(isRecording) recognition.stop(); isRecording = false;
+      document.getElementById('recordBtn').classList.replace('bg-red-800', 'bg-brand-red');
+      document.getElementById('recordRipple').classList.remove('animate-ping', 'opacity-50');
+      document.getElementById('recordingStatus').innerText = "";
+    }
+
+    function calculateSpeakScore(spokenText) {
+      const targetWords = speakTasks[currentSpeakIndex].sentence.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
+      const spokenWords = spokenText.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
+      let matchCount = 0;
+      targetWords.forEach(w => { if (spokenWords.includes(w)) { matchCount++; spokenWords.splice(spokenWords.indexOf(w), 1); } });
+      
+      const score = Math.round((matchCount / targetWords.length) * 100);
+      document.getElementById('speakScoreValue').innerText = score;
+      document.getElementById('speakUserText').innerText = `Heard: "${spokenText}"`;
+      document.getElementById('speakFeedbackArea').classList.remove('hidden');
+
+      const box = document.getElementById('speakFeedbackBox');
+      if (score >= 85) {
+        box.className = "p-5 rounded-2xl w-full text-center flex flex-col items-center bg-brand-green/10 text-brand-green border border-brand-green/30";
+        document.getElementById('speakScoreLabel').innerText = "Mission Accomplished!";
+        speakDailyScore += score;
+        document.getElementById('nextSpeakBtn').classList.remove('hidden');
+      } else {
+        box.className = "p-5 rounded-2xl w-full text-center flex flex-col items-center bg-orange-500/10 text-orange-400 border border-orange-500/20";
+        document.getElementById('speakScoreLabel').innerText = "Retry Required (Need 85%)";
+      }
+    }
+
+    function nextSpeakTask() {
+      if (currentSpeakIndex < speakTasks.length - 1) {
+        currentSpeakIndex++; loadSpeakTask();
+      } else {
+        const avg = Math.round(speakDailyScore / speakTasks.length);
+        completeWorkout('Speaking', avg);
+        currentSpeakIndex = 0; speakDailyScore = 0; loadSpeakTask();
+      }
+    }
+
     // -----------------------------------------
+    // 4. Tracker (打卡日曆生成)
+    // -----------------------------------------
+    function renderCalendar() {
+      const data = loadUserData();
+      document.getElementById('progressTotalScore').innerText = data.totalScore;
+      document.getElementById('progressStreak').innerText = data.currentStreak;
+
+      const now = new Date();
+      const year = now.getFullYear(); const month = now.getMonth();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const firstDay = new Date(year, month, 1).getDay();
+      
+      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      document.getElementById('calendarMonthLabel').innerText = `${monthNames[month]} ${year}`;
+
+      let html = '<div class="grid grid-cols-7 gap-y-4 gap-x-2 text-center text-xs font-mono">';
+      const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+      days.forEach(d => html += `<div class="text-gray-500 font-bold mb-2">${d}</div>`);
+      
+      for(let i=0; i<firstDay; i++) html += `<div></div>`; // 補空位
+      
+      for(let d=1; d<=daysInMonth; d++) {
+        const mm = String(month + 1).padStart(2, '0');
+        const dd = String(d).padStart(2, '0');
+        const dateStr = `${year}-${mm}-${dd}`;
+        
+        if (data.history && data.history.includes(dateStr)) {
+          // 有打卡：橙色火圖標
+          html += `<div class="w-8 h-8 mx-auto bg-brand-orange text-white rounded-full flex items-center justify-center shadow-lg shadow-brand-orange/40"><i class="fas fa-fire-alt text-sm"></i></div>`;
+        } else if (dateStr === getTodayDate()) {
+          // 今日未打卡：藍色外框
+          html += `<div class="w-8 h-8 mx-auto border-2 border-brand-blue text-brand-blue rounded-full flex items-center justify-center font-bold">${d}</div>`;
+        } else {
+          // 過去未打卡：灰色字
+          html += `<div class="w-8 h-8 mx-auto text-gray-600 flex items-center justify-center">${d}</div>`;
+        }
+      }
+      html += '</div>';
+      document.getElementById('calendarGrid').innerHTML = html;
+    }
+
+    // -----------------------------------------
+    // 5. 總結算與資料儲存
+    // -----------------------------------------
+    function completeWorkout(type, score) {
+      let data = loadUserData();
+      const today = getTodayDate();
+      
+      // 更新 History (確保唔重複加入今日)
+      if (!data.history) data.history = [];
+      if (!data.history.includes(today)) {
+        data.history.push(today);
+        // Streak 邏輯
+        const yesterday = new Date(Date.now() - 86400000).toLocaleDateString('en-CA');
+        data.history.includes(yesterday) ? data.currentStreak++ : data.currentStreak = 1;
+      }
+      
+      data.totalScore += score;
+      localStorage.setItem('english_coach_data_v3', JSON.stringify(data));
+      
+      updateGlobalUI(data);
+      
+      document.getElementById('summaryTitle').innerText = `${type} Complete!`;
+      document.getElementById('summaryScore').innerText = score;
+      document.getElementById('summaryTotal').innerText = data.totalScore;
+      document.getElementById('summaryModal').classList.remove('hidden', 'opacity-0');
+    }
+
+    function closeSummary() { document.getElementById('summaryModal').classList.add('hidden'); }
+
+    function updateGlobalUI(data) {
+      document.querySelectorAll('.streakValue').forEach(el => el.innerText = `${data.currentStreak}`);
+    }
+
+    // -----------------------------------------
+    // 6. Settings 語音 (保持精簡)
+    // -----------------------------------------
+    let voices = [];
+    function popVoices() {
+      voices = speechSynthesis.getVoices().filter(v => v.lang.includes('en'));
+      const sel = document.getElementById('voiceSelect'); sel.innerHTML = '';
+      const saved = localStorage.getItem('preferred_voice_uri');
+      voices.forEach((v, i) => {
+        const opt = document.createElement('option'); opt.text = v.name; opt.value = i;
+        if(saved === v.voiceURI) opt.selected = true;
+        sel.appendChild(opt);
+      });
+    }
+    speechSynthesis.onvoiceschanged = popVoices;
+    document.getElementById('voiceSelect').addEventListener('change', (e) => localStorage.setItem('preferred_voice_uri', voices[e.target.value].voiceURI));
+    function testVoice() { speakWord("Hello, I am your coach.", null); }
+
+    // 初始化
+    window.onload = () => {
+      loadVocabQuest();
+      loadSpeakTask();
+      updateGlobalUI(loadUserData());
+      switchView('vocab');
+      popVoices();
+    };
   </script>
 </body>
 </html>
