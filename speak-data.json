@@ -1,62 +1,32 @@
 [
   {
-    "id": "s1",
-    "type": "C1 Accuracy: The Heavy Lift",
-    "sentence": "The preliminary Field Return FA indicates a recurring defect in the SMT line that requires immediate rectification."
-  },
-  {
-    "id": "s2",
-    "type": "C1 Flow: The Endurance Run",
-    "sentence": "By launching the OBA 2.0 web tool, we can systematically track automated inspections and eliminate manual discrepancies."
-  },
-  {
-    "id": "s3",
-    "type": "C1 Assertive: The Sprint",
-    "sentence": "We need to schedule a comprehensive review with the ODM partners to address the escalating CQA concerns."
-  },
-  {
-    "id": "s4",
-    "type": "C1 Precision: Focus",
-    "sentence": "Implementing rigorous quality gates during the assembly phase is a prerequisite for achieving our target yield rate."
-  },
-  {
-    "id": "s5",
-    "type": "C1 Tech: Advanced",
-    "sentence": "The sudden spike in defective units was an anomaly that prompted an immediate halt to the production line."
-  },
-  {
-    "id": "s6",
-    "type": "C1 Business: Formal",
-    "sentence": "To mitigate ubiquitous supply chain disruptions, the team orchestrated a comprehensive contingency plan."
-  },
-  {
-    "id": "s7",
-    "type": "C1 Fluency: Natural",
-    "sentence": "I would have scheduled the financial review for Thursday if I had known about the preliminary figures earlier."
-  }
-  ,{
     "id": "s8",
     "type": "C1 Life: The Heavy Lift",
-    "sentence": "It is completely normal to procrastinate when faced with tedious and overwhelmingly mundane tasks."
+    "sentence": "It is completely normal to procrastinate when faced with tedious and overwhelmingly mundane tasks.",
+    "trans": "當面對冗長乏味且極度平凡的任務時，拖延是完全正常的。"
   },
   {
     "id": "s9",
     "type": "C1 Emotion: Natural Flow",
-    "sentence": "Her resilient attitude helped her alleviate the stress and bounce back from the sudden setback."
+    "sentence": "Her resilient attitude helped her alleviate the stress and bounce back from the sudden setback.",
+    "trans": "她充滿韌性的態度幫助她緩解壓力，並從突如其來的挫折中迅速恢復。"
   },
   {
     "id": "s10",
     "type": "C1 Travel: The Sprint",
-    "sentence": "Instead of planning a meticulous itinerary, we decided to take a spontaneous road trip across the country."
+    "sentence": "Instead of planning a meticulous itinerary, we decided to take a spontaneous road trip across the country.",
+    "trans": "我們決定來一場自發的跨國公路旅行，而不是去計劃一絲不苟的行程。"
   },
   {
     "id": "s11",
     "type": "C1 Tech: Focus",
-    "sentence": "The ubiquitous presence of social media has made it difficult for people to enjoy ephemeral moments in real life."
+    "sentence": "The ubiquitous presence of social media has made it difficult for people to enjoy ephemeral moments in real life.",
+    "trans": "社交媒體的無所不在，讓人們很難去享受現實生活中轉瞬即逝的時刻。"
   },
   {
     "id": "s12",
     "type": "C1 Daily: Conversational",
-    "sentence": "Taking a pragmatic approach to personal finance is absolutely indispensable in today's unpredictable economy."
+    "sentence": "Taking a pragmatic approach to personal finance is absolutely indispensable in today's unpredictable economy.",
+    "trans": "在現今不可預測的經濟環境下，對個人理財採取務實的態度是絕對不可或缺的。"
   }
 ]
