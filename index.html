@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>English Overload v1.8</title>
+  <title>English Overload v1.9</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Roboto+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -88,10 +88,12 @@
         </div>
       </div>
 
-      <div class="mt-auto flex justify-center gap-6">
-        <button onclick="playSpeakAudio()" class="w-16 h-16 bg-gray-700 text-gray-200 rounded-full shadow-lg flex items-center justify-center text-2xl active-scale hover:bg-gray-600"><i class="fas fa-volume-up"></i></button>
+      <div class="mt-auto flex justify-center gap-4 items-center">
+        <button onclick="playSpeakAudio()" class="w-14 h-14 bg-gray-700 text-gray-200 rounded-full shadow-lg flex items-center justify-center text-xl active-scale hover:bg-gray-600"><i class="fas fa-volume-up"></i></button>
         <button id="recordBtn" onclick="toggleRecording()" class="w-20 h-20 bg-brand-red text-white rounded-full shadow-2xl flex items-center justify-center text-3xl active-scale ring-8 ring-red-600/20 relative"><i class="fas fa-microphone"></i><span id="recordRipple" class="absolute inset-0 rounded-full bg-brand-red opacity-0"></span></button>
+        <button onclick="skipSpeakTask()" class="w-14 h-14 bg-gray-800 text-gray-400 rounded-full shadow-lg flex items-center justify-center text-xl active-scale hover:bg-gray-700 border border-gray-700"><i class="fas fa-forward"></i></button>
       </div>
+
       <div class="h-10 mt-3 mb-2 flex items-center justify-center">
          <p id="recordingStatus" class="text-center text-sm font-bold text-gray-400"></p>
       </div>
@@ -119,10 +121,11 @@
     <h2 class="text-2xl font-extrabold text-white mb-2">Settings</h2>
     <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800">
       <label class="block text-xs font-bold text-brand-blue uppercase tracking-widest mb-3">Coach Voice (精選美/英口音)</label>
-      <div class="relative mb-4">
+      <div class="relative mb-2">
         <select id="voiceSelect" class="w-full bg-brand-slate text-white border border-gray-700 rounded-xl p-4 appearance-none focus:outline-none focus:border-brand-blue"><option>Loading voices...</option></select>
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400"><i class="fas fa-chevron-down"></i></div>
       </div>
+      <p class="text-[10px] text-gray-500 mb-4 px-2">如果聽到機械人聲，請喺度轉另外一把聲。</p>
       <button onclick="testVoice()" class="w-full bg-gray-700 text-white py-3 rounded-xl font-bold text-sm active-scale hover:bg-gray-600 flex justify-center items-center gap-2"><i class="fas fa-play"></i> 試聽聲音 Test Voice</button>
       <button onclick="resetData()" class="w-full mt-8 bg-red-900/30 text-red-400 py-3 rounded-xl font-bold text-xs active-scale border border-red-900/50">RESET ALL DATA</button>
     </div>
@@ -263,7 +266,7 @@
     }
 
     // ==========================================
-    // Speaking System (v1.8 終極修復)
+    // Speaking System 
     // ==========================================
     let speakTasks = []; let currentSpeakIndex = 0; let speakDailyScore = 0;
     const DAILY_SPEAK_LIMIT = 3;
@@ -283,7 +286,6 @@
       const task = speakTasks[currentSpeakIndex];
       document.getElementById('taskProgress').innerText = currentSpeakIndex + 1;
       document.getElementById('taskType').innerText = task.type;
-      
       document.getElementById('targetSentence').className = "text-xl font-semibold leading-relaxed text-white font-sans mt-2";
       document.getElementById('targetSentence').innerText = task.sentence;
       
@@ -297,50 +299,30 @@
     }
 
     const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-    let recognition = null; 
-    let isRecording = false;
-    let finalSpeechText = ""; // 儲存連續收集到嘅文字
+    let recognition = null; let isRecording = false; let finalSpeechText = "";
 
     function toggleRecording() {
       if (isRecording) {
-        // 💥 當使用者主動撳停止：強制計分
         recognition.stop();
-        if(finalSpeechText.trim() !== "") {
-          calculateSpeakScore(finalSpeechText);
-        } else {
-          forceStopUI();
-          document.getElementById('recordingStatus').innerHTML = "<span class='text-orange-400'>⚠️ 聽唔清楚，請大聲啲再試。</span>";
-          document.getElementById('targetSentence').className = "text-xl font-semibold leading-relaxed text-white font-sans mt-2 transition-all";
-        }
+        if(finalSpeechText.trim() !== "") { calculateSpeakScore(finalSpeechText); } 
+        else { forceStopUI(); document.getElementById('recordingStatus').innerHTML = "<span class='text-orange-400'>⚠️ 無聲，請再試一次。</span>"; document.getElementById('targetSentence').className = "text-xl font-semibold leading-relaxed text-white font-sans mt-2 transition-all"; }
       } else {
         if (!SpeechRec) return alert("Browser not supported");
-
-        recognition = new SpeechRec();
-        recognition.lang = 'en-US';
-        recognition.continuous = true; // 💥 核心修復：防止長句子自動切斷
-        recognition.interimResults = true; // 允許實時預覽
-        finalSpeechText = "";
-
+        recognition = new SpeechRec(); recognition.lang = 'en-US'; recognition.continuous = true; recognition.interimResults = true; finalSpeechText = "";
+        
         recognition.onresult = (e) => {
           finalSpeechText = Array.from(e.results).map(r => r[0].transcript).join('');
-          // 實時顯示聽緊嘅字
           document.getElementById('recordingStatus').innerHTML = `<span class='text-brand-blue font-bold'>聽緊:</span> <span class='text-white font-normal italic'>${finalSpeechText}</span>`;
         };
-
-        recognition.onerror = (e) => {
-          console.warn("Speech error:", e.error);
-          forceStopUI();
-        };
-
+        recognition.onerror = (e) => { forceStopUI(); };
         try {
-          recognition.start();
-          isRecording = true;
+          recognition.start(); isRecording = true;
           document.getElementById('recordBtn').classList.replace('bg-brand-red', 'bg-red-800');
           document.getElementById('recordRipple').classList.add('animate-ping', 'opacity-50');
-          document.getElementById('recordingStatus').innerHTML = "<span class='text-red-400 animate-pulse'>🔴 Listening... (講完請撳掣停止)</span>";
+          document.getElementById('recordingStatus').innerHTML = "<span class='text-red-400 animate-pulse'>🔴 Listening... (講完撳掣停止)</span>";
           document.getElementById('speakFeedbackArea').classList.add('hidden');
           document.getElementById('targetSentence').className = "text-xl font-semibold leading-relaxed text-gray-500 font-sans mt-2 transition-all";
-        } catch(e) { console.error(e); forceStopUI(); }
+        } catch(e) { forceStopUI(); }
       }
     }
 
@@ -351,11 +333,23 @@
       document.getElementById('recordingStatus').innerText = "";
     }
 
+    // 💥 升級：Skip 按鈕邏輯
+    function skipSpeakTask() {
+      if (isRecording) forceStopUI();
+      // 不計分，直接跳下一題
+      document.getElementById('speakFeedbackBox').className = "p-5 rounded-2xl w-full text-center flex flex-col items-center bg-brand-dark border border-gray-700 shadow-inner";
+      document.getElementById('speakScoreLabel').className = "text-xs font-bold mb-1 uppercase tracking-wider text-gray-400";
+      if (currentSpeakIndex < speakTasks.length - 1) { 
+        currentSpeakIndex++; loadSpeakTask(); 
+      } else { 
+        completeWorkout('Speaking', Math.round(speakDailyScore / speakTasks.length)); 
+        fetchSpeakData(); currentSpeakIndex = 0; speakDailyScore = 0; 
+      }
+    }
+
     function calculateSpeakScore(spokenText) {
       if(!spokenText || spokenText.trim() === "") return;
-      forceStopUI(); 
-      document.getElementById('recordingStatus').innerText = ""; 
-      
+      forceStopUI(); document.getElementById('recordingStatus').innerText = ""; 
       const rawTargetWords = speakTasks[currentSpeakIndex].sentence.split(/\s+/);
       const targetClean = rawTargetWords.map(w => w.toLowerCase().replace(/[^\w\s\']/g, ""));
       const spokenClean = spokenText.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
@@ -365,13 +359,8 @@
       for (let i = 0; i < targetClean.length; i++) {
          let cleanW = targetClean[i]; let rawW = rawTargetWords[i];
          let foundIdx = spokenTemp.indexOf(cleanW);
-         if (foundIdx !== -1) {
-             matchCount++; spokenTemp.splice(foundIdx, 1);
-             highlightedHTML += `<span class="text-brand-green drop-shadow-[0_0_2px_rgba(16,185,129,0.5)]">${rawW}</span> `;
-         } else {
-             highlightedHTML += `<span class="text-brand-red font-bold underline decoration-brand-red/50">${rawW}</span> `;
-             if (cleanW.length > 0) missedWords.push(cleanW); 
-         }
+         if (foundIdx !== -1) { matchCount++; spokenTemp.splice(foundIdx, 1); highlightedHTML += `<span class="text-brand-green drop-shadow-[0_0_2px_rgba(16,185,129,0.5)]">${rawW}</span> `; } 
+         else { highlightedHTML += `<span class="text-brand-red font-bold underline decoration-brand-red/50">${rawW}</span> `; if (cleanW.length > 0) missedWords.push(cleanW); }
       }
       
       const score = Math.round((matchCount / targetClean.length) * 100);
@@ -381,9 +370,7 @@
       const missedArea = document.getElementById('speakMissedWordsArea');
       const missedList = document.getElementById('speakMissedWordsList');
       if (missedWords.length > 0) {
-          missedList.innerHTML = missedWords.map(w => 
-              `<button onclick="speakWord('${w}', event)" class="px-3 py-1.5 bg-brand-slate border border-brand-red/50 text-brand-red rounded-lg text-sm font-semibold active-scale flex items-center gap-2 shadow-sm hover:bg-brand-red/10 transition-colors"><i class="fas fa-volume-up text-xs opacity-70"></i> ${w}</button>`
-          ).join('');
+          missedList.innerHTML = missedWords.map(w => `<button onclick="speakWord('${w}', event)" class="px-3 py-1.5 bg-brand-slate border border-brand-red/50 text-brand-red rounded-lg text-sm font-semibold active-scale flex items-center gap-2 shadow-sm hover:bg-brand-red/10 transition-colors"><i class="fas fa-volume-up text-xs opacity-70"></i> ${w}</button>`).join('');
           missedArea.classList.remove('hidden');
       } else { missedArea.classList.add('hidden'); }
 
@@ -421,7 +408,7 @@
     }
 
     // ==========================================
-    // Tracker & Settings (v1.8 精簡聲音選項)
+    // Tracker & Settings
     // ==========================================
     function completeWorkout(type, score) {
       let data = loadUserData(); const today = getTodayDate();
@@ -476,22 +463,40 @@
     function resetData() { if(confirm("確定重置所有訓練數據？")) { localStorage.removeItem('english_coach_data_v5'); location.reload(); } }
 
     let voices = [];
+    
+    // 💥 升級：神級智能過濾器 (擷取 2男 2女, 英美各半)
     function popVoices() {
       const allVoices = speechSynthesis.getVoices();
       if(allVoices.length === 0) return;
 
-      const usVoices = allVoices.filter(v => v.lang === 'en-US' || v.lang === 'en_US');
-      const ukVoices = allVoices.filter(v => v.lang === 'en-GB' || v.lang === 'en_GB');
+      // 剔除明顯係機械人嘅聲音
+      const goodVoices = allVoices.filter(v => 
+        !v.name.includes('Eloquence') && 
+        !v.name.includes('Zarvox') && 
+        !v.name.includes('Bubbles') &&
+        !v.name.includes('Trinoids')
+      );
 
-      // 💥 核心：只抽取 2 US, 2 UK 乾淨俐落
+      const usVoices = goodVoices.filter(v => v.lang.includes('en-US') || v.lang.includes('en_US'));
+      const ukVoices = goodVoices.filter(v => v.lang.includes('en-GB') || v.lang.includes('en_GB'));
+
+      // 用 Keyword 搵相對似男/女嘅名
+      const findVoice = (arr, keywords) => arr.find(v => keywords.some(k => v.name.toLowerCase().includes(k)));
+
+      let usFemale = findVoice(usVoices, ['female', 'samantha', 'victoria', 'siri voice 1', 'zira', 'google us english']) || usVoices[0];
+      let usMale = findVoice(usVoices, ['male', 'alex', 'fred', 'siri voice 2', 'david', 'guy']) || usVoices.find(v => v !== usFemale);
+      
+      let ukFemale = findVoice(ukVoices, ['female', 'serena', 'martha', 'siri voice 1', 'hazel']) || ukVoices[0];
+      let ukMale = findVoice(ukVoices, ['male', 'daniel', 'arthur', 'siri voice 2', 'george']) || ukVoices.find(v => v !== ukFemale);
+
       let selectedVoices = [];
-      if(usVoices.length > 0) selectedVoices.push({ label: '🇺🇸 美音 (Accent A)', voice: usVoices[0] });
-      if(usVoices.length > 1) selectedVoices.push({ label: '🇺🇸 美音 (Accent B)', voice: usVoices[usVoices.length - 1] });
-      if(ukVoices.length > 0) selectedVoices.push({ label: '🇬🇧 英音 (Accent A)', voice: ukVoices[0] });
-      if(ukVoices.length > 1) selectedVoices.push({ label: '🇬🇧 英音 (Accent B)', voice: ukVoices[ukVoices.length - 1] });
+      if (usFemale) selectedVoices.push({ label: '🇺🇸 美式 (女聲/Female)', voice: usFemale });
+      if (usMale) selectedVoices.push({ label: '🇺🇸 美式 (男聲/Male)', voice: usMale });
+      if (ukFemale) selectedVoices.push({ label: '🇬🇧 英式 (女聲/Female)', voice: ukFemale });
+      if (ukMale) selectedVoices.push({ label: '🇬🇧 英式 (男聲/Male)', voice: ukMale });
 
-      // 去除重複 (萬一系統只有少數幾把聲)
-      selectedVoices = selectedVoices.filter((v, i, a) => a.findIndex(t => (t.voice.name === v.voice.name)) === i);
+      // 去除重複
+      selectedVoices = selectedVoices.filter((v, i, a) => v && a.findIndex(t => t.voice.name === v.voice.name) === i);
       voices = selectedVoices.map(item => item.voice);
 
       const sel = document.getElementById('voiceSelect'); 
@@ -500,12 +505,14 @@
       
       selectedVoices.forEach((item, i) => {
         const opt = document.createElement('option'); 
-        opt.text = item.label; 
+        // 顯示名稱加入括號等你知道背後係邊把聲，方便避開爛聲
+        opt.text = `${item.label} [${item.voice.name}]`; 
         opt.value = i;
         if(saved === item.voice.voiceURI) opt.selected = true; 
         sel.appendChild(opt);
       });
     }
+    
     speechSynthesis.onvoiceschanged = popVoices;
     document.getElementById('voiceSelect').onchange = (e) => localStorage.setItem('preferred_voice_uri', voices[e.target.value].voiceURI);
     function testVoice() { speakWord("Hello, I am your coach."); }
