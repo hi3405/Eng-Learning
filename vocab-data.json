@@ -110,3 +110,69 @@
     "explanation": "Erratic 形容無規律、不穩定嘅情況，完美對應後面提到嘅高低起伏。"
   }
 ]
+{
+    "sentence": "The new web-based tracking tool was engineered to {blank} the Open Box Audit (OBA) process, eliminating manual data entry errors.",
+    "options": [
+      { "word": "streamline", "trans": "精簡 / 優化" },
+      { "word": "complicate", "trans": "複雜化" },
+      { "word": "stagnate", "trans": "停滯" },
+      { "word": "obfuscate", "trans": "使模糊" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Streamline 經常配合 process (流程) 使用，指透過現代化或自動化去提高效率。"
+  },
+  {
+    "sentence": "Following the recent Field Return FA reports, it is crucial that we implement corrective actions to {blank} further risks.",
+    "options": [
+      { "word": "aggravate", "trans": "加重 / 惡化" },
+      { "word": "mitigate", "trans": "減輕 / 緩和" },
+      { "word": "fabricate", "trans": "捏造" },
+      { "word": "overlook", "trans": "忽略" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Mitigate risks (減低風險) 係工程同管理上極高頻嘅 C1 搭配詞。"
+  },
+  {
+    "sentence": "The recurring CQA issues from the ODM factory suggest that their current SMT processes lack {blank} quality controls.",
+    "options": [
+      { "word": "lenient", "trans": "寬鬆的" },
+      { "word": "rigorous", "trans": "嚴謹的 / 嚴格的" },
+      { "word": "sporadic", "trans": "零星的" },
+      { "word": "superficial", "trans": "表面的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Rigorous 形容標準、檢查或控制非常嚴密，不容許有差錯。Lenient 係反義詞。"
+  },
+  {
+    "sentence": "Our automated webpage for serial number tracking has drastically reduced the {blank} between reported and actual inventory.",
+    "options": [
+      { "word": "synergy", "trans": "協同效應" },
+      { "word": "discrepancy", "trans": "差異 / 不一致" },
+      { "word": "consensus", "trans": "共識" },
+      { "word": "paradigm", "trans": "典範" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Discrepancy 專指兩組本應相同嘅數據或事實之間出現咗落差。"
+  },
+  {
+    "sentence": "Before launching OBA 2.0, the QE team must {blank} that all cross-factory integration parameters are functioning correctly.",
+    "options": [
+      { "word": "verify", "trans": "驗證 / 核實" },
+      { "word": "nullify", "trans": "使無效" },
+      { "word": "speculate", "trans": "猜測" },
+      { "word": "instigate", "trans": "煽動" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Verify 係 QA/QE 日常必備字，指透過測試或檢查去確認某事物的真確性。"
+  },
+  {
+    "sentence": "The sudden spike in defective units was an {blank} that prompted an immediate halt to the production line.",
+    "options": [
+      { "word": "anomaly", "trans": "異常 / 反常事物" },
+      { "word": "incentive", "trans": "誘因" },
+      { "word": "aftermath", "trans": "餘波 / 後果" },
+      { "word": "equilibrium", "trans": "平衡" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Anomaly 指偏離正常預期嘅現象，喺數據分析同品質監控中非常常用。"
+  }
