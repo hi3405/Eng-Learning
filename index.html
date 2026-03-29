@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>English Overload v1.1</title>
+  <title>English Overload v1.2</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@
       </div>
       <div class="mt-4 flex justify-between items-end">
         <p class="text-xl font-extrabold text-white tracking-tight">C1 Precision</p>
-        <div class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md">Quest <span id="vocabProgress" class="text-brand-blue font-bold">1</span> / <span id="vocabTotal">...</span></div>
+        <div class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md">Quest <span id="vocabProgress">1</span> / <span id="vocabTotal">...</span></div>
       </div>
     </header>
 
@@ -46,9 +46,7 @@
           <span class="text-sm text-gray-400">載入題庫中...</span>
         </p>
       </div>
-
       <div id="vocabOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
-
       <div id="vocabFeedback" class="hidden mb-6 p-5 rounded-2xl bg-brand-dark border shadow-inner">
         <div class="flex items-center gap-2 mb-2">
           <i id="vocabFeedbackIcon" class="fas text-xl"></i>
@@ -56,7 +54,6 @@
         </div>
         <p id="vocabExplanation" class="text-sm text-gray-300 leading-relaxed"></p>
       </div>
-
       <button id="nextVocabBtn" onclick="nextVocabQuest()" class="hidden w-full mt-auto bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale flex justify-center items-center gap-2">
         Next Question <i class="fas fa-arrow-right text-sm"></i>
       </button>
@@ -72,14 +69,14 @@
         </div>
       </div>
       <div class="mt-4 flex justify-between items-end">
-        <p id="taskType" class="text-xl font-extrabold text-white tracking-tight">Task 1: The Heavy Lift</p>
-        <span class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md"><span id="taskProgress" class="text-brand-blue font-bold">1</span> / 2</span>
+        <p id="taskType" class="text-xl font-extrabold text-white tracking-tight text-brand-blue">Loading...</p>
+        <span class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md"><span id="taskProgress" class="text-brand-blue font-bold">1</span> / <span id="speakTotal">...</span></span>
       </div>
     </header>
     <main class="flex-grow p-6 flex flex-col">
       <div class="bg-brand-dark p-7 rounded-3xl shadow-xl mb-8 border border-gray-800">
         <p class="text-[11px] text-brand-blue font-bold mb-3 uppercase tracking-widest opacity-80">Target Sentence</p>
-        <p id="targetSentence" class="text-xl font-semibold leading-relaxed text-white font-sans"></p>
+        <p id="targetSentence" class="text-xl font-semibold leading-relaxed text-white font-sans text-center text-gray-400 text-sm mt-2">載入題庫中...</p>
       </div>
       <div id="speakFeedbackArea" class="hidden mb-6"><div class="p-5 rounded-2xl w-full text-center flex flex-col items-center" id="speakFeedbackBox"><p class="text-xs font-bold mb-1 uppercase tracking-wider" id="speakScoreLabel">Analysis Result</p><div class="flex items-end gap-1"><p class="text-5xl font-extrabold" id="speakScoreValue">0</p><p class="text-lg font-bold pb-1">%</p></div><p class="text-sm mt-3 text-gray-300 font-mono italic" id="speakUserText"></p></div></div>
       <div class="mt-auto flex justify-center gap-6">
@@ -166,32 +163,44 @@
       }
     }
 
+    // 💥 隨機洗牌演算法 (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+      let currentIndex = array.length, randomIndex;
+      while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+      }
+      return array;
+    }
+
     // -----------------------------------------
-    // 💥 v1.1 動態讀取題庫系統
+    // 💥 動態讀取 + Shuffle: Vocab 系統
     // -----------------------------------------
     let vocabData = []; 
     let currentVocabIndex = 0; 
     let vocabScore = 0; 
     let vocabAnswered = false;
+    const DAILY_VOCAB_LIMIT = 5; // 每日限制做 5 題，保持高強度精簡
 
     async function fetchVocabData() {
       try {
         const response = await fetch('vocab-data.json');
-        if (!response.ok) throw new Error('Network response was not ok');
+        if (!response.ok) throw new Error('Network error');
         
-        vocabData = await response.json();
+        let allVocab = await response.json();
+        // 洗牌並抽出每日指定題數
+        vocabData = shuffleArray(allVocab).slice(0, DAILY_VOCAB_LIMIT);
         
         document.getElementById('vocabTotal').innerText = vocabData.length;
         loadVocabQuest();
       } catch (error) {
-        console.error("題庫載入失敗:", error);
-        document.getElementById('vocabSentence').innerHTML = '<span class="text-brand-red font-bold flex items-center justify-center gap-2"><i class="fas fa-exclamation-triangle"></i> 無法載入題庫 (vocab-data.json)，請確認檔案已上傳。</span>';
+        document.getElementById('vocabSentence').innerHTML = '<span class="text-brand-red font-bold flex items-center justify-center gap-2"><i class="fas fa-exclamation-triangle"></i> 無法載入題庫 (vocab-data.json)</span>';
       }
     }
 
     function loadVocabQuest() {
-      if (vocabData.length === 0) return; // 避免未載入完成時報錯
-      
+      if (vocabData.length === 0) return; 
       vocabAnswered = false;
       const quest = vocabData[currentVocabIndex];
       document.getElementById('vocabProgress').innerText = currentVocabIndex + 1;
@@ -203,7 +212,6 @@
       quest.options.forEach((opt, index) => {
         const btn = document.createElement('div');
         btn.className = "w-full flex justify-between items-center p-4 rounded-xl border border-gray-700 bg-brand-dark text-gray-200 cursor-pointer transition-all hover:border-brand-blue vocab-option-btn";
-        
         btn.innerHTML = `
           <div class="flex-grow font-semibold text-lg flex items-center flex-wrap">
             <span class="mr-2">${opt.word}</span>
@@ -213,27 +221,12 @@
             <i class="fas fa-volume-up text-brand-blue text-lg"></i>
           </button>
         `;
-        
-        btn.onclick = (e) => {
-          if (e.target.closest('button')) return; 
-          checkVocabAnswer(index, btn, opt); 
-        };
+        btn.onclick = (e) => { if (e.target.closest('button')) return; checkVocabAnswer(index, btn, opt); };
         optionsContainer.appendChild(btn);
       });
 
       document.getElementById('vocabFeedback').classList.add('hidden');
       document.getElementById('nextVocabBtn').classList.add('hidden');
-    }
-
-    function speakWord(word, event) {
-      if(event) event.stopPropagation();
-      const utterance = new SpeechSynthesisUtterance(word);
-      const savedVoiceURI = localStorage.getItem('preferred_voice_uri');
-      if (savedVoiceURI) {
-        const preferredVoice = speechSynthesis.getVoices().find(v => v.voiceURI === savedVoiceURI);
-        if (preferredVoice) utterance.voice = preferredVoice;
-      }
-      window.speechSynthesis.speak(utterance);
     }
 
     function checkVocabAnswer(selectedIndex, btnElement, selectedOptionData) {
@@ -260,15 +253,13 @@
       }
 
       saveToVocabVault(quest.options[quest.correctIndex].word, quest.options[quest.correctIndex].trans, quest.explanation);
-
       document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', `<span class="text-brand-green font-bold border-b-2 border-brand-green mx-1 px-1">${quest.options[quest.correctIndex].word}</span>`);
       document.getElementById('nextVocabBtn').classList.remove('hidden');
     }
 
     function saveToVocabVault(word, trans, explanation) {
       let data = loadUserData();
-      const exists = data.savedVocab.find(v => v.word === word);
-      if (!exists) {
+      if (!data.savedVocab.find(v => v.word === word)) {
         data.savedVocab.push({ word, trans, explanation, dateAdded: getTodayDate() });
         localStorage.setItem('english_coach_data_v4', JSON.stringify(data));
       }
@@ -290,7 +281,9 @@
       } else {
         const scorePct = Math.round((vocabScore / vocabData.length) * 100);
         completeWorkout('Vocab', scorePct);
-        currentVocabIndex = 0; vocabScore = 0; loadVocabQuest();
+        // 完成後重新洗牌抽題，方便學員想 Double Workout
+        fetchVocabData(); 
+        currentVocabIndex = 0; vocabScore = 0;
       }
     }
 
@@ -327,13 +320,29 @@
     }
 
     // -----------------------------------------
-    // Speaking & 其他邏輯
+    // 💥 動態讀取 + Shuffle: Speaking 系統
     // -----------------------------------------
-    const speakTasks = [
-      { type: "Task 1: The Heavy Lift", sentence: "We must rectify the discrepancy immediately to prevent further yield loss." },
-      { type: "Task 2: The Endurance Run", sentence: "The streamlined process has significantly improved our audit efficiency." }
-    ];
-    let currentSpeakIndex = 0; let speakDailyScore = 0;
+    let speakTasks = [];
+    let currentSpeakIndex = 0; 
+    let speakDailyScore = 0;
+    const DAILY_SPEAK_LIMIT = 3; // 每日限制講 3 題
+
+    async function fetchSpeakData() {
+      try {
+        const response = await fetch('speak-data.json');
+        if (!response.ok) throw new Error('Network error');
+        
+        let allSpeak = await response.json();
+        // 洗牌並抽出每日指定題數
+        speakTasks = shuffleArray(allSpeak).slice(0, DAILY_SPEAK_LIMIT);
+        
+        document.getElementById('speakTotal').innerText = speakTasks.length;
+        loadSpeakTask();
+      } catch (error) {
+        document.getElementById('targetSentence').innerHTML = '<span class="text-brand-red font-bold">無法載入題庫 (speak-data.json)</span>';
+      }
+    }
+
     const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
     let recognition; let isRecording = false;
     if (SpeechRec) {
@@ -341,14 +350,30 @@
       recognition.onresult = (e) => calculateSpeakScore(e.results[0][0].transcript);
       recognition.onspeechend = stopRecording; recognition.onerror = stopRecording;
     }
+
     function loadSpeakTask() {
+      if (speakTasks.length === 0) return;
       document.getElementById('taskProgress').innerText = currentSpeakIndex + 1;
+      document.getElementById('taskType').innerText = speakTasks[currentSpeakIndex].type;
       document.getElementById('targetSentence').innerText = speakTasks[currentSpeakIndex].sentence;
       document.getElementById('speakFeedbackArea').classList.add('hidden');
       document.getElementById('nextSpeakBtn').classList.add('hidden');
     }
+
+    function speakWord(word, event) {
+      if(event) event.stopPropagation();
+      const utterance = new SpeechSynthesisUtterance(word);
+      const savedVoiceURI = localStorage.getItem('preferred_voice_uri');
+      if (savedVoiceURI) {
+        const preferredVoice = speechSynthesis.getVoices().find(v => v.voiceURI === savedVoiceURI);
+        if (preferredVoice) utterance.voice = preferredVoice;
+      }
+      window.speechSynthesis.speak(utterance);
+    }
+    
     function playSpeakAudio() { speakWord(speakTasks[currentSpeakIndex].sentence, null); }
     function toggleRecording() { isRecording ? stopRecording() : startRecording(); }
+    
     function startRecording() {
       if(!recognition) return alert("Browser not supported");
       recognition.start(); isRecording = true;
@@ -364,6 +389,7 @@
       document.getElementById('recordRipple').classList.remove('animate-ping', 'opacity-50');
       document.getElementById('recordingStatus').innerText = "";
     }
+    
     function calculateSpeakScore(spokenText) {
       const targetWords = speakTasks[currentSpeakIndex].sentence.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
       const spokenWords = spokenText.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
@@ -382,14 +408,20 @@
         document.getElementById('speakScoreLabel').innerText = "Retry Required (Need 85%)";
       }
     }
+    
     function nextSpeakTask() {
-      if (currentSpeakIndex < speakTasks.length - 1) { currentSpeakIndex++; loadSpeakTask();
+      if (currentSpeakIndex < speakTasks.length - 1) { 
+        currentSpeakIndex++; loadSpeakTask();
       } else {
         const avg = Math.round(speakDailyScore / speakTasks.length);
-        completeWorkout('Speaking', avg); currentSpeakIndex = 0; speakDailyScore = 0; loadSpeakTask();
+        completeWorkout('Speaking', avg); 
+        // 完成後重新洗牌抽題
+        fetchSpeakData();
+        currentSpeakIndex = 0; speakDailyScore = 0;
       }
     }
     
+    // 日曆與結算
     function renderCalendar() {
       const data = loadUserData();
       document.getElementById('progressTotalScore').innerText = data.totalScore;
@@ -428,6 +460,7 @@
     }
     function closeSummary() { document.getElementById('summaryModal').classList.add('hidden'); }
 
+    // 語音設定
     let voices = [];
     function popVoices() {
       voices = speechSynthesis.getVoices().filter(v => v.lang.includes('en'));
@@ -442,9 +475,10 @@
     document.getElementById('voiceSelect').addEventListener('change', (e) => localStorage.setItem('preferred_voice_uri', voices[e.target.value].voiceURI));
     function testVoice() { speakWord("Hello, I am your coach.", null); }
 
+    // 啟動載入
     window.onload = () => {
       fetchVocabData(); 
-      loadSpeakTask();
+      fetchSpeakData(); // 新增載入 Speaking JSON
       document.querySelectorAll('.streakValue').forEach(el => el.innerText = `${loadUserData().currentStreak}`);
       switchView('vocab'); 
       popVoices();
