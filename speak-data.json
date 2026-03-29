@@ -237,5 +237,63 @@
     "type": "Stage 40: Ultimate Grandmaster (C2)",
     "sentence": "Delineating the specific responsibilities for each resident engineer will mitigate the risk of overlapping work and miscommunication.",
     "trans": "清晰界定每位駐廠工程師的具體職責，將減輕工作重疊和溝通不良的風險。"
+  },{
+    "id": "s41",
+    "type": "C2 Dev: The Heavy Lift",
+    "sentence": "By hardcoding the serial number validation into the HTML tool, we successfully streamlined the entire OBA inspection process.",
+    "trans": "透過將序號驗證寫入 HTML 工具中，我們成功精簡了整個 OBA 檢驗流程。"
+  },
+  {
+    "id": "s42",
+    "type": "C1 Engineering: Focus",
+    "sentence": "The erratic temperature fluctuations strongly indicate that the vehicle's thermostat requires immediate replacement.",
+    "trans": "極不穩定的溫度波動強烈表明該車輛的恆溫器需要立即更換。"
+  },
+  {
+    "id": "s43",
+    "type": "C1 Fitness: Natural Rhythm",
+    "sentence": "Strict adherence to a high-protein diet is absolutely imperative if we intend to push past this stubborn weight loss plateau.",
+    "trans": "如果我們打算突破這個頑固的減重停滯期，嚴格遵守高蛋白飲食是絕對必要的。"
+  },
+  {
+    "id": "s44",
+    "type": "C2 Psychology: The Sprint",
+    "sentence": "Practicing congruent communication helps us avoid defensive postures like placating or blaming when resolving conflicts.",
+    "trans": "實踐內外一致的溝通，有助於我們在解決衝突時，避免討好或指責等防衛姿態。"
+  },
+  {
+    "id": "s45",
+    "type": "C1 Event: Formal Flow",
+    "sentence": "Finalizing the banquet seating chart requires meticulous coordination to accommodate everyone's dietary restrictions.",
+    "trans": "確定宴會座位表需要一絲不苟的協調，以配合每個人的飲食限制。"
+  },{
+    "id": "s46",
+    "type": "C2 System: The Endurance Run",
+    "sentence": "Implementing the OBA 2.0 web tool obviates the need for manual serial number verification across different factory sites.",
+    "trans": "實施 OBA 2.0 網頁工具，排除了在不同廠區進行手動序號驗證的需要。"
+  },
+  {
+    "id": "s47",
+    "type": "C1 Psychology: Natural Flow",
+    "sentence": "Recognizing our default placating or blaming behaviors is the first step toward congruent and effective communication.",
+    "trans": "意識到我們預設的討好或指責行為，是邁向一致且有效溝通的第一步。"
+  },
+  {
+    "id": "s48",
+    "type": "C1 Technical: Focus",
+    "sentence": "The itemized repair quote for the water tank and thermostat requires careful scrutiny before we authorize the work.",
+    "trans": "水箱和恆溫器的逐項維修報價需要仔細審查，然後我們才能授權動工。"
+  },
+  {
+    "id": "s49",
+    "type": "C2 Discipline: The Sprint",
+    "sentence": "Pushing through a weight loss plateau demands not only rigorous physical exertion but also unwavering dietary discipline.",
+    "trans": "突破減重停滯期不僅需要嚴格的體力消耗，還需要堅定不移的飲食紀律。"
+  },
+  {
+    "id": "s50",
+    "type": "C1 Presentation: Masterclass",
+    "sentence": "I have compiled a comprehensive training module to elucidate the fundamental concepts of the 8D problem-solving process.",
+    "trans": "我已經彙編了一個全面的培訓模組，以闡明 8D 解決問題流程的基本概念。"
   }
 ]
