@@ -143,4 +143,124 @@
     "correctIndex": 1,
     "explanation": "Impediment 係障礙物嘅意思。"
   }
+  ,{
+    "id": "v13",
+    "sentence": "Trying to assemble the IKEA furniture without instructions proved to be a incredibly {blank} and frustrating task.",
+    "options": [
+      { "word": "lucrative", "trans": "好賺的" },
+      { "word": "tedious", "trans": "冗長乏味的" },
+      { "word": "exhilarating", "trans": "令人興奮的" },
+      { "word": "spontaneous", "trans": "自發的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Tedious 形容一件工作或者過程又長又悶，令人疲倦，非常適合形容砌傢俬。"
+  },
+  {
+    "id": "v14",
+    "sentence": "Despite losing his job and his apartment in the same week, Jack remained incredibly {blank} and immediately started looking for new opportunities.",
+    "options": [
+      { "word": "resilient", "trans": "有韌性的 / 具恢復力的" },
+      { "word": "cynical", "trans": "憤世嫉俗的" },
+      { "word": "vulnerable", "trans": "脆弱的" },
+      { "word": "apathetic", "trans": "冷漠的" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Resilient 指喺逆境中能夠迅速恢復過來，係讚美人心理質素嘅高級用字。"
+  },
+  {
+    "id": "v15",
+    "sentence": "My gym trainer is incredibly {blank} about my form; he will correct me even if my elbow is just one inch out of place.",
+    "options": [
+      { "word": "lenient", "trans": "寬容的" },
+      { "word": "meticulous", "trans": "一絲不苟的 / 嚴謹的" },
+      { "word": "oblivious", "trans": "未察覺的" },
+      { "word": "haphazard", "trans": "隨意的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Meticulous 形容人對細節極度注重，一絲不苟。"
+  },
+  {
+    "id": "v16",
+    "sentence": "Smartphones have become so {blank} that it is almost impossible to imagine a world without them.",
+    "options": [
+      { "word": "obsolete", "trans": "淘汰的" },
+      { "word": "ubiquitous", "trans": "無所不在的" },
+      { "word": "ephemeral", "trans": "短暫的" },
+      { "word": "scarce", "trans": "稀有的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Ubiquitous 係 C1 必考字，解作 everywhere，常用於形容科技或流行現象。"
+  },
+  {
+    "id": "v17",
+    "sentence": "I tend to {blank} when faced with difficult tasks, often leaving them until the night before the deadline.",
+    "options": [
+      { "word": "expedite", "trans": "加速" },
+      { "word": "procrastinate", "trans": "拖延" },
+      { "word": "delegate", "trans": "委派" },
+      { "word": "scrutinize", "trans": "仔細審查" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Procrastinate 係「拖延症」嘅動詞，生活必備字。"
+  },
+  {
+    "id": "v18",
+    "sentence": "Taking a hot bath is a great way to {blank} muscle soreness after a heavy Push Day workout.",
+    "options": [
+      { "word": "aggravate", "trans": "加劇" },
+      { "word": "alleviate", "trans": "減輕 / 舒緩" },
+      { "word": "exacerbate", "trans": "惡化" },
+      { "word": "instigate", "trans": "煽動" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Alleviate 經常用來形容減輕痛楚、壓力或問題。"
+  },
+  {
+    "id": "v19",
+    "sentence": "Instead of waiting for the perfect moment, she made a {blank} decision to buy a plane ticket to Japan.",
+    "options": [
+      { "word": "pragmatic", "trans": "務實的" },
+      { "word": "spontaneous", "trans": "一時衝動的 / 自發的" },
+      { "word": "calculated", "trans": "深思熟慮的" },
+      { "word": "tedious", "trans": "冗長乏味的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Spontaneous 形容沒有預先計劃、隨心所欲嘅行動。"
+  },
+  {
+    "id": "v20",
+    "sentence": "The joy of eating a whole tub of ice cream is {blank}; the guilt, however, lasts much longer.",
+    "options": [
+      { "word": "eternal", "trans": "永恆的" },
+      { "word": "ephemeral", "trans": "短暫的 / 轉瞬即逝的" },
+      { "word": "profound", "trans": "深遠的" },
+      { "word": "ubiquitous", "trans": "無所不在的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Ephemeral 係高級文學/生活字，指事物存在時間極短。"
+  },
+  {
+    "id": "v21",
+    "sentence": "When planning the wedding budget, Jack took a very {blank} approach, prioritizing good food over expensive flowers.",
+    "options": [
+      { "word": "frivolous", "trans": "輕浮的 / 無謂的" },
+      { "word": "pragmatic", "trans": "務實的 / 實用的" },
+      { "word": "sentimental", "trans": "多愁善感的" },
+      { "word": "ambiguous", "trans": "模稜兩可的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Pragmatic 形容人做事講求實際、實用，唔搞花臣。"
+  },
+  {
+    "id": "v22",
+    "sentence": "With the rapid advancement of AI, many traditional clerical jobs are quickly becoming {blank}.",
+    "options": [
+      { "word": "lucrative", "trans": "好賺的" },
+      { "word": "indispensable", "trans": "不可或缺的" },
+      { "word": "obsolete", "trans": "過時的 / 被淘汰的" },
+      { "word": "versatile", "trans": "多才多藝的" }
+    ],
+    "correctIndex": 2,
+    "explanation": "Obsolete 形容因為有更好嘅替代品出現，而被時代淘汰嘅事物。"
+  }
 ]
