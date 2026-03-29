@@ -693,16 +693,18 @@ let vocabData = []; let currentVocabIndex = 0; let vocabScore = 0; let vocabAnsw
 let currentVocabLevel = 'c1';
 
 function changeVocabLevel(level) {
-  if(currentVocabLevel === level) return;
-  currentVocabLevel = level;
-  document.querySelectorAll('.vocab-lvl-btn').forEach(btn => {
-    btn.className = "vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold text-gray-500 transition-colors active-scale";
-  });
-  const ab = document.getElementById(`btn-lvl-${level}`);
-  if(ab) ab.className = "vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-blue text-white shadow-md transition-colors active-scale";
-  currentVocabIndex = 0; vocabScore = 0;
-  fetchVocabData();
-}
+      if(currentVocabLevel === level) return;
+      currentVocabLevel = level;
+      document.querySelectorAll('.vocab-lvl-btn').forEach(btn => {
+        btn.className = "vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold text-gray-500 transition-colors active-scale";
+      });
+      const ab = document.getElementById(`btn-lvl-${level}`);
+      if(ab) ab.className = "vocab-lvl-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-blue text-white shadow-md transition-colors active-scale";
+      currentVocabIndex = 0; vocabScore = 0;
+      
+      // 💥 核心修復：由原本直接 fetch，改為先檢查該 Level 係咪做完
+      checkDailyVocabStatus(); 
+    }
 
 function checkDailyVocabStatus() {
   const d = loadData();
