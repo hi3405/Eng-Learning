@@ -58,5 +58,604 @@
     ],
     "correctIndex": 0,
     "explanation": "Review a document 意思係提交前再仔細睇一次。"
+  },{
+    "id": "b1-6",
+    "sentence": "Can you {blank} the file to the email before sending it?",
+    "options": [
+      { "word": "attach", "trans": "附加 / 夾附" },
+      { "word": "delete", "trans": "刪除" },
+      { "word": "forget", "trans": "忘記" },
+      { "word": "print", "trans": "列印" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Attach a file 係寫 Email 必備嘅 B1 詞彙。"
+  },
+  {
+    "id": "b1-7",
+    "sentence": "We need to {blank} our hotel room before we travel to Japan.",
+    "options": [
+      { "word": "cancel", "trans": "取消" },
+      { "word": "confirm", "trans": "確認" },
+      { "word": "clean", "trans": "清潔" },
+      { "word": "leave", "trans": "離開" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Confirm a room/booking 指確認預訂，旅行常用。"
+  },
+  {
+    "id": "b1-8",
+    "sentence": "It is important to {blank} your cat twice a day to keep it healthy.",
+    "options": [
+      { "word": "feed", "trans": "餵飼" },
+      { "word": "wash", "trans": "清洗" },
+      { "word": "scold", "trans": "責罵" },
+      { "word": "ignore", "trans": "忽略" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Feed 係餵食嘅意思，照顧寵物必備。"
+  },
+  {
+    "id": "b1-9",
+    "sentence": "I strongly {blank} that you drink more water after your workout.",
+    "options": [
+      { "word": "complain", "trans": "投訴" },
+      { "word": "recommend", "trans": "建議 / 推薦" },
+      { "word": "deny", "trans": "否認" },
+      { "word": "forget", "trans": "忘記" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Recommend 係提出建議時最常用嘅動詞。"
+  },
+  {
+    "id": "b1-10",
+    "sentence": "They plan to {blank} a big party for their upcoming wedding.",
+    "options": [
+      { "word": "organize", "trans": "籌辦 / 組織" },
+      { "word": "destroy", "trans": "破壞" },
+      { "word": "avoid", "trans": "避開" },
+      { "word": "refuse", "trans": "拒絕" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Organize a party/event 意思係籌備或舉辦活動。"
+  },
+  {
+    "id": "b1-11",
+    "sentence": "If you want to lose weight, you should {blank} eating too much sugar.",
+    "options": [
+      { "word": "enjoy", "trans": "享受" },
+      { "word": "avoid", "trans": "避免" },
+      { "word": "continue", "trans": "繼續" },
+      { "word": "start", "trans": "開始" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Avoid doing something 意思係盡量唔好做某事。"
+  },
+  {
+    "id": "b1-12",
+    "sentence": "Please {blank} me when the new software is ready to use.",
+    "options": [
+      { "word": "inform", "trans": "通知" },
+      { "word": "guess", "trans": "猜測" },
+      { "word": "blame", "trans": "責怪" },
+      { "word": "hide", "trans": "隱瞞" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Inform someone 係正式場合中「通知某人」嘅用法。"
+  },
+  {
+    "id": "b1-13",
+    "sentence": "The mechanic needs to {blank} the engine of my car this weekend.",
+    "options": [
+      { "word": "break", "trans": "打破" },
+      { "word": "repair", "trans": "修理" },
+      { "word": "sell", "trans": "賣" },
+      { "word": "paint", "trans": "塗漆" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Repair 係修理汽車或機器嘅常用字。"
+  },
+  {
+    "id": "b1-14",
+    "sentence": "He had to {blank} the invitation because he was sick.",
+    "options": [
+      { "word": "accept", "trans": "接受" },
+      { "word": "decline", "trans": "婉拒" },
+      { "word": "create", "trans": "創造" },
+      { "word": "send", "trans": "發送" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Decline an invitation 係禮貌地拒絕邀請嘅講法。"
+  },
+  {
+    "id": "b1-15",
+    "sentence": "Drinking enough water can {blank} your overall health and energy levels.",
+    "options": [
+      { "word": "damage", "trans": "損害" },
+      { "word": "improve", "trans": "改善 / 提升" },
+      { "word": "reduce", "trans": "減少" },
+      { "word": "stop", "trans": "停止" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Improve health 係指令健康狀況變好。"
+  },
+  {
+    "id": "b1-16",
+    "sentence": "Make sure you have enough {blank} before you buy that expensive phone.",
+    "options": [
+      { "word": "budget", "trans": "預算" },
+      { "word": "time", "trans": "時間" },
+      { "word": "space", "trans": "空間" },
+      { "word": "luck", "trans": "運氣" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Budget 指金錢上嘅預算，理財必備字。"
+  },
+  {
+    "id": "b1-17",
+    "sentence": "I need to {blank} my boss for a few days off next month.",
+    "options": [
+      { "word": "ask", "trans": "請求 / 問" },
+      { "word": "tell", "trans": "告訴" },
+      { "word": "order", "trans": "命令" },
+      { "word": "force", "trans": "強迫" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Ask for days off 意思係請假。"
+  },
+  {
+    "id": "b1-18",
+    "sentence": "The store will {blank} a full refund if the product is broken.",
+    "options": [
+      { "word": "take", "trans": "拿取" },
+      { "word": "provide", "trans": "提供" },
+      { "word": "keep", "trans": "保留" },
+      { "word": "steal", "trans": "偷竊" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Provide a refund 指提供退款服務。"
+  },
+  {
+    "id": "b1-19",
+    "sentence": "We should {blank} our options carefully before making a decision.",
+    "options": [
+      { "word": "consider", "trans": "考慮" },
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "forget", "trans": "忘記" },
+      { "word": "drop", "trans": "放棄" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Consider options 係做決定前仔細諗清楚嘅意思。"
+  },
+  {
+    "id": "b1-20",
+    "sentence": "Can you {blank} the meeting schedule with the rest of the team?",
+    "options": [
+      { "word": "hide", "trans": "隱藏" },
+      { "word": "share", "trans": "分享" },
+      { "word": "lose", "trans": "遺失" },
+      { "word": "block", "trans": "封鎖" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Share 喺辦公室通常指將資訊或文件發送俾其他人。"
+  },
+  {
+    "id": "b1-21",
+    "sentence": "You must {blank} the form with your personal details.",
+    "options": [
+      { "word": "empty", "trans": "清空" },
+      { "word": "complete", "trans": "完成 / 填寫" },
+      { "word": "burn", "trans": "燒毀" },
+      { "word": "read", "trans": "閱讀" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Complete a form 意思係填妥表格。"
+  },
+  {
+    "id": "b1-22",
+    "sentence": "It is not polite to {blank} someone when they are speaking.",
+    "options": [
+      { "word": "listen", "trans": "聆聽" },
+      { "word": "interrupt", "trans": "打斷" },
+      { "word": "help", "trans": "幫助" },
+      { "word": "support", "trans": "支持" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Interrupt 指人哋講緊嘢嗰陣插嘴。"
+  },
+  {
+    "id": "b1-23",
+    "sentence": "We are looking for an {blank} way to solve this daily problem.",
+    "options": [
+      { "word": "expensive", "trans": "昂貴的" },
+      { "word": "effective", "trans": "有效的" },
+      { "word": "useless", "trans": "無用的" },
+      { "word": "angry", "trans": "生氣的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Effective way 即係行得通、有成效嘅方法。"
+  },
+  {
+    "id": "b1-24",
+    "sentence": "I will {blank} the main points of the project during the presentation.",
+    "options": [
+      { "word": "explain", "trans": "解釋" },
+      { "word": "confuse", "trans": "使困惑" },
+      { "word": "complain", "trans": "投訴" },
+      { "word": "guess", "trans": "猜測" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Explain 指清楚說明重點或細節。"
+  },
+  {
+    "id": "b1-25",
+    "sentence": "The hotel offers a free shuttle bus to {blank} you to the airport.",
+    "options": [
+      { "word": "leave", "trans": "留下" },
+      { "word": "transport", "trans": "運送 / 接載" },
+      { "word": "push", "trans": "推" },
+      { "word": "forget", "trans": "忘記" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Transport 喺旅遊語境指交通接載服務。"
+  },
+  {
+    "id": "b1-26",
+    "sentence": "Please {blank} that you have received my email.",
+    "options": [
+      { "word": "deny", "trans": "否認" },
+      { "word": "acknowledge", "trans": "承認 / 確認收到" },
+      { "word": "refuse", "trans": "拒絕" },
+      { "word": "ignore", "trans": "忽略" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Acknowledge receipt 係 Email 常見句，指確認收到。"
+  },
+  {
+    "id": "b1-27",
+    "sentence": "We need to {blank} the old documents from the computer to save space.",
+    "options": [
+      { "word": "keep", "trans": "保留" },
+      { "word": "remove", "trans": "移除" },
+      { "word": "copy", "trans": "複製" },
+      { "word": "save", "trans": "儲存" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Remove 意思係移走或刪除。"
+  },
+  {
+    "id": "b1-28",
+    "sentence": "You should {blank} your goals clearly so everyone understands them.",
+    "options": [
+      { "word": "define", "trans": "界定 / 清楚說明" },
+      { "word": "hide", "trans": "隱藏" },
+      { "word": "guess", "trans": "猜測" },
+      { "word": "forget", "trans": "忘記" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Define goals 指清楚定下目標內容。"
+  },
+  {
+    "id": "b1-29",
+    "sentence": "The new gym is very {blank} because it is right next to my office.",
+    "options": [
+      { "word": "far", "trans": "遙遠的" },
+      { "word": "convenient", "trans": "方便的" },
+      { "word": "difficult", "trans": "困難的" },
+      { "word": "expensive", "trans": "昂貴的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Convenient 形容位置或時間上帶來方便。"
+  },
+  {
+    "id": "b1-30",
+    "sentence": "I want to {blank} my friend for his help with the project.",
+    "options": [
+      { "word": "blame", "trans": "責怪" },
+      { "word": "appreciate", "trans": "感激 / 感謝" },
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "scold", "trans": "責罵" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Appreciate 係比 thank you 更正式嘅表達感激方法。"
+  },
+  {
+    "id": "b1-31",
+    "sentence": "We have a strictly {blank} schedule today, so please do not be late.",
+    "options": [
+      { "word": "tight", "trans": "緊湊的" },
+      { "word": "free", "trans": "自由的" },
+      { "word": "empty", "trans": "空閒的" },
+      { "word": "loose", "trans": "鬆散的" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Tight schedule 形容行程排得好密。"
+  },
+  {
+    "id": "b1-32",
+    "sentence": "The chef uses fresh ingredients to {blank} the food tastes good.",
+    "options": [
+      { "word": "hope", "trans": "希望" },
+      { "word": "ensure", "trans": "確保" },
+      { "word": "guess", "trans": "猜測" },
+      { "word": "doubt", "trans": "懷疑" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Ensure 意思係保證某事發生。"
+  },
+  {
+    "id": "b1-33",
+    "sentence": "Please {blank} the meeting details to all team members.",
+    "options": [
+      { "word": "keep", "trans": "保留" },
+      { "word": "distribute", "trans": "分發 / 派發" },
+      { "word": "hide", "trans": "隱藏" },
+      { "word": "steal", "trans": "偷取" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Distribute 常用於發佈文件或資訊俾一班人。"
+  },
+  {
+    "id": "b1-34",
+    "sentence": "You should always {blank} your computer screen when you leave the desk.",
+    "options": [
+      { "word": "break", "trans": "打破" },
+      { "word": "lock", "trans": "鎖上" },
+      { "word": "sell", "trans": "賣" },
+      { "word": "open", "trans": "打開" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Lock the screen 係辦公室基本安全守則。"
+  },
+  {
+    "id": "b1-35",
+    "sentence": "The customer was very {blank} with the quick service provided.",
+    "options": [
+      { "word": "angry", "trans": "生氣的" },
+      { "word": "satisfied", "trans": "滿意的" },
+      { "word": "sad", "trans": "傷心的" },
+      { "word": "bored", "trans": "沉悶的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Satisfied 形容對服務或產品感到滿意。"
+  },
+  {
+    "id": "b1-36",
+    "sentence": "To build muscle, you need to {blank} on eating enough protein daily.",
+    "options": [
+      { "word": "focus", "trans": "專注" },
+      { "word": "give up", "trans": "放棄" },
+      { "word": "forget", "trans": "忘記" },
+      { "word": "stop", "trans": "停止" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Focus on 意思係將注意力或精力集中喺某件事。"
+  },
+  {
+    "id": "b1-37",
+    "sentence": "The company decided to {blank} the old system with a new one.",
+    "options": [
+      { "word": "keep", "trans": "保留" },
+      { "word": "replace", "trans": "替換" },
+      { "word": "fix", "trans": "修理" },
+      { "word": "hide", "trans": "隱藏" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Replace something with something 意思係用新嘢取代舊嘢。"
+  },
+  {
+    "id": "b1-38",
+    "sentence": "It is a good habit to {blank} your expenses to manage your money better.",
+    "options": [
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "track", "trans": "追蹤 / 記錄" },
+      { "word": "spend", "trans": "花費" },
+      { "word": "waste", "trans": "浪費" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Track expenses 指記錄日常開支。"
+  },
+  {
+    "id": "b1-39",
+    "sentence": "If you don't understand the question, please ask me to {blank} it.",
+    "options": [
+      { "word": "clarify", "trans": "澄清 / 解釋清楚" },
+      { "word": "complicate", "trans": "使複雜" },
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "forget", "trans": "忘記" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Clarify 係指將唔清楚嘅嘢解釋明白。"
+  },
+  {
+    "id": "b1-40",
+    "sentence": "We have a {blank} amount of time to finish this task, so let's hurry up.",
+    "options": [
+      { "word": "endless", "trans": "無盡的" },
+      { "word": "limited", "trans": "有限的" },
+      { "word": "huge", "trans": "巨大的" },
+      { "word": "extra", "trans": "額外的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Limited time 指時間唔多，需要抓緊。"
+  },
+  {
+    "id": "b1-41",
+    "sentence": "The doctor gave me some medicine to {blank} the pain in my back.",
+    "options": [
+      { "word": "increase", "trans": "增加" },
+      { "word": "relieve", "trans": "緩解 / 減輕" },
+      { "word": "cause", "trans": "引起" },
+      { "word": "start", "trans": "開始" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Relieve pain 係醫療同健康語境常見字眼。"
+  },
+  {
+    "id": "b1-42",
+    "sentence": "Please {blank} that you bring your ID card to the exam center.",
+    "options": [
+      { "word": "forget", "trans": "忘記" },
+      { "word": "remember", "trans": "記住" },
+      { "word": "deny", "trans": "否認" },
+      { "word": "doubt", "trans": "懷疑" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Remember to do something 指謹記要做某事。"
+  },
+  {
+    "id": "b1-43",
+    "sentence": "She has a lot of {blank} working in customer service.",
+    "options": [
+      { "word": "experience", "trans": "經驗" },
+      { "word": "money", "trans": "金錢" },
+      { "word": "fear", "trans": "恐懼" },
+      { "word": "anger", "trans": "憤怒" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Experience 喺職場上指工作經驗。"
+  },
+  {
+    "id": "b1-44",
+    "sentence": "We need to {blank} the number of guests attending the wedding banquet.",
+    "options": [
+      { "word": "guess", "trans": "猜測" },
+      { "word": "calculate", "trans": "計算" },
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "forget", "trans": "忘記" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Calculate 意思係準確地計出數量或金額。"
+  },
+  {
+    "id": "b1-45",
+    "sentence": "The meeting was very {blank}, and everyone shared their ideas.",
+    "options": [
+      { "word": "silent", "trans": "安靜的" },
+      { "word": "productive", "trans": "有效率的 / 富有成效的" },
+      { "word": "useless", "trans": "無用的" },
+      { "word": "boring", "trans": "沉悶的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Productive meeting 指會議有實際成果，無浪費時間。"
+  },
+  {
+    "id": "b1-46",
+    "sentence": "Can you {blank} me how to use this new coffee machine?",
+    "options": [
+      { "word": "hide", "trans": "隱藏" },
+      { "word": "show", "trans": "展示 / 教導" },
+      { "word": "prevent", "trans": "阻止" },
+      { "word": "break", "trans": "打破" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Show someone how to do something 係最自然嘅求教講法。"
+  },
+  {
+    "id": "b1-47",
+    "sentence": "It is a rule to {blank} formal clothes in the office.",
+    "options": [
+      { "word": "buy", "trans": "買" },
+      { "word": "wear", "trans": "穿著" },
+      { "word": "sell", "trans": "賣" },
+      { "word": "wash", "trans": "清洗" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Wear clothes 指著衫，formal clothes 係正裝。"
+  },
+  {
+    "id": "b1-48",
+    "sentence": "The team will {blank} the results of the survey tomorrow.",
+    "options": [
+      { "word": "hide", "trans": "隱藏" },
+      { "word": "discuss", "trans": "討論" },
+      { "word": "delete", "trans": "刪除" },
+      { "word": "ignore", "trans": "忽略" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Discuss results 指針對結果進行商討。"
+  },
+  {
+    "id": "b1-49",
+    "sentence": "He was very {blank} when he saw the surprise birthday cake.",
+    "options": [
+      { "word": "bored", "trans": "沉悶的" },
+      { "word": "amazed", "trans": "驚喜的" },
+      { "word": "angry", "trans": "生氣的" },
+      { "word": "sleepy", "trans": "想睡的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Amazed 形容感到非常驚喜或驚訝。"
+  },
+  {
+    "id": "b1-50",
+    "sentence": "You should {blank} your resume before applying for the new job.",
+    "options": [
+      { "word": "burn", "trans": "燒毀" },
+      { "word": "update", "trans": "更新" },
+      { "word": "lose", "trans": "遺失" },
+      { "word": "forget", "trans": "忘記" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Update a resume 意思係將履歷表嘅資料更新到最新。"
+  },
+  {
+    "id": "b1-51",
+    "sentence": "The weather forecast says it might rain, so bring an {blank}.",
+    "options": [
+      { "word": "umbrella", "trans": "雨傘" },
+      { "word": "sunglasses", "trans": "太陽眼鏡" },
+      { "word": "ice cream", "trans": "雪糕" },
+      { "word": "oven", "trans": "焗爐" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Umbrella 係落雨必備嘅日常名詞。"
+  },
+  {
+    "id": "b1-52",
+    "sentence": "We need to {blank} the broken window as soon as possible.",
+    "options": [
+      { "word": "break", "trans": "打破" },
+      { "word": "fix", "trans": "修理" },
+      { "word": "open", "trans": "打開" },
+      { "word": "paint", "trans": "塗漆" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Fix 係修理事物最簡單直接嘅動詞。"
+  },
+  {
+    "id": "b1-53",
+    "sentence": "The restaurant is famous for its excellent customer {blank}.",
+    "options": [
+      { "word": "food", "trans": "食物" },
+      { "word": "service", "trans": "服務" },
+      { "word": "music", "trans": "音樂" },
+      { "word": "noise", "trans": "噪音" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Customer service 即係客戶服務。"
+  },
+  {
+    "id": "b1-54",
+    "sentence": "Please {blank} the volume of the radio, it's too loud.",
+    "options": [
+      { "word": "increase", "trans": "增加" },
+      { "word": "decrease", "trans": "減少 / 調低" },
+      { "word": "buy", "trans": "買" },
+      { "word": "break", "trans": "打破" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Decrease the volume 意思係較細聲。"
+  },
+  {
+    "id": "b1-55",
+    "sentence": "It is necessary to {blank} the terms before you sign the contract.",
+    "options": [
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "understand", "trans": "理解 / 明白" },
+      { "word": "forget", "trans": "忘記" },
+      { "word": "delete", "trans": "刪除" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Understand the terms 指明白條款內容。"
   }
 ]
