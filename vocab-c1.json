@@ -741,5 +741,243 @@
     ],
     "correctIndex": 1,
     "explanation": "Contingency plan 就是「Plan B」，用以應付突發狀況的備用方案。"
+  },{
+    "id": "c1-63",
+    "sentence": "The newly coded HTML web tool was designed to {blank} the tedious process of comparing serial numbers between QC2 and QMB.",
+    "options": [
+      { "word": "exacerbate", "trans": "惡化" },
+      { "word": "streamline", "trans": "精簡 / 優化" },
+      { "word": "obfuscate", "trans": "使模糊" },
+      { "word": "prolong", "trans": "延長" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Streamline a process 指透過自動化或重組來提高工作效率。"
+  },
+  {
+    "id": "c1-64",
+    "sentence": "The temperature of the Subaru Levorg 1.6 engine was fluctuating erratically, indicating a highly {blank} thermostat.",
+    "options": [
+      { "word": "pristine", "trans": "完美的" },
+      { "word": "defective", "trans": "有缺陷的 / 故障的" },
+      { "word": "resilient", "trans": "有韌性的" },
+      { "word": "lucrative", "trans": "有利可圖的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Defective 常用於形容機械零件、產品出現故障或瑕疵。"
+  },
+  {
+    "id": "c1-65",
+    "sentence": "To push past the 89.9kg threshold, strict {blank} to the high-protein, zero-starch dinner protocol is absolutely imperative.",
+    "options": [
+      { "word": "aversion", "trans": "厭惡" },
+      { "word": "adherence", "trans": "遵守 / 堅持" },
+      { "word": "immunity", "trans": "免疫力" },
+      { "word": "indifference", "trans": "冷漠" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Adherence to a rule/diet 係 C1 級別固定搭配，指嚴格遵守。"
+  },
+  {
+    "id": "c1-66",
+    "sentence": "Securing the banquet venue at Grand Luhu in Tamsui requires {blank} attention to the guest list and dietary preferences.",
+    "options": [
+      { "word": "frivolous", "trans": "輕浮的" },
+      { "word": "haphazard", "trans": "隨意的" },
+      { "word": "meticulous", "trans": "一絲不苟的 / 極度嚴謹的" },
+      { "word": "sporadic", "trans": "零星的" }
+    ],
+    "correctIndex": 2,
+    "explanation": "Meticulous attention 常用於形容籌備大型活動時對細節嘅極度關注。"
+  },
+  {
+    "id": "c1-67",
+    "sentence": "After a grueling Push/Pull/Leg training cycle, it is vital to let your muscle fibers {blank} to prevent severe DOMS.",
+    "options": [
+      { "word": "deteriorate", "trans": "惡化" },
+      { "word": "atrophy", "trans": "萎縮" },
+      { "word": "recuperate", "trans": "恢復 / 康復" },
+      { "word": "contract", "trans": "收縮" }
+    ],
+    "correctIndex": 2,
+    "explanation": "Recuperate 指經歷巨大消耗或創傷後進行恢復。"
+  },
+  {
+    "id": "c1-68",
+    "sentence": "The newly installed security endpoint software will immediately {blank} any unauthorized USB devices from mounting.",
+    "options": [
+      { "word": "facilitate", "trans": "促進" },
+      { "word": "intercept", "trans": "攔截 / 阻止" },
+      { "word": "endorse", "trans": "贊同" },
+      { "word": "propel", "trans": "推動" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Intercept 喺網絡安全領域指半途攔截、阻止資料或裝置存取。"
+  },
+  {
+    "id": "c1-69",
+    "sentence": "A core principle of Satir communication is maintaining a {blank} state, where internal emotions match outward expressions.",
+    "options": [
+      { "word": "congruent", "trans": "一致的 / 吻合的" },
+      { "word": "contradictory", "trans": "矛盾的" },
+      { "word": "hostile", "trans": "敵對的" },
+      { "word": "ambiguous", "trans": "模稜兩可的" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Congruent 係心理學名詞，指內外一致、真誠。"
+  },
+  {
+    "id": "c1-70",
+    "sentence": "The sudden spike in defective field returns is a clear {blank} that the current SMT parameters are failing.",
+    "options": [
+      { "word": "anecdote", "trans": "軼事" },
+      { "word": "anomaly", "trans": "異常事物" },
+      { "word": "indication", "trans": "跡象 / 指示" },
+      { "word": "illusion", "trans": "幻覺" }
+    ],
+    "correctIndex": 2,
+    "explanation": "A clear indication 指明顯嘅跡象或徵兆。"
+  },
+  {
+    "id": "c1-71",
+    "sentence": "The cat was noticeably {blank} for a few days post-operation, sleeping far more than usual.",
+    "options": [
+      { "word": "hyperactive", "trans": "過度活躍的" },
+      { "word": "agitated", "trans": "焦躁的" },
+      { "word": "lethargic", "trans": "昏睡的 / 無精打采的" },
+      { "word": "hostile", "trans": "充滿敵意的" }
+    ],
+    "correctIndex": 2,
+    "explanation": "Lethargic 形容極度疲倦、缺乏活力，常形容生病或手術後嘅狀態。"
+  },
+  {
+    "id": "c1-72",
+    "sentence": "We must prepare a comprehensive {blank} plan in case the August weather disrupts the outdoor wedding photo booth.",
+    "options": [
+      { "word": "spontaneous", "trans": "自發的" },
+      { "word": "redundant", "trans": "多餘的" },
+      { "word": "tentative", "trans": "暫定的" },
+      { "word": "contingency", "trans": "應急的 / 備用的" }
+    ],
+    "correctIndex": 3,
+    "explanation": "Contingency plan 意思係應急方案 (Plan B)。"
+  },{
+    "id": "c1-73",
+    "sentence": "By automating the cross-checking of serial numbers, the new OBA 2.0 interface completely {blank} the risk of human error during inspections.",
+    "options": [
+      { "word": "exacerbates", "trans": "惡化" },
+      { "word": "obviates", "trans": "消除 / 排除 (困難/需要)" },
+      { "word": "triggers", "trans": "觸發" },
+      { "word": "simulates", "trans": "模擬" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Obviate 係極高階 C2 詞彙，指透過預先採取措施，令某種需要或危險變得不再存在。"
+  },
+  {
+    "id": "c1-74",
+    "sentence": "The 8D problem-solving methodology is systematically structured to not just patch, but permanently {blank} the root cause of recurring SMT failures.",
+    "options": [
+      { "word": "perpetuate", "trans": "使延續" },
+      { "word": "disguise", "trans": "偽裝 / 掩飾" },
+      { "word": "eradicate", "trans": "根除 / 撲滅" },
+      { "word": "instigate", "trans": "煽動" }
+    ],
+    "correctIndex": 2,
+    "explanation": "Eradicate a problem 意思係連根拔起，徹底消滅，喺品質工程中非常關鍵。"
+  },
+  {
+    "id": "c1-75",
+    "sentence": "When confronted by an angry stakeholder about a field return, it is easy to default to a {blank} stance rather than addressing the core issue calmly.",
+    "options": [
+      { "word": "congruent", "trans": "一致的" },
+      { "word": "resilient", "trans": "有韌性的" },
+      { "word": "lucrative", "trans": "有利可圖的" },
+      { "word": "placating", "trans": "討好的 / 撫慰的" }
+    ],
+    "correctIndex": 3,
+    "explanation": "Placating 喺 Satir 溝通模式中，專指委曲求全、討好別人嘅防衛姿態。"
+  },
+  {
+    "id": "c1-76",
+    "sentence": "The mechanic presented a heavily {blank} invoice for the Subaru's water tank replacement, detailing the cost of every single component and labor hour.",
+    "options": [
+      { "word": "ambiguous", "trans": "含糊的" },
+      { "word": "vague", "trans": "模糊的" },
+      { "word": "itemized", "trans": "逐項列出的" },
+      { "word": "concise", "trans": "簡潔的" }
+    ],
+    "correctIndex": 2,
+    "explanation": "Itemized bill/invoice 商業必備詞，指將收費細節逐個項目列明嘅清單。"
+  },
+  {
+    "id": "c1-77",
+    "sentence": "Coordinating the shuttle buses to Grand Luhu involves {blank} logistical planning to ensure all guests arrive punctually for the ceremony.",
+    "options": [
+      { "word": "frivolous", "trans": "輕浮的" },
+      { "word": "intricate", "trans": "錯綜複雜的 / 精細的" },
+      { "word": "superficial", "trans": "表面的" },
+      { "word": "hostile", "trans": "敵對的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Intricate 形容事物結構複雜，包含極多細節需要處理。"
+  },
+  {
+    "id": "c1-78",
+    "sentence": "Strictly adhering to a zero-starch dinner can initially cause fatigue, but the body soon {blank} to the new metabolic state.",
+    "options": [
+      { "word": "succumbs", "trans": "屈服" },
+      { "word": "acclimates", "trans": "適應" },
+      { "word": "surrenders", "trans": "投降" },
+      { "word": "pertains", "trans": "關於" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Acclimate to (something) 指身體或心理逐漸適應新環境、新挑戰。"
+  },
+  {
+    "id": "c1-79",
+    "sentence": "The intense Pull Day workout left my triceps completely {blank}, requiring an extra day of active recovery before hitting the gym again.",
+    "options": [
+      { "word": "invigorated", "trans": "精神煥發的" },
+      { "word": "ubiquitous", "trans": "無處不在的" },
+      { "word": "incapacitated", "trans": "喪失能力的 / 失去行動力的" },
+      { "word": "obsolete", "trans": "過時的" }
+    ],
+    "correctIndex": 2,
+    "explanation": "Incapacitated 係極高階用字，形容因受傷或極度疲勞而完全無力郁動。"
+  },
+  {
+    "id": "c1-80",
+    "sentence": "The company's CrowdStrike Falcon Sensor will immediately {blank} any unrecognized executable files downloaded from an external USB drive.",
+    "options": [
+      { "word": "facilitate", "trans": "促進" },
+      { "word": "endorse", "trans": "背書 / 贊同" },
+      { "word": "dispatch", "trans": "派遣" },
+      { "word": "quarantine", "trans": "隔離" }
+    ],
+    "correctIndex": 3,
+    "explanation": "Quarantine 喺 IT 資安語境中，指將可疑檔案隔離，防止病毒擴散。"
+  },
+  {
+    "id": "c1-81",
+    "sentence": "A resident QE must firmly {blank} a high standard of quality without permanently damaging the collaborative relationship with the ODM partner.",
+    "options": [
+      { "word": "demolish", "trans": "拆毀" },
+      { "word": "betray", "trans": "背叛" },
+      { "word": "uphold", "trans": "維護 / 堅持" },
+      { "word": "neglect", "trans": "忽視" }
+    ],
+    "correctIndex": 2,
+    "explanation": "Uphold a standard/law 指堅守、維護某種標準或原則。"
+  },
+  {
+    "id": "c1-82",
+    "sentence": "After the anesthesia wore off, the cat exhibited slightly {blank} behavior, pacing around the living room restlessly instead of sleeping.",
+    "options": [
+      { "word": "erratic", "trans": "飄忽的 / 反常的" },
+      { "word": "lethargic", "trans": "昏睡的" },
+      { "word": "dormant", "trans": "休眠的" },
+      { "word": "tranquil", "trans": "寧靜的" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Erratic 形容行為無規律、難以預測，同之前學過嘅 lethargic (昏睡) 形成對比。"
   }
 ]
