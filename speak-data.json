@@ -34,4 +34,29 @@
     "type": "C1 Fluency: Natural",
     "sentence": "I would have scheduled the financial review for Thursday if I had known about the preliminary figures earlier."
   }
+  ,{
+    "id": "s8",
+    "type": "C1 Life: The Heavy Lift",
+    "sentence": "It is completely normal to procrastinate when faced with tedious and overwhelmingly mundane tasks."
+  },
+  {
+    "id": "s9",
+    "type": "C1 Emotion: Natural Flow",
+    "sentence": "Her resilient attitude helped her alleviate the stress and bounce back from the sudden setback."
+  },
+  {
+    "id": "s10",
+    "type": "C1 Travel: The Sprint",
+    "sentence": "Instead of planning a meticulous itinerary, we decided to take a spontaneous road trip across the country."
+  },
+  {
+    "id": "s11",
+    "type": "C1 Tech: Focus",
+    "sentence": "The ubiquitous presence of social media has made it difficult for people to enjoy ephemeral moments in real life."
+  },
+  {
+    "id": "s12",
+    "type": "C1 Daily: Conversational",
+    "sentence": "Taking a pragmatic approach to personal finance is absolutely indispensable in today's unpredictable economy."
+  }
 ]
