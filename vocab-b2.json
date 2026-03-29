@@ -1,0 +1,62 @@
+[
+  {
+    "id": "b2-1",
+    "sentence": "Due to the sudden material shortage, we have to {blank} the project deadline to next month.",
+    "options": [
+      { "word": "postpone", "trans": "推遲 / 延期" },
+      { "word": "cancel", "trans": "取消" },
+      { "word": "predict", "trans": "預測" },
+      { "word": "attend", "trans": "出席" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Postpone 係 B2 級別極常用嘅商業字眼，代替 delay。"
+  },
+  {
+    "id": "b2-2",
+    "sentence": "The team must {blank} a new strategy to handle the increasing number of defective items.",
+    "options": [
+      { "word": "destroy", "trans": "破壞" },
+      { "word": "formulate", "trans": "制定 / 構想" },
+      { "word": "forget", "trans": "忘記" },
+      { "word": "borrow", "trans": "借用" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Formulate a plan/strategy 指有系統地構思並制定計劃。"
+  },
+  {
+    "id": "b2-3",
+    "sentence": "It is highly recommended to {blank} all important data before updating the factory system.",
+    "options": [
+      { "word": "erase", "trans": "抹除" },
+      { "word": "backup", "trans": "備份" },
+      { "word": "expose", "trans": "暴露" },
+      { "word": "invent", "trans": "發明" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Backup data 喺 IT 同工程管理係必備動作。"
+  },
+  {
+    "id": "b2-4",
+    "sentence": "Her presentation was very {blank}, covering all the necessary details without wasting any time.",
+    "options": [
+      { "word": "messy", "trans": "混亂的" },
+      { "word": "concise", "trans": "簡潔的" },
+      { "word": "boring", "trans": "沉悶的" },
+      { "word": "lengthy", "trans": "冗長的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Concise 讚美人講嘢精準、簡明扼要，無廢話。"
+  },
+  {
+    "id": "b2-5",
+    "sentence": "We need to identify the {blank} cause of the SMT failure, not just treat the symptoms.",
+    "options": [
+      { "word": "root", "trans": "根本的" },
+      { "word": "fake", "trans": "虛假的" },
+      { "word": "final", "trans": "最終的" },
+      { "word": "hidden", "trans": "隱藏的" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Root cause (根本原因) 係 QE (品質工程) 最核心嘅詞彙。"
+  }
+]
