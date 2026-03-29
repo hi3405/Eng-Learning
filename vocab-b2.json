@@ -657,5 +657,304 @@
     ],
     "correctIndex": 1,
     "explanation": "Generate interest/revenue/reports 指產生、製造出某啲結果或事物。"
+  },{
+    "id": "b2-56",
+    "sentence": "The manager will {blank} specific tasks to each team member tomorrow.",
+    "options": [
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "assign", "trans": "指派 / 分配" },
+      { "word": "guess", "trans": "猜測" },
+      { "word": "delete", "trans": "刪除" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Assign tasks 係職場派 Job 嘅標準講法。"
+  },
+  {
+    "id": "b2-57",
+    "sentence": "We need to accurately {blank} the total cost before asking for budget approval.",
+    "options": [
+      { "word": "forget", "trans": "忘記" },
+      { "word": "calculate", "trans": "計算" },
+      { "word": "paint", "trans": "塗色" },
+      { "word": "steal", "trans": "偷" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Calculate 意思係精確地計出數值。"
+  },
+  {
+    "id": "b2-58",
+    "sentence": "Can you {blank} how long the SMT repair will take?",
+    "options": [
+      { "word": "estimate", "trans": "估計 / 估算" },
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "destroy", "trans": "破壞" },
+      { "word": "laugh", "trans": "嘲笑" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Estimate 指喺未有確實數據前做一個大概嘅估計。"
+  },
+  {
+    "id": "b2-59",
+    "sentence": "The purchasing department is trying to {blank} a better price with the supplier.",
+    "options": [
+      { "word": "argue", "trans": "爭吵" },
+      { "word": "negotiate", "trans": "談判 / 協商" },
+      { "word": "demand", "trans": "命令" },
+      { "word": "forget", "trans": "忘記" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Negotiate 係議價或傾合約嘅專業詞。"
+  },
+  {
+    "id": "b2-60",
+    "sentence": "The QE team must {blank} the root cause of the sudden defect rate increase.",
+    "options": [
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "investigate", "trans": "調查" },
+      { "word": "celebrate", "trans": "慶祝" },
+      { "word": "hide", "trans": "隱瞞" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Investigate 指深入調查事件原因。"
+  },
+  {
+    "id": "b2-61",
+    "sentence": "Please {blank} that all cables are connected properly before turning on the machine.",
+    "options": [
+      { "word": "deny", "trans": "否認" },
+      { "word": "verify", "trans": "驗證 / 核實" },
+      { "word": "forget", "trans": "忘記" },
+      { "word": "guess", "trans": "猜想" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Verify 指確認某件事情係正確無誤。"
+  },
+  {
+    "id": "b2-62",
+    "sentence": "We need to be {blank} with our schedule because the client might change the meeting time.",
+    "options": [
+      { "word": "stubborn", "trans": "固執的" },
+      { "word": "flexible", "trans": "靈活的" },
+      { "word": "angry", "trans": "生氣的" },
+      { "word": "lazy", "trans": "懶惰的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Flexible 形容可以因應情況變通。"
+  },
+  {
+    "id": "b2-63",
+    "sentence": "The factory cannot {blank} a 100% yield rate, but they are aiming for 98%.",
+    "options": [
+      { "word": "guarantee", "trans": "保證" },
+      { "word": "avoid", "trans": "避開" },
+      { "word": "destroy", "trans": "破壞" },
+      { "word": "refuse", "trans": "拒絕" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Guarantee 指拍心口保證。"
+  },
+  {
+    "id": "b2-64",
+    "sentence": "Make sure you enter the serial numbers {blank} into the new OBA system.",
+    "options": [
+      { "word": "randomly", "trans": "隨機地" },
+      { "word": "accurately", "trans": "準確地" },
+      { "word": "poorly", "trans": "糟糕地" },
+      { "word": "slowly", "trans": "緩慢地" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Accurately 指精準無誤地完成動作。"
+  },
+  {
+    "id": "b2-65",
+    "sentence": "I tried to {blank} him that updating the firmware is necessary for security.",
+    "options": [
+      { "word": "convince", "trans": "說服" },
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "scold", "trans": "責罵" },
+      { "word": "hide", "trans": "隱藏" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Convince 意思係用道理令其他人相信。"
+  },
+  {
+    "id": "b2-66",
+    "sentence": "During the training, the expert will {blank} how to properly use the testing tools.",
+    "options": [
+      { "word": "forget", "trans": "忘記" },
+      { "word": "demonstrate", "trans": "示範" },
+      { "word": "steal", "trans": "偷" },
+      { "word": "hide", "trans": "隱藏" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Demonstrate 意思係做示範俾人睇。"
+  },
+  {
+    "id": "b2-67",
+    "sentence": "It takes discipline to {blank} a healthy diet while traveling.",
+    "options": [
+      { "word": "ruin", "trans": "毀壞" },
+      { "word": "maintain", "trans": "維持" },
+      { "word": "avoid", "trans": "避開" },
+      { "word": "drop", "trans": "放棄" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Maintain 係保持某種好嘅狀態。"
+  },
+  {
+    "id": "b2-68",
+    "sentence": "All staff members are encouraged to {blank} in the upcoming safety workshop.",
+    "options": [
+      { "word": "sleep", "trans": "睡覺" },
+      { "word": "participate", "trans": "參與" },
+      { "word": "escape", "trans": "逃跑" },
+      { "word": "ignore", "trans": "忽略" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Participate 係 join 嘅高級版，解作參與。"
+  },
+  {
+    "id": "b2-69",
+    "sentence": "It is hard to {blank} exactly when the components will arrive due to the storm.",
+    "options": [
+      { "word": "predict", "trans": "預測" },
+      { "word": "forget", "trans": "忘記" },
+      { "word": "deny", "trans": "否認" },
+      { "word": "paint", "trans": "塗漆" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Predict 指預計未來嘅事。"
+  },
+  {
+    "id": "b2-70",
+    "sentence": "The team worked together to {blank} the difficult manufacturing problem.",
+    "options": [
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "tackle", "trans": "處理 / 解決" },
+      { "word": "create", "trans": "製造" },
+      { "word": "praise", "trans": "讚賞" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Tackle a problem 係迎難而上解決問題嘅生動講法。"
+  },
+  {
+    "id": "b2-71",
+    "sentence": "He agreed to {blank} the responsibility of leading the new integration project.",
+    "options": [
+      { "word": "reject", "trans": "拒絕" },
+      { "word": "undertake", "trans": "承擔" },
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "destroy", "trans": "破壞" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Undertake 指接受並承擔一項任務或責任。"
+  },
+  {
+    "id": "b2-72",
+    "sentence": "The new material is strong enough to {blank} high pressure and heat.",
+    "options": [
+      { "word": "break", "trans": "打破" },
+      { "word": "withstand", "trans": "承受 / 抵擋" },
+      { "word": "melt", "trans": "融化" },
+      { "word": "leak", "trans": "洩漏" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Withstand 常用於工程，指可以頂得順極端環境。"
+  },
+  {
+    "id": "b2-73",
+    "sentence": "The thermostat is designed to {blank} the engine's temperature automatically.",
+    "options": [
+      { "word": "regulate", "trans": "調節 / 規管" },
+      { "word": "confuse", "trans": "使混亂" },
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "break", "trans": "破壞" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Regulate 喺機械上指自動調整，喺管理上指立例規管。"
+  },
+  {
+    "id": "b2-74",
+    "sentence": "Since we ran out of part A, we had to use part B as a temporary {blank}.",
+    "options": [
+      { "word": "substitute", "trans": "替代品" },
+      { "word": "problem", "trans": "問題" },
+      { "word": "secret", "trans": "秘密" },
+      { "word": "mistake", "trans": "錯誤" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Substitute 指代替品。"
+  },
+  {
+    "id": "b2-75",
+    "sentence": "Do not {blank} to call me if you have any questions about the 8D report.",
+    "options": [
+      { "word": "rush", "trans": "趕急" },
+      { "word": "hesitate", "trans": "猶豫" },
+      { "word": "refuse", "trans": "拒絕" },
+      { "word": "forget", "trans": "忘記" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Don't hesitate to... 係 Email 非常客氣嘅結尾句。"
+  },
+  {
+    "id": "b2-76",
+    "sentence": "We must {blank} fully to our quality standards, even when facing tight deadlines.",
+    "options": [
+      { "word": "complain", "trans": "投訴" },
+      { "word": "commit", "trans": "承諾 / 致力於" },
+      { "word": "deny", "trans": "否認" },
+      { "word": "hide", "trans": "隱藏" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Commit to something 意思係全心全意投入同遵守。"
+  },
+  {
+    "id": "b2-77",
+    "sentence": "During the audit, the inspector will {blank} the operators' behavior on the production line.",
+    "options": [
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "observe", "trans": "觀察" },
+      { "word": "praise", "trans": "讚賞" },
+      { "word": "steal", "trans": "偷" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Observe 係稽核(Audit)時常用字，指從旁觀察。"
+  },
+  {
+    "id": "b2-78",
+    "sentence": "He doesn't have enough experience to {blank} for the senior engineering position.",
+    "options": [
+      { "word": "qualify", "trans": "具備資格" },
+      { "word": "fail", "trans": "失敗" },
+      { "word": "hide", "trans": "隱藏" },
+      { "word": "drop", "trans": "掉落" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Qualify 意思係合乎資格。"
+  },
+  {
+    "id": "b2-79",
+    "sentence": "The serial number on the box does not {blank} with the number on the device.",
+    "options": [
+      { "word": "argue", "trans": "爭吵" },
+      { "word": "correspond", "trans": "相符 / 對應" },
+      { "word": "fight", "trans": "打架" },
+      { "word": "hide", "trans": "隱藏" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Correspond with 喺檢查時指兩樣嘢數據吻合。"
+  },
+  {
+    "id": "b2-80",
+    "sentence": "It takes about two hours to completely {blank} the main engine block.",
+    "options": [
+      { "word": "break", "trans": "打碎" },
+      { "word": "assemble", "trans": "組裝" },
+      { "word": "melt", "trans": "融化" },
+      { "word": "burn", "trans": "燒毀" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Assemble 意思係將零件砌埋一齊。"
   }
 ]
