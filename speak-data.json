@@ -1,32 +1,122 @@
 [
   {
+    "id": "s1",
+    "type": "Stage 1: Warm-up (B2)",
+    "sentence": "Please send me the updated report before the meeting starts.",
+    "trans": "請在會議開始前把更新後的報告發給我。"
+  },
+  {
+    "id": "s2",
+    "type": "Stage 2: Daily Rhythm (B2)",
+    "sentence": "I usually take a short walk after lunch to clear my mind.",
+    "trans": "我通常在午餐後散步一下來理清思緒。"
+  },
+  {
+    "id": "s3",
+    "type": "Stage 3: QA Clarity (B2)",
+    "sentence": "We found a few minor defects in the first batch of samples.",
+    "trans": "我們在第一批樣品中發現了一些輕微的瑕疵。"
+  },
+  {
+    "id": "s4",
+    "type": "Stage 4: Natural Pace (B2)",
+    "sentence": "Let me know if you need any help with the new software update.",
+    "trans": "如果你需要有關新軟件更新的任何幫助，請讓我知道。"
+  },
+  {
+    "id": "s5",
+    "type": "Stage 5: Business Vowels (B2)",
+    "sentence": "The project deadline has been pushed back to next Friday.",
+    "trans": "專案的截止日期已經推遲到下週五。"
+  },
+  {
+    "id": "s6",
+    "type": "Stage 6: Mgmt Stress (B2+)",
+    "sentence": "It is crucial to keep the team updated on any sudden schedule changes.",
+    "trans": "讓團隊隨時了解任何突發的日程變更是至關重要的。"
+  },
+  {
+    "id": "s7",
+    "type": "Stage 7: Audit Precision (B2+)",
+    "sentence": "The auditor requested additional documents to verify our testing procedures.",
+    "trans": "審核員要求提供額外的文件來驗證我們的測試程序。"
+  },
+  {
     "id": "s8",
-    "type": "C1 Life: The Heavy Lift",
-    "sentence": "It is completely normal to procrastinate when faced with tedious and overwhelmingly mundane tasks.",
-    "trans": "當面對冗長乏味且極度平凡的任務時，拖延是完全正常的。"
+    "type": "Stage 8: Life Intonation (B2+)",
+    "sentence": "Trying to assemble that furniture without a manual was surprisingly frustrating.",
+    "trans": "在沒有說明書的情況下嘗試組裝那件傢俬，令人出奇地沮喪。"
   },
   {
     "id": "s9",
-    "type": "C1 Emotion: Natural Flow",
-    "sentence": "Her resilient attitude helped her alleviate the stress and bounce back from the sudden setback.",
-    "trans": "她充滿韌性的態度幫助她緩解壓力，並從突如其來的挫折中迅速恢復。"
+    "type": "Stage 9: Tech Linking (B2+)",
+    "sentence": "This automated tool will save us a significant amount of time on data entry.",
+    "trans": "這個自動化工具將為我們節省大量的數據輸入時間。"
   },
   {
     "id": "s10",
-    "type": "C1 Travel: The Sprint",
-    "sentence": "Instead of planning a meticulous itinerary, we decided to take a spontaneous road trip across the country.",
-    "trans": "我們決定來一場自發的跨國公路旅行，而不是去計劃一絲不苟的行程。"
+    "type": "Stage 10: Business Phrasing (B2+)",
+    "sentence": "We should schedule a follow-up call to discuss the remaining action items.",
+    "trans": "我們應該安排一次後續電話會議來討論剩餘的待辦事項。"
   },
   {
     "id": "s11",
-    "type": "C1 Tech: Focus",
-    "sentence": "The ubiquitous presence of social media has made it difficult for people to enjoy ephemeral moments in real life.",
-    "trans": "社交媒體的無所不在，讓人們很難去享受現實生活中轉瞬即逝的時刻。"
+    "type": "Stage 11: Tech Articulation (C1)",
+    "sentence": "By launching the new web tool, we can systematically track automated inspections.",
+    "trans": "透過推出新的網頁工具，我們可以有系統地追蹤自動化檢查。"
   },
   {
     "id": "s12",
-    "type": "C1 Daily: Conversational",
-    "sentence": "Taking a pragmatic approach to personal finance is absolutely indispensable in today's unpredictable economy.",
-    "trans": "在現今不可預測的經濟環境下，對個人理財採取務實的態度是絕對不可或缺的。"
+    "type": "Stage 12: Mgmt Flow (C1)",
+    "sentence": "We need to schedule a comprehensive review with the ODM partners next week.",
+    "trans": "我們需要與 ODM 合作夥伴安排在下週進行全面審查。"
+  },
+  {
+    "id": "s13",
+    "type": "Stage 13: Advanced Vocab (C1)",
+    "sentence": "Taking a pragmatic approach to personal finance is absolutely indispensable nowadays.",
+    "trans": "在現今，對個人理財採取務實的態度是絕對不可或缺的。"
+  },
+  {
+    "id": "s14",
+    "type": "Stage 14: The Endurance Run (C1)",
+    "sentence": "Implementing rigorous quality gates is a prerequisite for achieving our target yield rate.",
+    "trans": "實施嚴格的品質關卡是達到我們目標良率的先決條件。"
+  },
+  {
+    "id": "s15",
+    "type": "Stage 15: Engineering Pressure (C1)",
+    "sentence": "The sudden spike in defective units was an anomaly that prompted an immediate halt.",
+    "trans": "不良品數量的突然激增是一個異常情況，促使了立即停工。"
+  },
+  {
+    "id": "s16",
+    "type": "Stage 16: The Heavy Lift (C1+)",
+    "sentence": "To mitigate ubiquitous supply chain disruptions, the team orchestrated a contingency plan.",
+    "trans": "為了減輕無處不在的供應鏈中斷，團隊策劃了一項應急計劃。"
+  },
+  {
+    "id": "s17",
+    "type": "Stage 17: Master Level QA (C1+)",
+    "sentence": "The preliminary Field Return FA indicates a recurring defect that requires immediate rectification.",
+    "trans": "初步的客退故障分析表明存在一個反覆出現的缺陷，需要立即糾正。"
+  },
+  {
+    "id": "s18",
+    "type": "Stage 18: Native Rhythm (C1+)",
+    "sentence": "I would have scheduled the financial review for Thursday if I had known about the figures earlier.",
+    "trans": "如果我早點知道這些數據，我就會把財務審查安排在星期四了。"
+  },
+  {
+    "id": "s19",
+    "type": "Stage 19: The Sprint (C1+)",
+    "sentence": "The ubiquitous presence of social media makes it difficult to enjoy ephemeral moments in real life.",
+    "trans": "社交媒體的無所不在，讓人很難享受現實生活中轉瞬即逝的時刻。"
+  },
+  {
+    "id": "s20",
+    "type": "Stage 20: Final Boss (C1+)",
+    "sentence": "Rectifying the discrepancy between reported serial numbers and physical units is paramount to prevent further yield loss.",
+    "trans": "糾正報告序號與實際實物之間的差異，對於防止進一步的良率損失至關重要。"
   }
 ]
