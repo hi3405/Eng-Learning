@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>English Overload v1.9</title>
+  <title>English Overload v2.0</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Roboto+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -26,20 +26,19 @@
 <body class="text-gray-100 antialiased selection:bg-brand-blue/30 flex flex-col h-full relative max-w-md mx-auto bg-brand-slate shadow-2xl">
 
   <div id="view-vocab" class="view-section active">
-    <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10">
+    <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10 flex-shrink-0">
       <div class="flex justify-between items-center">
-        <h1 class="text-xs font-semibold uppercase tracking-widest text-gray-400">Vocab Builder</h1>
+        <h1 class="text-xs font-semibold uppercase tracking-widest text-gray-400">Daily Quest</h1>
         <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full shadow-inner streak-display">
           <i class="fas fa-fire-alt"></i> <span class="streakValue">0</span>
         </div>
       </div>
       <div class="mt-4 flex justify-between items-end">
-        <p class="text-xl font-extrabold text-white tracking-tight">C1 Precision</p>
+        <p class="text-xl font-extrabold text-white tracking-tight">Vocab Builder</p>
         <div class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md">Quest <span id="vocabProgress">1</span> / <span id="vocabTotal">...</span></div>
       </div>
     </header>
-
-    <main class="flex-grow p-6 flex flex-col">
+    <main class="flex-grow p-6 flex flex-col overflow-y-auto">
       <div class="bg-brand-dark p-6 rounded-3xl shadow-xl mb-6 border border-gray-800">
         <p id="vocabSentence" class="text-lg font-semibold leading-relaxed text-white font-sans text-center mt-4">
           <i class="fas fa-spinner fa-spin text-brand-blue text-2xl mb-2"></i><br><span class="text-sm text-gray-400">載入題庫中...</span>
@@ -50,70 +49,92 @@
         <div class="flex items-center gap-2 mb-2"><i id="vocabFeedbackIcon" class="fas text-xl"></i><h3 id="vocabFeedbackTitle" class="font-bold text-lg"></h3></div>
         <p id="vocabExplanation" class="text-sm text-gray-300 leading-relaxed"></p>
       </div>
-      <button id="nextVocabBtn" onclick="nextVocabQuest()" class="hidden w-full mt-auto bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale flex justify-center items-center gap-2">Next Question <i class="fas fa-arrow-right text-sm"></i></button>
+      <button id="nextVocabBtn" onclick="nextVocabQuest()" class="hidden w-full mt-auto bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale flex justify-center items-center gap-2 flex-shrink-0">Next Question <i class="fas fa-arrow-right text-sm"></i></button>
     </main>
   </div>
 
   <div id="view-speaking" class="view-section">
-    <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10">
-      <div class="flex justify-between items-center">
-        <h1 class="text-xs font-semibold uppercase tracking-widest text-gray-400">Speaking Quest</h1>
-        <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full shadow-inner streak-display">
-          <i class="fas fa-fire-alt"></i> <span class="streakValue">0</span>
-        </div>
-      </div>
-      <div class="mt-4 flex justify-between items-end">
-        <p id="taskType" class="text-xl font-extrabold text-white tracking-tight text-brand-blue">Loading...</p>
-        <span class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md"><span id="taskProgress" class="text-brand-blue font-bold">1</span> / <span id="speakTotal">...</span></span>
-      </div>
-    </header>
-    <main class="flex-grow p-6 flex flex-col">
-      <div class="bg-brand-dark p-7 rounded-3xl shadow-xl mb-4 border border-gray-800">
-        <p class="text-[11px] text-brand-blue font-bold mb-3 uppercase tracking-widest opacity-80">Target Sentence</p>
-        <p id="targetSentence" class="text-xl font-semibold leading-relaxed text-white font-sans text-center text-gray-400 text-sm mt-2">載入題庫中...</p>
-        <p id="targetTranslation" class="text-xl text-brand-yellow font-extrabold text-center mt-5 hidden tracking-wide leading-snug drop-shadow-sm"></p>
-      </div>
-      
-      <div id="speakFeedbackArea" class="hidden mb-6">
-        <div class="p-5 rounded-2xl w-full text-center flex flex-col items-center bg-brand-dark border border-gray-700 shadow-inner" id="speakFeedbackBox">
-          <p class="text-xs font-bold mb-1 uppercase tracking-wider" id="speakScoreLabel">Analysis Result</p>
-          <div class="flex items-end gap-1"><p class="text-5xl font-extrabold" id="speakScoreValue">0</p><p class="text-lg font-bold pb-1">%</p></div>
-          <div class="w-full h-px bg-gray-700 my-4"></div>
-          <p class="text-xs text-gray-400 font-bold uppercase mb-2">Pronunciation Analysis:</p>
-          <p class="text-base mt-1 text-white font-sans leading-relaxed" id="speakUserText"></p>
-          <div id="speakMissedWordsArea" class="mt-5 w-full text-left hidden">
-            <p class="text-[11px] text-brand-red font-bold uppercase tracking-widest mb-2"><i class="fas fa-exclamation-circle"></i> Needs Improvement (點擊聽發音):</p>
-            <div id="speakMissedWordsList" class="flex flex-wrap gap-2"></div>
+    
+    <div id="speakLevelScreen" class="flex flex-col h-full">
+      <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10 flex-shrink-0">
+        <div class="flex justify-between items-center">
+          <h1 class="text-xs font-semibold uppercase tracking-widest text-gray-400">Campaign Mode</h1>
+          <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full shadow-inner streak-display">
+            <i class="fas fa-fire-alt"></i> <span class="streakValue">0</span>
           </div>
         </div>
-      </div>
+        <div class="mt-4 flex justify-between items-end">
+          <p class="text-xl font-extrabold text-white tracking-tight">Speaking Stages</p>
+          <span class="text-xs font-mono text-brand-green bg-brand-green/10 border border-brand-green/20 px-2.5 py-1 rounded-md">80% to Unlock</span>
+        </div>
+      </header>
+      <main class="flex-grow p-6 overflow-y-auto">
+        <p class="text-sm text-gray-400 mb-6 text-center">挑戰 C1 級別發音，過關解鎖新句子！</p>
+        <div id="levelGrid" class="grid grid-cols-3 gap-4 pb-10"></div>
+      </main>
+    </div>
 
-      <div class="mt-auto flex justify-center gap-4 items-center">
-        <button onclick="playSpeakAudio()" class="w-14 h-14 bg-gray-700 text-gray-200 rounded-full shadow-lg flex items-center justify-center text-xl active-scale hover:bg-gray-600"><i class="fas fa-volume-up"></i></button>
-        <button id="recordBtn" onclick="toggleRecording()" class="w-20 h-20 bg-brand-red text-white rounded-full shadow-2xl flex items-center justify-center text-3xl active-scale ring-8 ring-red-600/20 relative"><i class="fas fa-microphone"></i><span id="recordRipple" class="absolute inset-0 rounded-full bg-brand-red opacity-0"></span></button>
-        <button onclick="skipSpeakTask()" class="w-14 h-14 bg-gray-800 text-gray-400 rounded-full shadow-lg flex items-center justify-center text-xl active-scale hover:bg-gray-700 border border-gray-700"><i class="fas fa-forward"></i></button>
-      </div>
+    <div id="speakActionScreen" class="hidden flex-col h-full">
+      <header class="p-5 pt-7 border-b border-gray-700 bg-brand-slate/90 backdrop-blur-md sticky top-0 z-10 flex-shrink-0">
+        <div class="flex justify-between items-center mb-4">
+          <button onclick="backToLevels()" class="text-gray-400 hover:text-white px-2 py-1 -ml-2 active-scale flex items-center gap-2 text-sm font-bold">
+            <i class="fas fa-chevron-left"></i> Back
+          </button>
+          <span class="text-xs font-mono text-gray-400 bg-brand-dark px-2.5 py-1 rounded-md">Stage <span id="currentStageNum" class="text-brand-blue font-bold">1</span></span>
+        </div>
+        <p id="taskType" class="text-lg font-extrabold text-brand-blue tracking-tight leading-tight">Loading...</p>
+      </header>
+      <main class="flex-grow p-6 flex flex-col overflow-y-auto">
+        <div class="bg-brand-dark p-7 rounded-3xl shadow-xl mb-4 border border-gray-800 flex-shrink-0">
+          <p class="text-[11px] text-brand-blue font-bold mb-3 uppercase tracking-widest opacity-80">Target Sentence</p>
+          <p id="targetSentence" class="text-xl font-semibold leading-relaxed text-white font-sans text-center text-gray-400 text-sm mt-2">載入題庫中...</p>
+          <p id="targetTranslation" class="text-xl text-brand-yellow font-extrabold text-center mt-5 hidden tracking-wide leading-snug drop-shadow-sm"></p>
+        </div>
+        
+        <div id="speakFeedbackArea" class="hidden mb-6 flex-shrink-0">
+          <div class="p-5 rounded-2xl w-full text-center flex flex-col items-center bg-brand-dark border border-gray-700 shadow-inner" id="speakFeedbackBox">
+            <p class="text-xs font-bold mb-1 uppercase tracking-wider" id="speakScoreLabel">Analysis Result</p>
+            <div class="flex items-end gap-1"><p class="text-5xl font-extrabold" id="speakScoreValue">0</p><p class="text-lg font-bold pb-1">%</p></div>
+            <div class="w-full h-px bg-gray-700 my-4"></div>
+            <p class="text-xs text-gray-400 font-bold uppercase mb-2">Pronunciation Analysis:</p>
+            <p class="text-base mt-1 text-white font-sans leading-relaxed" id="speakUserText"></p>
+            <div id="speakMissedWordsArea" class="mt-5 w-full text-left hidden">
+              <p class="text-[11px] text-brand-red font-bold uppercase tracking-widest mb-2"><i class="fas fa-exclamation-circle"></i> Needs Improvement (點擊聽):</p>
+              <div id="speakMissedWordsList" class="flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+        </div>
 
-      <div class="h-10 mt-3 mb-2 flex items-center justify-center">
-         <p id="recordingStatus" class="text-center text-sm font-bold text-gray-400"></p>
-      </div>
-      <button id="nextSpeakBtn" onclick="nextSpeakTask()" class="hidden w-full mt-2 bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale flex justify-center items-center gap-2">Next Challenge <i class="fas fa-arrow-right text-sm"></i></button>
-    </main>
+        <div class="mt-auto flex justify-center gap-4 items-center flex-shrink-0 pt-4">
+          <button onclick="playSpeakAudio()" class="w-14 h-14 bg-gray-700 text-gray-200 rounded-full shadow-lg flex items-center justify-center text-xl active-scale hover:bg-gray-600"><i class="fas fa-volume-up"></i></button>
+          <button id="recordBtn" onclick="toggleRecording()" class="w-20 h-20 bg-brand-red text-white rounded-full shadow-2xl flex items-center justify-center text-3xl active-scale ring-8 ring-red-600/20 relative"><i class="fas fa-microphone"></i><span id="recordRipple" class="absolute inset-0 rounded-full bg-brand-red opacity-0"></span></button>
+          <button id="nextLevelBtn" onclick="goToNextLevel()" class="w-14 h-14 bg-gray-800 text-gray-400 rounded-full shadow-lg flex items-center justify-center text-xl active-scale hover:bg-gray-700 border border-gray-700"><i class="fas fa-forward"></i></button>
+        </div>
+        <div class="h-10 mt-3 mb-2 flex items-center justify-center flex-shrink-0">
+           <p id="recordingStatus" class="text-center text-sm font-bold text-gray-400"></p>
+        </div>
+      </main>
+    </div>
   </div>
 
   <div id="view-progress" class="view-section pt-12 px-6">
     <h2 class="text-2xl font-extrabold text-white mb-2">Your Discipline</h2>
-    <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800 mb-6 flex justify-between items-center shadow-inner">
+    <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800 mb-6 flex justify-between items-center shadow-inner flex-shrink-0">
       <div><p class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Total Score</p><p class="text-3xl font-extrabold text-brand-blue" id="progressTotalScore">0</p></div>
       <div class="text-right"><p class="text-xs text-brand-orange font-bold uppercase tracking-wider mb-1">Current Streak</p><p class="text-3xl font-extrabold text-white"><span id="progressStreak">0</span> 🔥</p></div>
     </div>
-    <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800 shadow-inner mb-8">
+    <div class="bg-brand-dark p-6 rounded-3xl border border-gray-800 shadow-inner mb-8 flex-shrink-0">
       <h3 class="text-sm font-bold text-gray-300 mb-4 uppercase tracking-wider text-center" id="calendarMonthLabel">Month</h3>
       <div id="calendarGrid" class="w-full"></div>
     </div>
-    <div class="mb-6">
-      <div class="flex justify-between items-end mb-4"><h3 class="text-sm font-bold text-brand-blue uppercase tracking-wider"><i class="fas fa-vault mr-2"></i>Vocab Vault</h3><span class="text-xs text-gray-500" id="vaultCount">0 words</span></div>
-      <div id="vocabVaultList" class="flex flex-col gap-3"></div>
+    
+    <div class="mb-6 flex-shrink-0">
+      <div class="flex justify-between items-end mb-4">
+        <h3 class="text-sm font-bold text-brand-blue uppercase tracking-wider"><i class="fas fa-book-open mr-2"></i>Learned Words (Vocab Vault)</h3>
+        <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded"><span id="vaultCount">0</span> words</span>
+      </div>
+      <p class="text-xs text-gray-400 mb-4 italic">這裡記錄了所有你在 Daily Quest 中學過的生字。</p>
+      <div id="vocabVaultList" class="flex flex-col gap-3 pb-6"></div>
     </div>
   </div>
 
@@ -125,7 +146,7 @@
         <select id="voiceSelect" class="w-full bg-brand-slate text-white border border-gray-700 rounded-xl p-4 appearance-none focus:outline-none focus:border-brand-blue"><option>Loading voices...</option></select>
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400"><i class="fas fa-chevron-down"></i></div>
       </div>
-      <p class="text-[10px] text-gray-500 mb-4 px-2">如果聽到機械人聲，請喺度轉另外一把聲。</p>
+      <p class="text-[10px] text-gray-500 mb-4 px-2">如果聽到機械人聲，請試轉另外一把。</p>
       <button onclick="testVoice()" class="w-full bg-gray-700 text-white py-3 rounded-xl font-bold text-sm active-scale hover:bg-gray-600 flex justify-center items-center gap-2"><i class="fas fa-play"></i> 試聽聲音 Test Voice</button>
       <button onclick="resetData()" class="w-full mt-8 bg-red-900/30 text-red-400 py-3 rounded-xl font-bold text-xs active-scale border border-red-900/50">RESET ALL DATA</button>
     </div>
@@ -153,10 +174,15 @@
   <script>
     const getTodayDate = () => new Date().toLocaleDateString('en-CA');
 
+    // 💥 V6 Data: 加入 unlockedSpeakLevel 同 speakHighScores
     function loadUserData() {
-      const defaultData = { currentStreak: 0, lastCompletedDate: null, totalScore: 0, history: [], savedVocab: [], doneVocabIds: [], doneSpeakIds: [] };
-      const savedData = localStorage.getItem('english_coach_data_v5'); 
+      const defaultData = { currentStreak: 0, lastCompletedDate: null, totalScore: 0, history: [], savedVocab: [], doneVocabIds: [], unlockedSpeakLevel: 0, speakHighScores: {} };
+      const savedData = localStorage.getItem('english_coach_data_v6'); 
       return savedData ? JSON.parse(savedData) : defaultData;
+    }
+
+    function saveData(data) {
+      localStorage.setItem('english_coach_data_v6', JSON.stringify(data));
     }
 
     function switchView(viewName) {
@@ -164,7 +190,9 @@
       document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
       document.getElementById(`view-${viewName}`).classList.add('active');
       document.getElementById(`nav-${viewName}`).classList.add('active');
+      
       if(viewName === 'progress') { renderCalendar(); renderVocabVault(); }
+      if(viewName === 'speaking') { backToLevels(); } // 每次入 Speaking 都先顯示選關畫面
     }
 
     function shuffleArray(array) {
@@ -175,27 +203,8 @@
       return array;
     }
 
-    function getNextBatch(allData, limit, type) {
-      const data = loadUserData();
-      const doneList = type === 'vocab' ? (data.doneVocabIds || []) : (data.doneSpeakIds || []);
-      let filtered = allData.filter(item => !doneList.includes(item.id));
-      if (filtered.length < limit) {
-        if (type === 'vocab') data.doneVocabIds = []; else data.doneSpeakIds = [];
-        localStorage.setItem('english_coach_data_v5', JSON.stringify(data));
-        filtered = allData;
-      }
-      return shuffleArray(filtered).slice(0, limit);
-    }
-
-    function markIdAsDone(id, type) {
-      let data = loadUserData();
-      if (type === 'vocab' && !data.doneVocabIds.includes(id)) data.doneVocabIds.push(id);
-      if (type === 'speak' && !data.doneSpeakIds.includes(id)) data.doneSpeakIds.push(id);
-      localStorage.setItem('english_coach_data_v5', JSON.stringify(data));
-    }
-
     // ==========================================
-    // Vocab System
+    // Vocab System (Daily Quest - 保持隨機)
     // ==========================================
     let vocabData = []; let currentVocabIndex = 0; let vocabScore = 0; let vocabAnswered = false;
     const DAILY_VOCAB_LIMIT = 5;
@@ -204,7 +213,16 @@
       try {
         const response = await fetch('vocab-data.json');
         const allVocab = await response.json();
-        vocabData = getNextBatch(allVocab, DAILY_VOCAB_LIMIT, 'vocab');
+        
+        const data = loadUserData();
+        let filtered = allVocab.filter(item => !data.doneVocabIds.includes(item.id));
+        if (filtered.length < DAILY_VOCAB_LIMIT) {
+          data.doneVocabIds = [];
+          saveData(data);
+          filtered = allVocab;
+        }
+        vocabData = shuffleArray(filtered).slice(0, DAILY_VOCAB_LIMIT);
+        
         document.getElementById('vocabTotal').innerText = vocabData.length;
         loadVocabQuest();
       } catch (e) { document.getElementById('vocabSentence').innerText = "Load failed. Check JSON."; }
@@ -237,8 +255,11 @@
       correctBtn.classList.add('border-brand-green', 'bg-brand-green/20', 'text-brand-green');
       if (idx === quest.correctIndex) { vocabScore++; setVocabFeedback(true, "Spot On!", quest.explanation); }
       else { btn.classList.add('border-brand-red', 'bg-brand-red/20', 'text-brand-red'); setVocabFeedback(false, "Not Quite", quest.explanation); }
-      markIdAsDone(quest.id, 'vocab');
+      
+      let data = loadUserData();
+      if (!data.doneVocabIds.includes(quest.id)) { data.doneVocabIds.push(quest.id); saveData(data); }
       saveToVocabVault(quest.options[quest.correctIndex].word, quest.options[quest.correctIndex].trans, quest.explanation);
+      
       document.getElementById('vocabSentence').innerHTML = quest.sentence.replace('{blank}', `<span class="text-brand-green font-bold border-b-2 border-brand-green px-1">${quest.options[quest.correctIndex].word}</span>`);
       document.getElementById('nextVocabBtn').classList.remove('hidden');
     }
@@ -247,13 +268,13 @@
       let data = loadUserData();
       if (!data.savedVocab.find(v => v.word === word)) {
         data.savedVocab.push({ word, trans, explanation, dateAdded: getTodayDate() });
-        localStorage.setItem('english_coach_data_v5', JSON.stringify(data));
+        saveData(data);
       }
     }
 
     function setVocabFeedback(isCorrect, title, exp) {
       const box = document.getElementById('vocabFeedback');
-      box.className = `mb-6 p-5 rounded-2xl border ${isCorrect ? 'bg-brand-green/10 border-brand-green/30' : 'bg-brand-red/10 border-brand-red/30'}`;
+      box.className = `mb-6 p-5 rounded-2xl border flex-shrink-0 ${isCorrect ? 'bg-brand-green/10 border-brand-green/30' : 'bg-brand-red/10 border-brand-red/30'}`;
       document.getElementById('vocabFeedbackTitle').innerText = title;
       document.getElementById('vocabFeedbackTitle').className = `font-bold text-lg ${isCorrect ? 'text-brand-green' : 'text-brand-red'}`;
       document.getElementById('vocabExplanation').innerText = exp;
@@ -262,30 +283,63 @@
 
     function nextVocabQuest() {
       if (currentVocabIndex < vocabData.length - 1) { currentVocabIndex++; loadVocabQuest(); }
-      else { completeWorkout('Vocab', Math.round((vocabScore / vocabData.length) * 100)); fetchVocabData(); currentVocabIndex = 0; vocabScore = 0; }
+      else { completeWorkout('Vocab Quest', Math.round((vocabScore / vocabData.length) * 100)); fetchVocabData(); currentVocabIndex = 0; vocabScore = 0; }
     }
 
     // ==========================================
-    // Speaking System 
+    // 💥 Speaking System (v2.0 主線通關模式)
     // ==========================================
-    let speakTasks = []; let currentSpeakIndex = 0; let speakDailyScore = 0;
-    const DAILY_SPEAK_LIMIT = 3;
+    let allSpeakTasks = []; 
+    let currentStageIndex = 0; // 依家選緊邊關
 
     async function fetchSpeakData() {
       try {
         const response = await fetch('speak-data.json');
-        const allSpeak = await response.json();
-        speakTasks = getNextBatch(allSpeak, DAILY_SPEAK_LIMIT, 'speak');
-        document.getElementById('speakTotal').innerText = speakTasks.length;
-        loadSpeakTask();
-      } catch (e) { document.getElementById('targetSentence').innerText = "Load failed"; }
+        // 唔再 Shuffle，順序載入作為關卡
+        allSpeakTasks = await response.json(); 
+        renderLevelGrid();
+      } catch (e) { document.getElementById('levelGrid').innerText = "Load failed"; }
     }
 
-    function loadSpeakTask() {
-      if (speakTasks.length === 0) return;
-      const task = speakTasks[currentSpeakIndex];
-      document.getElementById('taskProgress').innerText = currentSpeakIndex + 1;
+    function renderLevelGrid() {
+      const data = loadUserData();
+      const grid = document.getElementById('levelGrid');
+      grid.innerHTML = '';
+      
+      allSpeakTasks.forEach((task, index) => {
+        const isUnlocked = index <= data.unlockedSpeakLevel;
+        const highScore = data.speakHighScores[task.id] || 0;
+        const isCleared = highScore >= 80;
+        
+        const btn = document.createElement('button');
+        if (isUnlocked) {
+          btn.className = `w-full aspect-square rounded-2xl flex flex-col items-center justify-center border-2 active-scale transition-all ${isCleared ? 'bg-brand-dark border-brand-green/50 text-brand-green' : 'bg-brand-blue border-brand-blue text-white shadow-lg shadow-brand-blue/30'}`;
+          btn.innerHTML = `
+            <span class="text-2xl font-black">${index + 1}</span>
+            ${isCleared ? `<span class="text-xs font-bold mt-1">${highScore}%</span>` : `<span class="text-[10px] font-bold mt-1 uppercase tracking-widest opacity-80">Stage</span>`}
+            ${isCleared ? `<i class="fas fa-check-circle text-xs mt-1"></i>` : ''}
+          `;
+          btn.onclick = () => openStage(index);
+        } else {
+          // 鎖定狀態
+          btn.className = "w-full aspect-square rounded-2xl flex flex-col items-center justify-center border-2 bg-gray-800 border-gray-700 text-gray-500 cursor-not-allowed opacity-50";
+          btn.innerHTML = `<i class="fas fa-lock text-xl mb-1"></i><span class="text-xl font-black">${index + 1}</span>`;
+        }
+        grid.appendChild(btn);
+      });
+    }
+
+    function openStage(index) {
+      currentStageIndex = index;
+      const task = allSpeakTasks[index];
+      
+      document.getElementById('speakLevelScreen').classList.add('hidden');
+      document.getElementById('speakActionScreen').classList.remove('hidden');
+      document.getElementById('speakActionScreen').classList.add('flex');
+      
+      document.getElementById('currentStageNum').innerText = index + 1;
       document.getElementById('taskType').innerText = task.type;
+      
       document.getElementById('targetSentence').className = "text-xl font-semibold leading-relaxed text-white font-sans mt-2";
       document.getElementById('targetSentence').innerText = task.sentence;
       
@@ -294,8 +348,27 @@
       else { transEl.classList.add('hidden'); }
 
       document.getElementById('speakFeedbackArea').classList.add('hidden');
-      document.getElementById('nextSpeakBtn').classList.add('hidden');
+      
+      // 控制 Next 按鈕 (Skip功能)
+      const nextBtn = document.getElementById('nextLevelBtn');
+      nextBtn.onclick = () => {
+        // Skip 掣：如果係最後一關，就返去 Level 表
+        if (currentStageIndex < allSpeakTasks.length - 1 && currentStageIndex < loadUserData().unlockedSpeakLevel) {
+           openStage(currentStageIndex + 1);
+        } else {
+           backToLevels();
+        }
+      };
+      
       document.getElementById('recordingStatus').innerText = "";
+    }
+
+    function backToLevels() {
+      if(isRecording) forceStopUI();
+      document.getElementById('speakActionScreen').classList.add('hidden');
+      document.getElementById('speakActionScreen').classList.remove('flex');
+      document.getElementById('speakLevelScreen').classList.remove('hidden');
+      renderLevelGrid(); // 刷新分數同解鎖狀態
     }
 
     const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -328,29 +401,18 @@
 
     function forceStopUI() {
       isRecording = false;
+      if (recognition) { try { recognition.stop(); } catch(e){} }
       document.getElementById('recordBtn').classList.replace('bg-red-800', 'bg-brand-red');
       document.getElementById('recordRipple').classList.remove('animate-ping', 'opacity-50');
       document.getElementById('recordingStatus').innerText = "";
     }
 
-    // 💥 升級：Skip 按鈕邏輯
-    function skipSpeakTask() {
-      if (isRecording) forceStopUI();
-      // 不計分，直接跳下一題
-      document.getElementById('speakFeedbackBox').className = "p-5 rounded-2xl w-full text-center flex flex-col items-center bg-brand-dark border border-gray-700 shadow-inner";
-      document.getElementById('speakScoreLabel').className = "text-xs font-bold mb-1 uppercase tracking-wider text-gray-400";
-      if (currentSpeakIndex < speakTasks.length - 1) { 
-        currentSpeakIndex++; loadSpeakTask(); 
-      } else { 
-        completeWorkout('Speaking', Math.round(speakDailyScore / speakTasks.length)); 
-        fetchSpeakData(); currentSpeakIndex = 0; speakDailyScore = 0; 
-      }
-    }
-
     function calculateSpeakScore(spokenText) {
       if(!spokenText || spokenText.trim() === "") return;
       forceStopUI(); document.getElementById('recordingStatus').innerText = ""; 
-      const rawTargetWords = speakTasks[currentSpeakIndex].sentence.split(/\s+/);
+      
+      const task = allSpeakTasks[currentStageIndex];
+      const rawTargetWords = task.sentence.split(/\s+/);
       const targetClean = rawTargetWords.map(w => w.toLowerCase().replace(/[^\w\s\']/g, ""));
       const spokenClean = spokenText.toLowerCase().replace(/[^\w\s\']/g, "").split(/\s+/);
       
@@ -377,27 +439,33 @@
       document.getElementById('speakFeedbackArea').classList.remove('hidden');
       const box = document.getElementById('speakFeedbackBox');
       
+      // 💥 紀錄分數並判斷是否解鎖下一關
+      let data = loadUserData();
+      const previousHigh = data.speakHighScores[task.id] || 0;
+      if (score > previousHigh) { data.speakHighScores[task.id] = score; }
+      
       if (score >= 80) { 
         box.classList.replace("border-gray-700", "border-brand-green/30");
-        document.getElementById('speakScoreLabel').innerText = "Excellent!";
-        document.getElementById('speakScoreLabel').className = "text-xs font-bold mb-1 uppercase tracking-wider text-brand-green";
-        speakDailyScore += score; document.getElementById('nextSpeakBtn').classList.remove('hidden');
-        markIdAsDone(speakTasks[currentSpeakIndex].id, 'speak');
+        document.getElementById('speakScoreLabel').innerText = "Stage Cleared!";
+        document.getElementById('speakScoreLabel').className = "text-xs font-bold mb-1 uppercase tracking-widest text-brand-green";
+        
+        // 解鎖邏輯：如果而家係最新嗰關，就解鎖+1
+        if (currentStageIndex === data.unlockedSpeakLevel && currentStageIndex < allSpeakTasks.length - 1) {
+           data.unlockedSpeakLevel++;
+           alert("🎉 恭喜通關！下一句 C1 挑戰已解鎖！");
+        }
+        
+        // 計入總分
+        completeWorkout('Speaking Stage', score, false); // false 代表唔彈 Modal，避免阻礙視線
       } else {
         box.classList.replace("border-gray-700", "border-orange-500/30");
-        document.getElementById('speakScoreLabel').innerText = "Retry Required (80%)";
-        document.getElementById('speakScoreLabel').className = "text-xs font-bold mb-1 uppercase tracking-wider text-orange-400";
+        document.getElementById('speakScoreLabel').innerText = "Retry Required (80% to clear)";
+        document.getElementById('speakScoreLabel').className = "text-xs font-bold mb-1 uppercase tracking-widest text-orange-400";
       }
+      saveData(data); // 儲存最高分同解鎖進度
     }
 
-    function nextSpeakTask() {
-      document.getElementById('speakFeedbackBox').className = "p-5 rounded-2xl w-full text-center flex flex-col items-center bg-brand-dark border border-gray-700 shadow-inner";
-      document.getElementById('speakScoreLabel').className = "text-xs font-bold mb-1 uppercase tracking-wider text-gray-400";
-      if (currentSpeakIndex < speakTasks.length - 1) { currentSpeakIndex++; loadSpeakTask(); }
-      else { completeWorkout('Speaking', Math.round(speakDailyScore / speakTasks.length)); fetchSpeakData(); currentSpeakIndex = 0; speakDailyScore = 0; }
-    }
-
-    function playSpeakAudio() { speakWord(speakTasks[currentSpeakIndex].sentence, null); }
+    function playSpeakAudio() { speakWord(allSpeakTasks[currentStageIndex].sentence, null); }
     function speakWord(word, e) {
       if(e) e.stopPropagation();
       window.speechSynthesis.cancel();
@@ -407,10 +475,19 @@
       window.speechSynthesis.speak(u);
     }
 
+    function goToNextLevel() {
+        let data = loadUserData();
+        if (currentStageIndex < allSpeakTasks.length - 1 && currentStageIndex < data.unlockedSpeakLevel) {
+            openStage(currentStageIndex + 1);
+        } else {
+            backToLevels();
+        }
+    }
+
     // ==========================================
     // Tracker & Settings
     // ==========================================
-    function completeWorkout(type, score) {
+    function completeWorkout(type, score, showModal = true) {
       let data = loadUserData(); const today = getTodayDate();
       if (!data.history.includes(today)) {
         data.history.push(today);
@@ -418,12 +495,15 @@
         data.history.includes(yesterday) ? data.currentStreak++ : data.currentStreak = 1;
       }
       data.totalScore += score;
-      localStorage.setItem('english_coach_data_v5', JSON.stringify(data));
+      saveData(data);
       document.querySelectorAll('.streakValue').forEach(el => el.innerText = data.currentStreak);
-      document.getElementById('summaryTitle').innerText = `${type} Complete!`;
-      document.getElementById('summaryScore').innerText = score;
-      document.getElementById('summaryTotal').innerText = data.totalScore;
-      document.getElementById('summaryModal').classList.remove('hidden');
+      
+      if (showModal) {
+        document.getElementById('summaryTitle').innerText = `${type} Complete!`;
+        document.getElementById('summaryScore').innerText = score;
+        document.getElementById('summaryTotal').innerText = data.totalScore;
+        document.getElementById('summaryModal').classList.remove('hidden');
+      }
     }
     function closeSummary() { document.getElementById('summaryModal').classList.add('hidden'); }
 
@@ -449,53 +529,44 @@
     function renderVocabVault() {
       const data = loadUserData();
       const list = document.getElementById('vocabVaultList');
-      document.getElementById('vaultCount').innerText = `${data.savedVocab.length} words`;
+      document.getElementById('vaultCount').innerText = data.savedVocab.length;
       list.innerHTML = data.savedVocab.length ? [...data.savedVocab].reverse().map(v => `
         <div class="bg-brand-dark p-4 rounded-2xl border border-gray-700">
           <div class="flex justify-between items-start">
             <div><p class="text-xl font-extrabold text-white">${v.word}</p><p class="text-brand-yellow font-bold text-sm">${v.trans}</p></div>
-            <button class="w-10 h-10 rounded-full bg-brand-slate flex items-center justify-center" onclick="speakWord('${v.word}')"><i class="fas fa-volume-up text-gray-300"></i></button>
+            <button class="w-10 h-10 rounded-full bg-brand-slate flex items-center justify-center active-scale" onclick="speakWord('${v.word}')"><i class="fas fa-volume-up text-gray-300"></i></button>
           </div>
-          <p class="text-xs text-gray-400 mt-2">${v.explanation}</p>
-        </div>`).join('') : '<p class="text-center py-4 text-gray-500 italic">No words saved yet.</p>';
+          <p class="text-xs text-gray-400 mt-2 leading-relaxed">${v.explanation}</p>
+        </div>`).join('') : '<p class="text-center py-4 text-gray-500 italic">完成 Vocab 訓練後，生字會自動記錄喺度！</p>';
     }
 
-    function resetData() { if(confirm("確定重置所有訓練數據？")) { localStorage.removeItem('english_coach_data_v5'); location.reload(); } }
+    function resetData() { if(confirm("確定重置所有訓練數據同解鎖進度？")) { localStorage.removeItem('english_coach_data_v6'); location.reload(); } }
 
     let voices = [];
-    
-    // 💥 升級：神級智能過濾器 (擷取 2男 2女, 英美各半)
+    // 💥 升級優化：更強大嘅英式男聲捕獲演算法
     function popVoices() {
       const allVoices = speechSynthesis.getVoices();
       if(allVoices.length === 0) return;
 
-      // 剔除明顯係機械人嘅聲音
-      const goodVoices = allVoices.filter(v => 
-        !v.name.includes('Eloquence') && 
-        !v.name.includes('Zarvox') && 
-        !v.name.includes('Bubbles') &&
-        !v.name.includes('Trinoids')
-      );
-
+      const goodVoices = allVoices.filter(v => !v.name.includes('Eloquence') && !v.name.includes('Zarvox') && !v.name.includes('Bubbles') && !v.name.includes('Trinoids'));
       const usVoices = goodVoices.filter(v => v.lang.includes('en-US') || v.lang.includes('en_US'));
       const ukVoices = goodVoices.filter(v => v.lang.includes('en-GB') || v.lang.includes('en_GB'));
 
-      // 用 Keyword 搵相對似男/女嘅名
       const findVoice = (arr, keywords) => arr.find(v => keywords.some(k => v.name.toLowerCase().includes(k)));
 
-      let usFemale = findVoice(usVoices, ['female', 'samantha', 'victoria', 'siri voice 1', 'zira', 'google us english']) || usVoices[0];
+      let usFemale = findVoice(usVoices, ['female', 'samantha', 'victoria', 'siri voice 1', 'zira']) || usVoices[0];
       let usMale = findVoice(usVoices, ['male', 'alex', 'fred', 'siri voice 2', 'david', 'guy']) || usVoices.find(v => v !== usFemale);
       
       let ukFemale = findVoice(ukVoices, ['female', 'serena', 'martha', 'siri voice 1', 'hazel']) || ukVoices[0];
-      let ukMale = findVoice(ukVoices, ['male', 'daniel', 'arthur', 'siri voice 2', 'george']) || ukVoices.find(v => v !== ukFemale);
+      // 確保就算無 Daniel，只要係 en-GB 而唔係 female 嘅聲都會被揀中做英國男聲
+      let ukMale = findVoice(ukVoices, ['male', 'daniel', 'arthur', 'siri voice 2', 'george']) || ukVoices.find(v => v !== ukFemale) || ukVoices[1];
 
       let selectedVoices = [];
-      if (usFemale) selectedVoices.push({ label: '🇺🇸 美式 (女聲/Female)', voice: usFemale });
-      if (usMale) selectedVoices.push({ label: '🇺🇸 美式 (男聲/Male)', voice: usMale });
-      if (ukFemale) selectedVoices.push({ label: '🇬🇧 英式 (女聲/Female)', voice: ukFemale });
-      if (ukMale) selectedVoices.push({ label: '🇬🇧 英式 (男聲/Male)', voice: ukMale });
+      if (usFemale) selectedVoices.push({ label: '🇺🇸 美式 (女聲)', voice: usFemale });
+      if (usMale) selectedVoices.push({ label: '🇺🇸 美式 (男聲)', voice: usMale });
+      if (ukFemale) selectedVoices.push({ label: '🇬🇧 英式 (女聲)', voice: ukFemale });
+      if (ukMale) selectedVoices.push({ label: '🇬🇧 英式 (男聲)', voice: ukMale });
 
-      // 去除重複
       selectedVoices = selectedVoices.filter((v, i, a) => v && a.findIndex(t => t.voice.name === v.voice.name) === i);
       voices = selectedVoices.map(item => item.voice);
 
@@ -505,8 +576,7 @@
       
       selectedVoices.forEach((item, i) => {
         const opt = document.createElement('option'); 
-        // 顯示名稱加入括號等你知道背後係邊把聲，方便避開爛聲
-        opt.text = `${item.label} [${item.voice.name}]`; 
+        opt.text = `${item.label} [${item.voice.name.split(' ')[0]}]`; // 只顯示名嘅第一個字，保持乾淨
         opt.value = i;
         if(saved === item.voice.voiceURI) opt.selected = true; 
         sel.appendChild(opt);
@@ -515,10 +585,9 @@
     
     speechSynthesis.onvoiceschanged = popVoices;
     document.getElementById('voiceSelect').onchange = (e) => localStorage.setItem('preferred_voice_uri', voices[e.target.value].voiceURI);
-    function testVoice() { speakWord("Hello, I am your coach."); }
+    function testVoice() { speakWord("Push your limit, Jack."); }
 
-    window.onload = () => { fetchVocabData(); fetchSpeakData(); updateGlobalStreak(); switchView('vocab'); popVoices(); };
-    function updateGlobalStreak() { document.querySelectorAll('.streakValue').forEach(el => el.innerText = loadUserData().currentStreak); }
+    window.onload = () => { fetchVocabData(); fetchSpeakData(); document.querySelectorAll('.streakValue').forEach(el => el.innerText = loadUserData().currentStreak); switchView('vocab'); popVoices(); };
   </script>
 </body>
 </html>
