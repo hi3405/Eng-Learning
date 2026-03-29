@@ -58,5 +58,604 @@
     ],
     "correctIndex": 0,
     "explanation": "Root cause (根本原因) 係 QE (品質工程) 最核心嘅詞彙。"
+  },{
+    "id": "b2-6",
+    "sentence": "The company plans to {blank} a new quality control policy starting next month.",
+    "options": [
+      { "word": "implement", "trans": "實施 / 執行" },
+      { "word": "delete", "trans": "刪除" },
+      { "word": "guess", "trans": "猜測" },
+      { "word": "forget", "trans": "忘記" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Implement a policy/plan 指將政策或計劃付諸實行，商業極常用。"
+  },
+  {
+    "id": "b2-7",
+    "sentence": "We need to deeply {blank} the performance of the new testing equipment.",
+    "options": [
+      { "word": "praise", "trans": "讚賞" },
+      { "word": "evaluate", "trans": "評估" },
+      { "word": "hide", "trans": "隱藏" },
+      { "word": "paint", "trans": "塗漆" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Evaluate 指對事物嘅價值、表現或狀況進行評估。"
+  },
+  {
+    "id": "b2-8",
+    "sentence": "Our engineering team will {blank} with the marketing department on this new product launch.",
+    "options": [
+      { "word": "fight", "trans": "打架" },
+      { "word": "collaborate", "trans": "合作 / 協作" },
+      { "word": "complain", "trans": "投訴" },
+      { "word": "escape", "trans": "逃跑" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Collaborate with 係跨部門合作嘅標準專業用字。"
+  },
+  {
+    "id": "b2-9",
+    "sentence": "The management promised to be more {blank} about the upcoming budget cuts.",
+    "options": [
+      { "word": "transparent", "trans": "透明的 / 坦誠的" },
+      { "word": "angry", "trans": "生氣的" },
+      { "word": "invisible", "trans": "隱形的" },
+      { "word": "stubborn", "trans": "固執的" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Transparent 喺商業上指資訊公開透明、無隱瞞。"
+  },
+  {
+    "id": "b2-10",
+    "sentence": "This new automated software is much more {blank} than our old manual system.",
+    "options": [
+      { "word": "expensive", "trans": "昂貴的" },
+      { "word": "efficient", "trans": "有效率的" },
+      { "word": "clumsy", "trans": "笨拙的" },
+      { "word": "boring", "trans": "沉悶的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Efficient 形容系統或人做事效率高，唔浪費時間同資源。"
+  },
+  {
+    "id": "b2-11",
+    "sentence": "Customer satisfaction is our top {blank} for the next quarter.",
+    "options": [
+      { "word": "secret", "trans": "秘密" },
+      { "word": "priority", "trans": "優先事項" },
+      { "word": "joke", "trans": "笑話" },
+      { "word": "mistake", "trans": "錯誤" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Top priority 意思係最首要、必須優先處理嘅事。"
+  },
+  {
+    "id": "b2-12",
+    "sentence": "The assembly plant has already reached its maximum production {blank}.",
+    "options": [
+      { "word": "capacity", "trans": "容量 / 生產力" },
+      { "word": "temperature", "trans": "溫度" },
+      { "word": "color", "trans": "顏色" },
+      { "word": "debt", "trans": "債務" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Production capacity 係工廠管理術語，指最高產能。"
+  },
+  {
+    "id": "b2-13",
+    "sentence": "The QA engineers will {blank} the defect data to find the root cause.",
+    "options": [
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "analyze", "trans": "分析" },
+      { "word": "delete", "trans": "刪除" },
+      { "word": "guess", "trans": "猜測" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Analyze data 即係對數據進行分析以得出結論。"
+  },
+  {
+    "id": "b2-14",
+    "sentence": "We need to develop a better {blank} to increase our market share in Asia.",
+    "options": [
+      { "word": "strategy", "trans": "策略" },
+      { "word": "excuse", "trans": "藉口" },
+      { "word": "rumor", "trans": "謠言" },
+      { "word": "habit", "trans": "習慣" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Strategy 係指為達成長期目標而制定嘅策略或計謀。"
+  },
+  {
+    "id": "b2-15",
+    "sentence": "The main {blank} of this meeting is to finalize the product design.",
+    "options": [
+      { "word": "fear", "trans": "恐懼" },
+      { "word": "objective", "trans": "目標 / 目的" },
+      { "word": "memory", "trans": "記憶" },
+      { "word": "complaint", "trans": "投訴" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Objective 同 goal 相似，但更常在專業語境中指具體目標。"
+  },
+  {
+    "id": "b2-16",
+    "sentence": "We should prepare an {blank} plan in case the shipment is delayed by the storm.",
+    "options": [
+      { "word": "alternative", "trans": "替代的 / 備用的" },
+      { "word": "expensive", "trans": "昂貴的" },
+      { "word": "impossible", "trans": "不可能的" },
+      { "word": "illegal", "trans": "非法的" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Alternative plan 即係 Plan B 或替代方案。"
+  },
+  {
+    "id": "b2-17",
+    "sentence": "Please ensure that your presentation only includes information {blank} to the audit.",
+    "options": [
+      { "word": "harmful", "trans": "有害的" },
+      { "word": "relevant", "trans": "相關的 / 切題的" },
+      { "word": "boring", "trans": "沉悶的" },
+      { "word": "immune", "trans": "免疫的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Relevant to... 指同某個主題有直接關係、切題。"
+  },
+  {
+    "id": "b2-18",
+    "sentence": "Could you please {blank} on what you meant by 'system failure'?",
+    "options": [
+      { "word": "elaborate", "trans": "詳盡說明" },
+      { "word": "forget", "trans": "忘記" },
+      { "word": "whisper", "trans": "低語" },
+      { "word": "complicate", "trans": "使複雜" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Elaborate on 係請人對某一點進一步詳細解釋嘅專業講法。"
+  },
+  {
+    "id": "b2-19",
+    "sentence": "We might need to {blank} the original design to meet the new safety standards.",
+    "options": [
+      { "word": "destroy", "trans": "破壞" },
+      { "word": "modify", "trans": "修改 / 更改" },
+      { "word": "steal", "trans": "偷取" },
+      { "word": "praise", "trans": "讚賞" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Modify 指為咗改善或符合標準而作出少許修改。"
+  },
+  {
+    "id": "b2-20",
+    "sentence": "The director has to {blank} the budget before we can purchase the new servers.",
+    "options": [
+      { "word": "reject", "trans": "拒絕" },
+      { "word": "approve", "trans": "批准 / 核准" },
+      { "word": "steal", "trans": "偷竊" },
+      { "word": "burn", "trans": "燒毀" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Approve a budget/request 意思係上級正式批准。"
+  },
+  {
+    "id": "b2-21",
+    "sentence": "With this new marketing campaign, our sales will likely {blank} our expectations.",
+    "options": [
+      { "word": "fail", "trans": "失敗" },
+      { "word": "exceed", "trans": "超過 / 勝過" },
+      { "word": "match", "trans": "符合" },
+      { "word": "decrease", "trans": "減少" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Exceed expectations 係指表現好過預期。"
+  },
+  {
+    "id": "b2-22",
+    "sentence": "We must take immediate steps to {blank} the risk of accidents in the warehouse.",
+    "options": [
+      { "word": "maximize", "trans": "最大化" },
+      { "word": "minimize", "trans": "最小化 / 減到最少" },
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "celebrate", "trans": "慶祝" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Minimize risk 指將風險或損失減到最低。"
+  },
+  {
+    "id": "b2-23",
+    "sentence": "The company is planning to {blank} its business into the European market next year.",
+    "options": [
+      { "word": "shrink", "trans": "縮小" },
+      { "word": "expand", "trans": "擴展 / 擴張" },
+      { "word": "hide", "trans": "隱藏" },
+      { "word": "abandon", "trans": "放棄" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Expand business/market 係指業務擴張。"
+  },
+  {
+    "id": "b2-24",
+    "sentence": "It is crucial to {blank} a good professional relationship with our key suppliers.",
+    "options": [
+      { "word": "ruin", "trans": "毀壞" },
+      { "word": "maintain", "trans": "維持 / 保持" },
+      { "word": "forget", "trans": "忘記" },
+      { "word": "avoid", "trans": "避開" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Maintain a relationship/standard 指保持喺良好嘅狀態。"
+  },
+  {
+    "id": "b2-25",
+    "sentence": "Regular check-ups can help {blank} unexpected breakdowns of the factory machines.",
+    "options": [
+      { "word": "cause", "trans": "導致" },
+      { "word": "prevent", "trans": "防止 / 預防" },
+      { "word": "encourage", "trans": "鼓勵" },
+      { "word": "invite", "trans": "邀請" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Prevent 意思係採取措施阻止壞事發生。"
+  },
+  {
+    "id": "b2-26",
+    "sentence": "The IT team is trying to {blank} the network connection issue right now.",
+    "options": [
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "troubleshoot", "trans": "排除故障" },
+      { "word": "create", "trans": "創造" },
+      { "word": "praise", "trans": "讚美" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Troubleshoot 係工程同 IT 常用字，指尋找並解決技術問題。"
+  },
+  {
+    "id": "b2-27",
+    "sentence": "There has been a {blank} improvement in the yield rate since we updated the software.",
+    "options": [
+      { "word": "tiny", "trans": "微小的" },
+      { "word": "significant", "trans": "顯著的 / 重要的" },
+      { "word": "fake", "trans": "虛假的" },
+      { "word": "invisible", "trans": "看不見的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Significant improvement 指改善幅度好大、好明顯。"
+  },
+  {
+    "id": "b2-28",
+    "sentence": "Attention to detail is absolutely {blank} when conducting a quality audit.",
+    "options": [
+      { "word": "optional", "trans": "可選擇的" },
+      { "word": "essential", "trans": "不可或缺的 / 必要的" },
+      { "word": "useless", "trans": "無用的" },
+      { "word": "funny", "trans": "好笑的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Essential 意思同 vital/important 接近，指絕對必需。"
+  },
+  {
+    "id": "b2-29",
+    "sentence": "The technician performs a {blank} inspection of the cooling system every Friday.",
+    "options": [
+      { "word": "routine", "trans": "常規的 / 例行的" },
+      { "word": "random", "trans": "隨機的" },
+      { "word": "rare", "trans": "罕見的" },
+      { "word": "secret", "trans": "秘密的" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Routine inspection 係指按既定時間表進行嘅例行檢查。"
+  },
+  {
+    "id": "b2-30",
+    "sentence": "We must carefully {blank} every single component before it is packed for shipping.",
+    "options": [
+      { "word": "break", "trans": "打破" },
+      { "word": "inspect", "trans": "檢查 / 檢驗" },
+      { "word": "guess", "trans": "猜測" },
+      { "word": "paint", "trans": "塗色" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Inspect 指為咗搵錯漏而進行仔細檢查。"
+  },
+  {
+    "id": "b2-31",
+    "sentence": "Please ensure you properly {blank} all the steps you took to resolve the error.",
+    "options": [
+      { "word": "forget", "trans": "忘記" },
+      { "word": "document", "trans": "記錄 (動詞)" },
+      { "word": "deny", "trans": "否認" },
+      { "word": "steal", "trans": "偷竊" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Document 喺度做動詞，指將過程或結果以書面形式記錄低。"
+  },
+  {
+    "id": "b2-32",
+    "sentence": "The HR department will {blank} the training schedule for all new resident engineers.",
+    "options": [
+      { "word": "coordinate", "trans": "協調 / 統籌" },
+      { "word": "confuse", "trans": "使混淆" },
+      { "word": "complain", "trans": "投訴" },
+      { "word": "ignore", "trans": "忽略" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Coordinate 指協調各方、統籌安排令事情順利進行。"
+  },
+  {
+    "id": "b2-33",
+    "sentence": "Using tape is just a {blank} fix; we need a real replacement part.",
+    "options": [
+      { "word": "permanent", "trans": "永久的" },
+      { "word": "temporary", "trans": "暫時的 / 臨時的" },
+      { "word": "expensive", "trans": "昂貴的" },
+      { "word": "perfect", "trans": "完美的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Temporary fix 指臨時嘅解決方法。"
+  },
+  {
+    "id": "b2-34",
+    "sentence": "If the oil leak is not stopped, it could cause {blank} damage to the engine.",
+    "options": [
+      { "word": "temporary", "trans": "臨時的" },
+      { "word": "permanent", "trans": "永久的" },
+      { "word": "funny", "trans": "好笑的" },
+      { "word": "imaginary", "trans": "想像的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Permanent damage 意思係造成無得修復嘅長遠破壞。"
+  },
+  {
+    "id": "b2-35",
+    "sentence": "Our {blank} plan was to finish by May, but we faced several unexpected delays.",
+    "options": [
+      { "word": "final", "trans": "最終的" },
+      { "word": "initial", "trans": "最初的 / 起初的" },
+      { "word": "fake", "trans": "虛假的" },
+      { "word": "useless", "trans": "無用的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Initial plan 常用於講述原本一開始嘅計劃。"
+  },
+  {
+    "id": "b2-36",
+    "sentence": "The consultant provided a very {blank} report covering every aspect of the supply chain.",
+    "options": [
+      { "word": "brief", "trans": "簡短的" },
+      { "word": "comprehensive", "trans": "全面的 / 詳盡的" },
+      { "word": "confusing", "trans": "令人困惑的" },
+      { "word": "blank", "trans": "空白的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Comprehensive report 指內容包羅萬有、鉅細無遺嘅報告。"
+  },
+  {
+    "id": "b2-37",
+    "sentence": "Please make sure there is {blank} lighting in the room before starting the delicate repair.",
+    "options": [
+      { "word": "poor", "trans": "差的" },
+      { "word": "adequate", "trans": "充足的 / 足夠的" },
+      { "word": "too much", "trans": "太多的" },
+      { "word": "colorful", "trans": "色彩繽紛的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Adequate 同 enough 意思相近，但語氣更正式，指達到需求標準。"
+  },
+  {
+    "id": "b2-38",
+    "sentence": "The assembly line had to be paused due to a severe {blank} of critical microchips.",
+    "options": [
+      { "word": "surplus", "trans": "過剩" },
+      { "word": "shortage", "trans": "短缺 / 缺乏" },
+      { "word": "variety", "trans": "多樣性" },
+      { "word": "collection", "trans": "收集" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Shortage of materials/components 係製造業常見嘅問題。"
+  },
+  {
+    "id": "b2-39",
+    "sentence": "You must present a {blank} employee ID card to enter the restricted server room.",
+    "options": [
+      { "word": "expired", "trans": "過期的" },
+      { "word": "valid", "trans": "有效的 / 合法的" },
+      { "word": "fake", "trans": "假的" },
+      { "word": "broken", "trans": "損壞的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Valid ID 指無過期、合乎規格嘅證件或證明。"
+  },
+  {
+    "id": "b2-40",
+    "sentence": "The warehouse manager returned all the {blank} units back to the original supplier.",
+    "options": [
+      { "word": "perfect", "trans": "完美的" },
+      { "word": "defective", "trans": "有缺陷的 / 不良的" },
+      { "word": "expensive", "trans": "昂貴的" },
+      { "word": "heavy", "trans": "沉重的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Defective units 就係大家成日講嘅「不良品」或 NG 品。"
+  },
+  {
+    "id": "b2-41",
+    "sentence": "It is {blank} procedure to test all software updates on a secure server before release.",
+    "options": [
+      { "word": "strange", "trans": "奇怪的" },
+      { "word": "standard", "trans": "標準的 / 常規的" },
+      { "word": "illegal", "trans": "非法的" },
+      { "word": "optional", "trans": "可選擇的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Standard procedure (SOP) 意思係標準作業程序。"
+  },
+  {
+    "id": "b2-42",
+    "sentence": "This document contains sensitive {blank} data and should never be emailed to clients.",
+    "options": [
+      { "word": "public", "trans": "公開的" },
+      { "word": "internal", "trans": "內部的" },
+      { "word": "external", "trans": "外部的" },
+      { "word": "useless", "trans": "無用的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Internal data 指只限公司內部傳閱嘅資料。"
+  },
+  {
+    "id": "b2-43",
+    "sentence": "We hired an {blank} auditor to independently review our financial and quality records.",
+    "options": [
+      { "word": "internal", "trans": "內部的" },
+      { "word": "external", "trans": "外部的 / 外聘的" },
+      { "word": "lazy", "trans": "懶惰的" },
+      { "word": "unqualified", "trans": "無資格的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "External auditor 指從公司外面聘請返嚟嘅第三方審計員。"
+  },
+  {
+    "id": "b2-44",
+    "sentence": "Please reply to this request as soon as possible; the matter is highly {blank}.",
+    "options": [
+      { "word": "relaxing", "trans": "令人放鬆的" },
+      { "word": "urgent", "trans": "緊急的 / 逼切的" },
+      { "word": "unimportant", "trans": "不重要的" },
+      { "word": "funny", "trans": "好笑的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Urgent 形容事情急需處理，Email 常見字。"
+  },
+  {
+    "id": "b2-45",
+    "sentence": "The heavy snowstorm caused a significant {blank} in the delivery of our raw materials.",
+    "options": [
+      { "word": "speed", "trans": "速度" },
+      { "word": "delay", "trans": "延遲 / 耽擱" },
+      { "word": "bonus", "trans": "獎金" },
+      { "word": "success", "trans": "成功" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Cause a delay 指導致時間上嘅延誤。"
+  },
+  {
+    "id": "b2-46",
+    "sentence": "Since the old method failed, we need to take a completely different {blank} to solve this issue.",
+    "options": [
+      { "word": "approach", "trans": "方法 / 途徑" },
+      { "word": "excuse", "trans": "藉口" },
+      { "word": "joke", "trans": "笑話" },
+      { "word": "vacation", "trans": "假期" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Take an approach 意思係採取某種方法或角度去處理問題。"
+  },
+  {
+    "id": "b2-47",
+    "sentence": "The overall cost is the most important {blank} we must consider when choosing a new supplier.",
+    "options": [
+      { "word": "color", "trans": "顏色" },
+      { "word": "factor", "trans": "因素 / 要素" },
+      { "word": "weather", "trans": "天氣" },
+      { "word": "hobby", "trans": "嗜好" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Factor 係指影響結果或決定嘅重要元素。"
+  },
+  {
+    "id": "b2-48",
+    "sentence": "Let's try to look at this user interface issue from the customer's {blank}.",
+    "options": [
+      { "word": "screen", "trans": "螢幕" },
+      { "word": "perspective", "trans": "觀點 / 角度" },
+      { "word": "wallet", "trans": "錢包" },
+      { "word": "shadow", "trans": "影子" }
+    ],
+    "correctIndex": 1,
+    "explanation": "From someone's perspective 意思係代入某人嘅角度去睇事物。"
+  },
+  {
+    "id": "b2-49",
+    "sentence": "Although the process was difficult, the successful {blank} of the project made everyone proud.",
+    "options": [
+      { "word": "outcome", "trans": "結果 / 後果" },
+      { "word": "failure", "trans": "失敗" },
+      { "word": "beginning", "trans": "開始" },
+      { "word": "complaint", "trans": "投訴" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Outcome 同 result 相似，多數指一件事情最終帶嚟嘅成效或結果。"
+  },
+  {
+    "id": "b2-50",
+    "sentence": "The development team values your honest {blank} and will use it to improve the app.",
+    "options": [
+      { "word": "silence", "trans": "沉默" },
+      { "word": "feedback", "trans": "回饋 / 意見" },
+      { "word": "money", "trans": "金錢" },
+      { "word": "anger", "trans": "憤怒" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Feedback 係職場同產品開發極常用字，指收集返嚟嘅意見。"
+  },
+  {
+    "id": "b2-51",
+    "sentence": "The most attractive {blank} of this new smartwatch is its extended battery life.",
+    "options": [
+      { "word": "flaw", "trans": "瑕疵" },
+      { "word": "feature", "trans": "特徵 / 功能" },
+      { "word": "box", "trans": "盒子" },
+      { "word": "cable", "trans": "電線" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Feature 指產品主打嘅功能或特色。"
+  },
+  {
+    "id": "b2-52",
+    "sentence": "Unfortunately, the new tracking software is not {blank} with our older operating systems.",
+    "options": [
+      { "word": "angry", "trans": "生氣的" },
+      { "word": "compatible", "trans": "相容的 / 兼容的" },
+      { "word": "expensive", "trans": "昂貴的" },
+      { "word": "visible", "trans": "可見的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Compatible with 係 IT 常見搭配，指系統之間能夠互相配合運作。"
+  },
+  {
+    "id": "b2-53",
+    "sentence": "We need to {blank} our servers tonight to handle the increasing volume of web traffic.",
+    "options": [
+      { "word": "downgrade", "trans": "降級" },
+      { "word": "upgrade", "trans": "升級" },
+      { "word": "smash", "trans": "砸碎" },
+      { "word": "hide", "trans": "隱藏" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Upgrade 指提升硬體或軟件嘅等級效能。"
+  },
+  {
+    "id": "b2-54",
+    "sentence": "The IT technician managed to {blank} all the accidentally deleted files from the backup drive.",
+    "options": [
+      { "word": "destroy", "trans": "破壞" },
+      { "word": "restore", "trans": "恢復 / 還原" },
+      { "word": "sell", "trans": "賣" },
+      { "word": "forget", "trans": "忘記" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Restore data/files 意思係將資料還原返出嚟。"
+  },
+  {
+    "id": "b2-55",
+    "sentence": "A good marketing campaign should {blank} a lot of interest and potential leads for the brand.",
+    "options": [
+      { "word": "kill", "trans": "殺死" },
+      { "word": "generate", "trans": "產生 / 生成" },
+      { "word": "avoid", "trans": "避開" },
+      { "word": "hide", "trans": "隱藏" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Generate interest/revenue/reports 指產生、製造出某啲結果或事物。"
   }
 ]
