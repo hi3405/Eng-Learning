@@ -262,5 +262,484 @@
     ],
     "correctIndex": 2,
     "explanation": "Obsolete 形容因為有更好嘅替代品出現，而被時代淘汰嘅事物。"
+  },{
+    "id": "v23",
+    "sentence": "The new tracking tool will {blank} data from QC2 and QMB factories into one unified dashboard.",
+    "options": [
+      { "word": "consolidate", "trans": "合併 / 整合" },
+      { "word": "scatter", "trans": "分散" },
+      { "word": "diminish", "trans": "減少" },
+      { "word": "provoke", "trans": "挑釁" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Consolidate 經常用於商業或 IT，指將分散嘅數據或資源整合為一。"
+  },
+  {
+    "id": "v24",
+    "sentence": "If the engine's temperature continues to {blank} erratically, the thermostat might need immediate replacement.",
+    "options": [
+      { "word": "stabilize", "trans": "穩定" },
+      { "word": "fluctuate", "trans": "波動 / 起伏" },
+      { "word": "plummet", "trans": "暴跌" },
+      { "word": "soar", "trans": "飆升" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Fluctuate 指數值（如溫度、體重、股市）不穩定地上下波動。"
+  },
+  {
+    "id": "v25",
+    "sentence": "Hitting a weight loss {blank} is completely normal; adjusting your macronutrients can help you break through.",
+    "options": [
+      { "word": "peak", "trans": "巔峰" },
+      { "word": "plateau", "trans": "停滯期 / 高原期" },
+      { "word": "deficit", "trans": "赤字" },
+      { "word": "surplus", "trans": "盈餘" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Plateau 喺健身同進度管理中，專指進度停滯不前嘅階段。"
+  },
+  {
+    "id": "v26",
+    "sentence": "Organizing a large banquet for hundreds of guests requires {blank} attention to the seating arrangements and dietary restrictions.",
+    "options": [
+      { "word": "frivolous", "trans": "輕浮的" },
+      { "word": "meticulous", "trans": "一絲不苟的 / 嚴謹的" },
+      { "word": "haphazard", "trans": "隨意的" },
+      { "word": "negligent", "trans": "疏忽的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Meticulous 形容對細節極度重視，非常適合形容大型活動籌備。"
+  },
+  {
+    "id": "v27",
+    "sentence": "In effective communication, your outward body language must be {blank} with your inner feelings to build trust.",
+    "options": [
+      { "word": "congruent", "trans": "一致的 / 吻合的" },
+      { "word": "contradictory", "trans": "矛盾的" },
+      { "word": "hostile", "trans": "充滿敵意的" },
+      { "word": "ambiguous", "trans": "模稜兩可的" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Congruent 係心理學同溝通學常用字，指內外一致、真誠無偽。"
+  },
+  {
+    "id": "v28",
+    "sentence": "It is essential to give your muscles enough time to {blank} after a high-intensity push and pull workout.",
+    "options": [
+      { "word": "deteriorate", "trans": "惡化" },
+      { "word": "recuperate", "trans": "恢復 / 康復" },
+      { "word": "contract", "trans": "收縮" },
+      { "word": "atrophy", "trans": "萎縮" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Recuperate 指從疲勞、疾病或消耗中恢復過來。"
+  },
+  {
+    "id": "v29",
+    "sentence": "Ensuring the safety of the field return analysis process is {blank} to preventing workplace hazards.",
+    "options": [
+      { "word": "trivial", "trans": "微不足道的" },
+      { "word": "paramount", "trans": "至關重要的 / 首要的" },
+      { "word": "optional", "trans": "可選擇的" },
+      { "word": "marginal", "trans": "邊緣的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Paramount 是 C1 級別形容詞，意指比其他所有事情都更重要。"
+  },
+  {
+    "id": "v30",
+    "sentence": "The proposed ODM integration project seems highly {blank}, promising a significant reduction in operational costs.",
+    "options": [
+      { "word": "lucrative", "trans": "有利可圖的" },
+      { "word": "futile", "trans": "徒勞的" },
+      { "word": "detrimental", "trans": "有害的" },
+      { "word": "redundant", "trans": "多餘的" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Lucrative 經常用來形容能帶來豐厚利潤或巨大效益的商業計劃。"
+  },
+  {
+    "id": "v31",
+    "sentence": "Strict quality control gates will {blank} defective units from moving further down the SMT line.",
+    "options": [
+      { "word": "encourage", "trans": "鼓勵" },
+      { "word": "deter", "trans": "阻止 / 威懾" },
+      { "word": "propel", "trans": "推動" },
+      { "word": "incorporate", "trans": "納入" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Deter someone/something from... 意指制止或阻嚇某事發生。"
+  },
+  {
+    "id": "v32",
+    "sentence": "Please ensure that all the documents you submit {blank} directly to the current audit scope.",
+    "options": [
+      { "word": "deviate", "trans": "偏離" },
+      { "word": "pertain", "trans": "關於 / 相關" },
+      { "word": "succumb", "trans": "屈服" },
+      { "word": "allude", "trans": "暗指" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Pertain to... 是非常正式的商業用語，表示與某事物直接相關。"
+  },
+  {
+    "id": "v33",
+    "sentence": "After reviewing the yield data, we concluded that returning to the old manufacturing process is no longer a {blank} option.",
+    "options": [
+      { "word": "obsolete", "trans": "過時的" },
+      { "word": "viable", "trans": "可行的 / 望成功的" },
+      { "word": "sporadic", "trans": "零星的" },
+      { "word": "fictitious", "trans": "虛構的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Viable option (可行的選項) 是工程與決策時極常用的搭配。"
+  },
+  {
+    "id": "v34",
+    "sentence": "The QA team must {blank} every single field return report to identify the root cause of the failure.",
+    "options": [
+      { "word": "skim", "trans": "略讀" },
+      { "word": "scrutinize", "trans": "仔細審查" },
+      { "word": "fabricate", "trans": "捏造" },
+      { "word": "discard", "trans": "丟棄" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Scrutinize 強調極度仔細、嚴格地檢查以找出問題。"
+  },
+  {
+    "id": "v35",
+    "sentence": "To {blank} the bottleneck in the assembly line, we need a cohesive strategy rather than a temporary fix.",
+    "options": [
+      { "word": "exacerbate", "trans": "惡化" },
+      { "word": "alleviate", "trans": "減輕 / 緩解" },
+      { "word": "complicate", "trans": "使複雜" },
+      { "word": "conceal", "trans": "隱藏" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Alleviate a problem/bottleneck 意思是減輕困難或舒緩樽頸。"
+  },
+  {
+    "id": "v36",
+    "sentence": "The non-disclosure agreement clearly {blank} that no proprietary data should be shared with third parties.",
+    "options": [
+      { "word": "stipulates", "trans": "明文規定" },
+      { "word": "implies", "trans": "暗示" },
+      { "word": "retracts", "trans": "撤回" },
+      { "word": "contradicts", "trans": "反駁" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Stipulate 常用於合約或法規，意指具體、明確地規定條件。"
+  },
+  {
+    "id": "v37",
+    "sentence": "We cannot base our next product launch on such {blank} and arbitrary consumer feedback.",
+    "options": [
+      { "word": "lucid", "trans": "清晰的" },
+      { "word": "ambiguous", "trans": "模稜兩可的 / 含糊的" },
+      { "word": "tangible", "trans": "實質的" },
+      { "word": "compelling", "trans": "有說服力的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Ambiguous 指意思含糊不清，無法用作可靠的決策依據。"
+  },
+  {
+    "id": "v38",
+    "sentence": "Any slight {blank} from the standard operating procedures could jeopardize the entire production batch.",
+    "options": [
+      { "word": "adherence", "trans": "遵守" },
+      { "word": "deviation", "trans": "偏離 / 誤差" },
+      { "word": "compliance", "trans": "服從" },
+      { "word": "alignment", "trans": "對齊 / 一致" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Deviation 指偏離了既定的標準或常軌，在品質工程中是核心字眼。"
+  },
+  {
+    "id": "v39",
+    "sentence": "The manager's inspiring speech managed to {blank} a highly positive response from the discouraged team.",
+    "options": [
+      { "word": "suppress", "trans": "壓制" },
+      { "word": "elicit", "trans": "引出 / 誘發" },
+      { "word": "hinder", "trans": "阻礙" },
+      { "word": "nullify", "trans": "使無效" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Elicit a response 意指成功引發或誘導出某種反應或情緒。"
+  },
+  {
+    "id": "v40",
+    "sentence": "Allocating extra headcount to the testing phase will greatly {blank} the software's release.",
+    "options": [
+      { "word": "prolong", "trans": "延長" },
+      { "word": "facilitate", "trans": "促進 / 使便利" },
+      { "word": "obstruct", "trans": "阻塞" },
+      { "word": "sabotage", "trans": "破壞" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Facilitate 指提供便利，使事情更容易或更快完成。"
+  },
+  {
+    "id": "v41",
+    "sentence": "Without adequate sensors, it is difficult to accurately {blank} the pressure changes inside the chamber.",
+    "options": [
+      { "word": "gauge", "trans": "測量 / 評估" },
+      { "word": "ignore", "trans": "忽略" },
+      { "word": "instigate", "trans": "煽動" },
+      { "word": "disregard", "trans": "漠視" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Gauge 作為動詞時，意指精準地測量或判斷（如壓力、情緒、反應）。"
+  },
+  {
+    "id": "v42",
+    "sentence": "The system generated an alert warning us that a critical server failure was {blank}.",
+    "options": [
+      { "word": "obsolete", "trans": "過時的" },
+      { "word": "imminent", "trans": "迫在眉睫的 / 逼近的" },
+      { "word": "trivial", "trans": "微不足道的" },
+      { "word": "elusive", "trans": "難以捉摸的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Imminent 常用於警告危險或重大事件即將發生。"
+  },
+  {
+    "id": "v43",
+    "sentence": "Using unverified components will undoubtedly {blank} the safety rating of the final product.",
+    "options": [
+      { "word": "elevate", "trans": "提升" },
+      { "word": "jeopardize", "trans": "危及 / 危害" },
+      { "word": "fortify", "trans": "強化" },
+      { "word": "vindicate", "trans": "證明無辜" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Jeopardize 是 C1 級的強烈字眼，表示將事物置於危險之中。"
+  },
+  {
+    "id": "v44",
+    "sentence": "We must ensure that all customer complaints are treated as {blank} concerns rather than mere annoyances.",
+    "options": [
+      { "word": "fictitious", "trans": "虛構的" },
+      { "word": "legitimate", "trans": "合情理的 / 合法的" },
+      { "word": "superficial", "trans": "表面的" },
+      { "word": "erratic", "trans": "飄忽的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Legitimate concerns 指合理、正當、值得認真對待的擔憂。"
+  },
+  {
+    "id": "v45",
+    "sentence": "The tension in the meeting room was so {blank} that nobody dared to speak first.",
+    "options": [
+      { "word": "obscure", "trans": "模糊的" },
+      { "word": "manifest", "trans": "明顯的 / 顯而易見的" },
+      { "word": "subtle", "trans": "微妙的" },
+      { "word": "latent", "trans": "潛在的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Manifest 作形容詞時，指極度明顯、不言而喻。"
+  },
+  {
+    "id": "v46",
+    "sentence": "By avoiding the root cause analysis, we will only {blank} the same engineering failures.",
+    "options": [
+      { "word": "eradicate", "trans": "根除" },
+      { "word": "perpetuate", "trans": "使持續 / 使不朽" },
+      { "word": "rectify", "trans": "糾正" },
+      { "word": "dismantle", "trans": "拆除" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Perpetuate 指令某種情況（通常是壞事）延續下去。"
+  },
+  {
+    "id": "v47",
+    "sentence": "It is difficult to {blank} the exact financial impact of the recent supply chain delays.",
+    "options": [
+      { "word": "quantify", "trans": "量化" },
+      { "word": "fabricate", "trans": "捏造" },
+      { "word": "obscure", "trans": "掩蓋" },
+      { "word": "disperse", "trans": "驅散" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Quantify 意指將事物（如影響、風險）用數字具體表達出來。"
+  },
+  {
+    "id": "v48",
+    "sentence": "After the automation upgrade, the manual data entry process became entirely {blank}.",
+    "options": [
+      { "word": "vital", "trans": "至關重要的" },
+      { "word": "redundant", "trans": "多餘的 / 被裁減的" },
+      { "word": "intricate", "trans": "複雜精細的" },
+      { "word": "stringent", "trans": "嚴格的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Redundant 指因為系統升級而變得不再需要、多餘的程序或人手。"
+  },
+  {
+    "id": "v49",
+    "sentence": "The initial tests passed, but all {blank} evaluations revealed a critical flaw in the design.",
+    "options": [
+      { "word": "preceding", "trans": "先前的" },
+      { "word": "subsequent", "trans": "隨後的 / 其後的" },
+      { "word": "irrelevant", "trans": "無關的" },
+      { "word": "isolated", "trans": "孤立的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Subsequent 用於描述發生在某事件之後的動作或情況。"
+  },
+  {
+    "id": "v50",
+    "sentence": "Investors are looking for {blank} evidence of growth before injecting more capital into the startup.",
+    "options": [
+      { "word": "abstract", "trans": "抽象的" },
+      { "word": "tangible", "trans": "實質的 / 有形的" },
+      { "word": "hypothetical", "trans": "假設的" },
+      { "word": "illusory", "trans": "虛幻的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Tangible evidence 指真實存在、可觸摸或可明確證實的證據。"
+  },
+  {
+    "id": "v51",
+    "sentence": "Despite hours of debate, the committee finally reached a {blank} decision to proceed with the merger.",
+    "options": [
+      { "word": "divided", "trans": "分裂的" },
+      { "word": "unanimous", "trans": "全體一致的" },
+      { "word": "tentative", "trans": "暫定的" },
+      { "word": "controversial", "trans": "具爭議的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Unanimous decision 是會議中極高級的搭配，表示無人反對、全票通過。"
+  },
+  {
+    "id": "v52",
+    "sentence": "We must {blank} the test results with an independent third-party laboratory.",
+    "options": [
+      { "word": "validate", "trans": "驗證 / 使生效" },
+      { "word": "contradict", "trans": "反駁" },
+      { "word": "compromise", "trans": "妥協 / 損害" },
+      { "word": "repudiate", "trans": "否認" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Validate 指透過官方或權威途徑確認某事物的真確性。"
+  },
+  {
+    "id": "v53",
+    "sentence": "The unprecedented high failure rate certainly {blank} a full-scale factory investigation.",
+    "options": [
+      { "word": "mitigates", "trans": "減輕" },
+      { "word": "warrants", "trans": "使...成為必要 / 值得" },
+      { "word": "pacifies", "trans": "平息" },
+      { "word": "conceals", "trans": "隱藏" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Warrant (動詞) 在此意指情況嚴重，使得某行動（調查）變得理所當然及必要。"
+  },
+  {
+    "id": "v54",
+    "sentence": "Implementing the new SMT parameters will {blank} a much higher production efficiency.",
+    "options": [
+      { "word": "hinder", "trans": "阻礙" },
+      { "word": "yield", "trans": "產生 / 帶來 (收益/結果)" },
+      { "word": "deplete", "trans": "耗盡" },
+      { "word": "withhold", "trans": "扣留" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Yield 除了指「良率」，作動詞時解作產出或帶來良好結果。"
+  },
+  {
+    "id": "v55",
+    "sentence": "The project manager needs to properly {blank} resources to ensure the OBA tool is finished on time.",
+    "options": [
+      { "word": "squander", "trans": "揮霍" },
+      { "word": "allocate", "trans": "分配 / 撥出" },
+      { "word": "confiscate", "trans": "沒收" },
+      { "word": "hoard", "trans": "囤積" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Allocate resources/budget 是專案管理的核心 C1 詞彙。"
+  },
+  {
+    "id": "v56",
+    "sentence": "We use the performance of our top-tier competitor as a {blank} to evaluate our own quality standards.",
+    "options": [
+      { "word": "liability", "trans": "負債 / 累贅" },
+      { "word": "benchmark", "trans": "基準 / 指標" },
+      { "word": "hindrance", "trans": "阻礙" },
+      { "word": "byproduct", "trans": "副產品" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Benchmark 是用作比較或評估標準的基準點。"
+  },
+  {
+    "id": "v57",
+    "sentence": "The QA team had to {blank} data from three different factories to generate the final monthly report.",
+    "options": [
+      { "word": "compile", "trans": "彙編 / 收集" },
+      { "word": "disperse", "trans": "散佈" },
+      { "word": "obliterate", "trans": "徹底消除" },
+      { "word": "segregate", "trans": "隔離" }
+    ],
+    "correctIndex": 0,
+    "explanation": "Compile data/reports 指從不同來源收集資料並編寫成報告。"
+  },
+  {
+    "id": "v58",
+    "sentence": "The training manual clearly {blank} the boundaries of the resident engineer's responsibilities.",
+    "options": [
+      { "word": "obscures", "trans": "使模糊" },
+      { "word": "delineates", "trans": "清晰界定 / 描繪" },
+      { "word": "conflates", "trans": "混淆" },
+      { "word": "circumvents", "trans": "迴避" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Delineate 指極度精確、清晰地劃定界線或描述細節。"
+  },
+  {
+    "id": "v59",
+    "sentence": "High-protein diets are effective because they help {blank} muscle mass while cutting body fat.",
+    "options": [
+      { "word": "deplete", "trans": "消耗" },
+      { "word": "retain", "trans": "保留 / 保持" },
+      { "word": "discard", "trans": "拋棄" },
+      { "word": "fluctuate", "trans": "波動" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Retain 意指保留不流失，常用於 fitness (retain muscle) 或商業 (retain talent)。"
+  },
+  {
+    "id": "v60",
+    "sentence": "If we want to hit the 80kg target by August, sticking to the zero-starch dinner rule is {blank}.",
+    "options": [
+      { "word": "optional", "trans": "可選的" },
+      { "word": "imperative", "trans": "極為重要的 / 必須的" },
+      { "word": "trivial", "trans": "微不足道的" },
+      { "word": "ambiguous", "trans": "含糊的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Imperative 表達極度逼切、絕對不能妥協的要求。"
+  },
+  {
+    "id": "v61",
+    "sentence": "The mechanic warned that ignoring a faulty thermostat could result in {blank} damage to the engine block.",
+    "options": [
+      { "word": "reversible", "trans": "可逆的" },
+      { "word": "irreversible", "trans": "不可逆轉的" },
+      { "word": "negligible", "trans": "可忽略的" },
+      { "word": "superficial", "trans": "表面的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Irreversible damage 是指造成了無法修復的永久性損害。"
+  },
+  {
+    "id": "v62",
+    "sentence": "To ensure the wedding runs smoothly, we must prepare a {blank} plan for bad weather at the venue.",
+    "options": [
+      { "word": "spontaneous", "trans": "自發的" },
+      { "word": "contingency", "trans": "應急的 / 備用的" },
+      { "word": "redundant", "trans": "多餘的" },
+      { "word": "tentative", "trans": "暫定的" }
+    ],
+    "correctIndex": 1,
+    "explanation": "Contingency plan 就是「Plan B」，用以應付突發狀況的備用方案。"
   }
 ]
