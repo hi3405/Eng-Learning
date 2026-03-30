@@ -9,6 +9,10 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Firebase compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script>
     tailwind.config = { theme: { extend: { colors: { brand: { dark: '#0A0E17', slate: '#1E293B', orange: '#F97316', blue: '#3B82F6', green: '#10B981', red: '#EF4444', yellow: '#FDE047', purple: '#8B5CF6' } } } } }
   </script>
@@ -96,6 +100,11 @@
         <div class="flex items-center gap-1.5 text-brand-orange font-extrabold text-sm px-3 py-1.5 bg-brand-orange/10 rounded-full streak-display">
           <i class="fas fa-fire-alt"></i> <span class="streakValue">0</span>
         </div>
+        <!-- Firebase Auth Button -->
+        <button id="authBtn" onclick="handleAuth()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-600 text-xs font-bold transition-all active-scale">
+          <span id="authBtnIcon" style="font-size:13px;">👤</span>
+          <span id="authBtnText" class="text-gray-400 uppercase tracking-widest" style="font-size:10px;">登入</span>
+        </button>
       </div>
     </div>
     <div class="mt-4 flex justify-between items-center">
@@ -550,6 +559,19 @@
     </button>
   </div>
 
+  <!-- Cloud Sync Section -->
+  <div class="bg-brand-dark p-5 rounded-3xl border border-gray-800 mb-4" id="syncSection">
+    <label class="block text-xs font-bold text-brand-blue uppercase tracking-widest mb-3"><i class="fas fa-cloud mr-1"></i> 雲端同步</label>
+    <div id="syncStatusCard" class="flex items-center gap-3 p-3 rounded-2xl border border-gray-700 mb-3">
+      <span id="syncStatusIcon" class="text-xl">👤</span>
+      <div class="flex-1">
+        <p id="syncStatusTitle" class="text-sm font-bold text-gray-300">本機模式</p>
+        <p id="syncStatusDesc" class="text-xs text-gray-500">登入 Google 可跨裝置同步</p>
+      </div>
+      <button onclick="handleAuth()" id="syncActionBtn" class="text-xs font-bold px-3 py-1.5 rounded-full border border-brand-blue text-brand-blue bg-brand-blue/10 active-scale">Google 登入</button>
+    </div>
+  </div>
+
   <button onclick="resetData()" class="w-full bg-red-900/30 text-red-400 py-3 rounded-xl font-bold text-xs active-scale border border-red-900/50 mb-8">
     RESET ALL DATA
   </button>
@@ -620,8 +642,61 @@ const DEFAULT_DATA = {
   autoReadOn:true, // ★ NEW
   speakScoreHistory:{}
 };
-function loadData(){const s=localStorage.getItem('eng_v32');if(!s)return JSON.parse(JSON.stringify(DEFAULT_DATA));try{return{...JSON.parse(JSON.stringify(DEFAULT_DATA)),...JSON.parse(s)};}catch(e){return JSON.parse(JSON.stringify(DEFAULT_DATA));}}
-function saveData(d){localStorage.setItem('eng_v32',JSON.stringify(d));}
+// ══════════════════════════════════════════
+// IndexedDB — 主要儲存（比 localStorage 大好多，唔怕 Safari ITP）
+// ══════════════════════════════════════════
+let ENG_DB = null;
+function engOpenDB() {
+  return new Promise((resolve, reject) => {
+    if(ENG_DB){ resolve(ENG_DB); return; }
+    const req = indexedDB.open('EngOverloadDB', 1);
+    req.onupgradeneeded = e => {
+      const db = e.target.result;
+      if(!db.objectStoreNames.contains('kv')) db.createObjectStore('kv', {keyPath:'k'});
+    };
+    req.onsuccess = e => { ENG_DB = e.target.result; resolve(ENG_DB); };
+    req.onerror = e => reject(e);
+  });
+}
+async function engIdbGet(key) {
+  const db = await engOpenDB();
+  return new Promise(resolve => {
+    const req = db.transaction('kv','readonly').objectStore('kv').get(key);
+    req.onsuccess = () => resolve(req.result ? req.result.v : null);
+    req.onerror = () => resolve(null);
+  });
+}
+async function engIdbSet(key, value) {
+  const db = await engOpenDB();
+  return new Promise(resolve => {
+    const tx = db.transaction('kv','readwrite');
+    tx.objectStore('kv').put({k:key, v:value});
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => resolve();
+  });
+}
+async function engIdbDel(key) {
+  const db = await engOpenDB();
+  return new Promise(resolve => {
+    const tx = db.transaction('kv','readwrite');
+    tx.objectStore('kv').delete(key);
+    tx.oncomplete = () => resolve();
+  });
+}
+
+// loadData — 同步讀 localStorage（啟動快）
+function loadData(){
+  const s=localStorage.getItem('eng_v32');
+  if(!s)return JSON.parse(JSON.stringify(DEFAULT_DATA));
+  try{return{...JSON.parse(JSON.stringify(DEFAULT_DATA)),...JSON.parse(s)};}
+  catch(e){return JSON.parse(JSON.stringify(DEFAULT_DATA));}
+}
+
+// saveData — 同時寫 localStorage + IDB（mirror）
+function saveData(d){
+  localStorage.setItem('eng_v32',JSON.stringify(d));
+  engIdbSet('eng_data', d); // async mirror，唔影響主流程
+}
 
 // Migrate from older keys
 (function migrate(){
@@ -1200,12 +1275,166 @@ function updateLastExportUI(){
 
 function updateSettingsPage(){const d=loadData();updateReminderUI(d.reminderOn!==false);updateAutoReadUI(d.autoReadOn!==false);document.getElementById('srsErrorCount').textContent=Object.keys(d.errorVocab||{}).length;updateLastExportUI();}
 function clearErrors(){const d=loadData();d.errorVocab={};saveData(d);document.getElementById('srsErrorCount').textContent=0;updateRetryBadge();}
-function resetData(){
+async function resetData(){
   if(confirm("確定重置所有資料？此操作無法復原！")){
-    // 清除所有相關 key，包括舊版 migration key
     ['eng_v32','eng_v31','eng_v30','english_coach_data_v9','eng_lastExport','preferred_voice_uri'].forEach(k=>localStorage.removeItem(k));
+    // 同時清 IndexedDB
+    try { await engIdbDel('eng_data'); } catch(e) {}
     location.reload();
   }
+}
+
+// ══════════════════════════════════════════
+// Firebase Auth + Firestore 同步
+// ══════════════════════════════════════════
+const ENG_FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDVib6xIEPWUMmh2Kdp5xisU0Cx6Zs6O3U",
+  authDomain: "iron-log-7c180.firebaseapp.com",
+  projectId: "iron-log-7c180",
+  storageBucket: "iron-log-7c180.firebasestorage.app",
+  messagingSenderId: "172718642883",
+  appId: "1:172718642883:web:5dc5c14fdd5bf56450b476"
+};
+
+let engFbAuth, engFbDb, engFbProvider, engCurrentUser, engSyncEnabled=false;
+
+try {
+  // 用同一個 Firebase app（如果已經初始化就用現有的）
+  let fbApp;
+  try { fbApp = firebase.app(); } catch(e) { fbApp = firebase.initializeApp(ENG_FIREBASE_CONFIG); }
+  engFbAuth = firebase.auth();
+  engFbDb = firebase.firestore();
+  engFbProvider = new firebase.auth.GoogleAuthProvider();
+  engFbProvider.setCustomParameters({prompt:'select_account'});
+  engFbDb.enablePersistence().catch(e=>{});
+
+  engFbAuth.onAuthStateChanged(user => {
+    engCurrentUser = user;
+    engSyncEnabled = !!user;
+    updateEngAuthUI(user);
+    if(user) {
+      loadEngFromFirestore(user.uid).then(()=>{
+        showToast(`☁️ 已登入：${user.displayName || user.email}`);
+      });
+    }
+  });
+} catch(e) { console.error('Firebase init error:', e); }
+
+function updateEngAuthUI(user) {
+  const btn = document.getElementById('authBtn');
+  const icon = document.getElementById('authBtnIcon');
+  const text = document.getElementById('authBtnText');
+  const statusCard = document.getElementById('syncStatusCard');
+  const statusTitle = document.getElementById('syncStatusTitle');
+  const statusDesc = document.getElementById('syncStatusDesc');
+  const actionBtn = document.getElementById('syncActionBtn');
+
+  if(user) {
+    // Header button
+    if(btn) btn.style.borderColor = '#10B981';
+    if(icon) icon.innerHTML = user.photoURL ? `<img src="${user.photoURL}" style="width:18px;height:18px;border-radius:50%;">` : '✅';
+    if(text) { text.textContent = '已同步'; text.style.color = '#10B981'; }
+    // Settings card
+    if(statusCard) statusCard.style.borderColor = '#10B981';
+    if(statusTitle) { statusTitle.textContent = user.displayName || user.email; statusTitle.style.color = '#10B981'; }
+    if(statusDesc) statusDesc.textContent = '資料自動同步至雲端';
+    if(actionBtn) { actionBtn.textContent = '登出'; actionBtn.className = 'text-xs font-bold px-3 py-1.5 rounded-full border border-gray-500 text-gray-400 active-scale'; }
+  } else {
+    if(btn) btn.style.borderColor = '';
+    if(icon) icon.innerHTML = '👤';
+    if(text) { text.textContent = '登入'; text.style.color = ''; }
+    if(statusCard) statusCard.style.borderColor = '';
+    if(statusTitle) { statusTitle.textContent = '本機模式'; statusTitle.style.color = ''; }
+    if(statusDesc) statusDesc.textContent = '登入 Google 可跨裝置同步';
+    if(actionBtn) { actionBtn.textContent = 'Google 登入'; actionBtn.className = 'text-xs font-bold px-3 py-1.5 rounded-full border border-brand-blue text-brand-blue bg-brand-blue/10 active-scale'; }
+  }
+}
+
+async function handleAuth() {
+  if(!engFbAuth) { showToast('Firebase 載入中...'); return; }
+  if(engCurrentUser) {
+    if(confirm(`登出 ${engCurrentUser.displayName || engCurrentUser.email}？`)) {
+      await engFbAuth.signOut();
+      showToast('已登出');
+    }
+  } else {
+    try {
+      await engFbAuth.signInWithPopup(engFbProvider);
+    } catch(e) {
+      const code = e.code || '';
+      if(code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') return;
+      showToast('登入失敗：' + (e.code || e.message));
+    }
+  }
+}
+
+async function saveEngToFirestore(uid) {
+  if(!engSyncEnabled || !uid || !engFbDb) return;
+  try {
+    const d = loadData();
+    await engFbDb.collection('eng_users').doc(uid).set({
+      data: JSON.stringify(d),
+      updatedAt: new Date().toISOString()
+    }, {merge: true});
+  } catch(e) { console.error('Firestore save error:', e); }
+}
+
+async function loadEngFromFirestore(uid) {
+  if(!uid || !engFbDb) return;
+  try {
+    const snap = await engFbDb.collection('eng_users').doc(uid).get();
+    if(snap.exists) {
+      const cloudData = snap.data();
+      const cloudTime = cloudData.updatedAt ? new Date(cloudData.updatedAt).getTime() : 0;
+      const localStr = localStorage.getItem('eng_v32');
+      const localData = localStr ? JSON.parse(localStr) : null;
+      const localTime = localData?.lastSaved ? new Date(localData.lastSaved).getTime() : 0;
+
+      if(cloudTime > localTime && cloudData.data) {
+        const parsed = JSON.parse(cloudData.data);
+        saveData(parsed);
+        // 重新 render
+        const d = loadData();
+        document.querySelectorAll('.streakValue').forEach(el=>el.textContent=d.currentStreak);
+        updateRetryBadge();
+        updateSettingsPage();
+        showToast('☁️ 已從雲端同步最新資料');
+      } else {
+        // 本機較新，上傳
+        await saveEngToFirestore(uid);
+      }
+    } else {
+      await saveEngToFirestore(uid);
+    }
+  } catch(e) { console.error('Firestore load error:', e); }
+}
+
+// saveData 已在上面定義（包含 IDB mirror）
+// 呢度 override 加入時間戳 + Firestore 同步
+const _baseSaveData = saveData;
+// 重新定義 saveData 加入完整功能
+function saveData(d) {
+  d.lastSaved = new Date().toISOString();
+  localStorage.setItem('eng_v32', JSON.stringify(d));
+  engIdbSet('eng_data', d); // IDB mirror
+  if(engSyncEnabled && engCurrentUser) {
+    saveEngToFirestore(engCurrentUser.uid);
+  }
+}
+
+// Toast function（English Overload 版本）
+function showToast(msg) {
+  let t = document.getElementById('engToast');
+  if(!t) {
+    t = document.createElement('div');
+    t.id = 'engToast';
+    t.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1E293B;border:1px solid #3B82F6;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;z-index:9999;transition:opacity .3s;white-space:nowrap;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.style.opacity = '0', 2500);
 }
 
 // VOICE
@@ -1232,7 +1461,32 @@ function stopWaveCapture(){if(waveAnimFrame)cancelAnimationFrame(waveAnimFrame);
 // ══════════════════════════════════════════
 // BOOT
 // ══════════════════════════════════════════
-window.onload=()=>{
+async function engBoot() {
+  // 嘗試從 IDB 載入（比 localStorage 更可靠）
+  try {
+    const idbData = await engIdbGet('eng_data');
+    if(idbData && typeof idbData === 'object') {
+      const localStr = localStorage.getItem('eng_v32');
+      const localData = localStr ? JSON.parse(localStr) : null;
+      // 比較時間，用較新的
+      const idbTime = idbData.lastSaved ? new Date(idbData.lastSaved).getTime() : 0;
+      const localTime = localData?.lastSaved ? new Date(localData.lastSaved).getTime() : 0;
+      if(idbTime > localTime) {
+        // IDB 較新，同步回 localStorage
+        localStorage.setItem('eng_v32', JSON.stringify(idbData));
+      } else if(localTime > idbTime && localData) {
+        // localStorage 較新，同步到 IDB
+        await engIdbSet('eng_data', localData);
+      }
+    } else {
+      // IDB 無資料，將 localStorage 資料 mirror 到 IDB
+      const localStr = localStorage.getItem('eng_v32');
+      if(localStr) {
+        try { await engIdbSet('eng_data', JSON.parse(localStr)); } catch(e) {}
+      }
+    }
+  } catch(e) { console.log('IDB boot error:', e); }
+
   const d=loadData();
   document.getElementById('vocabDateLbl').textContent=new Date().toLocaleDateString('zh-HK',{year:'numeric',month:'long',day:'numeric'});
   document.querySelectorAll('.streakValue').forEach(el=>el.textContent=d.currentStreak);
@@ -1246,7 +1500,10 @@ window.onload=()=>{
   setTimeout(checkBanner,600);
   setTimeout(checkAutoRetry,1200);
   setTimeout(showAISuggestion,2000);
-};
+  updateEngAuthUI(null);
+}
+
+window.onload = () => engBoot();
 </script>
 </body>
 </html>
