@@ -9,7 +9,7 @@
       { "word": "record", "trans": "記錄" }
     ],
     "correctIndex": 0,
-    "explanation": "Reset password 係最基本嘅 IT 詞彙，意思係重設密碼。"
+    "explanation": "Reset password 是最基本的 IT 詞彙，意思是重設密碼。"
   },
   {
     "id": "b1-2",
@@ -21,7 +21,7 @@
       { "word": "confused", "trans": "困惑的" }
     ],
     "correctIndex": 1,
-    "explanation": "Punctual 形容人非常守時，係職場基本要求。"
+    "explanation": "Punctual 形容人非常守時，是職場的基本要求。"
   },
   {
     "id": "b1-3",
@@ -33,7 +33,7 @@
       { "word": "ignore", "trans": "忽略" }
     ],
     "correctIndex": 0,
-    "explanation": "Resolve an issue 係客服同 QA 日常最常講嘅句子。"
+    "explanation": "Resolve an issue 是客服與 QA 日常最常說的句子，指解決問題。"
   },
   {
     "id": "b1-4",
@@ -57,8 +57,9 @@
       { "word": "hide", "trans": "隱藏" }
     ],
     "correctIndex": 0,
-    "explanation": "Review a document 意思係提交前再仔細睇一次。"
-  },{
+    "explanation": "Review a document 意思是在提交前再仔細檢查一次。"
+  },
+  {
     "id": "b1-6",
     "sentence": "Can you {blank} the file to the email before sending it?",
     "options": [
@@ -68,7 +69,7 @@
       { "word": "print", "trans": "列印" }
     ],
     "correctIndex": 0,
-    "explanation": "Attach a file 係寫 Email 必備嘅 B1 詞彙。"
+    "explanation": "Attach a file 是寫電子郵件必備的 B1 詞彙。"
   },
   {
     "id": "b1-7",
@@ -80,7 +81,7 @@
       { "word": "leave", "trans": "離開" }
     ],
     "correctIndex": 1,
-    "explanation": "Confirm a room/booking 指確認預訂，旅行常用。"
+    "explanation": "Confirm a room/booking 指確認預訂，旅行常用語。"
   },
   {
     "id": "b1-8",
@@ -92,7 +93,7 @@
       { "word": "ignore", "trans": "忽略" }
     ],
     "correctIndex": 0,
-    "explanation": "Feed 係餵食嘅意思，照顧寵物必備。"
+    "explanation": "Feed 是餵食的意思，照顧寵物必備。"
   },
   {
     "id": "b1-9",
@@ -104,7 +105,7 @@
       { "word": "forget", "trans": "忘記" }
     ],
     "correctIndex": 1,
-    "explanation": "Recommend 係提出建議時最常用嘅動詞。"
+    "explanation": "Recommend 是提出建議時最常用的動詞。"
   },
   {
     "id": "b1-10",
@@ -116,7 +117,7 @@
       { "word": "refuse", "trans": "拒絕" }
     ],
     "correctIndex": 0,
-    "explanation": "Organize a party/event 意思係籌備或舉辦活動。"
+    "explanation": "Organize a party/event 意思是籌備或舉辦活動。"
   },
   {
     "id": "b1-11",
@@ -128,7 +129,7 @@
       { "word": "start", "trans": "開始" }
     ],
     "correctIndex": 1,
-    "explanation": "Avoid doing something 意思係盡量唔好做某事。"
+    "explanation": "Avoid doing something 意思是盡量避免做某事。"
   },
   {
     "id": "b1-12",
@@ -140,7 +141,7 @@
       { "word": "hide", "trans": "隱瞞" }
     ],
     "correctIndex": 0,
-    "explanation": "Inform someone 係正式場合中「通知某人」嘅用法。"
+    "explanation": "Inform someone 是正式場合中「通知某人」的用法。"
   },
   {
     "id": "b1-13",
@@ -152,7 +153,7 @@
       { "word": "paint", "trans": "塗漆" }
     ],
     "correctIndex": 1,
-    "explanation": "Repair 係修理汽車或機器嘅常用字。"
+    "explanation": "Repair 是修理汽車或機器的常用字。"
   },
   {
     "id": "b1-14",
@@ -164,7 +165,7 @@
       { "word": "send", "trans": "發送" }
     ],
     "correctIndex": 1,
-    "explanation": "Decline an invitation 係禮貌地拒絕邀請嘅講法。"
+    "explanation": "Decline an invitation 是禮貌地拒絕邀請的說法。"
   },
   {
     "id": "b1-15",
@@ -176,7 +177,7 @@
       { "word": "stop", "trans": "停止" }
     ],
     "correctIndex": 1,
-    "explanation": "Improve health 係指令健康狀況變好。"
+    "explanation": "Improve health 是指讓健康狀況變好。"
   },
   {
     "id": "b1-16",
@@ -188,7 +189,7 @@
       { "word": "luck", "trans": "運氣" }
     ],
     "correctIndex": 0,
-    "explanation": "Budget 指金錢上嘅預算，理財必備字。"
+    "explanation": "Budget 指金錢上的預算，理財必備字。"
   },
   {
     "id": "b1-17",
@@ -200,7 +201,7 @@
       { "word": "force", "trans": "強迫" }
     ],
     "correctIndex": 0,
-    "explanation": "Ask for days off 意思係請假。"
+    "explanation": "Ask for days off 意思是請假。"
   },
   {
     "id": "b1-18",
@@ -224,7 +225,7 @@
       { "word": "drop", "trans": "放棄" }
     ],
     "correctIndex": 0,
-    "explanation": "Consider options 係做決定前仔細諗清楚嘅意思。"
+    "explanation": "Consider options 是指在做決定前仔細思考清楚。"
   },
   {
     "id": "b1-20",
@@ -236,7 +237,7 @@
       { "word": "block", "trans": "封鎖" }
     ],
     "correctIndex": 1,
-    "explanation": "Share 喺辦公室通常指將資訊或文件發送俾其他人。"
+    "explanation": "Share 在辦公室通常指將資訊或文件分享給其他人。"
   },
   {
     "id": "b1-21",
@@ -248,7 +249,7 @@
       { "word": "read", "trans": "閱讀" }
     ],
     "correctIndex": 1,
-    "explanation": "Complete a form 意思係填妥表格。"
+    "explanation": "Complete a form 意思是填妥表格。"
   },
   {
     "id": "b1-22",
@@ -260,7 +261,7 @@
       { "word": "support", "trans": "支持" }
     ],
     "correctIndex": 1,
-    "explanation": "Interrupt 指人哋講緊嘢嗰陣插嘴。"
+    "explanation": "Interrupt 指在別人說話時插嘴打斷。"
   },
   {
     "id": "b1-23",
@@ -272,7 +273,7 @@
       { "word": "angry", "trans": "生氣的" }
     ],
     "correctIndex": 1,
-    "explanation": "Effective way 即係行得通、有成效嘅方法。"
+    "explanation": "Effective way 即是行得通、有成效的方法。"
   },
   {
     "id": "b1-24",
@@ -296,7 +297,7 @@
       { "word": "forget", "trans": "忘記" }
     ],
     "correctIndex": 1,
-    "explanation": "Transport 喺旅遊語境指交通接載服務。"
+    "explanation": "Transport 在旅遊語境中指交通接載服務。"
   },
   {
     "id": "b1-26",
@@ -308,7 +309,7 @@
       { "word": "ignore", "trans": "忽略" }
     ],
     "correctIndex": 1,
-    "explanation": "Acknowledge receipt 係 Email 常見句，指確認收到。"
+    "explanation": "Acknowledge receipt 是電子郵件常見句，指確認收到。"
   },
   {
     "id": "b1-27",
@@ -320,7 +321,7 @@
       { "word": "save", "trans": "儲存" }
     ],
     "correctIndex": 1,
-    "explanation": "Remove 意思係移走或刪除。"
+    "explanation": "Remove 意思是移走或刪除。"
   },
   {
     "id": "b1-28",
@@ -332,7 +333,7 @@
       { "word": "forget", "trans": "忘記" }
     ],
     "correctIndex": 0,
-    "explanation": "Define goals 指清楚定下目標內容。"
+    "explanation": "Define goals 指清楚界定目標內容。"
   },
   {
     "id": "b1-29",
@@ -344,7 +345,7 @@
       { "word": "expensive", "trans": "昂貴的" }
     ],
     "correctIndex": 1,
-    "explanation": "Convenient 形容位置或時間上帶來方便。"
+    "explanation": "Convenient 形容在位置或時間上帶來方便。"
   },
   {
     "id": "b1-30",
@@ -356,7 +357,7 @@
       { "word": "scold", "trans": "責罵" }
     ],
     "correctIndex": 1,
-    "explanation": "Appreciate 係比 thank you 更正式嘅表達感激方法。"
+    "explanation": "Appreciate 是比 thank you 更正式的表達感激方式。"
   },
   {
     "id": "b1-31",
@@ -368,7 +369,7 @@
       { "word": "loose", "trans": "鬆散的" }
     ],
     "correctIndex": 0,
-    "explanation": "Tight schedule 形容行程排得好密。"
+    "explanation": "Tight schedule 形容行程排得非常緊湊。"
   },
   {
     "id": "b1-32",
@@ -380,7 +381,7 @@
       { "word": "doubt", "trans": "懷疑" }
     ],
     "correctIndex": 1,
-    "explanation": "Ensure 意思係保證某事發生。"
+    "explanation": "Ensure 意思是確保或保證某事發生。"
   },
   {
     "id": "b1-33",
@@ -392,7 +393,7 @@
       { "word": "steal", "trans": "偷取" }
     ],
     "correctIndex": 1,
-    "explanation": "Distribute 常用於發佈文件或資訊俾一班人。"
+    "explanation": "Distribute 常用於發佈文件或資訊給一群人。"
   },
   {
     "id": "b1-34",
@@ -404,7 +405,7 @@
       { "word": "open", "trans": "打開" }
     ],
     "correctIndex": 1,
-    "explanation": "Lock the screen 係辦公室基本安全守則。"
+    "explanation": "Lock the screen 是辦公室基本安全守則。"
   },
   {
     "id": "b1-35",
@@ -428,7 +429,7 @@
       { "word": "stop", "trans": "停止" }
     ],
     "correctIndex": 0,
-    "explanation": "Focus on 意思係將注意力或精力集中喺某件事。"
+    "explanation": "Focus on 意思是將注意力或精力集中在某件事上。"
   },
   {
     "id": "b1-37",
@@ -440,7 +441,7 @@
       { "word": "hide", "trans": "隱藏" }
     ],
     "correctIndex": 1,
-    "explanation": "Replace something with something 意思係用新嘢取代舊嘢。"
+    "explanation": "Replace something with something 意思是用新事物取代舊事物。"
   },
   {
     "id": "b1-38",
@@ -452,7 +453,7 @@
       { "word": "waste", "trans": "浪費" }
     ],
     "correctIndex": 1,
-    "explanation": "Track expenses 指記錄日常開支。"
+    "explanation": "Track expenses 指追蹤並記錄日常開支。"
   },
   {
     "id": "b1-39",
@@ -464,7 +465,7 @@
       { "word": "forget", "trans": "忘記" }
     ],
     "correctIndex": 0,
-    "explanation": "Clarify 係指將唔清楚嘅嘢解釋明白。"
+    "explanation": "Clarify 是指將不清楚的事情解釋明白。"
   },
   {
     "id": "b1-40",
@@ -476,9 +477,8 @@
       { "word": "extra", "trans": "額外的" }
     ],
     "correctIndex": 1,
-    "explanation": "Limited time 指時間唔多，需要抓緊。"
-  },
-  {
+    "explanation": "Limited time 指時間不多，需要抓緊。"
+  },{
     "id": "b1-41",
     "sentence": "The doctor gave me some medicine to {blank} the pain in my back.",
     "options": [
@@ -488,7 +488,7 @@
       { "word": "start", "trans": "開始" }
     ],
     "correctIndex": 1,
-    "explanation": "Relieve pain 係醫療同健康語境常見字眼。"
+    "explanation": "Relieve pain 是醫療與健康語境的常見字眼。"
   },
   {
     "id": "b1-42",
@@ -500,7 +500,7 @@
       { "word": "doubt", "trans": "懷疑" }
     ],
     "correctIndex": 1,
-    "explanation": "Remember to do something 指謹記要做某事。"
+    "explanation": "Remember to do something 指謹記要做某件事。"
   },
   {
     "id": "b1-43",
@@ -512,7 +512,7 @@
       { "word": "anger", "trans": "憤怒" }
     ],
     "correctIndex": 0,
-    "explanation": "Experience 喺職場上指工作經驗。"
+    "explanation": "Experience 在職場上指工作經驗。"
   },
   {
     "id": "b1-44",
@@ -524,7 +524,7 @@
       { "word": "forget", "trans": "忘記" }
     ],
     "correctIndex": 1,
-    "explanation": "Calculate 意思係準確地計出數量或金額。"
+    "explanation": "Calculate 意思是準確地計算出數量或金額。"
   },
   {
     "id": "b1-45",
@@ -536,7 +536,7 @@
       { "word": "boring", "trans": "沉悶的" }
     ],
     "correctIndex": 1,
-    "explanation": "Productive meeting 指會議有實際成果，無浪費時間。"
+    "explanation": "Productive meeting 指會議有實際成果，沒有浪費時間。"
   },
   {
     "id": "b1-46",
@@ -548,7 +548,7 @@
       { "word": "break", "trans": "打破" }
     ],
     "correctIndex": 1,
-    "explanation": "Show someone how to do something 係最自然嘅求教講法。"
+    "explanation": "Show someone how to do something 是最自然的求教說法。"
   },
   {
     "id": "b1-47",
@@ -560,7 +560,7 @@
       { "word": "wash", "trans": "清洗" }
     ],
     "correctIndex": 1,
-    "explanation": "Wear clothes 指著衫，formal clothes 係正裝。"
+    "explanation": "Wear clothes 指穿著衣物，formal clothes 是指正裝。"
   },
   {
     "id": "b1-48",
@@ -596,7 +596,7 @@
       { "word": "forget", "trans": "忘記" }
     ],
     "correctIndex": 1,
-    "explanation": "Update a resume 意思係將履歷表嘅資料更新到最新。"
+    "explanation": "Update a resume 意思是將履歷表的資料更新到最新狀態。"
   },
   {
     "id": "b1-51",
@@ -605,10 +605,10 @@
       { "word": "umbrella", "trans": "雨傘" },
       { "word": "sunglasses", "trans": "太陽眼鏡" },
       { "word": "ice cream", "trans": "雪糕" },
-      { "word": "oven", "trans": "焗爐" }
+      { "word": "oven", "trans": "烤箱" }
     ],
     "correctIndex": 0,
-    "explanation": "Umbrella 係落雨必備嘅日常名詞。"
+    "explanation": "Umbrella 是下雨必備的日常名詞。"
   },
   {
     "id": "b1-52",
@@ -620,7 +620,7 @@
       { "word": "paint", "trans": "塗漆" }
     ],
     "correctIndex": 1,
-    "explanation": "Fix 係修理事物最簡單直接嘅動詞。"
+    "explanation": "Fix 是修理事物最簡單直接的動詞。"
   },
   {
     "id": "b1-53",
@@ -632,7 +632,7 @@
       { "word": "noise", "trans": "噪音" }
     ],
     "correctIndex": 1,
-    "explanation": "Customer service 即係客戶服務。"
+    "explanation": "Customer service 即是客戶服務。"
   },
   {
     "id": "b1-54",
@@ -644,7 +644,7 @@
       { "word": "break", "trans": "打破" }
     ],
     "correctIndex": 1,
-    "explanation": "Decrease the volume 意思係較細聲。"
+    "explanation": "Decrease the volume 意思是調低音量。"
   },
   {
     "id": "b1-55",
@@ -657,7 +657,8 @@
     ],
     "correctIndex": 1,
     "explanation": "Understand the terms 指明白條款內容。"
-  },{
+  },
+  {
     "id": "b1-56",
     "sentence": "Can you help me {blank} a meeting for tomorrow morning?",
     "options": [
@@ -667,7 +668,7 @@
       { "word": "destroy", "trans": "破壞" }
     ],
     "correctIndex": 1,
-    "explanation": "Arrange a meeting 指安排會議，基礎必備。"
+    "explanation": "Arrange a meeting 指安排會議，基礎必備單字。"
   },
   {
     "id": "b1-57",
@@ -679,7 +680,7 @@
       { "word": "enjoy", "trans": "享受" }
     ],
     "correctIndex": 0,
-    "explanation": "Attend 意思係出席或參加。"
+    "explanation": "Attend 意思是出席或參加。"
   },
   {
     "id": "b1-58",
@@ -703,7 +704,7 @@
       { "word": "guess", "trans": "猜測" }
     ],
     "correctIndex": 1,
-    "explanation": "Suggest 意思係提出建議。"
+    "explanation": "Suggest 意思是提出建議。"
   },
   {
     "id": "b1-60",
@@ -715,7 +716,7 @@
       { "word": "hide", "trans": "隱藏" }
     ],
     "correctIndex": 0,
-    "explanation": "Connect to Wi-Fi 係連線上網嘅標準講法。"
+    "explanation": "Connect to Wi-Fi 是連線上網的標準說法。"
   },
   {
     "id": "b1-61",
@@ -727,7 +728,7 @@
       { "word": "send", "trans": "發送" }
     ],
     "correctIndex": 1,
-    "explanation": "Receive an email 指收到電郵。"
+    "explanation": "Receive an email 指收到電子郵件。"
   },
   {
     "id": "b1-62",
@@ -739,7 +740,7 @@
       { "word": "scold", "trans": "責罵" }
     ],
     "correctIndex": 0,
-    "explanation": "Invite someone 意思係邀請某人。"
+    "explanation": "Invite someone 意思是邀請某人。"
   },
   {
     "id": "b1-63",
@@ -751,7 +752,7 @@
       { "word": "sleep", "trans": "睡覺" }
     ],
     "correctIndex": 2,
-    "explanation": "Celebrate 指慶祝好事情。"
+    "explanation": "Celebrate 指慶祝美好的事情。"
   },
   {
     "id": "b1-64",
@@ -763,7 +764,7 @@
       { "word": "deny", "trans": "否認" }
     ],
     "correctIndex": 1,
-    "explanation": "Expect 喺商業上指預計某事會發生。"
+    "explanation": "Expect 在商業上指預計某事會發生。"
   },
   {
     "id": "b1-65",
@@ -775,7 +776,7 @@
       { "word": "lose", "trans": "遺失" }
     ],
     "correctIndex": 0,
-    "explanation": "Manage a team 意思係管理團隊。"
+    "explanation": "Manage a team 意思是管理團隊。"
   },
   {
     "id": "b1-66",
@@ -787,7 +788,7 @@
       { "word": "leave", "trans": "離開" }
     ],
     "correctIndex": 0,
-    "explanation": "Support 指喺背後撐住或支援某人。"
+    "explanation": "Support 指在背後支持或支援某人。"
   },
   {
     "id": "b1-67",
@@ -799,7 +800,7 @@
       { "word": "doubt", "trans": "懷疑" }
     ],
     "correctIndex": 1,
-    "explanation": "Build trust 即係建立互信。"
+    "explanation": "Build trust 即是建立互信。"
   },
   {
     "id": "b1-68",
@@ -811,7 +812,7 @@
       { "word": "break", "trans": "打破" }
     ],
     "correctIndex": 0,
-    "explanation": "Compare 指將兩樣嘢放埋一齊比較。"
+    "explanation": "Compare 指將兩樣事物放在一起比較。"
   },
   {
     "id": "b1-69",
@@ -823,7 +824,7 @@
       { "word": "ignore", "trans": "忽略" }
     ],
     "correctIndex": 1,
-    "explanation": "Decide 意思係做決定。"
+    "explanation": "Decide 意思是做決定。"
   },
   {
     "id": "b1-70",
@@ -835,7 +836,7 @@
       { "word": "steal", "trans": "偷" }
     ],
     "correctIndex": 0,
-    "explanation": "Describe 指用說話形容出嚟。"
+    "explanation": "Describe 指用言語形容出來。"
   },
   {
     "id": "b1-71",
@@ -859,7 +860,7 @@
       { "word": "fail", "trans": "失敗" }
     ],
     "correctIndex": 0,
-    "explanation": "Promise 指答應人哋會做某件事。"
+    "explanation": "Promise 指答應別人會做某件事。"
   },
   {
     "id": "b1-73",
@@ -871,7 +872,7 @@
       { "word": "scare", "trans": "嚇唬" }
     ],
     "correctIndex": 1,
-    "explanation": "Welcome someone 係迎新常用詞。"
+    "explanation": "Welcome someone 是迎新常用詞。"
   },
   {
     "id": "b1-74",
@@ -883,7 +884,7 @@
       { "word": "hide", "trans": "躲藏" }
     ],
     "correctIndex": 1,
-    "explanation": "Gather 意思係將人或物品集合埋一齊。"
+    "explanation": "Gather 意思是將人或物品集合在一起。"
   },
   {
     "id": "b1-75",
@@ -895,7 +896,7 @@
       { "word": "sell", "trans": "賣" }
     ],
     "correctIndex": 1,
-    "explanation": "Charge 喺電子產品語境指充電。"
+    "explanation": "Charge 在電子產品語境中指充電。"
   },
   {
     "id": "b1-76",
@@ -907,7 +908,7 @@
       { "word": "burn", "trans": "燒" }
     ],
     "correctIndex": 1,
-    "explanation": "Lift 指將重物搬起，健身或搬運常用。"
+    "explanation": "Lift 指將重物舉起，健身或搬運時常用。"
   },
   {
     "id": "b1-77",
@@ -919,7 +920,7 @@
       { "word": "hide", "trans": "隱藏" }
     ],
     "correctIndex": 0,
-    "explanation": "Stretch 指拉筋，放鬆肌肉。"
+    "explanation": "Stretch 指伸展或拉筋，用以放鬆肌肉。"
   },
   {
     "id": "b1-78",
@@ -931,7 +932,7 @@
       { "word": "forget", "trans": "忘記" }
     ],
     "correctIndex": 1,
-    "explanation": "Join us 係極常見嘅邀請語。"
+    "explanation": "Join us 是極常見的邀請語。"
   },
   {
     "id": "b1-79",
@@ -943,7 +944,7 @@
       { "word": "eat", "trans": "吃" }
     ],
     "correctIndex": 0,
-    "explanation": "Happen 意思係有咩事情會發生。"
+    "explanation": "Happen 意思是有什麼事情會發生。"
   },
   {
     "id": "b1-80",
@@ -955,6 +956,6 @@
       { "word": "ignore", "trans": "忽略" }
     ],
     "correctIndex": 0,
-    "explanation": "Visit 指去探訪或參觀某個地方。"
+    "explanation": "Visit 指去拜訪或參觀某個地方。"
   }
 ]
