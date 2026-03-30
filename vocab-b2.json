@@ -9,7 +9,7 @@
       { "word": "attend", "trans": "出席" }
     ],
     "correctIndex": 0,
-    "explanation": "Postpone 係 B2 級別極常用嘅商業字眼，代替 delay。"
+    "explanation": "Postpone 是 B2 級別極常用的商業字眼，代替 delay。"
   },
   {
     "id": "b2-2",
@@ -21,7 +21,7 @@
       { "word": "borrow", "trans": "借用" }
     ],
     "correctIndex": 1,
-    "explanation": "Formulate a plan/strategy 指有系統地構思並制定計劃。"
+    "explanation": "Formulate a plan/strategy 指有系統地構思並制定計畫。"
   },
   {
     "id": "b2-3",
@@ -33,7 +33,7 @@
       { "word": "invent", "trans": "發明" }
     ],
     "correctIndex": 1,
-    "explanation": "Backup data 喺 IT 同工程管理係必備動作。"
+    "explanation": "Backup data 在 IT 與工程管理是必備動作。"
   },
   {
     "id": "b2-4",
@@ -45,7 +45,7 @@
       { "word": "lengthy", "trans": "冗長的" }
     ],
     "correctIndex": 1,
-    "explanation": "Concise 讚美人講嘢精準、簡明扼要，無廢話。"
+    "explanation": "Concise 讚美人說話精準、簡明扼要，沒有廢話。"
   },
   {
     "id": "b2-5",
@@ -57,8 +57,9 @@
       { "word": "hidden", "trans": "隱藏的" }
     ],
     "correctIndex": 0,
-    "explanation": "Root cause (根本原因) 係 QE (品質工程) 最核心嘅詞彙。"
-  },{
+    "explanation": "Root cause (根本原因) 是 QE (品質工程) 最核心的詞彙。"
+  },
+  {
     "id": "b2-6",
     "sentence": "The company plans to {blank} a new quality control policy starting next month.",
     "options": [
@@ -68,7 +69,7 @@
       { "word": "forget", "trans": "忘記" }
     ],
     "correctIndex": 0,
-    "explanation": "Implement a policy/plan 指將政策或計劃付諸實行，商業極常用。"
+    "explanation": "Implement a policy/plan 指將政策或計畫付諸實行，商業極常用。"
   },
   {
     "id": "b2-7",
@@ -80,7 +81,7 @@
       { "word": "paint", "trans": "塗漆" }
     ],
     "correctIndex": 1,
-    "explanation": "Evaluate 指對事物嘅價值、表現或狀況進行評估。"
+    "explanation": "Evaluate 指對事物的價值、表現或狀況進行評估。"
   },
   {
     "id": "b2-8",
@@ -92,7 +93,7 @@
       { "word": "escape", "trans": "逃跑" }
     ],
     "correctIndex": 1,
-    "explanation": "Collaborate with 係跨部門合作嘅標準專業用字。"
+    "explanation": "Collaborate with 是跨部門合作的標準專業用語。"
   },
   {
     "id": "b2-9",
@@ -104,7 +105,7 @@
       { "word": "stubborn", "trans": "固執的" }
     ],
     "correctIndex": 0,
-    "explanation": "Transparent 喺商業上指資訊公開透明、無隱瞞。"
+    "explanation": "Transparent 在商業上指資訊公開透明、沒有隱瞞。"
   },
   {
     "id": "b2-10",
@@ -116,7 +117,7 @@
       { "word": "boring", "trans": "沉悶的" }
     ],
     "correctIndex": 1,
-    "explanation": "Efficient 形容系統或人做事效率高，唔浪費時間同資源。"
+    "explanation": "Efficient 形容系統或人做事效率高，不浪費時間與資源。"
   },
   {
     "id": "b2-11",
@@ -128,7 +129,7 @@
       { "word": "mistake", "trans": "錯誤" }
     ],
     "correctIndex": 1,
-    "explanation": "Top priority 意思係最首要、必須優先處理嘅事。"
+    "explanation": "Top priority 意思是最首要、必須優先處理的事。"
   },
   {
     "id": "b2-12",
@@ -140,7 +141,7 @@
       { "word": "debt", "trans": "債務" }
     ],
     "correctIndex": 0,
-    "explanation": "Production capacity 係工廠管理術語，指最高產能。"
+    "explanation": "Production capacity 是工廠管理術語，指最高產能。"
   },
   {
     "id": "b2-13",
@@ -152,7 +153,7 @@
       { "word": "guess", "trans": "猜測" }
     ],
     "correctIndex": 1,
-    "explanation": "Analyze data 即係對數據進行分析以得出結論。"
+    "explanation": "Analyze data 即是對數據進行分析以得出結論。"
   },
   {
     "id": "b2-14",
@@ -164,7 +165,7 @@
       { "word": "habit", "trans": "習慣" }
     ],
     "correctIndex": 0,
-    "explanation": "Strategy 係指為達成長期目標而制定嘅策略或計謀。"
+    "explanation": "Strategy 是指為達成長期目標而制定的策略或計謀。"
   },
   {
     "id": "b2-15",
@@ -176,7 +177,7 @@
       { "word": "complaint", "trans": "投訴" }
     ],
     "correctIndex": 1,
-    "explanation": "Objective 同 goal 相似，但更常在專業語境中指具體目標。"
+    "explanation": "Objective 與 goal 相似，但更常在專業語境中指具體目標。"
   },
   {
     "id": "b2-16",
@@ -188,7 +189,7 @@
       { "word": "illegal", "trans": "非法的" }
     ],
     "correctIndex": 0,
-    "explanation": "Alternative plan 即係 Plan B 或替代方案。"
+    "explanation": "Alternative plan 即是 Plan B 或替代方案。"
   },
   {
     "id": "b2-17",
@@ -200,7 +201,7 @@
       { "word": "immune", "trans": "免疫的" }
     ],
     "correctIndex": 1,
-    "explanation": "Relevant to... 指同某個主題有直接關係、切題。"
+    "explanation": "Relevant to... 指與某個主題有直接關係、切題。"
   },
   {
     "id": "b2-18",
@@ -212,7 +213,7 @@
       { "word": "complicate", "trans": "使複雜" }
     ],
     "correctIndex": 0,
-    "explanation": "Elaborate on 係請人對某一點進一步詳細解釋嘅專業講法。"
+    "explanation": "Elaborate on 是請人對某一點進一步詳細解釋的專業說法。"
   },
   {
     "id": "b2-19",
@@ -224,7 +225,7 @@
       { "word": "praise", "trans": "讚賞" }
     ],
     "correctIndex": 1,
-    "explanation": "Modify 指為咗改善或符合標準而作出少許修改。"
+    "explanation": "Modify 指為了改善或符合標準而作出少許修改。"
   },
   {
     "id": "b2-20",
@@ -236,7 +237,7 @@
       { "word": "burn", "trans": "燒毀" }
     ],
     "correctIndex": 1,
-    "explanation": "Approve a budget/request 意思係上級正式批准。"
+    "explanation": "Approve a budget/request 意思是上級正式批准。"
   },
   {
     "id": "b2-21",
@@ -248,7 +249,7 @@
       { "word": "decrease", "trans": "減少" }
     ],
     "correctIndex": 1,
-    "explanation": "Exceed expectations 係指表現好過預期。"
+    "explanation": "Exceed expectations 是指表現好過預期。"
   },
   {
     "id": "b2-22",
@@ -272,7 +273,7 @@
       { "word": "abandon", "trans": "放棄" }
     ],
     "correctIndex": 1,
-    "explanation": "Expand business/market 係指業務擴張。"
+    "explanation": "Expand business/market 是指業務擴張。"
   },
   {
     "id": "b2-24",
@@ -284,7 +285,7 @@
       { "word": "avoid", "trans": "避開" }
     ],
     "correctIndex": 1,
-    "explanation": "Maintain a relationship/standard 指保持喺良好嘅狀態。"
+    "explanation": "Maintain a relationship/standard 指保持在良好的狀態。"
   },
   {
     "id": "b2-25",
@@ -296,7 +297,7 @@
       { "word": "invite", "trans": "邀請" }
     ],
     "correctIndex": 1,
-    "explanation": "Prevent 意思係採取措施阻止壞事發生。"
+    "explanation": "Prevent 意思是採取措施阻止壞事發生。"
   },
   {
     "id": "b2-26",
@@ -308,7 +309,7 @@
       { "word": "praise", "trans": "讚美" }
     ],
     "correctIndex": 1,
-    "explanation": "Troubleshoot 係工程同 IT 常用字，指尋找並解決技術問題。"
+    "explanation": "Troubleshoot 是工程與 IT 常用字，指尋找並解決技術問題。"
   },
   {
     "id": "b2-27",
@@ -320,7 +321,7 @@
       { "word": "invisible", "trans": "看不見的" }
     ],
     "correctIndex": 1,
-    "explanation": "Significant improvement 指改善幅度好大、好明顯。"
+    "explanation": "Significant improvement 指改善幅度很大、很明顯。"
   },
   {
     "id": "b2-28",
@@ -332,7 +333,7 @@
       { "word": "funny", "trans": "好笑的" }
     ],
     "correctIndex": 1,
-    "explanation": "Essential 意思同 vital/important 接近，指絕對必需。"
+    "explanation": "Essential 意思與 vital/important 接近，指絕對必需。"
   },
   {
     "id": "b2-29",
@@ -344,7 +345,7 @@
       { "word": "secret", "trans": "秘密的" }
     ],
     "correctIndex": 0,
-    "explanation": "Routine inspection 係指按既定時間表進行嘅例行檢查。"
+    "explanation": "Routine inspection 是指按既定時間表進行的例行檢查。"
   },
   {
     "id": "b2-30",
@@ -356,7 +357,7 @@
       { "word": "paint", "trans": "塗色" }
     ],
     "correctIndex": 1,
-    "explanation": "Inspect 指為咗搵錯漏而進行仔細檢查。"
+    "explanation": "Inspect 指為了尋找錯漏而進行仔細檢查。"
   },
   {
     "id": "b2-31",
@@ -368,7 +369,7 @@
       { "word": "steal", "trans": "偷竊" }
     ],
     "correctIndex": 1,
-    "explanation": "Document 喺度做動詞，指將過程或結果以書面形式記錄低。"
+    "explanation": "Document 這裡作動詞，指將過程或結果以書面形式記錄下來。"
   },
   {
     "id": "b2-32",
@@ -380,7 +381,7 @@
       { "word": "ignore", "trans": "忽略" }
     ],
     "correctIndex": 0,
-    "explanation": "Coordinate 指協調各方、統籌安排令事情順利進行。"
+    "explanation": "Coordinate 指協調各方、統籌安排讓事情順利進行。"
   },
   {
     "id": "b2-33",
@@ -392,7 +393,7 @@
       { "word": "perfect", "trans": "完美的" }
     ],
     "correctIndex": 1,
-    "explanation": "Temporary fix 指臨時嘅解決方法。"
+    "explanation": "Temporary fix 指臨時的解決方法。"
   },
   {
     "id": "b2-34",
@@ -404,7 +405,7 @@
       { "word": "imaginary", "trans": "想像的" }
     ],
     "correctIndex": 1,
-    "explanation": "Permanent damage 意思係造成無得修復嘅長遠破壞。"
+    "explanation": "Permanent damage 意思是造成無法修復的長遠破壞。"
   },
   {
     "id": "b2-35",
@@ -416,7 +417,7 @@
       { "word": "useless", "trans": "無用的" }
     ],
     "correctIndex": 1,
-    "explanation": "Initial plan 常用於講述原本一開始嘅計劃。"
+    "explanation": "Initial plan 常用於講述一開始的計畫。"
   },
   {
     "id": "b2-36",
@@ -428,7 +429,7 @@
       { "word": "blank", "trans": "空白的" }
     ],
     "correctIndex": 1,
-    "explanation": "Comprehensive report 指內容包羅萬有、鉅細無遺嘅報告。"
+    "explanation": "Comprehensive report 指內容包羅萬象、鉅細靡遺的報告。"
   },
   {
     "id": "b2-37",
@@ -440,7 +441,7 @@
       { "word": "colorful", "trans": "色彩繽紛的" }
     ],
     "correctIndex": 1,
-    "explanation": "Adequate 同 enough 意思相近，但語氣更正式，指達到需求標準。"
+    "explanation": "Adequate 與 enough 意思相近，但語氣更正式，指達到需求標準。"
   },
   {
     "id": "b2-38",
@@ -452,7 +453,7 @@
       { "word": "collection", "trans": "收集" }
     ],
     "correctIndex": 1,
-    "explanation": "Shortage of materials/components 係製造業常見嘅問題。"
+    "explanation": "Shortage of materials/components 是製造業常見的問題。"
   },
   {
     "id": "b2-39",
@@ -464,21 +465,8 @@
       { "word": "broken", "trans": "損壞的" }
     ],
     "correctIndex": 1,
-    "explanation": "Valid ID 指無過期、合乎規格嘅證件或證明。"
-  },
-  {
-    "id": "b2-40",
-    "sentence": "The warehouse manager returned all the {blank} units back to the original supplier.",
-    "options": [
-      { "word": "perfect", "trans": "完美的" },
-      { "word": "defective", "trans": "有缺陷的 / 不良的" },
-      { "word": "expensive", "trans": "昂貴的" },
-      { "word": "heavy", "trans": "沉重的" }
-    ],
-    "correctIndex": 1,
-    "explanation": "Defective units 就係大家成日講嘅「不良品」或 NG 品。"
-  },
-  {
+    "explanation": "Valid ID 指未過期、合乎規格的證件或證明。"
+  },{
     "id": "b2-41",
     "sentence": "It is {blank} procedure to test all software updates on a secure server before release.",
     "options": [
@@ -488,7 +476,7 @@
       { "word": "optional", "trans": "可選擇的" }
     ],
     "correctIndex": 1,
-    "explanation": "Standard procedure (SOP) 意思係標準作業程序。"
+    "explanation": "Standard procedure (SOP) 意思是標準作業程序。"
   },
   {
     "id": "b2-42",
@@ -500,7 +488,7 @@
       { "word": "useless", "trans": "無用的" }
     ],
     "correctIndex": 1,
-    "explanation": "Internal data 指只限公司內部傳閱嘅資料。"
+    "explanation": "Internal data 指只限公司內部傳閱的資料。"
   },
   {
     "id": "b2-43",
@@ -512,19 +500,19 @@
       { "word": "unqualified", "trans": "無資格的" }
     ],
     "correctIndex": 1,
-    "explanation": "External auditor 指從公司外面聘請返嚟嘅第三方審計員。"
+    "explanation": "External auditor 指從公司外部聘請來的第三方審計員。"
   },
   {
     "id": "b2-44",
     "sentence": "Please reply to this request as soon as possible; the matter is highly {blank}.",
     "options": [
       { "word": "relaxing", "trans": "令人放鬆的" },
-      { "word": "urgent", "trans": "緊急的 / 逼切的" },
+      { "word": "urgent", "trans": "緊急的 / 迫切的" },
       { "word": "unimportant", "trans": "不重要的" },
       { "word": "funny", "trans": "好笑的" }
     ],
     "correctIndex": 1,
-    "explanation": "Urgent 形容事情急需處理，Email 常見字。"
+    "explanation": "Urgent 形容事情急需處理，電子郵件常見字眼。"
   },
   {
     "id": "b2-45",
@@ -536,7 +524,7 @@
       { "word": "success", "trans": "成功" }
     ],
     "correctIndex": 1,
-    "explanation": "Cause a delay 指導致時間上嘅延誤。"
+    "explanation": "Cause a delay 指導致時間上的延誤。"
   },
   {
     "id": "b2-46",
@@ -548,7 +536,7 @@
       { "word": "vacation", "trans": "假期" }
     ],
     "correctIndex": 0,
-    "explanation": "Take an approach 意思係採取某種方法或角度去處理問題。"
+    "explanation": "Take an approach 意思是採取某種方法或角度去處理問題。"
   },
   {
     "id": "b2-47",
@@ -560,7 +548,7 @@
       { "word": "hobby", "trans": "嗜好" }
     ],
     "correctIndex": 1,
-    "explanation": "Factor 係指影響結果或決定嘅重要元素。"
+    "explanation": "Factor 是指影響結果或決定的重要元素。"
   },
   {
     "id": "b2-48",
@@ -572,7 +560,7 @@
       { "word": "shadow", "trans": "影子" }
     ],
     "correctIndex": 1,
-    "explanation": "From someone's perspective 意思係代入某人嘅角度去睇事物。"
+    "explanation": "From someone's perspective 意思是代入某人的角度去看待事物。"
   },
   {
     "id": "b2-49",
@@ -584,7 +572,7 @@
       { "word": "complaint", "trans": "投訴" }
     ],
     "correctIndex": 0,
-    "explanation": "Outcome 同 result 相似，多數指一件事情最終帶嚟嘅成效或結果。"
+    "explanation": "Outcome 與 result 相似，多數指一件事情最終帶來的成效或結果。"
   },
   {
     "id": "b2-50",
@@ -596,7 +584,7 @@
       { "word": "anger", "trans": "憤怒" }
     ],
     "correctIndex": 1,
-    "explanation": "Feedback 係職場同產品開發極常用字，指收集返嚟嘅意見。"
+    "explanation": "Feedback 是職場與產品開發極常用字，指收集回來的意見。"
   },
   {
     "id": "b2-51",
@@ -608,7 +596,7 @@
       { "word": "cable", "trans": "電線" }
     ],
     "correctIndex": 1,
-    "explanation": "Feature 指產品主打嘅功能或特色。"
+    "explanation": "Feature 指產品主打的功能或特色。"
   },
   {
     "id": "b2-52",
@@ -620,7 +608,7 @@
       { "word": "visible", "trans": "可見的" }
     ],
     "correctIndex": 1,
-    "explanation": "Compatible with 係 IT 常見搭配，指系統之間能夠互相配合運作。"
+    "explanation": "Compatible with 是 IT 常見搭配，指系統之間能夠互相配合運作。"
   },
   {
     "id": "b2-53",
@@ -632,7 +620,7 @@
       { "word": "hide", "trans": "隱藏" }
     ],
     "correctIndex": 1,
-    "explanation": "Upgrade 指提升硬體或軟件嘅等級效能。"
+    "explanation": "Upgrade 指提升硬體或軟體的等級效能。"
   },
   {
     "id": "b2-54",
@@ -644,7 +632,7 @@
       { "word": "forget", "trans": "忘記" }
     ],
     "correctIndex": 1,
-    "explanation": "Restore data/files 意思係將資料還原返出嚟。"
+    "explanation": "Restore data/files 意思是將資料從備份中還原出來。"
   },
   {
     "id": "b2-55",
@@ -656,8 +644,9 @@
       { "word": "hide", "trans": "隱藏" }
     ],
     "correctIndex": 1,
-    "explanation": "Generate interest/revenue/reports 指產生、製造出某啲結果或事物。"
-  },{
+    "explanation": "Generate interest/revenue/reports 指產生、製造出某些結果或事物。"
+  },
+  {
     "id": "b2-56",
     "sentence": "The manager will {blank} specific tasks to each team member tomorrow.",
     "options": [
@@ -667,7 +656,7 @@
       { "word": "delete", "trans": "刪除" }
     ],
     "correctIndex": 1,
-    "explanation": "Assign tasks 係職場派 Job 嘅標準講法。"
+    "explanation": "Assign tasks 是職場分配工作的標準說法。"
   },
   {
     "id": "b2-57",
@@ -679,7 +668,7 @@
       { "word": "steal", "trans": "偷" }
     ],
     "correctIndex": 1,
-    "explanation": "Calculate 意思係精確地計出數值。"
+    "explanation": "Calculate 意思是精確地計算出數值。"
   },
   {
     "id": "b2-58",
@@ -691,7 +680,7 @@
       { "word": "laugh", "trans": "嘲笑" }
     ],
     "correctIndex": 0,
-    "explanation": "Estimate 指喺未有確實數據前做一個大概嘅估計。"
+    "explanation": "Estimate 指在沒有確切數據前做出一個大約的估計。"
   },
   {
     "id": "b2-59",
@@ -703,7 +692,7 @@
       { "word": "forget", "trans": "忘記" }
     ],
     "correctIndex": 1,
-    "explanation": "Negotiate 係議價或傾合約嘅專業詞。"
+    "explanation": "Negotiate 是議價或協商合約的專業詞彙。"
   },
   {
     "id": "b2-60",
@@ -715,7 +704,7 @@
       { "word": "hide", "trans": "隱瞞" }
     ],
     "correctIndex": 1,
-    "explanation": "Investigate 指深入調查事件原因。"
+    "explanation": "Investigate 指深入調查事件的原因。"
   },
   {
     "id": "b2-61",
@@ -727,7 +716,7 @@
       { "word": "guess", "trans": "猜想" }
     ],
     "correctIndex": 1,
-    "explanation": "Verify 指確認某件事情係正確無誤。"
+    "explanation": "Verify 指確認某件事情是正確無誤的。"
   },
   {
     "id": "b2-62",
@@ -739,7 +728,7 @@
       { "word": "lazy", "trans": "懶惰的" }
     ],
     "correctIndex": 1,
-    "explanation": "Flexible 形容可以因應情況變通。"
+    "explanation": "Flexible 形容可以因應情況變通、具彈性的。"
   },
   {
     "id": "b2-63",
@@ -751,7 +740,7 @@
       { "word": "refuse", "trans": "拒絕" }
     ],
     "correctIndex": 0,
-    "explanation": "Guarantee 指拍心口保證。"
+    "explanation": "Guarantee 意思是給予擔保、保證。"
   },
   {
     "id": "b2-64",
@@ -775,7 +764,7 @@
       { "word": "hide", "trans": "隱藏" }
     ],
     "correctIndex": 0,
-    "explanation": "Convince 意思係用道理令其他人相信。"
+    "explanation": "Convince 意思是用道理使其他人相信或信服。"
   },
   {
     "id": "b2-66",
@@ -787,7 +776,7 @@
       { "word": "hide", "trans": "隱藏" }
     ],
     "correctIndex": 1,
-    "explanation": "Demonstrate 意思係做示範俾人睇。"
+    "explanation": "Demonstrate 意思是進行示範操作。"
   },
   {
     "id": "b2-67",
@@ -799,7 +788,7 @@
       { "word": "drop", "trans": "放棄" }
     ],
     "correctIndex": 1,
-    "explanation": "Maintain 係保持某種好嘅狀態。"
+    "explanation": "Maintain 是保持某種良好的狀態。"
   },
   {
     "id": "b2-68",
@@ -811,7 +800,7 @@
       { "word": "ignore", "trans": "忽略" }
     ],
     "correctIndex": 1,
-    "explanation": "Participate 係 join 嘅高級版，解作參與。"
+    "explanation": "Participate 是 join 的高級版，解作參與。"
   },
   {
     "id": "b2-69",
@@ -823,7 +812,7 @@
       { "word": "paint", "trans": "塗漆" }
     ],
     "correctIndex": 0,
-    "explanation": "Predict 指預計未來嘅事。"
+    "explanation": "Predict 指預測未來的事件。"
   },
   {
     "id": "b2-70",
@@ -835,7 +824,7 @@
       { "word": "praise", "trans": "讚賞" }
     ],
     "correctIndex": 1,
-    "explanation": "Tackle a problem 係迎難而上解決問題嘅生動講法。"
+    "explanation": "Tackle a problem 是迎難而上解決問題的生動說法。"
   },
   {
     "id": "b2-71",
@@ -859,7 +848,7 @@
       { "word": "leak", "trans": "洩漏" }
     ],
     "correctIndex": 1,
-    "explanation": "Withstand 常用於工程，指可以頂得順極端環境。"
+    "explanation": "Withstand 常用於工程，指能夠抵擋極端的環境或壓力。"
   },
   {
     "id": "b2-73",
@@ -871,7 +860,7 @@
       { "word": "break", "trans": "破壞" }
     ],
     "correctIndex": 0,
-    "explanation": "Regulate 喺機械上指自動調整，喺管理上指立例規管。"
+    "explanation": "Regulate 在機械上指自動調整，在管理上指立例規管。"
   },
   {
     "id": "b2-74",
@@ -895,7 +884,7 @@
       { "word": "forget", "trans": "忘記" }
     ],
     "correctIndex": 1,
-    "explanation": "Don't hesitate to... 係 Email 非常客氣嘅結尾句。"
+    "explanation": "Don't hesitate to... 是電子郵件非常客氣的結尾用語。"
   },
   {
     "id": "b2-76",
@@ -907,7 +896,7 @@
       { "word": "hide", "trans": "隱藏" }
     ],
     "correctIndex": 1,
-    "explanation": "Commit to something 意思係全心全意投入同遵守。"
+    "explanation": "Commit to something 意思是全心全意投入與遵守。"
   },
   {
     "id": "b2-77",
@@ -919,7 +908,7 @@
       { "word": "steal", "trans": "偷" }
     ],
     "correctIndex": 1,
-    "explanation": "Observe 係稽核(Audit)時常用字，指從旁觀察。"
+    "explanation": "Observe 是稽核 (Audit) 時的常用字，指從旁觀察。"
   },
   {
     "id": "b2-78",
@@ -931,7 +920,7 @@
       { "word": "drop", "trans": "掉落" }
     ],
     "correctIndex": 0,
-    "explanation": "Qualify 意思係合乎資格。"
+    "explanation": "Qualify 意思是合乎資格。"
   },
   {
     "id": "b2-79",
@@ -943,7 +932,7 @@
       { "word": "hide", "trans": "隱藏" }
     ],
     "correctIndex": 1,
-    "explanation": "Correspond with 喺檢查時指兩樣嘢數據吻合。"
+    "explanation": "Correspond with 在檢查時指兩件事物或數據相吻合。"
   },
   {
     "id": "b2-80",
@@ -955,6 +944,6 @@
       { "word": "burn", "trans": "燒毀" }
     ],
     "correctIndex": 1,
-    "explanation": "Assemble 意思係將零件砌埋一齊。"
+    "explanation": "Assemble 意思是將零件組裝在一起。"
   }
 ]
