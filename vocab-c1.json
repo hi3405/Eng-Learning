@@ -9,7 +9,7 @@
       { "word": "obfuscate", "trans": "使模糊" }
     ],
     "correctIndex": 0,
-    "explanation": "Streamline 經常配合 process (流程) 使用，指透過自動化提高效率。"
+    "explanation": "Streamline 經常配合 process (流程) 使用，指透過自動化來提高效率。"
   },
   {
     "id": "v2",
@@ -21,7 +21,7 @@
       { "word": "overlook", "trans": "忽略" }
     ],
     "correctIndex": 1,
-    "explanation": "Mitigate risks (減低風險) 係工程同管理上極高頻嘅搭配詞。"
+    "explanation": "Mitigate risks (減低風險) 是工程與管理上極高頻的搭配詞。"
   },
   {
     "id": "v3",
@@ -33,7 +33,7 @@
       { "word": "superficial", "trans": "表面的" }
     ],
     "correctIndex": 1,
-    "explanation": "Rigorous 形容標準或檢查非常嚴密。Lenient 係反義詞。"
+    "explanation": "Rigorous 形容標準或檢查非常嚴密。Lenient 是其反義詞。"
   },
   {
     "id": "v4",
@@ -45,7 +45,7 @@
       { "word": "paradigm", "trans": "典範" }
     ],
     "correctIndex": 1,
-    "explanation": "Discrepancy 專指兩組本應相同嘅數據之間出現咗落差。"
+    "explanation": "Discrepancy 專指兩組本應相同的數據之間出現了落差。"
   },
   {
     "id": "v5",
@@ -57,7 +57,7 @@
       { "word": "instigate", "trans": "煽動" }
     ],
     "correctIndex": 0,
-    "explanation": "Verify 係 QA 核心字，指透過測試確認某事物的真確性。"
+    "explanation": "Verify 是 QA 核心單字，指透過測試來確認某事物的真實性與正確性。"
   },
   {
     "id": "v6",
@@ -69,7 +69,7 @@
       { "word": "equilibrium", "trans": "平衡" }
     ],
     "correctIndex": 0,
-    "explanation": "Anomaly 指偏離預期嘅現象，喺品質監控中非常常用。"
+    "explanation": "Anomaly 指偏離預期的異常現象，在品質監控中非常常用。"
   },
   {
     "id": "v7",
@@ -81,7 +81,7 @@
       { "word": "mitigate", "trans": "減輕" }
     ],
     "correctIndex": 0,
-    "explanation": "Expedite 係商業常用字，代表加快進度。"
+    "explanation": "Expedite 是商業常用字，代表加快進度或促使提早完成。"
   },
   {
     "id": "v8",
@@ -93,7 +93,7 @@
       { "word": "consensus", "trans": "共識" }
     ],
     "correctIndex": 1,
-    "explanation": "Under scrutiny 係固定搭配，指受到嚴格審查。"
+    "explanation": "Under scrutiny 是固定搭配，指受到嚴格、仔細的審查。"
   },
   {
     "id": "v9",
@@ -105,7 +105,7 @@
       { "word": "byproduct", "trans": "副產品" }
     ],
     "correctIndex": 2,
-    "explanation": "Prerequisite 指事前必須具備嘅條件。"
+    "explanation": "Prerequisite 指事前必須具備的先決條件。"
   },
   {
     "id": "v10",
@@ -117,7 +117,7 @@
       { "word": "contradict", "trans": "反駁" }
     ],
     "correctIndex": 1,
-    "explanation": "Substantiate 意指提供證據去支持一個主張。"
+    "explanation": "Substantiate 意指提供具體證據去支持或證實一個主張。"
   },
   {
     "id": "v11",
@@ -129,7 +129,7 @@
       { "word": "irrelevant", "trans": "無關的" }
     ],
     "correctIndex": 2,
-    "explanation": "Detrimental to... 係指對某事物造成損害。"
+    "explanation": "Detrimental to... 是指對某事物造成損害或產生不利影響。"
   },
   {
     "id": "v12",
@@ -141,9 +141,9 @@
       { "word": "boon", "trans": "恩賜 / 益處" }
     ],
     "correctIndex": 1,
-    "explanation": "Impediment 係障礙物嘅意思。"
-  }
-  ,{
+    "explanation": "Impediment 是指阻礙進度或發展的障礙物。"
+  },
+  {
     "id": "v13",
     "sentence": "Trying to assemble the IKEA furniture without instructions proved to be a incredibly {blank} and frustrating task.",
     "options": [
@@ -153,7 +153,7 @@
       { "word": "spontaneous", "trans": "自發的" }
     ],
     "correctIndex": 1,
-    "explanation": "Tedious 形容一件工作或者過程又長又悶，令人疲倦，非常適合形容砌傢俬。"
+    "explanation": "Tedious 形容一件工作或過程冗長且乏味，令人疲倦，非常適合形容組裝家具。"
   },
   {
     "id": "v14",
@@ -165,7 +165,7 @@
       { "word": "apathetic", "trans": "冷漠的" }
     ],
     "correctIndex": 0,
-    "explanation": "Resilient 指喺逆境中能夠迅速恢復過來，係讚美人心理質素嘅高級用字。"
+    "explanation": "Resilient 指在逆境中能夠迅速恢復過來，是讚美人類心理素質的高級用字。"
   },
   {
     "id": "v15",
@@ -189,7 +189,7 @@
       { "word": "scarce", "trans": "稀有的" }
     ],
     "correctIndex": 1,
-    "explanation": "Ubiquitous 係 C1 必考字，解作 everywhere，常用於形容科技或流行現象。"
+    "explanation": "Ubiquitous 是 C1 必考字，解作無所不在的 (everywhere)，常用於形容科技或流行現象。"
   },
   {
     "id": "v17",
@@ -201,7 +201,7 @@
       { "word": "scrutinize", "trans": "仔細審查" }
     ],
     "correctIndex": 1,
-    "explanation": "Procrastinate 係「拖延症」嘅動詞，生活必備字。"
+    "explanation": "Procrastinate 是「拖延症」的動詞，生活必備字。"
   },
   {
     "id": "v18",
@@ -213,7 +213,7 @@
       { "word": "instigate", "trans": "煽動" }
     ],
     "correctIndex": 1,
-    "explanation": "Alleviate 經常用來形容減輕痛楚、壓力或問題。"
+    "explanation": "Alleviate 經常用來形容減輕痛楚、壓力或問題的嚴重性。"
   },
   {
     "id": "v19",
@@ -225,7 +225,7 @@
       { "word": "tedious", "trans": "冗長乏味的" }
     ],
     "correctIndex": 1,
-    "explanation": "Spontaneous 形容沒有預先計劃、隨心所欲嘅行動。"
+    "explanation": "Spontaneous 形容沒有預先計畫、隨心所欲的自發性行動。"
   },
   {
     "id": "v20",
@@ -237,7 +237,7 @@
       { "word": "ubiquitous", "trans": "無所不在的" }
     ],
     "correctIndex": 1,
-    "explanation": "Ephemeral 係高級文學/生活字，指事物存在時間極短。"
+    "explanation": "Ephemeral 是高級文學與生活用字，指事物存在時間極短、轉瞬即逝。"
   },
   {
     "id": "v21",
@@ -249,7 +249,7 @@
       { "word": "ambiguous", "trans": "模稜兩可的" }
     ],
     "correctIndex": 1,
-    "explanation": "Pragmatic 形容人做事講求實際、實用，唔搞花臣。"
+    "explanation": "Pragmatic 形容人做事講求實際、務實，不拘泥於不切實際的幻想。"
   },
   {
     "id": "v22",
@@ -261,8 +261,9 @@
       { "word": "versatile", "trans": "多才多藝的" }
     ],
     "correctIndex": 2,
-    "explanation": "Obsolete 形容因為有更好嘅替代品出現，而被時代淘汰嘅事物。"
-  },{
+    "explanation": "Obsolete 形容因為有更好的替代品出現，而被時代淘汰的事物。"
+  },
+  {
     "id": "v23",
     "sentence": "The new tracking tool will {blank} data from QC2 and QMB factories into one unified dashboard.",
     "options": [
@@ -272,7 +273,7 @@
       { "word": "provoke", "trans": "挑釁" }
     ],
     "correctIndex": 0,
-    "explanation": "Consolidate 經常用於商業或 IT，指將分散嘅數據或資源整合為一。"
+    "explanation": "Consolidate 經常用於商業或 IT 領域，指將分散的數據或資源整合為一。"
   },
   {
     "id": "v24",
@@ -296,7 +297,7 @@
       { "word": "surplus", "trans": "盈餘" }
     ],
     "correctIndex": 1,
-    "explanation": "Plateau 喺健身同進度管理中，專指進度停滯不前嘅階段。"
+    "explanation": "Plateau 在健身與進度管理中，專指進度停滯不前的高原期。"
   },
   {
     "id": "v26",
@@ -320,7 +321,7 @@
       { "word": "ambiguous", "trans": "模稜兩可的" }
     ],
     "correctIndex": 0,
-    "explanation": "Congruent 係心理學同溝通學常用字，指內外一致、真誠無偽。"
+    "explanation": "Congruent 是心理學與溝通學常用字，指內外一致、真誠無偽。"
   },
   {
     "id": "v28",
@@ -332,7 +333,7 @@
       { "word": "atrophy", "trans": "萎縮" }
     ],
     "correctIndex": 1,
-    "explanation": "Recuperate 指從疲勞、疾病或消耗中恢復過來。"
+    "explanation": "Recuperate 指從疲勞、疾病或巨大消耗中恢復過來。"
   },
   {
     "id": "v29",
@@ -344,7 +345,7 @@
       { "word": "marginal", "trans": "邊緣的" }
     ],
     "correctIndex": 1,
-    "explanation": "Paramount 是 C1 級別形容詞，意指比其他所有事情都更重要。"
+    "explanation": "Paramount 是 C1 級別形容詞，意指比其他所有事情都更重要、首要的。"
   },
   {
     "id": "v30",
@@ -356,7 +357,7 @@
       { "word": "redundant", "trans": "多餘的" }
     ],
     "correctIndex": 0,
-    "explanation": "Lucrative 經常用來形容能帶來豐厚利潤或巨大效益的商業計劃。"
+    "explanation": "Lucrative 經常用來形容能帶來豐厚利潤或巨大效益的商業計畫。"
   },
   {
     "id": "v31",
@@ -404,7 +405,7 @@
       { "word": "discard", "trans": "丟棄" }
     ],
     "correctIndex": 1,
-    "explanation": "Scrutinize 強調極度仔細、嚴格地檢查以找出問題。"
+    "explanation": "Scrutinize 強調極度仔細、嚴格地檢查以找出問題的根本。"
   },
   {
     "id": "v35",
@@ -416,7 +417,7 @@
       { "word": "conceal", "trans": "隱藏" }
     ],
     "correctIndex": 1,
-    "explanation": "Alleviate a problem/bottleneck 意思是減輕困難或舒緩樽頸。"
+    "explanation": "Alleviate a problem/bottleneck 意思是減輕困難或舒緩瓶頸。"
   },
   {
     "id": "v36",
@@ -440,7 +441,7 @@
       { "word": "compelling", "trans": "有說服力的" }
     ],
     "correctIndex": 1,
-    "explanation": "Ambiguous 指意思含糊不清，無法用作可靠的決策依據。"
+    "explanation": "Ambiguous 指意思含糊不清、模稜兩可，無法用作可靠的決策依據。"
   },
   {
     "id": "v38",
