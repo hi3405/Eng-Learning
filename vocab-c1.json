@@ -478,8 +478,7 @@
     ],
     "correctIndex": 1,
     "explanation": "Facilitate 指提供便利，使事情更容易或更快完成。"
-  },
-  {
+  },{
     "id": "v41",
     "sentence": "Without adequate sensors, it is difficult to accurately {blank} the pressure changes inside the chamber.",
     "options": [
@@ -501,7 +500,7 @@
       { "word": "elusive", "trans": "難以捉摸的" }
     ],
     "correctIndex": 1,
-    "explanation": "Imminent 常用於警告危險或重大事件即將發生。"
+    "explanation": "Imminent 常用於警告危險或重大事件即將發生、迫在眉睫。"
   },
   {
     "id": "v43",
@@ -513,14 +512,14 @@
       { "word": "vindicate", "trans": "證明無辜" }
     ],
     "correctIndex": 1,
-    "explanation": "Jeopardize 是 C1 級的強烈字眼，表示將事物置於危險之中。"
+    "explanation": "Jeopardize 是 C1 級別的強烈字眼，表示將事物置於危險之中。"
   },
   {
     "id": "v44",
     "sentence": "We must ensure that all customer complaints are treated as {blank} concerns rather than mere annoyances.",
     "options": [
       { "word": "fictitious", "trans": "虛構的" },
-      { "word": "legitimate", "trans": "合情理的 / 合法的" },
+      { "word": "legitimate", "trans": "合情理的 / 正當的" },
       { "word": "superficial", "trans": "表面的" },
       { "word": "erratic", "trans": "飄忽的" }
     ],
@@ -537,7 +536,7 @@
       { "word": "latent", "trans": "潛在的" }
     ],
     "correctIndex": 1,
-    "explanation": "Manifest 作形容詞時，指極度明顯、不言而喻。"
+    "explanation": "Manifest 作為形容詞時，指極度明顯、不言而喻。"
   },
   {
     "id": "v46",
@@ -549,7 +548,7 @@
       { "word": "dismantle", "trans": "拆除" }
     ],
     "correctIndex": 1,
-    "explanation": "Perpetuate 指令某種情況（通常是壞事）延續下去。"
+    "explanation": "Perpetuate 指讓某種情況（通常是壞事）延續下去。"
   },
   {
     "id": "v47",
@@ -597,7 +596,7 @@
       { "word": "illusory", "trans": "虛幻的" }
     ],
     "correctIndex": 1,
-    "explanation": "Tangible evidence 指真實存在、可觸摸或可明確證實的證據。"
+    "explanation": "Tangible evidence 指真實存在、可觸摸或可明確證實的實質證據。"
   },
   {
     "id": "v51",
@@ -621,7 +620,7 @@
       { "word": "repudiate", "trans": "否認" }
     ],
     "correctIndex": 0,
-    "explanation": "Validate 指透過官方或權威途徑確認某事物的真確性。"
+    "explanation": "Validate 指透過官方或權威途徑確認某事物的真實性與有效性。"
   },
   {
     "id": "v53",
@@ -633,7 +632,7 @@
       { "word": "conceals", "trans": "隱藏" }
     ],
     "correctIndex": 1,
-    "explanation": "Warrant (動詞) 在此意指情況嚴重，使得某行動（調查）變得理所當然及必要。"
+    "explanation": "Warrant 作為動詞時，意指情況嚴重，使得某行動（如調查）變得理所當然及必要。"
   },
   {
     "id": "v54",
@@ -645,7 +644,7 @@
       { "word": "withhold", "trans": "扣留" }
     ],
     "correctIndex": 1,
-    "explanation": "Yield 除了指「良率」，作動詞時解作產出或帶來良好結果。"
+    "explanation": "Yield 除了當作名詞指「良率」，作動詞時解作產出或帶來良好的結果。"
   },
   {
     "id": "v55",
@@ -657,7 +656,7 @@
       { "word": "hoard", "trans": "囤積" }
     ],
     "correctIndex": 1,
-    "explanation": "Allocate resources/budget 是專案管理的核心 C1 詞彙。"
+    "explanation": "Allocate resources/budget 是專案管理的核心 C1 詞彙，意指分配資源。"
   },
   {
     "id": "v56",
@@ -705,11 +704,11 @@
       { "word": "fluctuate", "trans": "波動" }
     ],
     "correctIndex": 1,
-    "explanation": "Retain 意指保留不流失，常用於 fitness (retain muscle) 或商業 (retain talent)。"
+    "explanation": "Retain 意指保留不流失，常用於健身 (retain muscle) 或商業 (retain talent)。"
   },
   {
     "id": "v60",
-    "sentence": "If we want to hit the 80kg target by August, sticking to the zero-starch dinner rule is {blank}.",
+    "sentence": "If we want to hit the 89.9kg target by August, sticking to the zero-starch dinner rule is {blank}.",
     "options": [
       { "word": "optional", "trans": "可選的" },
       { "word": "imperative", "trans": "極為重要的 / 必須的" },
@@ -717,7 +716,7 @@
       { "word": "ambiguous", "trans": "含糊的" }
     ],
     "correctIndex": 1,
-    "explanation": "Imperative 表達極度逼切、絕對不能妥協的要求。"
+    "explanation": "Imperative 表達極度迫切、絕對不能妥協的要求。"
   },
   {
     "id": "v61",
@@ -742,7 +741,8 @@
     ],
     "correctIndex": 1,
     "explanation": "Contingency plan 就是「Plan B」，用以應付突發狀況的備用方案。"
-  },{
+  },
+  {
     "id": "c1-63",
     "sentence": "The newly coded HTML web tool was designed to {blank} the tedious process of comparing serial numbers between QC2 and QMB.",
     "options": [
@@ -776,7 +776,7 @@
       { "word": "indifference", "trans": "冷漠" }
     ],
     "correctIndex": 1,
-    "explanation": "Adherence to a rule/diet 係 C1 級別固定搭配，指嚴格遵守。"
+    "explanation": "Adherence to a rule/diet 是 C1 級別固定搭配，指嚴格遵守。"
   },
   {
     "id": "c1-66",
@@ -788,7 +788,7 @@
       { "word": "sporadic", "trans": "零星的" }
     ],
     "correctIndex": 2,
-    "explanation": "Meticulous attention 常用於形容籌備大型活動時對細節嘅極度關注。"
+    "explanation": "Meticulous attention 常用於形容籌備大型活動時對細節的極度關注。"
   },
   {
     "id": "c1-67",
@@ -812,7 +812,7 @@
       { "word": "propel", "trans": "推動" }
     ],
     "correctIndex": 1,
-    "explanation": "Intercept 喺網絡安全領域指半途攔截、阻止資料或裝置存取。"
+    "explanation": "Intercept 在網路安全領域指半途攔截、阻止資料或裝置存取。"
   },
   {
     "id": "c1-69",
@@ -824,7 +824,7 @@
       { "word": "ambiguous", "trans": "模稜兩可的" }
     ],
     "correctIndex": 0,
-    "explanation": "Congruent 係心理學名詞，指內外一致、真誠。"
+    "explanation": "Congruent 是心理學名詞，指內外一致、真誠無偽。"
   },
   {
     "id": "c1-70",
@@ -836,7 +836,7 @@
       { "word": "illusion", "trans": "幻覺" }
     ],
     "correctIndex": 2,
-    "explanation": "A clear indication 指明顯嘅跡象或徵兆。"
+    "explanation": "A clear indication 指明顯的跡象或徵兆。"
   },
   {
     "id": "c1-71",
@@ -848,7 +848,7 @@
       { "word": "hostile", "trans": "充滿敵意的" }
     ],
     "correctIndex": 2,
-    "explanation": "Lethargic 形容極度疲倦、缺乏活力，常形容生病或手術後嘅狀態。"
+    "explanation": "Lethargic 形容極度疲倦、缺乏活力，常形容生病或手術後的狀態。"
   },
   {
     "id": "c1-72",
@@ -860,8 +860,9 @@
       { "word": "contingency", "trans": "應急的 / 備用的" }
     ],
     "correctIndex": 3,
-    "explanation": "Contingency plan 意思係應急方案 (Plan B)。"
-  },{
+    "explanation": "Contingency plan 意思是應急方案 (Plan B)。"
+  },
+  {
     "id": "c1-73",
     "sentence": "By automating the cross-checking of serial numbers, the new OBA 2.0 interface completely {blank} the risk of human error during inspections.",
     "options": [
@@ -871,7 +872,7 @@
       { "word": "simulates", "trans": "模擬" }
     ],
     "correctIndex": 1,
-    "explanation": "Obviate 係極高階 C2 詞彙，指透過預先採取措施，令某種需要或危險變得不再存在。"
+    "explanation": "Obviate 是極高階 C2 詞彙，指透過預先採取措施，讓某種需要或危險變得不再存在。"
   },
   {
     "id": "c1-74",
@@ -883,7 +884,7 @@
       { "word": "instigate", "trans": "煽動" }
     ],
     "correctIndex": 2,
-    "explanation": "Eradicate a problem 意思係連根拔起，徹底消滅，喺品質工程中非常關鍵。"
+    "explanation": "Eradicate a problem 意思是連根拔起，徹底消滅，在品質工程中非常關鍵。"
   },
   {
     "id": "c1-75",
@@ -895,7 +896,7 @@
       { "word": "placating", "trans": "討好的 / 撫慰的" }
     ],
     "correctIndex": 3,
-    "explanation": "Placating 喺 Satir 溝通模式中，專指委曲求全、討好別人嘅防衛姿態。"
+    "explanation": "Placating 在 Satir 溝通模式中，專指委曲求全、討好別人的防衛姿態。"
   },
   {
     "id": "c1-76",
@@ -907,7 +908,7 @@
       { "word": "concise", "trans": "簡潔的" }
     ],
     "correctIndex": 2,
-    "explanation": "Itemized bill/invoice 商業必備詞，指將收費細節逐個項目列明嘅清單。"
+    "explanation": "Itemized bill/invoice 商業必備詞，指將收費細節逐個項目列明的清單。"
   },
   {
     "id": "c1-77",
@@ -943,7 +944,7 @@
       { "word": "obsolete", "trans": "過時的" }
     ],
     "correctIndex": 2,
-    "explanation": "Incapacitated 係極高階用字，形容因受傷或極度疲勞而完全無力郁動。"
+    "explanation": "Incapacitated 是極高階用字，形容因受傷或極度疲勞而完全無力行動。"
   },
   {
     "id": "c1-80",
@@ -955,7 +956,7 @@
       { "word": "quarantine", "trans": "隔離" }
     ],
     "correctIndex": 3,
-    "explanation": "Quarantine 喺 IT 資安語境中，指將可疑檔案隔離，防止病毒擴散。"
+    "explanation": "Quarantine 在 IT 資安語境中，指將可疑檔案隔離，防止病毒擴散。"
   },
   {
     "id": "c1-81",
@@ -979,6 +980,6 @@
       { "word": "tranquil", "trans": "寧靜的" }
     ],
     "correctIndex": 0,
-    "explanation": "Erratic 形容行為無規律、難以預測，同之前學過嘅 lethargic (昏睡) 形成對比。"
+    "explanation": "Erratic 形容行為無規律、難以預測，與之前學過的 lethargic (昏睡) 形成對比。"
   }
 ]
