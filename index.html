@@ -130,9 +130,9 @@
         <!-- ★ NEW: Wrong word breakdown -->
         <div id="wrongBreakdown" class="hidden mt-3 pt-3 border-t border-gray-700">
           <p class="text-[11px] text-brand-red font-bold uppercase tracking-widest mb-1">❌ 你揀咗：</p>
-          <p id="wrongWordText" class="text-sm text-gray-400"></p>
+          <p id="wrongWordText" class="text-base text-gray-400"></p>
           <p class="text-[11px] text-brand-green font-bold uppercase tracking-widest mb-1 mt-2">✅ 正確答案：</p>
-          <p id="correctWordText" class="text-sm text-brand-green font-semibold"></p>
+          <p id="correctWordText" class="text-base text-brand-green font-semibold"></p>
         </div>
       </div>
       <button id="nextVocabBtn" onclick="nextVocabQuest()" class="hidden w-full mt-auto bg-brand-blue text-white py-4 rounded-xl font-bold text-lg shadow-xl active-scale flex justify-center items-center gap-2 flex-shrink-0">
@@ -232,7 +232,7 @@
         </div>
         <div class="flip-card-back bg-brand-dark border-2 border-brand-yellow/40 rounded-3xl w-full h-full flex flex-col items-center justify-center p-6 shadow-xl">
           <p class="text-xs text-brand-yellow font-bold uppercase tracking-widest mb-2">中文</p>
-          <p id="flashTrans" class="text-2xl font-extrabold text-brand-yellow text-center mb-3"></p>
+          <p id="flashTrans" class="text-3xl font-extrabold text-brand-yellow text-center mb-3"></p>
           <!-- ★ IMPROVED: Show full explanation on back -->
           <p id="flashExplanation" class="text-xs text-gray-400 text-center leading-relaxed"></p>
         </div>
@@ -767,7 +767,7 @@ function loadVocabQuest(){
   q.options.forEach((opt,idx)=>{
     const btn=document.createElement('div');
     btn.className="vocab-opt w-full flex items-center gap-3 p-4 rounded-xl border border-gray-700 bg-brand-dark cursor-pointer active-scale";
-    btn.innerHTML=`<span class="w-7 h-7 rounded-lg border border-gray-600 flex items-center justify-center font-bold text-xs text-gray-400 flex-shrink-0">${labels[idx]}</span><div class="flex-grow"><span class="font-semibold text-base text-white">${opt.word}</span><span class="vocab-trans hidden text-brand-yellow text-sm ml-2">- ${opt.trans}</span></div><button class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0" onclick="speakWord('${opt.word}',event)"><i class="fas fa-volume-up text-brand-blue text-sm"></i></button>`;
+    btn.innerHTML=`<span class="w-7 h-7 rounded-lg border border-gray-600 flex items-center justify-center font-bold text-xs text-gray-400 flex-shrink-0">${labels[idx]}</span><div class="flex-grow"><span class="font-semibold text-base text-white">${opt.word}</span><span class="vocab-trans hidden text-brand-yellow font-bold text-base ml-2">- ${opt.trans}</span></div><button class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0" onclick="speakWord('${opt.word}',event)"><i class="fas fa-volume-up text-brand-blue text-sm"></i></button>`;
     btn.onclick=(e)=>{if(!e.target.closest('button[onclick]'))checkVocabAnswer(idx,btn,q);};
     document.getElementById('vocabOptions').appendChild(btn);
   });
@@ -847,8 +847,56 @@ function updateRetryBadge(){const c=getRetryDueCount();const btn=document.getEle
 
 let retryData=[],retryIndex=0,retryAnswered=false;
 function initRetry(){const d=loadData();const t=getTodayDate();retryData=shuffleArray(Object.values(d.errorVocab||{}).filter(e=>e.nextReview<=t&&e.q));retryIndex=0;document.getElementById('retryTotal').textContent=retryData.length;document.getElementById('retryQuestArea').classList.remove('hidden');document.getElementById('retryDoneArea').classList.add('hidden');if(retryData.length>0)loadRetryQuest();else{document.getElementById('retryQuestArea').classList.add('hidden');document.getElementById('retryDoneArea').classList.remove('hidden');}}
-function loadRetryQuest(){if(!retryData.length)return;retryAnswered=false;const q=retryData[retryIndex].q;const pct=Math.round(retryIndex/retryData.length*100);document.getElementById('retryProgress').textContent=retryIndex+1;document.getElementById('retryProgressBar').style.width=pct+'%';document.getElementById('retrySentence').innerHTML=q.sentence.replace('{blank}','<span class="blank-space"></span>');document.getElementById('retryOptions').innerHTML='';document.getElementById('retryFeedback').classList.add('hidden');document.getElementById('nextRetryBtn').classList.add('hidden');const labels=['A','B','C','D'];q.options.forEach((opt,idx)=>{const btn=document.createElement('div');btn.className="vocab-opt w-full flex items-center gap-3 p-4 rounded-xl border border-gray-700 bg-brand-dark cursor-pointer active-scale";btn.innerHTML=`<span class="w-7 h-7 rounded-lg border border-gray-600 flex items-center justify-center font-bold text-xs text-gray-400 flex-shrink-0">${labels[idx]}</span><div class="flex-grow"><span class="font-semibold text-base text-white">${opt.word}</span></div><button class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0" onclick="speakWord('${opt.word}',event)"><i class="fas fa-volume-up text-brand-blue text-sm"></i></button>`;btn.onclick=(e)=>{if(!e.target.closest('button[onclick]'))checkRetryAnswer(idx,btn,q);};document.getElementById('retryOptions').appendChild(btn);});}
-function checkRetryAnswer(idx,btn,q){if(retryAnswered)return;retryAnswered=true;document.querySelectorAll('#retryOptions .vocab-opt').forEach((b,i)=>{if(i===q.correctIndex)b.classList.add('border-brand-green','bg-brand-green/20');});if(idx===q.correctIndex){btn.classList.add('correct-pulse');setVocabFeedback(true,'✅ Correct!',q.explanation,'retryFeedback','retryFeedbackTitle','retryExplanation');updateSRS(q.id,true);const d=loadData();if(d.autoReadOn!==false)setTimeout(()=>speakWord(q.options[q.correctIndex].word,null),300);}else{btn.classList.add('border-brand-red','bg-brand-red/20','shake');setVocabFeedback(false,'❌ Wrong again',q.explanation,'retryFeedback','retryFeedbackTitle','retryExplanation');updateSRS(q.id,false);}document.getElementById('nextRetryBtn').classList.remove('hidden');}
+function loadRetryQuest(){
+  if(!retryData.length)return;
+  retryAnswered=false;
+  const q=retryData[retryIndex].q;
+  const pct=Math.round(retryIndex/retryData.length*100);
+  document.getElementById('retryProgress').textContent=retryIndex+1;
+  document.getElementById('retryProgressBar').style.width=pct+'%';
+  document.getElementById('retrySentence').innerHTML=q.sentence.replace('{blank}','<span class="blank-space"></span>');
+  document.getElementById('retryOptions').innerHTML='';
+  document.getElementById('retryFeedback').classList.add('hidden');
+  document.getElementById('nextRetryBtn').classList.add('hidden');
+  const labels=['A','B','C','D'];
+  q.options.forEach((opt,idx)=>{
+    const btn=document.createElement('div');
+    btn.className="vocab-opt w-full flex items-center gap-3 p-4 rounded-xl border border-gray-700 bg-brand-dark cursor-pointer active-scale";
+    btn.innerHTML=`
+      <span class="w-7 h-7 rounded-lg border border-gray-600 flex items-center justify-center font-bold text-xs text-gray-400 flex-shrink-0">${labels[idx]}</span>
+      <div class="flex-grow">
+        <span class="font-semibold text-base text-white">${opt.word}</span>
+        <span class="retry-trans hidden text-brand-yellow font-bold text-base ml-2">- ${opt.trans}</span>
+      </div>
+      <button class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0" onclick="speakWord('${opt.word}',event)">
+        <i class="fas fa-volume-up text-brand-blue text-sm"></i>
+      </button>`;
+    btn.onclick=(e)=>{if(!e.target.closest('button[onclick]'))checkRetryAnswer(idx,btn,q);};
+    document.getElementById('retryOptions').appendChild(btn);
+  });
+}
+
+function checkRetryAnswer(idx,btn,q){
+  if(retryAnswered)return;
+  retryAnswered=true;
+  // ★ Show all Chinese translations after answer
+  document.querySelectorAll('.retry-trans').forEach(el=>el.classList.remove('hidden'));
+  document.querySelectorAll('#retryOptions .vocab-opt').forEach((b,i)=>{
+    if(i===q.correctIndex)b.classList.add('border-brand-green','bg-brand-green/20');
+  });
+  if(idx===q.correctIndex){
+    btn.classList.add('correct-pulse');
+    setVocabFeedback(true,'✅ Correct!',q.explanation,'retryFeedback','retryFeedbackTitle','retryExplanation');
+    updateSRS(q.id,true);
+    const d=loadData();if(d.autoReadOn!==false)setTimeout(()=>speakWord(q.options[q.correctIndex].word,null),300);
+  }else{
+    btn.classList.add('border-brand-red','bg-brand-red/20','shake');
+    setVocabFeedback(false,'❌ Wrong again',q.explanation,'retryFeedback','retryFeedbackTitle','retryExplanation');
+    updateSRS(q.id,false);
+    const d=loadData();if(d.autoReadOn!==false)setTimeout(()=>speakWord(q.options[q.correctIndex].word,null),800);
+  }
+  document.getElementById('nextRetryBtn').classList.remove('hidden');
+}
 function nextRetryQuest(){if(retryIndex<retryData.length-1){retryIndex++;loadRetryQuest();}else{document.getElementById('retryQuestArea').classList.add('hidden');document.getElementById('retryDoneArea').classList.remove('hidden');updateRetryBadge();}}
 
 // ══════════════════════════════════════════
@@ -867,7 +915,7 @@ function speakFlash(){if(flashCards[flashIndex])speakWord(flashCards[flashIndex]
 // MY VOCAB
 // ══════════════════════════════════════════
 function addMyVocabWord(){const word=document.getElementById('addWordInput').value.trim();const trans=document.getElementById('addTransInput').value.trim();const note=document.getElementById('addNoteInput').value.trim();if(!word||!trans){shakeEl('addWordInput');return;}const d=loadData();if(!d.myVocab)d.myVocab=[];d.myVocab.unshift({word,trans,note,dateAdded:getTodayDate()});saveData(d);document.getElementById('addWordInput').value='';document.getElementById('addTransInput').value='';document.getElementById('addNoteInput').value='';renderMyVocab();document.getElementById('flashMyCount').textContent=d.myVocab.length;}
-function renderMyVocab(){const d=loadData();const list=d.myVocab||[];document.getElementById('myVocabCount').textContent=list.length;const c=document.getElementById('myVocabList');const e=document.getElementById('myVocabEmpty');if(!list.length){c.innerHTML='';e.classList.remove('hidden');return;}e.classList.add('hidden');c.innerHTML=list.map((v,i)=>`<div class="bg-brand-dark p-4 rounded-2xl border border-gray-700"><div class="flex justify-between items-start"><div><p class="text-lg font-extrabold text-white">${v.word}</p><p class="text-brand-yellow font-bold text-sm">${v.trans}</p>${v.note?`<p class="text-xs text-gray-500 mt-1 leading-relaxed">${v.note}</p>`:''}</div><div class="flex gap-2 ml-3"><button class="w-9 h-9 rounded-full bg-brand-slate flex items-center justify-center active-scale" onclick="speakWord('${v.word}',event)"><i class="fas fa-volume-up text-gray-300 text-sm"></i></button><button class="w-9 h-9 rounded-full bg-brand-red/10 border border-brand-red/30 flex items-center justify-center active-scale" onclick="delMyVocab(${i})"><i class="fas fa-trash text-brand-red text-xs"></i></button></div></div><p class="text-[10px] text-gray-600 mt-2">${v.dateAdded}</p></div>`).join('');}
+function renderMyVocab(){const d=loadData();const list=d.myVocab||[];document.getElementById('myVocabCount').textContent=list.length;const c=document.getElementById('myVocabList');const e=document.getElementById('myVocabEmpty');if(!list.length){c.innerHTML='';e.classList.remove('hidden');return;}e.classList.add('hidden');c.innerHTML=list.map((v,i)=>`<div class="bg-brand-dark p-4 rounded-2xl border border-gray-700"><div class="flex justify-between items-start"><div><p class="text-lg font-extrabold text-white">${v.word}</p><p class="text-brand-yellow font-bold text-lg">${v.trans}</p>${v.note?`<p class="text-xs text-gray-500 mt-1 leading-relaxed">${v.note}</p>`:''}</div><div class="flex gap-2 ml-3"><button class="w-9 h-9 rounded-full bg-brand-slate flex items-center justify-center active-scale" onclick="speakWord('${v.word}',event)"><i class="fas fa-volume-up text-gray-300 text-sm"></i></button><button class="w-9 h-9 rounded-full bg-brand-red/10 border border-brand-red/30 flex items-center justify-center active-scale" onclick="delMyVocab(${i})"><i class="fas fa-trash text-brand-red text-xs"></i></button></div></div><p class="text-[10px] text-gray-600 mt-2">${v.dateAdded}</p></div>`).join('');}
 function delMyVocab(idx){const d=loadData();d.myVocab.splice(idx,1);saveData(d);renderMyVocab();document.getElementById('flashMyCount').textContent=d.myVocab.length;}
 function shakeEl(id){const el=document.getElementById(id);el.classList.add('border-brand-red','shake');setTimeout(()=>el.classList.remove('shake','border-brand-red'),500);}
 
@@ -1081,7 +1129,7 @@ function renderCalendar(){
 function renderVocabVault(){
   const d=loadData();document.getElementById('vaultCount').textContent=d.savedVocab.length;
   const list=document.getElementById('vocabVaultList');
-  list.innerHTML=d.savedVocab.length?[...d.savedVocab].reverse().map(v=>`<div class="bg-brand-dark p-4 rounded-2xl border border-gray-700 fade-in"><div class="flex justify-between items-start"><div><p class="text-lg font-extrabold text-white">${v.word}</p><p class="text-brand-yellow font-bold text-sm">${v.trans}</p></div><button class="w-9 h-9 rounded-full bg-brand-slate flex items-center justify-center active-scale" onclick="speakWord('${v.word}')"><i class="fas fa-volume-up text-gray-300 text-sm"></i></button></div><p class="text-xs text-gray-400 mt-2 leading-relaxed">${v.explanation}</p></div>`).join(''):'<p class="text-center py-4 text-gray-500 text-sm italic">完成 Vocab Quest 後生字會記錄在這裡！</p>';
+  list.innerHTML=d.savedVocab.length?[...d.savedVocab].reverse().map(v=>`<div class="bg-brand-dark p-4 rounded-2xl border border-gray-700 fade-in"><div class="flex justify-between items-start"><div><p class="text-lg font-extrabold text-white">${v.word}</p><p class="text-brand-yellow font-bold text-lg">${v.trans}</p></div><button class="w-9 h-9 rounded-full bg-brand-slate flex items-center justify-center active-scale" onclick="speakWord('${v.word}')"><i class="fas fa-volume-up text-gray-300 text-sm"></i></button></div><p class="text-xs text-gray-400 mt-2 leading-relaxed">${v.explanation}</p></div>`).join(''):'<p class="text-center py-4 text-gray-500 text-sm italic">完成 Vocab Quest 後生字會記錄在這裡！</p>';
 }
 
 let myRadarChart=null;
