@@ -1200,7 +1200,13 @@ function updateLastExportUI(){
 
 function updateSettingsPage(){const d=loadData();updateReminderUI(d.reminderOn!==false);updateAutoReadUI(d.autoReadOn!==false);document.getElementById('srsErrorCount').textContent=Object.keys(d.errorVocab||{}).length;updateLastExportUI();}
 function clearErrors(){const d=loadData();d.errorVocab={};saveData(d);document.getElementById('srsErrorCount').textContent=0;updateRetryBadge();}
-function resetData(){if(confirm("確定重置所有資料？")){localStorage.removeItem('eng_v32');location.reload();}}
+function resetData(){
+  if(confirm("確定重置所有資料？此操作無法復原！")){
+    // 清除所有相關 key，包括舊版 migration key
+    ['eng_v32','eng_v31','eng_v30','english_coach_data_v9','eng_lastExport','preferred_voice_uri'].forEach(k=>localStorage.removeItem(k));
+    location.reload();
+  }
+}
 
 // VOICE
 let voices=[];
