@@ -692,11 +692,7 @@ function loadData(){
   catch(e){return JSON.parse(JSON.stringify(DEFAULT_DATA));}
 }
 
-// saveData — 同時寫 localStorage + IDB（mirror）
-function saveData(d){
-  localStorage.setItem('eng_v32',JSON.stringify(d));
-  engIdbSet('eng_data', d); // async mirror，唔影響主流程
-}
+// saveData defined below with full IDB + Firestore support
 
 // Migrate from older keys
 (function migrate(){
@@ -1299,14 +1295,12 @@ const ENG_FIREBASE_CONFIG = {
 let engFbAuth, engFbDb, engFbProvider, engCurrentUser, engSyncEnabled=false;
 
 try {
-  // 用同一個 Firebase app（如果已經初始化就用現有的）
-  let fbApp;
-  try { fbApp = firebase.app(); } catch(e) { fbApp = firebase.initializeApp(ENG_FIREBASE_CONFIG); }
-  engFbAuth = firebase.auth();
-  engFbDb = firebase.firestore();
+  const engFbApp = firebase.initializeApp(ENG_FIREBASE_CONFIG, 'engApp');
+  engFbAuth = engFbApp.auth();
+  engFbDb = engFbApp.firestore();
   engFbProvider = new firebase.auth.GoogleAuthProvider();
   engFbProvider.setCustomParameters({prompt:'select_account'});
-  engFbDb.enablePersistence().catch(e=>{});
+  try { engFbDb.enablePersistence(); } catch(e) {}
 
   engFbAuth.onAuthStateChanged(user => {
     engCurrentUser = user;
@@ -1409,14 +1403,13 @@ async function loadEngFromFirestore(uid) {
   } catch(e) { console.error('Firestore load error:', e); }
 }
 
-// saveData 已在上面定義（包含 IDB mirror）
-// 呢度 override 加入時間戳 + Firestore 同步
-const _baseSaveData = saveData;
-// 重新定義 saveData 加入完整功能
+
+
+// ★ 唯一完整版 saveData：localStorage + IDB + Firestore
 function saveData(d) {
   d.lastSaved = new Date().toISOString();
   localStorage.setItem('eng_v32', JSON.stringify(d));
-  engIdbSet('eng_data', d); // IDB mirror
+  engIdbSet('eng_data', d);
   if(engSyncEnabled && engCurrentUser) {
     saveEngToFirestore(engCurrentUser.uid);
   }
